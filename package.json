@@ -1,0 +1,14 @@
+{
+  "name": "daily-blitz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "Henry Lyford",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
