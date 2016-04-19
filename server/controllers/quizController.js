@@ -1,7 +1,12 @@
+var Quiz = require('../models/quizModel');
+
 module.exports = {
 
 	handleQuiz: function (quiz_id, callback) {
-		callback('hey you');
+		Quiz.find() //({queryParam: quiz_id})
+			.then(function (result) {
+				console.log('result here ',result );
+			})
 	}
 
 }
