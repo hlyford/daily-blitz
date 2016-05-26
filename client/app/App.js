@@ -2,15 +2,33 @@
 
 var GuessInput = React.createClass({
   getInitialState: function() {
-    return {guessValue: ''};
+    return {correct: []};
   },
+
   handleChange: function(event) {
-    this.setState({value: event.target.value});
-    console.log(this.state);
+  	var guess = event.target.value //.toLowerCase();
+  	var lastNames = _.pluck(this.props.data[0].players, 'lastName');  	
+    if (_.contains(lastNames , guess)) {
+    	this.setState({ correct: this.state.correct.concat(guess) });    
+    	$('.guess-box').val('');	    	
+    }
   },
+
   render: function() {  	    
     return (
-      <input type="text" value={this.state.guessValue} onChange={this.handleChange} />
+    	<div>
+      	<input className="guess-box" type="text" value={this.state.guessValue} onChange={this.handleChange} />
+      	<div>
+      		<ul>
+						{this.state.correct.map((item)=>(
+							<li key={this.state.timestamp}>
+								{item}
+							</li>
+						))}
+					</ul>
+      	</div>
+      </div>
+     	 
     )
   }
 
@@ -19,27 +37,27 @@ var GuessInput = React.createClass({
 
 var MainApp = React.createClass({
 
-  getInitialState: function() {
-  	this.getQuiz();
+  getInitialState: function() {  	
     return {};
   },
 
   render: function() {  	    
     return (
       <div className="commentBox">
-        Hello, world! I am a CommentBox.
-        <GuessInput />
+        Name the players older than Kobe
+        <GuessInput data={ this.state.data } />
       </div>
     );    
   },
 
-  getQuiz: function() {  	
+  componentDidMount: function() {  	
     $.ajax({
       url: '/quiz/2x68a',
       dataType: 'json',
       cache: false,
-      success: function(data) {
-        this.setState({data: data});
+      success: function(data) {      	
+        this.setState({data: data});    
+        console.log(this.state);    
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
