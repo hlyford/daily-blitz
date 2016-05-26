@@ -1,0 +1,7 @@
+Next steps
+
+- style and layout
+- superuser tools or cron job for updating the daily quiz
+- routing to play old quizzes??
+- deploy to heroku 
+- buy a domain and set up alias
