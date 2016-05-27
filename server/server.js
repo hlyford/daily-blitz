@@ -11,7 +11,7 @@ var port = process.env.PORT || 8000;
 var app = express();
 
 // set up MongoDB
-var dbURI = process.env.MONGO_URI || 'mongodb://localhost/obscore';
+var dbURI = process.env.MONGODB_URI || 'mongodb://localhost/obscore';
 
 mongoose.connect(dbURI);
 console.log('MongoDB listening at: ' + dbURI);
