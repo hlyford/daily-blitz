@@ -9,10 +9,10 @@ var GuessInput = React.createClass({
   	var guess = event.target.value.toLowerCase();
   	var lastNames = _.pluck(this.props.data.players, 'lastName');
   	var fullNames = _.pluck(this.props.data.players, 'fullName');  
-  	// check if they entered the last name
+  	// check if they entered the last name, keep track of index
   	var indexLastName = _.indexOf(lastNames, guess);
   	var indexFullName = _.indexOf(fullNames, guess);
-  	
+  	// if the entered last name, they got it correct
   	if (indexLastName !== -1) {  		
   		var correctName = this.props.data.players[indexLastName].fullName;
   		this.setState({ correct: this.state.correct.concat(correctName) });  
