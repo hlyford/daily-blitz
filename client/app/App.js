@@ -1,5 +1,11 @@
-// sub-components here for now
+// import react router
+var rR = window.ReactRouter;
+var Router = rR.Router;
+var Route = rR.Route;
+var Link = rR.Link;
 
+
+// sub-components here for now
 var GuessInput = React.createClass({
   getInitialState: function() {
     return {correct: []};
