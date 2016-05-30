@@ -16,6 +16,7 @@
     "path": "^0.12.7",
     "react": "^15.1.0",
     "react-router": "^2.4.1",
+    "react-skeleton": "^1.0.2",
     "requirejs": "^2.2.0"
   },
   "engines": {

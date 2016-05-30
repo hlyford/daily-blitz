@@ -1,4 +1,4 @@
-var GuessInput = React.createClass({ 
+React.createClass({ 
 
   render: function() {  	    
     return (
