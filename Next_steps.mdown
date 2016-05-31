@@ -1,6 +1,6 @@
 Next steps
 
-- ** fix admin quiz submissions so breaks up by first and last name in the UI **
+- ** fix admin quiz submissions so has first and last for EACH submission, (copy first row setup) **
 - style and layout
 - superuser tools or cron job for updating the daily quiz
 - routing to play old quizzes??

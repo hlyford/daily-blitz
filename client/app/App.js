@@ -7,8 +7,8 @@ var Router = rR.Router, Route = rR.Route,Link = rR.Link, browserHistory = rR.bro
 // ----- ADMIN COMPONENT  ----- // 
 
 var Admin = React.createClass({
-  getInitialState: function() {
-    return { players: {} };
+  getInitialState: function() {    
+    return { players: [] };
   },
   submitQuiz: function () {
     $.ajax({
@@ -36,19 +36,24 @@ var Admin = React.createClass({
       this.setState({quiz_id: event.target.value});        
     } else if (event.target.id === 'password') {
       this.setState({password: event.target.value });
-    } else {
-      var playerId = event.target.id, newPlayers = this.state.players;
-      newPlayers[playerId] = event.target.value;
+    } else {      
+      var playerId = event.target.id, newPlayers = this.state.players; 
+      !newPlayers[playerId] ? newPlayers[playerId] = {} : newPlayers[playerId];     
+      event.target.className === 'firstName' ? newPlayers[playerId].firstName = event.target.value : newPlayers[playerId].lastName = event.target.value;      
       this.setState({ players: newPlayers });
+      console.log(this.state);
     }
 
   },
-  render: function () {    
+  render: function () {        
     return (
       <div> 
         <div>Quiz Name: <input id="quiz-name" className="guess-box" type="text" value={this.state.quiz_name} onChange={this.handleChange} /></div>
         <div>Quiz ID: <input className="quiz-id" id="quiz-id" type="text" value={this.state.quiz_id} onChange={this.handleChange} /></div>
-        <div>Player 1: <input className="player" id="1" type="text" value={this.state.players[1]} onChange={this.handleChange} /></div>
+        <div>Player 1: 
+          <input className="firstName" data="" id="0" type="text" value={ this.state.players[0] !== undefined ? this.state.players[0].firstName : ''}  onChange={this.handleChange} />
+          <input className="lastName" id="0" type="text" value={ this.state.players[0] !== undefined ? this.state.players[0].lastName : '' } onChange={this.handleChange} />
+        </div>
         <div>Player 2: <input className="player" id="2" type="text" value={this.state.players[2]} onChange={this.handleChange} /></div>
         <div>Player 3: <input className="player" id="3" type="text" value={this.state.players[3]} onChange={this.handleChange} /></div>
         <div>Player 4: <input className="player" id="4" type="text" value={this.state.players[4]} onChange={this.handleChange} /></div>
