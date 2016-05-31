@@ -1,4 +1,4 @@
-React.createClass({ 
+var stuff = React.createClass({ 
 
   render: function() {  	    
     return (
