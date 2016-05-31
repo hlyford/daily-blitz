@@ -113,11 +113,11 @@ var Quiz = React.createClass({
 
   getQuiz: function() {   
     $.ajax({
-      url: '/quiz/2x68a',
+      url: '/quiz/2x68a',  // test query: 2x68a
       dataType: 'json',
       cache: false,
       success: function(data) {     
-        console.log(data);
+        console.log('first res', data);
         data = this.addFullNameAndConvertLowerCase(data[0]);        
         this.setState({data: data, takingQuiz: true});               
       }.bind(this),

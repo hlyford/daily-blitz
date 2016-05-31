@@ -2,8 +2,8 @@ var Quiz = require('../models/quizModel');
 
 module.exports = {
 
-	handleQuiz: function (quiz_id, callback) {
-		Quiz.find() //({queryParam: quiz_id})
+	handleQuiz: function (quiz_id, callback) {		
+		Quiz.find({queryParam: quiz_id})
 			.then(function (result) {
 				callback(result);
 			})
@@ -19,16 +19,14 @@ module.exports = {
 			var playersArray = [];
 			for (player in data.players) {
 				playersArray.push(data.players[player]);
-			}
-			console.log('array', playersArray);
-
+			}			
+			// call on the model to create the quiz
 			Quiz.create({
 				title: data.quiz_name,
 				queryParam: data.quiz_id,
 				players: playersArray
 			})
-				.then(function(result) {
-					console.log(result);
+				.then(function(result) {					
 					callback(result);
 				});
 		}
