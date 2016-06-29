@@ -167,7 +167,7 @@ var App = React.createClass({
   render: function() {  	    
     return (
       <div className="commentBox">     
-        Welcome to GOAT blitz
+        <h2>Welcome to GOAT blitz</h2>
         <div>
           <Link to='quiz'
             activeClassName='-active'>Play today&#39;s quiz

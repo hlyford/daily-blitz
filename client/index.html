@@ -1,20 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>React Playground</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-  <script src="https://fb.me/react-with-addons-0.14.6.js"></script>
-  <script src="https://fb.me/react-dom-0.14.6.js"></script>
-  <script src="https://npmcdn.com/react-router/umd/ReactRouter.min.js"></script>
+  <head>
+    <meta charset="utf-8">
+    <title>React Playground</title>
+    <!-- style sheets -->
+    <link rel="stylesheet" type="text/css" href="./dist/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./dist/styles/skeleton.css">
+    <link rel="stylesheet" type="text/css" href="./dist/styles/custom.css">
+    <!-- react related scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://fb.me/react-with-addons-0.14.6.js"></script>
+    <script src="https://fb.me/react-dom-0.14.6.js"></script>
+    <script src="https://npmcdn.com/react-router/umd/ReactRouter.min.js"></script>
+    </head>
   </head>
-</head>
-<body>
-  <div id="app"></div>
-  <script src="../lib/underscore.js"></script>
-  <script src="../lib/jquery-2.2.0.min.js"></script>
-  <script src="../lib/require.js"></script>
-  <script type="text/babel" src="./app/components/GuessInput.js"></script>
-  <script type="text/babel" src="./app/App.js"></script>  
-</body>
+  <body>
+    <!-- <div class="container"> -->
+      <nav class="navbar">
+          <div class="container">
+            <ul class="navbar-list">
+              <li class="navbar-item"><a class="navbar-link" href="#intro">Intro</a></li>
+              <li class="navbar-item">
+                <a class="navbar-link" href="#" data-popover="#codeNavPopover">Code</a>
+                <div id="codeNavPopover" class="popover">
+                  <ul class="popover-list">
+                    <li class="popover-item">
+                      <a class="popover-link" href="#grid">Grid</a>
+                    </li>
+                    <li class="popover-item">
+                      <a class="popover-link" href="#typography">Typography</a>
+                    </li>
+                    <li class="popover-item">
+                      <a class="popover-link" href="#buttons">Buttons</a>
+                    </li>
+                    <li class="popover-item">
+                      <a class="popover-link" href="#forms">Forms</a>
+                    </li>
+                    <li class="popover-item">
+                      <a class="popover-link" href="#lists">Lists</a>
+                    </li>
+                    <li class="popover-item">
+                      <a class="popover-link" href="#code">Code</a>
+                    </li>
+                    <li class="popover-item">
+                      <a class="popover-link" href="#tables">Tables</a>
+                    </li>
+                    <li class="popover-item">
+                      <a class="popover-link" href="#queries">Queries</a>
+                    </li>
+                    <li class="popover-item">
+                      <a class="popover-link" href="#utilities">Utilities</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="navbar-item"><a class="navbar-link" href="#examples">Examples</a></li>
+              <li class="navbar-item">
+                <a class="navbar-link" href="#" data-popover="#moreNavPopover">More</a>
+                <div id="moreNavPopover" class="popover">
+                  <ul class="popover-list">
+                    <li class="popover-item">
+                      <a class="popover-link" href="https://github.com/dhg/Skeleton">On Github</a>
+                    </li>
+                    <li class="popover-item">
+                      <a class="popover-link" href="https://github.com/dhg/Skeleton#browser-support">Browsers</a>
+                    </li>
+                    <li class="popover-item">
+                      <a class="popover-link" href="https://github.com/dhg/Skeleton#license">License</a>
+                    </li>
+                    <li class="popover-item">
+                      <a class="popover-link" href="https://github.com/dhg/Skeleton#extensions">Extensions</a>
+                    </li>
+                    <li class="popover-item">
+                      <a class="popover-link" href="https://github.com/dhg/Skeleton/releases">Versions</a>
+                    </li>
+                    <li class="popover-item">
+                      <a class="popover-link" href="https://github.com/dhg/Skeleton#colophon">Colophon</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+      </nav>
+      <div class="content-container">
+        <h2 class="header">GOAT Blitz: Daily Sports Quizzes for Fans</h2>      
+        <div class="main-quiz-content">
+          <div id="app"></div>    
+        </div>
+        
+      </div>
+
+
+    <!-- </div> -->
+
+    <!-- other scripts -->
+    <script src="../lib/underscore.js"></script>
+    <script src="../lib/jquery-2.2.0.min.js"></script>
+    <script src="../lib/require.js"></script>
+    <script type="text/babel" src="./app/components/GuessInput.js"></script>
+    <script type="text/babel" src="./app/App.js"></script>  
+  </body>
 </html>
