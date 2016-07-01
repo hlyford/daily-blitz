@@ -71,6 +71,23 @@ var Admin = React.createClass({
     )
   }
 })
+// ----- Subcribe COMPONENT ---- //
+var Subscribe = React.createClass({  
+  render: function() {          
+    console.log('state', this.state);
+    return (      
+      <div>
+        <div>
+          Get email updates: <input className="enter-email" type="text" onChange placeholder="Email address"/>
+        </div>
+        <div>
+          Get mobile phone updates: <input className="enter-email" type="text" onChange placeholder="Phone number" />
+        </div>
+      </div>       
+    )
+  }
+
+});
 
 // ----- QUIZ COMPONENT ---- //
 var Quiz = React.createClass({
@@ -166,14 +183,15 @@ var App = React.createClass({
 
   render: function() {  	    
     return (
-      <div className="commentBox">     
-        <h2>Welcome to GOAT blitz</h2>
+      <div className="commentBox">             
         <div>
           <Link to='quiz'
             activeClassName='-active'>Play today&#39;s quiz
           </Link>    
-        </div>
-        <div>Subscribe to daily quizzes</div>    
+        </div>        
+        <Link to='subscribe'
+          activeClassName='-active'>Subscribe to daily quizzes
+        </Link>    
         {this.props.children}
          {/*} <GuessInput data={ this.state.data } /> */ }
       </div>
@@ -185,6 +203,7 @@ ReactDOM.render((
   <Router > 
     <Route path="/" component={App} />
     <Route path="/quiz" component={Quiz}/>  
+    <Route path="/subscribe" component={Subscribe}/>  
     <Route path="/admin" component={Admin}/>
 
   </Router>

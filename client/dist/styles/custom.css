@@ -288,5 +288,7 @@ html {
       justify-content: center; }
       html .content-container .main-quiz-content button {
         color: white; }
+      html .content-container .main-quiz-content .guess-box {
+        color: black; }
 
 /*# sourceMappingURL=custom.css.map */
