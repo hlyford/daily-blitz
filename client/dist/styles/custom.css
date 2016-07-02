@@ -290,5 +290,7 @@ html {
         color: white; }
       html .content-container .main-quiz-content .guess-box {
         color: black; }
+  html .subscribe-container input {
+    color: black; }
 
 /*# sourceMappingURL=custom.css.map */
