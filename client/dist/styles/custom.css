@@ -273,6 +273,8 @@ html {
   html nav.navbar {
     background-color: rgba(255, 255, 255, 0.6);
     border-top: none; }
+  html input {
+    color: black; }
   html .content-container {
     margin: 7% 14% 0 14%;
     background-color: rgba(0, 0, 0, 0.6);

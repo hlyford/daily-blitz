@@ -3,10 +3,19 @@ var Quiz = require('../models/quizModel');
 module.exports = {
 
 	handleQuiz: function (quiz_id, callback) {		
-		Quiz.find({queryParam: quiz_id})
-			.then(function (result) {
-				callback(result);
-			})
+		// get all quizzes or get an individual quiz
+		if (quiz_id === 'all') {
+			console.log('hi');
+			Quiz.find()
+				.then(function (result) {
+					callback(result);
+				})
+		}	else {
+			Quiz.find({queryParam: quiz_id})
+				.then(function (result) {
+					callback(result);
+				})
+		}
 	},
 
 	createQuiz: function (data, callback) {
