@@ -19,8 +19,7 @@ var Admin = React.createClass({
       cache: false,
       success: function(data) {
         console.log('response from server', data);             
-        this.setState({response: data});  
-        console.log(this.state);                 
+        this.setState({response: data});                  
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -40,8 +39,7 @@ var Admin = React.createClass({
       var playerId = event.target.id, newPlayers = this.state.players; 
       !newPlayers[playerId] ? newPlayers[playerId] = {} : newPlayers[playerId];     
       event.target.className === 'firstName' ? newPlayers[playerId].firstName = event.target.value : newPlayers[playerId].lastName = event.target.value;      
-      this.setState({ players: newPlayers });
-      console.log(this.state);
+      this.setState({ players: newPlayers });      
     }
 
   },
@@ -104,15 +102,13 @@ var PastQuizzes = React.createClass({
     this.getQuizzes();
   },
   getQuizzes: function () {    
-    // call off to backend with user info
-    console.log('hui');
+    // call off to backend with user info    
     $.ajax({
       url: '/quiz/all',  
       type: 'GET',
       dataType: 'json',      
       cache: false,
-      success: function(data) { 
-        console.log('all quizzes' , data);    
+      success: function(data) {           
         this.setState({ quiz_list: data });
       }.bind(this),      
       error: function(xhr, status, err) {
@@ -163,8 +159,7 @@ var Subscribe = React.createClass({
       dataType: 'json',
       data: submission,
       cache: false,
-      success: function(data) {     
-        console.log('first res', data);                  
+      success: function(data) {                           
       }.bind(this),      
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -199,8 +194,7 @@ var Quiz = React.createClass({
     var quizQueryParam = this.props.location.query['quiz_id'];
     if (quizQueryParam) {
       this.state.active_quiz = quizQueryParam;
-      this.getQuiz();
-      console.log('get quiz', this.state);
+      this.getQuiz();      
     }        
   },
 
@@ -219,8 +213,7 @@ var Quiz = React.createClass({
   		// ***** remove the player from the list ****
   		
   		// reset the guess box
-  		$('.guess-box').val(''); 
-      console.log('after guess' , this.state);
+  		$('.guess-box').val('');       
   	// check if they entered the players FULL NAME
   	} else if (indexFullName !== -1) {
   		var correctName = this.state.quiz_info.players[indexFullName].fullName;
@@ -229,8 +222,7 @@ var Quiz = React.createClass({
   		// ***** remove the player from the list ****
   		
   		// reset the guess box
-  		$('.guess-box').val(''); 
-      console.log('after guess' , this.state);
+  		$('.guess-box').val('');       
   	}   		
   },
 
@@ -268,6 +260,7 @@ var Quiz = React.createClass({
           <button onClick={ this.getQuiz }>Take quiz!</button> :
           <div>
             <div>{ this.state.quiz_info.title }</div>
+            <div> You have answered: {this.state.correct.length} / {this.state.quiz_info.players.length}</div>
       	    <input className="guess-box" type="text" value={this.state.guessValue} onChange={this.handleChange} />
       	    <div>
         		  <ul>
