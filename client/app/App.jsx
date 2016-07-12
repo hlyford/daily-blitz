@@ -1,6 +1,8 @@
-// import react router
-var rR = window.ReactRouter;
-var Router = rR.Router, Route = rR.Route,Link = rR.Link, browserHistory = rR.browserHistory;
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Router , Route} from 'react-router';
+
 
 // sub-components here for now
 
@@ -303,13 +305,14 @@ var App = React.createClass({
   },
 });
 /* history={browserHistory} */  
-ReactDOM.render((
-  <Router > 
+const routes = (
+  <Route>
     <Route path="/" component={App} />
     <Route path="/quiz" component={Quiz}/>
     <Route path="/pastQuizzes" component={PastQuizzes}/>  
     <Route path="/subscribe" component={Subscribe}/>  
     <Route path="/admin" component={Admin}/>
+  </Route>
+)
 
-  </Router>
-), document.getElementById('app'))
+ReactDOM.render(<Router>{routes}</Router>, document.getElementById('app')) 
