@@ -56,376 +56,27 @@
 
 	var _reactRouter = __webpack_require__(170);
 
+	var _Admin = __webpack_require__(232);
+
+	var _Admin2 = _interopRequireDefault(_Admin);
+
+	var _PastQuizzes = __webpack_require__(233);
+
+	var _PastQuizzes2 = _interopRequireDefault(_PastQuizzes);
+
+	var _Subscribe = __webpack_require__(234);
+
+	var _Subscribe2 = _interopRequireDefault(_Subscribe);
+
+	var _Quiz = __webpack_require__(235);
+
+	var _Quiz2 = _interopRequireDefault(_Quiz);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// sub-components here for now
-
-	// ----- ADMIN COMPONENT  ----- //
-
-	var Admin = _react2.default.createClass({
-	  displayName: 'Admin',
-
-	  getInitialState: function getInitialState() {
-	    return { players: [] };
-	  },
-	  submitQuiz: function submitQuiz() {
-	    $.ajax({
-	      url: '/quiz',
-	      type: 'POST',
-	      data: this.state,
-	      dataType: 'json',
-	      cache: false,
-	      success: function (data) {
-	        console.log('response from server', data);
-	        this.setState({ response: data });
-	      }.bind(this),
-	      error: function (xhr, status, err) {
-	        console.error(this.props.url, status, err.toString());
-	      }.bind(this)
-	    });
-	    // reset the form
-	    this.setState({ players: {}, quiz_id: '', password: '', quiz_name: '' });
-	  },
-	  handleChange: function handleChange(event) {
-	    if (event.target.id === 'quiz-name') {
-	      this.setState({ quiz_name: event.target.value });
-	    } else if (event.target.id === 'quiz-id') {
-	      this.setState({ quiz_id: event.target.value });
-	    } else if (event.target.id === 'password') {
-	      this.setState({ password: event.target.value });
-	    } else {
-	      var playerId = event.target.id,
-	          newPlayers = this.state.players;
-	      !newPlayers[playerId] ? newPlayers[playerId] = {} : newPlayers[playerId];
-	      event.target.className === 'firstName' ? newPlayers[playerId].firstName = event.target.value : newPlayers[playerId].lastName = event.target.value;
-	      this.setState({ players: newPlayers });
-	    }
-	  },
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Quiz Name: ',
-	        _react2.default.createElement('input', { id: 'quiz-name', className: 'guess-box', type: 'text', value: this.state.quiz_name, onChange: this.handleChange })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Quiz ID: ',
-	        _react2.default.createElement('input', { className: 'quiz-id', id: 'quiz-id', type: 'text', value: this.state.quiz_id, onChange: this.handleChange })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Player 1 (first, last names):',
-	        _react2.default.createElement('input', { className: 'firstName', data: '', id: '0', type: 'text', value: this.state.players[0] !== undefined ? this.state.players[0].firstName : '', onChange: this.handleChange }),
-	        _react2.default.createElement('input', { className: 'lastName', id: '0', type: 'text', value: this.state.players[0] !== undefined ? this.state.players[0].lastName : '', onChange: this.handleChange })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Player 2 (first, last names):',
-	        _react2.default.createElement('input', { className: 'firstName', data: '', id: '1', type: 'text', value: this.state.players[1] !== undefined ? this.state.players[1].firstName : '', onChange: this.handleChange }),
-	        _react2.default.createElement('input', { className: 'lastName', id: '1', type: 'text', value: this.state.players[1] !== undefined ? this.state.players[1].lastName : '', onChange: this.handleChange })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Player 3 (first, last names):',
-	        _react2.default.createElement('input', { className: 'firstName', data: '', id: '2', type: 'text', value: this.state.players[2] !== undefined ? this.state.players[2].firstName : '', onChange: this.handleChange }),
-	        _react2.default.createElement('input', { className: 'lastName', id: '2', type: 'text', value: this.state.players[2] !== undefined ? this.state.players[2].lastName : '', onChange: this.handleChange })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Player 4 (first, last names):',
-	        _react2.default.createElement('input', { className: 'firstName', data: '', id: '3', type: 'text', value: this.state.players[3] !== undefined ? this.state.players[3].firstName : '', onChange: this.handleChange }),
-	        _react2.default.createElement('input', { className: 'lastName', id: '3', type: 'text', value: this.state.players[3] !== undefined ? this.state.players[3].lastName : '', onChange: this.handleChange })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Player 5 (first, last names):',
-	        _react2.default.createElement('input', { className: 'firstName', data: '', id: '4', type: 'text', value: this.state.players[4] !== undefined ? this.state.players[4].firstName : '', onChange: this.handleChange }),
-	        _react2.default.createElement('input', { className: 'lastName', id: '4', type: 'text', value: this.state.players[4] !== undefined ? this.state.players[4].lastName : '', onChange: this.handleChange })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Player 6 (first, last names):',
-	        _react2.default.createElement('input', { className: 'firstName', data: '', id: '5', type: 'text', value: this.state.players[5] !== undefined ? this.state.players[5].firstName : '', onChange: this.handleChange }),
-	        _react2.default.createElement('input', { className: 'lastName', id: '5', type: 'text', value: this.state.players[5] !== undefined ? this.state.players[5].lastName : '', onChange: this.handleChange })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Player 7 (first, last names):',
-	        _react2.default.createElement('input', { className: 'firstName', data: '', id: '6', type: 'text', value: this.state.players[6] !== undefined ? this.state.players[6].firstName : '', onChange: this.handleChange }),
-	        _react2.default.createElement('input', { className: 'lastName', id: '6', type: 'text', value: this.state.players[6] !== undefined ? this.state.players[6].lastName : '', onChange: this.handleChange })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Player 8 (first, last names):',
-	        _react2.default.createElement('input', { className: 'firstName', data: '', id: '7', type: 'text', value: this.state.players[7] !== undefined ? this.state.players[7].firstName : '', onChange: this.handleChange }),
-	        _react2.default.createElement('input', { className: 'lastName', id: '7', type: 'text', value: this.state.players[7] !== undefined ? this.state.players[7].lastName : '', onChange: this.handleChange })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Password: ',
-	        _react2.default.createElement('input', { className: 'player', id: 'password', type: 'text', value: this.state.password, onChange: this.handleChange })
-	      ),
-	      _react2.default.createElement(
-	        'button',
-	        { onClick: this.submitQuiz },
-	        'Add Quiz'
-	      ),
-	      this.state.response ? _react2.default.createElement(
-	        'div',
-	        null,
-	        'Quiz created with id: ',
-	        this.state.response.queryParam,
-	        ' '
-	      ) : ''
-	    );
-	  }
-	});
-	// ----- PAST QUIZZES COMPONENT ---- //
-	var PastQuizzes = _react2.default.createClass({
-	  displayName: 'PastQuizzes',
-
-	  getInitialState: function getInitialState() {
-	    return { quiz_list: [] };
-	  },
-	  componentDidMount: function componentDidMount() {
-	    this.getQuizzes();
-	  },
-	  getQuizzes: function getQuizzes() {
-	    // call off to backend with user info   
-	    $.ajax({
-	      url: '/quiz/all',
-	      type: 'GET',
-	      dataType: 'json',
-	      cache: false,
-	      success: function (data) {
-	        this.setState({ quiz_list: data });
-	      }.bind(this),
-	      error: function (xhr, status, err) {
-	        console.error(this.props.url, status, err.toString());
-	      }.bind(this)
-	    });
-	  },
-	  render: function render() {
-	    var listItems = this.state.quiz_list.map(function (item) {
-	      item.url = "#/quiz?quiz_id=" + item.queryParam;
-	      return _react2.default.createElement(
-	        'li',
-	        { key: item._id },
-	        _react2.default.createElement(
-	          'a',
-	          { href: item.url },
-	          item.title
-	        )
-	      );
-	    });
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      'Here are the old quizzes',
-	      _react2.default.createElement(
-	        'ul',
-	        null,
-	        listItems
-	      )
-	    );
-	  }
-	});
-
-	// ----- Subcribe COMPONENT ---- //
-	var Subscribe = _react2.default.createClass({
-	  displayName: 'Subscribe',
-
-	  getInitialState: function getInitialState() {
-	    return { email: null, phone_number: null };
-	  },
-	  handleChange: function handleChange(event) {
-	    var entry = event.target.value;
-	    if (event.target.id === 'email') {
-	      this.state.email = entry;
-	    } else {
-	      this.state.phone_number = entry;
-	    }
-	  },
-	  submitForm: function submitForm(event) {
-	    var submission = { email: this.state.email, phone_number: this.state.phone_number };
-	    // call off to backend with user info
-	    $.ajax({
-	      url: '/user',
-	      type: 'POST',
-	      dataType: 'json',
-	      data: submission,
-	      cache: false,
-	      success: function (data) {}.bind(this),
-	      error: function (xhr, status, err) {
-	        console.error(this.props.url, status, err.toString());
-	      }.bind(this)
-	    });
-	  },
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'subscribe-container' },
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Enter your email, phone number, or both'
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Get email updates: ',
-	        _react2.default.createElement('input', { className: 'enter-email', type: 'text', id: 'email', onChange: this.handleChange, placeholder: 'Email address' })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Get mobile phone updates: ',
-	        _react2.default.createElement('input', { className: 'enter-email', type: 'text', id: 'phone', onChange: this.handleChange, placeholder: 'Phone number' })
-	      ),
-	      _react2.default.createElement(
-	        'button',
-	        { onClick: this.submitForm },
-	        'Submit'
-	      )
-	    );
-	  }
-
-	});
-
-	// ----- QUIZ COMPONENT ---- //
-	var Quiz = _react2.default.createClass({
-	  displayName: 'Quiz',
-
-	  getInitialState: function getInitialState() {
-	    return { correct: [], takingQuiz: false, active_quiz: '' };
-	  },
-	  componentWillMount: function componentWillMount() {
-	    // check if there's a query string param, if so, set up that quiz
-	    var quizQueryParam = this.props.location.query['quiz_id'];
-	    if (quizQueryParam) {
-	      this.state.active_quiz = quizQueryParam;
-	      this.getQuiz();
-	    }
-	  },
-
-	  handleChange: function handleChange(event) {
-	    var guess = event.target.value.toLowerCase();
-	    var lastNames = _.pluck(this.state.quiz_info.players, 'lastName');
-	    var fullNames = _.pluck(this.state.quiz_info.players, 'fullName');
-	    // check if they entered the last name, keep track of index
-	    var indexLastName = _.indexOf(lastNames, guess);
-	    var indexFullName = _.indexOf(fullNames, guess);
-	    // if the entered LAST NAME, they got it correct and they hadn't guessed it before
-	    if (indexLastName !== -1 && _.indexOf(this.state.correct['last_name'], guess) === -1) {
-	      var correctName = this.state.quiz_info.players[indexLastName].fullName;
-	      var correctLastName = this.state.quiz_info.players[indexLastName].lastName;
-	      this.setState({ correct: this.state.correct.concat({ full_name: correctName, last_name: correctLastName }) });
-	      // ***** remove the player from the list ****
-
-	      // reset the guess box
-	      $('.guess-box').val('');
-	      // check if they entered the players FULL NAME
-	    } else if (indexFullName !== -1) {
-	      var correctName = this.state.quiz_info.players[indexFullName].fullName;
-	      this.setState({ correct: this.state.correct.concat(correctName) });
-	      // this.setState(correct: this.state.correct.concat(correctName); 
-	      // ***** remove the player from the list ****
-
-	      // reset the guess box
-	      $('.guess-box').val('');
-	    }
-	  },
-
-	  addFullNameAndConvertLowerCase: function addFullNameAndConvertLowerCase(list) {
-	    _.each(list.players, function (item, index, players) {
-	      // make full name
-	      item.fullName = item.firstName + ' ' + item.lastName;
-	      // convert to lower case
-	      item.firstNameLower = item.firstName.toLowerCase(), item.lastName = item.lastName.toLowerCase();
-	      item.fullNameLower = item.fullName.toLowerCase();
-	    });
-	    return list;
-	  },
-
-	  getQuiz: function getQuiz() {
-	    $.ajax({
-	      url: '/quiz/' + this.state.active_quiz, // test query: 2x68a
-	      dataType: 'json',
-	      cache: false,
-	      success: function (data) {
-	        data = this.addFullNameAndConvertLowerCase(data[0]);
-	        this.setState({ quiz_info: data, takingQuiz: true });
-	      }.bind(this),
-	      error: function (xhr, status, err) {
-	        console.error(this.props.url, status, err.toString());
-	      }.bind(this)
-	    });
-	  },
-
-	  render: function render() {
-	    var _this = this;
-
-	    // console.log('state', this.state);
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      !this.state.takingQuiz ? _react2.default.createElement(
-	        'button',
-	        { onClick: this.getQuiz },
-	        'Take quiz!'
-	      ) : _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          this.state.quiz_info.title
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          ' You have answered: ',
-	          this.state.correct.length,
-	          ' / ',
-	          this.state.quiz_info.players.length
-	        ),
-	        _react2.default.createElement('input', { className: 'guess-box', type: 'text', value: this.state.guessValue, onChange: this.handleChange }),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'ul',
-	            null,
-	            this.state.correct.map(function (item) {
-	              return _react2.default.createElement(
-	                'li',
-	                { key: _this.state.timestamp },
-	                item.full_name
-	              );
-	            })
-	          )
-	        )
-	      )
-	    );
-	  }
-
-	});
 	// ------ END SUB COMPONENTS ------- //
 
+	// import subcomponents
 	var App = _react2.default.createClass({
 	  displayName: 'App',
 
@@ -442,14 +93,14 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(
-	          Link,
+	          _reactRouter.Link,
 	          { to: 'quiz',
 	            activeClassName: '-active' },
 	          'Play today\'s quiz'
 	        )
 	      ),
 	      _react2.default.createElement(
-	        Link,
+	        _reactRouter.Link,
 	        { to: 'subscribe',
 	          activeClassName: '-active' },
 	        'Subscribe to daily quizzes'
@@ -458,20 +109,20 @@
 	    );
 	  }
 	});
-	/* history={browserHistory} */
+
 	var routes = _react2.default.createElement(
 	  _reactRouter.Route,
 	  null,
 	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: App }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/quiz', component: Quiz }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/pastQuizzes', component: PastQuizzes }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/subscribe', component: Subscribe }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/admin', component: Admin })
+	  _react2.default.createElement(_reactRouter.Route, { path: '/quiz', component: _Quiz2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/pastQuizzes', component: _PastQuizzes2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/subscribe', component: _Subscribe2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/admin', component: _Admin2.default })
 	);
 
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRouter.Router,
-	  null,
+	  { history: _reactRouter.hashHistory },
 	  routes
 	), document.getElementById('app'));
 
@@ -26943,6 +26594,444 @@
 
 	exports.default = (0, _createRouterHistory2.default)(_createHashHistory2.default);
 	module.exports = exports['default'];
+
+/***/ },
+/* 232 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Admin = _react2.default.createClass({
+	  displayName: 'Admin',
+
+	  getInitialState: function getInitialState() {
+	    return { players: [] };
+	  },
+	  submitQuiz: function submitQuiz() {
+	    $.ajax({
+	      url: '/quiz',
+	      type: 'POST',
+	      data: this.state,
+	      dataType: 'json',
+	      cache: false,
+	      success: function (data) {
+	        console.log('response from server', data);
+	        this.setState({ response: data });
+	      }.bind(this),
+	      error: function (xhr, status, err) {
+	        console.error(this.props.url, status, err.toString());
+	      }.bind(this)
+	    });
+	    // reset the form
+	    this.setState({ players: {}, quiz_id: '', password: '', quiz_name: '' });
+	  },
+	  handleChange: function handleChange(event) {
+	    if (event.target.id === 'quiz-name') {
+	      this.setState({ quiz_name: event.target.value });
+	    } else if (event.target.id === 'quiz-id') {
+	      this.setState({ quiz_id: event.target.value });
+	    } else if (event.target.id === 'password') {
+	      this.setState({ password: event.target.value });
+	    } else {
+	      var playerId = event.target.id,
+	          newPlayers = this.state.players;
+	      !newPlayers[playerId] ? newPlayers[playerId] = {} : newPlayers[playerId];
+	      event.target.className === 'firstName' ? newPlayers[playerId].firstName = event.target.value : newPlayers[playerId].lastName = event.target.value;
+	      this.setState({ players: newPlayers });
+	    }
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        'Quiz Name: ',
+	        _react2.default.createElement('input', { id: 'quiz-name', className: 'guess-box', type: 'text', value: this.state.quiz_name, onChange: this.handleChange })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        'Quiz ID: ',
+	        _react2.default.createElement('input', { className: 'quiz-id', id: 'quiz-id', type: 'text', value: this.state.quiz_id, onChange: this.handleChange })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        'Player 1 (first, last names):',
+	        _react2.default.createElement('input', { className: 'firstName', data: '', id: '0', type: 'text', value: this.state.players[0] !== undefined ? this.state.players[0].firstName : '', onChange: this.handleChange }),
+	        _react2.default.createElement('input', { className: 'lastName', id: '0', type: 'text', value: this.state.players[0] !== undefined ? this.state.players[0].lastName : '', onChange: this.handleChange })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        'Player 2 (first, last names):',
+	        _react2.default.createElement('input', { className: 'firstName', data: '', id: '1', type: 'text', value: this.state.players[1] !== undefined ? this.state.players[1].firstName : '', onChange: this.handleChange }),
+	        _react2.default.createElement('input', { className: 'lastName', id: '1', type: 'text', value: this.state.players[1] !== undefined ? this.state.players[1].lastName : '', onChange: this.handleChange })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        'Player 3 (first, last names):',
+	        _react2.default.createElement('input', { className: 'firstName', data: '', id: '2', type: 'text', value: this.state.players[2] !== undefined ? this.state.players[2].firstName : '', onChange: this.handleChange }),
+	        _react2.default.createElement('input', { className: 'lastName', id: '2', type: 'text', value: this.state.players[2] !== undefined ? this.state.players[2].lastName : '', onChange: this.handleChange })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        'Player 4 (first, last names):',
+	        _react2.default.createElement('input', { className: 'firstName', data: '', id: '3', type: 'text', value: this.state.players[3] !== undefined ? this.state.players[3].firstName : '', onChange: this.handleChange }),
+	        _react2.default.createElement('input', { className: 'lastName', id: '3', type: 'text', value: this.state.players[3] !== undefined ? this.state.players[3].lastName : '', onChange: this.handleChange })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        'Player 5 (first, last names):',
+	        _react2.default.createElement('input', { className: 'firstName', data: '', id: '4', type: 'text', value: this.state.players[4] !== undefined ? this.state.players[4].firstName : '', onChange: this.handleChange }),
+	        _react2.default.createElement('input', { className: 'lastName', id: '4', type: 'text', value: this.state.players[4] !== undefined ? this.state.players[4].lastName : '', onChange: this.handleChange })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        'Player 6 (first, last names):',
+	        _react2.default.createElement('input', { className: 'firstName', data: '', id: '5', type: 'text', value: this.state.players[5] !== undefined ? this.state.players[5].firstName : '', onChange: this.handleChange }),
+	        _react2.default.createElement('input', { className: 'lastName', id: '5', type: 'text', value: this.state.players[5] !== undefined ? this.state.players[5].lastName : '', onChange: this.handleChange })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        'Player 7 (first, last names):',
+	        _react2.default.createElement('input', { className: 'firstName', data: '', id: '6', type: 'text', value: this.state.players[6] !== undefined ? this.state.players[6].firstName : '', onChange: this.handleChange }),
+	        _react2.default.createElement('input', { className: 'lastName', id: '6', type: 'text', value: this.state.players[6] !== undefined ? this.state.players[6].lastName : '', onChange: this.handleChange })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        'Player 8 (first, last names):',
+	        _react2.default.createElement('input', { className: 'firstName', data: '', id: '7', type: 'text', value: this.state.players[7] !== undefined ? this.state.players[7].firstName : '', onChange: this.handleChange }),
+	        _react2.default.createElement('input', { className: 'lastName', id: '7', type: 'text', value: this.state.players[7] !== undefined ? this.state.players[7].lastName : '', onChange: this.handleChange })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        'Password: ',
+	        _react2.default.createElement('input', { className: 'player', id: 'password', type: 'text', value: this.state.password, onChange: this.handleChange })
+	      ),
+	      _react2.default.createElement(
+	        'button',
+	        { onClick: this.submitQuiz },
+	        'Add Quiz'
+	      ),
+	      this.state.response ? _react2.default.createElement(
+	        'div',
+	        null,
+	        'Quiz created with id: ',
+	        this.state.response.queryParam,
+	        ' '
+	      ) : ''
+	    );
+	  }
+	}); // ----- ADMIN COMPONENT  ----- //
+
+
+	exports.default = Admin;
+
+/***/ },
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var PastQuizzes = _react2.default.createClass({
+	  displayName: 'PastQuizzes',
+
+	  getInitialState: function getInitialState() {
+	    return { quiz_list: [] };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.getQuizzes();
+	  },
+	  getQuizzes: function getQuizzes() {
+	    // call off to backend with user info
+	    $.ajax({
+	      url: '/quiz/all',
+	      type: 'GET',
+	      dataType: 'json',
+	      cache: false,
+	      success: function (data) {
+	        this.setState({ quiz_list: data });
+	      }.bind(this),
+	      error: function (xhr, status, err) {
+	        console.error(this.props.url, status, err.toString());
+	      }.bind(this)
+	    });
+	  },
+	  render: function render() {
+	    var listItems = this.state.quiz_list.map(function (item) {
+	      item.url = "#/quiz?quiz_id=" + item.queryParam;
+	      return _react2.default.createElement(
+	        'li',
+	        { key: item._id },
+	        _react2.default.createElement(
+	          'a',
+	          { href: item.url },
+	          item.title
+	        )
+	      );
+	    });
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      'Here are the old quizzes',
+	      _react2.default.createElement(
+	        'ul',
+	        null,
+	        listItems
+	      )
+	    );
+	  }
+	}); // ----- PAST QUIZZES COMPONENT ---- //
+
+
+	exports.default = PastQuizzes;
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Subscribe = _react2.default.createClass({
+	  displayName: 'Subscribe',
+
+	  getInitialState: function getInitialState() {
+	    return { email: null, phone_number: null };
+	  },
+	  handleChange: function handleChange(event) {
+	    var entry = event.target.value;
+	    if (event.target.id === 'email') {
+	      this.state.email = entry;
+	    } else {
+	      this.state.phone_number = entry;
+	    }
+	  },
+	  submitForm: function submitForm(event) {
+	    var submission = { email: this.state.email, phone_number: this.state.phone_number };
+	    // call off to backend with user info
+	    $.ajax({
+	      url: '/user',
+	      type: 'POST',
+	      dataType: 'json',
+	      data: submission,
+	      cache: false,
+	      success: function (data) {}.bind(this),
+	      error: function (xhr, status, err) {
+	        console.error(this.props.url, status, err.toString());
+	      }.bind(this)
+	    });
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'subscribe-container' },
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        'Enter your email, phone number, or both'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        'Get email updates: ',
+	        _react2.default.createElement('input', { className: 'enter-email', type: 'text', id: 'email', onChange: this.handleChange, placeholder: 'Email address' })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        'Get mobile phone updates: ',
+	        _react2.default.createElement('input', { className: 'enter-email', type: 'text', id: 'phone', onChange: this.handleChange, placeholder: 'Phone number' })
+	      ),
+	      _react2.default.createElement(
+	        'button',
+	        { onClick: this.submitForm },
+	        'Submit'
+	      )
+	    );
+	  }
+
+	}); // ----- Subcribe COMPONENT ---- //
+
+
+	exports.default = Subscribe;
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Quiz = _react2.default.createClass({
+	  displayName: 'Quiz',
+
+	  getInitialState: function getInitialState() {
+	    return { correct: [], takingQuiz: false, active_quiz: '' };
+	  },
+	  componentWillMount: function componentWillMount() {
+	    // check if there's a query string param, if so, set up that quiz
+	    var quizQueryParam = this.props.location.query['quiz_id'];
+	    if (quizQueryParam) {
+	      this.state.active_quiz = quizQueryParam;
+	    } else {
+	      // PLACEHOLDER KOBE QUIZ FOR NOW
+	      this.state.active_quiz = '2x68a';
+	    }
+	  },
+
+	  handleChange: function handleChange(event) {
+	    var guess = event.target.value.toLowerCase();
+	    var lastNames = _.pluck(this.state.quiz_info.players, 'lastName');
+	    var fullNames = _.pluck(this.state.quiz_info.players, 'fullName');
+	    // check if they entered the last name, keep track of index
+	    var indexLastName = _.indexOf(lastNames, guess);
+	    var indexFullName = _.indexOf(fullNames, guess);
+	    // if the entered LAST NAME, they got it correct and they hadn't guessed it before
+	    if (indexLastName !== -1 && _.indexOf(this.state.correct['last_name'], guess) === -1) {
+	      var correctName = this.state.quiz_info.players[indexLastName].fullName;
+	      var correctLastName = this.state.quiz_info.players[indexLastName].lastName;
+	      this.setState({ correct: this.state.correct.concat({ full_name: correctName, last_name: correctLastName }) });
+	      // ***** remove the player from the list ****
+
+	      // reset the guess box
+	      $('.guess-box').val('');
+	      // check if they entered the players FULL NAME
+	    } else if (indexFullName !== -1) {
+	      var correctName = this.state.quiz_info.players[indexFullName].fullName;
+	      this.setState({ correct: this.state.correct.concat(correctName) });
+	      // this.setState(correct: this.state.correct.concat(correctName);
+	      // ***** remove the player from the list ****
+
+	      // reset the guess box
+	      $('.guess-box').val('');
+	    }
+	  },
+
+	  addFullNameAndConvertLowerCase: function addFullNameAndConvertLowerCase(list) {
+	    _.each(list.players, function (item, index, players) {
+	      // make full name
+	      item.fullName = item.firstName + ' ' + item.lastName;
+	      // convert to lower case
+	      item.firstNameLower = item.firstName.toLowerCase(), item.lastName = item.lastName.toLowerCase();
+	      item.fullNameLower = item.fullName.toLowerCase();
+	    });
+	    return list;
+	  },
+
+	  getQuiz: function getQuiz() {
+	    $.ajax({
+	      url: '/quiz/' + this.state.active_quiz, // test query: 2x68a
+	      dataType: 'json',
+	      cache: false,
+	      success: function (data) {
+	        data = this.addFullNameAndConvertLowerCase(data[0]);
+	        this.setState({ quiz_info: data, takingQuiz: true });
+	      }.bind(this),
+	      error: function (xhr, status, err) {
+	        console.error(this.props.url, status, err.toString());
+	      }.bind(this)
+	    });
+	  },
+
+	  render: function render() {
+	    var _this = this;
+
+	    // console.log('state', this.state);
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      !this.state.takingQuiz ? _react2.default.createElement(
+	        'button',
+	        { onClick: this.getQuiz },
+	        'Take quiz!'
+	      ) : _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          this.state.quiz_info.title
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          ' You have answered: ',
+	          this.state.correct.length,
+	          ' / ',
+	          this.state.quiz_info.players.length
+	        ),
+	        _react2.default.createElement('input', { className: 'guess-box', type: 'text', value: this.state.guessValue, onChange: this.handleChange }),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'ul',
+	            null,
+	            this.state.correct.map(function (item) {
+	              return _react2.default.createElement(
+	                'li',
+	                { key: _this.state.timestamp },
+	                item.full_name
+	              );
+	            })
+	          )
+	        )
+	      )
+	    );
+	  }
+	}); // ----- QUIZ COMPONENT ---- //
+
+
+	exports.default = Quiz;
 
 /***/ }
 /******/ ]);
