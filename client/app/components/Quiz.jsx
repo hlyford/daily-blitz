@@ -19,7 +19,7 @@ var Quiz = React.createClass({
   handleChange: function(event) {
   	var guess = event.target.value.toLowerCase();
   	var lastNames = _.pluck(this.state.quiz_info.players, 'lastName');
-  	var fullNames = _.pluck(this.state.quiz_info.players, 'fullName');
+  	var fullNames = _.pluck(this.state.quiz_info.players, 'fullNameLower');
   	// check if they entered the last name, keep track of index
   	var indexLastName = _.indexOf(lastNames, guess);
   	var indexFullName = _.indexOf(fullNames, guess);
@@ -32,16 +32,25 @@ var Quiz = React.createClass({
 
   		// reset the guess box
   		$('.guess-box').val('');
+      this.flash();
   	// check if they entered the players FULL NAME
   	} else if (indexFullName !== -1) {
-  		var correctName = this.state.quiz_info.players[indexFullName].fullName;
-  		this.setState({ correct: this.state.correct.concat(correctName) });
+	    var correctName = this.state.quiz_info.players[indexFullName].fullName;
+      var correctLastName = this.state.quiz_info.players[indexFullName].lastName;
+      this.setState({ correct: this.state.correct.concat( {full_name:correctName, last_name: correctLastName}) });
   		// this.setState(correct: this.state.correct.concat(correctName);
   		// ***** remove the player from the list ****
 
   		// reset the guess box
   		$('.guess-box').val('');
   	}
+  },
+
+  flash: function () {
+    $('.main-quiz-content .guess-box').addClass('boom');
+    setTimeout(function() {
+      $('.main-quiz-content .guess-box').removeClass('boom');
+    }, 200)
   },
 
   addFullNameAndConvertLowerCase: function (list) {

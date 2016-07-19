@@ -4,22 +4,32 @@ var app = require('./server.js');
 var quizController = require('./controllers/quizController');
 var userController = require('./controllers/userController');
 var bodyParser = require('body-parser');
+var path = require('path');
 
 var router = express.Router();
 router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: true }));  
+router.use(bodyParser.urlencoded({ extended: true }));
+
 
 // QUIZ ROUTES
+
+// add back wild card route once have browserHistory working
+// router.route('*')
+// 	.get(function (req, res) {
+// 		var stuff = path.resolve('client', 'index.html');
+// 		res.sendFile(stuff);
+// 	})
+
 router.route( '/quiz/:querySlug' )
 	.get(function (req, res) {
 		// send to quiz controller
-		quizController.handleQuiz(req.params.querySlug, function (quiz_data) {									
+		quizController.handleQuiz(req.params.querySlug, function (quiz_data) {
 			res.send(quiz_data);
-		})		
+		})
 	})
 router.route('/quiz')
-	.post(function (req, res) {		
-		quizController.createQuiz(req.body, function (response) {						
+	.post(function (req, res) {
+		quizController.createQuiz(req.body, function (response) {
 			res.send(response);
 		});
 	})

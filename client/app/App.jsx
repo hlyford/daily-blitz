@@ -1,7 +1,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Link, Route, hashHistory} from 'react-router';
+import { Router, Link, Route, hashHistory, browserHistory} from 'react-router';
 // import subcomponents
 import Admin from './components/Admin.jsx';
 import PastQuizzes from './components/PastQuizzes.jsx';

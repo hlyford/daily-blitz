@@ -1,0 +1,16 @@
+@media (min-width: 769px) {
+
+	html {
+		nav.navbar {
+			background-color: rgba(255,255,255,.6);
+			border-top: none;
+			.container {
+				padding-left: 0;
+			}
+		}
+		.container.main {
+		  padding-top: 5%;
+		}
+	}
+
+}

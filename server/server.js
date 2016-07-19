@@ -25,8 +25,6 @@ app.use(express.static(path.join(__dirname, "../client")));
 // redirect http requests to router
 app.use('/', router);
 
-// console.log(router);
-
 // start the server
 app.listen(port, function () {
 	console.log('App running at: ' + port);
