@@ -40,7 +40,11 @@ html {
         color: black; }
         html .content-container .main-quiz-content .guess-box.boom {
           background-color: green; }
-  html .subscribe-container input {
-    color: black; }
+    html .content-container #app {
+      width: 100%; }
+      html .content-container #app .subscribe-view input {
+        color: black; }
+      html .content-container #app .roster-view .six {
+        text-align: center; }
 
 /*# sourceMappingURL=custom_base.css.map */

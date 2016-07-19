@@ -7,6 +7,7 @@ import Admin from './components/Admin.jsx';
 import PastQuizzes from './components/PastQuizzes.jsx';
 import Subscribe from './components/Subscribe.jsx';
 import Quiz from './components/Quiz.jsx';
+import Rosters from './components/Rosters.jsx';
 
 // ------ END SUB COMPONENTS ------- //
 
@@ -41,6 +42,7 @@ const routes = (
     <Route path="/pastQuizzes" component={PastQuizzes}/>
     <Route path="/subscribe" component={Subscribe}/>
     <Route path="/admin" component={Admin}/>
+    <Route path="/rosters" component={Rosters}/>
   </Route>
 )
 

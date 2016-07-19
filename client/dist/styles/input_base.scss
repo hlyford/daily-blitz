@@ -51,11 +51,20 @@ html {
         }
 			}
 		}
-	}
-	.subscribe-container {
-		input {
-			color: black;
+		#app {
+			width: 100%;
+			.subscribe-view {
+				input {
+					color: black;
+				}
+			}
+			.roster-view {
+				.six {
+					text-align: center;
+				}
+			}
 		}
 	}
+
 
 }

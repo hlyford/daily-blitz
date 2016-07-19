@@ -72,11 +72,14 @@
 
 	var _Quiz2 = _interopRequireDefault(_Quiz);
 
+	var _Rosters = __webpack_require__(236);
+
+	var _Rosters2 = _interopRequireDefault(_Rosters);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// ------ END SUB COMPONENTS ------- //
 
-	// import subcomponents
 	var App = _react2.default.createClass({
 	  displayName: 'App',
 
@@ -109,6 +112,8 @@
 	    );
 	  }
 	});
+	// import subcomponents
+
 
 	var routes = _react2.default.createElement(
 	  _reactRouter.Route,
@@ -117,7 +122,8 @@
 	  _react2.default.createElement(_reactRouter.Route, { path: '/quiz', component: _Quiz2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/pastQuizzes', component: _PastQuizzes2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/subscribe', component: _Subscribe2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/admin', component: _Admin2.default })
+	  _react2.default.createElement(_reactRouter.Route, { path: '/admin', component: _Admin2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/rosters', component: _Rosters2.default })
 	);
 
 	_reactDom2.default.render(_react2.default.createElement(
@@ -26864,7 +26870,7 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'subscribe-container' },
+	      { className: 'subscribe-view' },
 	      _react2.default.createElement(
 	        'div',
 	        null,
@@ -27041,6 +27047,46 @@
 
 
 	exports.default = Quiz;
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Rosters = _react2.default.createClass({
+		displayName: "Rosters",
+
+
+		render: function render() {
+			return _react2.default.createElement(
+				"div",
+				{ className: "roster-view" },
+				_react2.default.createElement(
+					"div",
+					{ className: "six columns" },
+					"Eastern Conference Teams"
+				),
+				_react2.default.createElement(
+					"div",
+					{ className: "six columns" },
+					"Western Conference Teams"
+				)
+			);
+		}
+	});
+
+	exports.default = Rosters;
 
 /***/ }
 /******/ ]);

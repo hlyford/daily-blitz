@@ -32,7 +32,7 @@ var Subscribe = React.createClass({
   },
   render: function() {
     return (
-      <div className="subscribe-container">
+      <div className="subscribe-view">
         <div>Enter your email, phone number, or both</div>
         <div>
           Get email updates: <input className="enter-email" type="text" id="email" onChange={ this.handleChange } placeholder="Email address"/>
