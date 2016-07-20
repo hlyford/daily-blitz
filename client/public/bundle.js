@@ -27052,7 +27052,7 @@
 /* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -27065,22 +27065,39 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Rosters = _react2.default.createClass({
-		displayName: "Rosters",
+		displayName: 'Rosters',
 
-
+		getInitialState: function getInitialState() {
+			return { rosters: [] };
+		},
+		componentDidMount: function componentDidMount() {
+			// call off for all team rosters
+			$.ajax({
+				url: '/roster',
+				dataType: 'json',
+				cache: false,
+				success: function (data) {
+					console.log(data);
+					this.setState({ rosters: data });
+				}.bind(this),
+				error: function (xhr, status, err) {
+					console.error(this.props.url, status, err.toString());
+				}.bind(this)
+			});
+		},
 		render: function render() {
 			return _react2.default.createElement(
-				"div",
-				{ className: "roster-view" },
+				'div',
+				{ className: 'roster-view' },
 				_react2.default.createElement(
-					"div",
-					{ className: "six columns" },
-					"Eastern Conference Teams"
+					'div',
+					{ className: 'six columns' },
+					'Eastern Conference Teams'
 				),
 				_react2.default.createElement(
-					"div",
-					{ className: "six columns" },
-					"Western Conference Teams"
+					'div',
+					{ className: 'six columns' },
+					'Western Conference Teams'
 				)
 			);
 		}

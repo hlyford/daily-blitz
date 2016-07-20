@@ -8,11 +8,13 @@ var baseUrl = require('./url_info').baseUrl;
 // var teamSlugs = require('./url-info').teamSlugs;
 var rosterController = require('./rosterController');
 
-var team = {
-	players: []
-};
 
 var getRosters = function (urlSlug, callback) {
+	// initialize team object
+	var team = {
+		players: []
+	};
+	// form the url and go to the page
 	var url = baseUrl + urlSlug + "/roster";
 	request(url, function (error, response, html) {
 	  if (!error && response.statusCode == 200) {
@@ -21,11 +23,13 @@ var getRosters = function (urlSlug, callback) {
 			// get the team name
 			var teamName = $('.IbBox h1 span:nth-child(1)').text();
 			team['name'] = teamName;
+			var teamAcronym = urlSlug;
+			team['acronym'] = teamAcronym;
 
 			// get all the players info
 			var rows = $('.ys-roster-table tbody tr');
 			rows.each(function (i, element) {
-				if (i === 0) {
+				// if (i === 0) {
 					var player = {};
 					var playerNumber = $(element).find('td:nth-child(1)').text();
 					player['player_number'] = playerNumber;
@@ -55,7 +59,7 @@ var getRosters = function (urlSlug, callback) {
 						}
 					}
 					team.players.push(player);
-				}
+				// }
 			});
 		} else {
 			console.log(error);
@@ -64,16 +68,17 @@ var getRosters = function (urlSlug, callback) {
 	});
 }
 // call the function with the slug
-// getRosters('gsw', function(teamData) {
-// 	rosterController.addRoster(teamData, function (result) {
-// 		console.log('hi', result);
-// 	})
-// });
-console.log(baseUrl);
-var teamData = {name: 'henrys', players: ['james']};
-rosterController.addRoster(teamData, function (result) {
-	console.log('hi', result);
-})
+getRosters('gsw', function(teamData) {
+	console.log(teamData);
+	// rosterController.addRoster(teamData, function (result) {
+	// 	console.log('hi', result);
+	// })
+});
+// console.log(baseUrl);
+// var teamData = {name: 'henrys', players: ['james']};
+// rosterController.addRoster(teamData, function (result) {
+// 	console.log('hi', result);
+// })
 
 var getPlayers = function(urlSlug, callback) {
   var shortSlug = urlSlug.slice(0, 3);

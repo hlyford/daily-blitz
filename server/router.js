@@ -3,6 +3,7 @@ var express = require('express');
 var app = require('./server.js');
 var quizController = require('./controllers/quizController');
 var userController = require('./controllers/userController');
+var rosterController = require('./controllers/rosterController');
 var bodyParser = require('body-parser');
 var path = require('path');
 
@@ -20,6 +21,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 // 		res.sendFile(stuff);
 // 	})
 
+// QUIZ ROUTES
 router.route( '/quiz/:querySlug' )
 	.get(function (req, res) {
 		// send to quiz controller
@@ -36,8 +38,16 @@ router.route('/quiz')
 
 // USER ROUTES
 router.route('/user')
-	.post(function (req, res) {
+	.get(function (req, res) {
 		userController.createUser(req.body, function (response) {
+			res.send(response);
+		})
+	})
+
+// ROSTER ROUTES
+router.route('/roster')
+	.get( function (req, res) {
+		rosterController.getRosters(function (response) {
 			res.send(response);
 		})
 	})

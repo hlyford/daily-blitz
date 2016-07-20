@@ -1,17 +1,9 @@
-// var Roster = require('./rosterModel');
 var mongoose = require('mongoose');
-
-var RostersSchema = new mongoose.Schema({
- name: String,
- players: Array
- },
- {collection: 'rosters'}
-);
-
-var Roster = mongoose.model('Rosters', RostersSchema, 'Rosters');
+var Roster = require('../models/rosterModel');
+var db = require('../server.js');
+console.log('here',db.db);
 
 module.exports = {
-
 
 	addRoster: function (data, callback) {
 		// call on the model to create the quiz
@@ -33,7 +25,7 @@ module.exports = {
 
 	getRosters: function (callback) {
 		// find all rosters
-		Roster.find({})
+		dbURI.Roster.find({})
 			.then( function (result) {
 				console.log('in controller', result);
 				callback(result);
