@@ -2,8 +2,8 @@ var User = require('../models/userModel');
 
 module.exports = {
 
-	handleQuiz: function (quiz_id, callback) {		
-		Quiz.find({queryParam: quiz_id})
+	handleQuiz: function (quiz_id, callback) {
+		User.find({queryParam: quiz_id})
 			.then(function (result) {
 				callback(result);
 			})
@@ -13,11 +13,11 @@ module.exports = {
 		// check if we already have that email or password
 		console.log('controller', data);
 			// call on the model to create the quiz
-			User.create({				
+			User.create({
 				email: data.email,
 				phone_number: data.phone_number
 			})
-				.then(function(result) {					
+				.then(function(result) {
 					callback(result);
 				});
 		}

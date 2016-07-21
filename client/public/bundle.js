@@ -27068,7 +27068,19 @@
 		displayName: 'Rosters',
 
 		getInitialState: function getInitialState() {
-			return { rosters: [] };
+			return { rosters: [], western: [], eastern: [] };
+		},
+		sortByConference: function sortByConference(teams) {
+			var eastern = [],
+			    western = [];
+			teams.forEach(function (team, index) {
+				if (team.conference === 'western') {
+					western.push(team);
+				} else {
+					eastern.push(item);
+				}
+			});
+			this.setState({ rosters: teams, western: western, eastern: eastern });
 		},
 		componentDidMount: function componentDidMount() {
 			// call off for all team rosters
@@ -27077,8 +27089,7 @@
 				dataType: 'json',
 				cache: false,
 				success: function (data) {
-					console.log(data);
-					this.setState({ rosters: data });
+					this.sortByConference(data);
 				}.bind(this),
 				error: function (xhr, status, err) {
 					console.error(this.props.url, status, err.toString());
@@ -27092,12 +27103,46 @@
 				_react2.default.createElement(
 					'div',
 					{ className: 'six columns' },
-					'Eastern Conference Teams'
+					_react2.default.createElement(
+						'div',
+						null,
+						'Eastern Conference Teams'
+					),
+					_react2.default.createElement(
+						'ul',
+						null,
+						this.state.eastern.map(function (team) {
+							return _react2.default.createElement(
+								'li',
+								{ key: team.acronym },
+								team.name
+							);
+						})
+					)
 				),
 				_react2.default.createElement(
 					'div',
 					{ className: 'six columns' },
-					'Western Conference Teams'
+					_react2.default.createElement(
+						'div',
+						null,
+						'Western Conference Teams'
+					),
+					_react2.default.createElement(
+						'ul',
+						null,
+						this.state.western.map(function (team) {
+							return _react2.default.createElement(
+								'li',
+								{ key: team.acronym },
+								_react2.default.createElement(
+									'a',
+									{ data: team.acronym },
+									team.name
+								)
+							);
+						})
+					)
 				)
 			);
 		}

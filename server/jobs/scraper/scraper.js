@@ -6,7 +6,7 @@ var url = require('url');
 var exec = require('child_process').exec;
 var baseUrl = require('./url_info').baseUrl;
 // var teamSlugs = require('./url-info').teamSlugs;
-var rosterController = require('./rosterController');
+var rosterController = require('../../controllers/rosterController');
 
 
 var getRosters = function (urlSlug, callback) {
@@ -29,7 +29,7 @@ var getRosters = function (urlSlug, callback) {
 			// get all the players info
 			var rows = $('.ys-roster-table tbody tr');
 			rows.each(function (i, element) {
-				// if (i === 0) {
+				if (i === 0) {
 					var player = {};
 					var playerNumber = $(element).find('td:nth-child(1)').text();
 					player['player_number'] = playerNumber;
@@ -59,7 +59,7 @@ var getRosters = function (urlSlug, callback) {
 						}
 					}
 					team.players.push(player);
-				// }
+				}
 			});
 		} else {
 			console.log(error);
@@ -68,18 +68,14 @@ var getRosters = function (urlSlug, callback) {
 	});
 }
 // call the function with the slug
-getRosters('gsw', function(teamData) {
-	console.log(teamData);
-	// rosterController.addRoster(teamData, function (result) {
-	// 	console.log('hi', result);
-	// })
-});
-// console.log(baseUrl);
-// var teamData = {name: 'henrys', players: ['james']};
-// rosterController.addRoster(teamData, function (result) {
-// 	console.log('hi', result);
-// })
-
+// getRosters('gsw', function(teamData) {
+// 	rosterController.addRoster({name: 'poopes'}, function (result) {
+// 		console.log('hi', result);
+// 	})
+// });
+rosterController.addRoster({name: 'poopes', acronym: 'hi', players: ['yo']}, function (result) {
+	console.log('hi', result);
+})
 var getPlayers = function(urlSlug, callback) {
   var shortSlug = urlSlug.slice(0, 3);
   request(baseUrl + urlSlug, function (error, response, html) {

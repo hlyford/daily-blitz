@@ -1,23 +1,25 @@
-var mongoose = require('mongoose');
 var Roster = require('../models/rosterModel');
-var db = require('../server.js');
-console.log('here',db.db);
 
 module.exports = {
 
 	addRoster: function (data, callback) {
 		// call on the model to create the quiz
-
-		var team_name = data.name;
+		console.log('in controller', data);
 		var playersArray = [];
 		for (player in data.players) {
 			playersArray.push(data.players[player]);
 		}
+		// Roster.create({name: 'kobe'}).then (function() {
+		// 	console.log('hehhreh');
+		// 	callback('hihih');
+		// });
 		Roster.create({
-			name: team_name,
+			name: data.name,
+			acronym: data.acronym,
+			conference: "western",
 			players: playersArray
-		}).then(function(result) {
-				console.log('hihihi');
+		}).then( function(result) {
+				if (err) return handleError(err);
 				console.log('hre agani',result);
 				callback(result);
 			});
@@ -25,9 +27,8 @@ module.exports = {
 
 	getRosters: function (callback) {
 		// find all rosters
-		dbURI.Roster.find({})
+		Roster.find()
 			.then( function (result) {
-				console.log('in controller', result);
 				callback(result);
 			});
 

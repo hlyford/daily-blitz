@@ -46,5 +46,7 @@ html {
         color: black; }
       html .content-container #app .roster-view .six {
         text-align: center; }
+        html .content-container #app .roster-view .six li {
+          cursor: pointer; }
 
 /*# sourceMappingURL=custom_base.css.map */
