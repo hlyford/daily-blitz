@@ -5,7 +5,7 @@ var teamsArray = require('./team_acronyms');
 var looper = function (i) {
 	var nextWait = Math.floor(Math.random() * (80000 - 40000) + 40000);
 	console.log('waiting...', nextWait);
-	if (i < 2) {
+	if (i < 15) {
 		getRosters(teamsArray[i]);
 		setTimeout(function () {
 			looper(i + 1);
@@ -17,4 +17,4 @@ var looper = function (i) {
 };
 
 // start at the beginning of teams array
-looper(0);
+looper(6);

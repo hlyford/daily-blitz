@@ -26977,13 +26977,20 @@
 	  },
 
 	  addFullNameAndConvertLowerCase: function addFullNameAndConvertLowerCase(list) {
-	    _.each(list.players, function (item, index, players) {
-	      // make full name
-	      item.fullName = item.firstName + ' ' + item.lastName;
-	      // convert to lower case
-	      item.firstNameLower = item.firstName.toLowerCase(), item.lastName = item.lastName.toLowerCase();
-	      item.fullNameLower = item.fullName.toLowerCase();
-	    });
+	    // make it simpler if it's a roster FOR NOW
+	    if (this.state.roster) {
+	      _.each(list.players, function (item, index, players) {
+	        item.fullNameLower = item.name.toLowerCase();
+	      });
+	    } else {
+	      _.each(list.players, function (item, index, players) {
+	        // make full name
+	        item.fullName = item.firstName + ' ' + item.lastName;
+	        // convert to lower case
+	        item.firstNameLower = item.firstName.toLowerCase(), item.lastName = item.lastName.toLowerCase();
+	        item.fullNameLower = item.fullName.toLowerCase();
+	      });
+	    }
 	    return list;
 	  },
 
@@ -26994,9 +27001,8 @@
 	      dataType: 'json',
 	      cache: false,
 	      success: function (data) {
-	        if (!this.state.roster) {
-	          data = this.addFullNameAndConvertLowerCase(data[0]);
-	        }
+	        // console.log(data);
+	        data = this.state.roster ? this.addFullNameAndConvertLowerCase(data[0]) : this.addFullNameAndConvertLowerCase(data[0]);
 	        this.setState({ quiz_info: data, takingQuiz: true });
 	        console.log(this.state);
 	      }.bind(this),
@@ -27007,8 +27013,7 @@
 	  },
 
 	  render: function render() {
-	    var _this = this;
-
+	    console.log('state', this.state);
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -27034,7 +27039,7 @@
 	            this.state.correct.map(function (item) {
 	              return _react2.default.createElement(
 	                'li',
-	                { key: _this.state.timestamp },
+	                { key: item.full_name },
 	                item.full_name
 	              );
 	            })
