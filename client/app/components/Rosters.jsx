@@ -4,6 +4,9 @@ var Rosters = React.createClass({
 	getInitialState: function() {
 	  return { rosters: [] , western :[], eastern: [] };
 	},
+	componentWillMount: function () {
+		this.getRosters();
+	},
 	sortByConference: function (teams) {
 		var eastern = [], western = [];
 		teams.forEach(function(team, index) {
@@ -15,7 +18,7 @@ var Rosters = React.createClass({
 		});
 		this.setState({ rosters: teams, western: western, eastern: eastern });
 	},
-	componentDidMount: function () {
+	getRosters: function () {
 		// call off for all team rosters
 		$.ajax({
 		  url: '/roster',
@@ -30,28 +33,34 @@ var Rosters = React.createClass({
 		});
 	},
 	render: function () {
+		var westernTeams = this.state.western.map(function (team) {
+			team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
+		  return (
+	  		 <li key={ team.acronym }>
+	  			  <a href={ team.url }>{ team.team_name }</a>
+	  		 </li>
+		  )
+		});
+		var eastern = this.state.eastern.map(function (team) {
+			team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
+		  return (
+	  		 <li key={ team.acronym }>
+	  			  <a data={ team.url }>{ team.team_name }</a>
+	  		 </li>
+		  )
+			});
 		return (
 			<div className="roster-view">
 		    <div className="six columns">
 		    	<div>Eastern Conference Teams</div>
     		  <ul>
-					  {this.state.eastern.map((team)=>
-						  	(
-							 <li key={ team.acronym }>
-								  { team.name }
-							 </li>
-						  ))}
+
 				  </ul>
 				</div>
 		    <div className="six columns">
 		    	<div>Western Conference Teams</div>
     		  <ul>
-					  {this.state.western.map((team)=>
-						  	(
-							 <li key={ team.acronym }>
-								  <a data={ team.acronym }>{ team.name }</a>
-							 </li>
-						  ))}
+					  { westernTeams }
 				  </ul>
 		    </div>
 		  </div>

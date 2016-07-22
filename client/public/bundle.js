@@ -26926,7 +26926,12 @@
 	  componentWillMount: function componentWillMount() {
 	    // check if there's a query string param, if so, set up that quiz
 	    var quizQueryParam = this.props.location.query['quiz_id'];
+	    // check if it's a roster
+	    var quizRosterParam = this.props.location.query['roster'];
 	    if (quizQueryParam) {
+	      if (quizRosterParam) {
+	        this.state.roster = true;
+	      }
 	      this.state.active_quiz = quizQueryParam;
 	    } else {
 	      // PLACEHOLDER KOBE QUIZ FOR NOW
@@ -26983,13 +26988,17 @@
 	  },
 
 	  getQuiz: function getQuiz() {
+	    var route = this.state.roster ? '/roster/' : '/quiz/';
 	    $.ajax({
-	      url: '/quiz/' + this.state.active_quiz, // test query: 2x68a
+	      url: route + this.state.active_quiz, // test query: 2x68a
 	      dataType: 'json',
 	      cache: false,
 	      success: function (data) {
-	        data = this.addFullNameAndConvertLowerCase(data[0]);
+	        if (!this.state.roster) {
+	          data = this.addFullNameAndConvertLowerCase(data[0]);
+	        }
 	        this.setState({ quiz_info: data, takingQuiz: true });
+	        console.log(this.state);
 	      }.bind(this),
 	      error: function (xhr, status, err) {
 	        console.error(this.props.url, status, err.toString());
@@ -27000,7 +27009,6 @@
 	  render: function render() {
 	    var _this = this;
 
-	    // console.log('state', this.state);
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -27015,14 +27023,6 @@
 	          'div',
 	          null,
 	          this.state.quiz_info.title
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          ' You have answered: ',
-	          this.state.correct.length,
-	          ' / ',
-	          this.state.quiz_info.players.length
 	        ),
 	        _react2.default.createElement('input', { className: 'guess-box', type: 'text', value: this.state.guessValue, onChange: this.handleChange }),
 	        _react2.default.createElement(
@@ -27070,6 +27070,9 @@
 		getInitialState: function getInitialState() {
 			return { rosters: [], western: [], eastern: [] };
 		},
+		componentWillMount: function componentWillMount() {
+			this.getRosters();
+		},
 		sortByConference: function sortByConference(teams) {
 			var eastern = [],
 			    western = [];
@@ -27082,7 +27085,7 @@
 			});
 			this.setState({ rosters: teams, western: western, eastern: eastern });
 		},
-		componentDidMount: function componentDidMount() {
+		getRosters: function getRosters() {
 			// call off for all team rosters
 			$.ajax({
 				url: '/roster',
@@ -27097,6 +27100,30 @@
 			});
 		},
 		render: function render() {
+			var westernTeams = this.state.western.map(function (team) {
+				team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
+				return _react2.default.createElement(
+					'li',
+					{ key: team.acronym },
+					_react2.default.createElement(
+						'a',
+						{ href: team.url },
+						team.team_name
+					)
+				);
+			});
+			var eastern = this.state.eastern.map(function (team) {
+				team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
+				return _react2.default.createElement(
+					'li',
+					{ key: team.acronym },
+					_react2.default.createElement(
+						'a',
+						{ data: team.url },
+						team.team_name
+					)
+				);
+			});
 			return _react2.default.createElement(
 				'div',
 				{ className: 'roster-view' },
@@ -27108,17 +27135,7 @@
 						null,
 						'Eastern Conference Teams'
 					),
-					_react2.default.createElement(
-						'ul',
-						null,
-						this.state.eastern.map(function (team) {
-							return _react2.default.createElement(
-								'li',
-								{ key: team.acronym },
-								team.name
-							);
-						})
-					)
+					_react2.default.createElement('ul', null)
 				),
 				_react2.default.createElement(
 					'div',
@@ -27131,17 +27148,7 @@
 					_react2.default.createElement(
 						'ul',
 						null,
-						this.state.western.map(function (team) {
-							return _react2.default.createElement(
-								'li',
-								{ key: team.acronym },
-								_react2.default.createElement(
-									'a',
-									{ data: team.acronym },
-									team.name
-								)
-							);
-						})
+						westernTeams
 					)
 				)
 			);

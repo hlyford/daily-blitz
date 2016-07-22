@@ -8,7 +8,12 @@ var Quiz = React.createClass({
   componentWillMount: function () {
     // check if there's a query string param, if so, set up that quiz
     var quizQueryParam = this.props.location.query['quiz_id'];
+    // check if it's a roster
+    var quizRosterParam = this.props.location.query['roster'];
     if (quizQueryParam) {
+      if (quizRosterParam) {
+        this.state.roster = true;
+      }
       this.state.active_quiz = quizQueryParam;
     } else {
       // PLACEHOLDER KOBE QUIZ FOR NOW
@@ -65,13 +70,17 @@ var Quiz = React.createClass({
   },
 
   getQuiz: function() {
+    var route = this.state.roster ? '/roster/' : '/quiz/';
     $.ajax({
-      url: '/quiz/' + this.state.active_quiz,  // test query: 2x68a
+      url: route + this.state.active_quiz,  // test query: 2x68a
       dataType: 'json',
       cache: false,
       success: function(data) {
-        data = this.addFullNameAndConvertLowerCase(data[0]);
+        if (!this.state.roster) {
+          data = this.addFullNameAndConvertLowerCase(data[0]);
+        }
         this.setState({quiz_info: data, takingQuiz: true});
+        console.log(this.state);
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -87,7 +96,7 @@ var Quiz = React.createClass({
           <button onClick={ this.getQuiz }>Take quiz!</button> :
           <div>
             <div>{ this.state.quiz_info.title }</div>
-            <div> You have answered: {this.state.correct.length} / {this.state.quiz_info.players.length}</div>
+           {/* <div> You have answered: {this.state.correct.length} / {this.state.quiz_info.players.length}</div> */}
       	    <input className="guess-box" type="text" value={this.state.guessValue} onChange={this.handleChange} />
       	    <div>
         		  <ul>

@@ -47,8 +47,15 @@ router.route('/user')
 // ROSTER ROUTES
 router.route('/roster')
 	.get( function (req, res) {
-		rosterController.getRosters(function (response) {
+		rosterController.getAllRosters(function (response) {
 			res.send(response);
+		})
+	})
+router.route('/roster/:team_acronym')
+	.get(function (req, res) {
+		console.log('here', req.params.team_acronym);
+		rosterController.getRoster(req.params.team_acronym, function (roster_data) {
+			res.send(roster_data);
 		})
 	})
 
