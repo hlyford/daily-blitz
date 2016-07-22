@@ -1,5 +1,6 @@
 var Quiz = require('../models/quizModel');
 
+
 module.exports = {
 
 	handleQuiz: function (quiz_id, callback) {

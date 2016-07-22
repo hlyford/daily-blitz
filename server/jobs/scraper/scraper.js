@@ -1,5 +1,6 @@
 var request = require('request');
 var cheerio = require('cheerio');
+var util = require('util');
 // var Scraper = require("image-scraper");
 var fs = require('fs');
 var url = require('url');
@@ -7,6 +8,8 @@ var exec = require('child_process').exec;
 var baseUrl = require('./url_info').baseUrl;
 // var teamSlugs = require('./url-info').teamSlugs;
 var rosterController = require('../../controllers/rosterController');
+var teamsArray = require('./team_acronyms');
+var Roster = require('../../models/rosterModel');
 
 
 var getRosters = function (urlSlug, callback) {
@@ -22,14 +25,14 @@ var getRosters = function (urlSlug, callback) {
 			var $ = cheerio.load(html);
 			// get the team name
 			var teamName = $('.IbBox h1 span:nth-child(1)').text();
-			team['name'] = teamName;
+			team['team_name'] = teamName;
 			var teamAcronym = urlSlug;
 			team['acronym'] = teamAcronym;
 
 			// get all the players info
 			var rows = $('.ys-roster-table tbody tr');
 			rows.each(function (i, element) {
-				if (i === 0) {
+				// if (i === 0) {
 					var player = {};
 					var playerNumber = $(element).find('td:nth-child(1)').text();
 					player['player_number'] = playerNumber;
@@ -59,58 +62,39 @@ var getRosters = function (urlSlug, callback) {
 						}
 					}
 					team.players.push(player);
-				}
+				// }
 			});
 		} else {
 			console.log(error);
 		}
-		callback(team);
+		rosterController.addStuff(team);
 	});
 }
-// call the function with the slug
-// getRosters('gsw', function(teamData) {
-// 	rosterController.addRoster({name: 'poopes'}, function (result) {
-// 		console.log('hi', result);
-// 	})
-// });
-rosterController.addRoster({name: 'poopes', acronym: 'hi', players: ['yo']}, function (result) {
-	console.log('hi', result);
-})
-var getPlayers = function(urlSlug, callback) {
-  var shortSlug = urlSlug.slice(0, 3);
-  request(baseUrl + urlSlug, function (error, response, html) {
-	  if (!error && response.statusCode == 200) {
-	  	// load the html for the page
-			var $ = cheerio.load(html);
-			$('.sortcell').each(function(i, element){
-				// pull out the player's name based on the DOM
-  			var playerName = $(element).first().text();
-  			var $a = $(element).find('a');
-  			var playerUrl = $a.attr('href');
-  			// for each player, make a second request using cheerio; new page is href for player image
-  			request(playerUrl, function (error, response, html) {
-  				if (error) throw error;
-	  			if (!error && response.statusCode == 200) {
-	    			var $$ = cheerio.load(html);
-	    			var playerPicUrl = $$('.main-headshot').find('img').attr('src');
-	    			if (playerPicUrl !== undefined) {
-		    			playerList.push({name: playerName, imageUrl: playerPicUrl});
-		    			// get the images and save them to the images directory
-		    			var dlDir = './images/' + shortSlug + '/'  + playerName.replace(/ /g,"_").replace(/\'/g, '') + '.png';
-	      			var curl =  'curl ' + playerPicUrl.replace(/&/g,'\\&') + ' -o ' + dlDir  + ' --create-dirs';
-	      			var child = exec(curl, function(err, stdout, stderr) {
-	          		if (err){ console.log(stderr); throw err; }
-	          		else console.log(playerName + ' downloaded to ' + dlDir);
-	      			});
-	      		}
-	  			}
-				});
-			});
-	  }
-	});
-}
+module.exports = getRosters;
+
+// loop through waiting 60 seconds each time
+// var looper = function (i) {
+// 	if (i < 30) {
+// 		getRosters(teamsArray[i], function(teamData) {
+// 			// add the conference
+// 			teamData.conference = 'western';
+// 			// add new file under the team acronym
+// 			var dir = './teams/' + teamData.acronym +'.js';
+// 			var asString = util.inspect(teamData);
+// 			console.log(asString);
+// 			fs.writeFile(dir, asString, function(err) {
+// 			    if(err) {
+// 			        return console.log(err);
+// 			    }
+// 			    console.log("The file was saved!");
+// 			});
+// 		});
+// 	}
+// 	setTimeout(function () {
+// 		looper(i + 1);
+// 	}, 60000);
+// };
+
+// looper(3);
 
 
-// for (var i = 0; i < teamSlugs.length; i++) {
-// 	getPlayers(teamSlugs[i]);
-// }

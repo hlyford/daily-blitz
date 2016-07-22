@@ -5,7 +5,8 @@
   "main": "index.html",
   "scripts": {
     "start": "nodemon server/server.js",
-    "test": "npm test"
+    "test": "npm test",
+    "scrape": "node server/scraper.js"
   },
   "author": "Henry Lyford",
   "license": "ISC",
@@ -29,6 +30,7 @@
     "request": "^2.73.0",
     "requirejs": "^2.2.0",
     "url": "^0.11.0",
+    "util": "^0.10.3",
     "webpack": "^1.13.1"
   },
   "engines": {

@@ -1,12 +1,11 @@
 var mongoose = require('mongoose');
 
-var RostersSchema = new mongoose.Schema({
- name: String,
- // players: Array,
- acronym: String,
- conference: String
- },
- {collection: 'rosters'}
-);
+var RosterSchema = new mongoose.Schema({
+	team_name: String,
+	acronym: String,
+	conference: String,
+	players: Array,
+	time: { type : Date, default: Date.now }
+});
 
-module.exports = mongoose.model('rosters', RostersSchema);
+module.exports = mongoose.model('Roster', RosterSchema);
