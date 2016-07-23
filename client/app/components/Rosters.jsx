@@ -13,7 +13,7 @@ var Rosters = React.createClass({
 			if (team.conference === 'western') {
 				western.push(team);
 			} else {
-				eastern.push(item);
+				eastern.push(team);
 			}
 		});
 		this.setState({ rosters: teams, western: western, eastern: eastern });
@@ -41,7 +41,7 @@ var Rosters = React.createClass({
 	  		 </li>
 		  )
 		});
-		var eastern = this.state.eastern.map(function (team) {
+		var easternTeams = this.state.eastern.map(function (team) {
 			team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
 		  return (
 	  		 <li key={ team.acronym }>
@@ -54,7 +54,7 @@ var Rosters = React.createClass({
 		    <div className="six columns">
 		    	<div>Eastern Conference Teams</div>
     		  <ul>
-
+    		  	{ easternTeams }
 				  </ul>
 				</div>
 		    <div className="six columns">

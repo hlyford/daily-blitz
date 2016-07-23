@@ -26921,7 +26921,7 @@
 	  displayName: 'Quiz',
 
 	  getInitialState: function getInitialState() {
-	    return { correct: [], takingQuiz: false, active_quiz: '' };
+	    return { quiz_info: {}, correct: [], takingQuiz: false, active_quiz: '' };
 	  },
 	  componentWillMount: function componentWillMount() {
 	    // check if there's a query string param, if so, set up that quiz
@@ -26938,10 +26938,15 @@
 	      this.state.active_quiz = '2x68a';
 	    }
 	  },
-
+	  componentDidMount: function componentDidMount() {
+	    this.getQuiz();
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.getQuiz.abort();
+	  },
 	  handleChange: function handleChange(event) {
 	    var guess = event.target.value.toLowerCase();
-	    var lastNames = _.pluck(this.state.quiz_info.players, 'lastName');
+	    var lastNames = _.pluck(this.state.quiz_info.players, 'lastNameLower');
 	    var fullNames = _.pluck(this.state.quiz_info.players, 'fullNameLower');
 	    // check if they entered the last name, keep track of index
 	    var indexLastName = _.indexOf(lastNames, guess);
@@ -26966,6 +26971,7 @@
 
 	      // reset the guess box
 	      $('.guess-box').val('');
+	      this.flash();
 	    }
 	  },
 
@@ -26973,15 +26979,13 @@
 	    $('.main-quiz-content .guess-box').addClass('boom');
 	    setTimeout(function () {
 	      $('.main-quiz-content .guess-box').removeClass('boom');
-	    }, 200);
+	    }, 1000);
 	  },
 
 	  addFullNameAndConvertLowerCase: function addFullNameAndConvertLowerCase(list) {
 	    // make it simpler if it's a roster FOR NOW
 	    if (this.state.roster) {
-	      _.each(list.players, function (item, index, players) {
-	        item.fullNameLower = item.name.toLowerCase();
-	      });
+	      list.title = list.team_name;
 	    } else {
 	      _.each(list.players, function (item, index, players) {
 	        // make full name
@@ -26993,6 +26997,9 @@
 	    }
 	    return list;
 	  },
+	  startQuiz: function startQuiz() {
+	    this.setState({ 'takingQuiz': true });
+	  },
 
 	  getQuiz: function getQuiz() {
 	    var route = this.state.roster ? '/roster/' : '/quiz/';
@@ -27001,10 +27008,9 @@
 	      dataType: 'json',
 	      cache: false,
 	      success: function (data) {
-	        // console.log(data);
-	        data = this.state.roster ? this.addFullNameAndConvertLowerCase(data[0]) : this.addFullNameAndConvertLowerCase(data[0]);
-	        this.setState({ quiz_info: data, takingQuiz: true });
-	        console.log(this.state);
+	        // console.log('from server', data);
+	        this.state.quiz_info = this.addFullNameAndConvertLowerCase(data[0]);
+	        // console.log('done with sort', this.state);
 	      }.bind(this),
 	      error: function (xhr, status, err) {
 	        console.error(this.props.url, status, err.toString());
@@ -27013,23 +27019,34 @@
 	  },
 
 	  render: function render() {
-	    console.log('state', this.state);
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'quiz-view' },
 	      !this.state.takingQuiz ? _react2.default.createElement(
 	        'button',
-	        { onClick: this.getQuiz },
+	        { className: 'text-middle', onClick: this.startQuiz },
 	        'Take quiz!'
 	      ) : _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(
 	          'div',
-	          null,
-	          this.state.quiz_info.title
+	          { className: 'guess-box-container text-middle' },
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            this.state.quiz_info.title
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            ' You have answered: ',
+	            this.state.correct.length,
+	            ' / ',
+	            this.state.quiz_info.players.length
+	          ),
+	          _react2.default.createElement('input', { className: 'guess-box', type: 'text', value: this.state.guessValue, onChange: this.handleChange })
 	        ),
-	        _react2.default.createElement('input', { className: 'guess-box', type: 'text', value: this.state.guessValue, onChange: this.handleChange }),
 	        _react2.default.createElement(
 	          'div',
 	          null,
@@ -27085,7 +27102,7 @@
 				if (team.conference === 'western') {
 					western.push(team);
 				} else {
-					eastern.push(item);
+					eastern.push(team);
 				}
 			});
 			this.setState({ rosters: teams, western: western, eastern: eastern });
@@ -27117,7 +27134,7 @@
 					)
 				);
 			});
-			var eastern = this.state.eastern.map(function (team) {
+			var easternTeams = this.state.eastern.map(function (team) {
 				team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
 				return _react2.default.createElement(
 					'li',
@@ -27140,7 +27157,11 @@
 						null,
 						'Eastern Conference Teams'
 					),
-					_react2.default.createElement('ul', null)
+					_react2.default.createElement(
+						'ul',
+						null,
+						easternTeams
+					)
 				),
 				_react2.default.createElement(
 					'div',

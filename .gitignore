@@ -6,3 +6,5 @@ client/dist/styles/.sass-cache/eae5f313855968ecf064f3efafe9cba9922a29b6/input.sc
 Next_steps.mdown
 server/jobs/scraper/url_info.js
 server/jobs/scraper/teams/
+npm-debug.log
+*.sass-cache*

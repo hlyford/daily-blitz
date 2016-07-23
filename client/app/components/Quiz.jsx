@@ -3,7 +3,7 @@ import React from 'react';
 
 var Quiz = React.createClass({
   getInitialState: function() {
-    return { correct: [], takingQuiz: false, active_quiz: '' };
+    return { quiz_info: {}, correct: [], takingQuiz: false, active_quiz: '' };
   },
   componentWillMount: function () {
     // check if there's a query string param, if so, set up that quiz
@@ -20,10 +20,15 @@ var Quiz = React.createClass({
       this.state.active_quiz = '2x68a';
     }
   },
-
+  componentDidMount: function () {
+    this.getQuiz();
+  },
+  componentWillUnmount: function() {
+      this.getQuiz.abort();
+  },
   handleChange: function(event) {
   	var guess = event.target.value.toLowerCase();
-  	var lastNames = _.pluck(this.state.quiz_info.players, 'lastName');
+  	var lastNames = _.pluck(this.state.quiz_info.players, 'lastNameLower');
   	var fullNames = _.pluck(this.state.quiz_info.players, 'fullNameLower');
   	// check if they entered the last name, keep track of index
   	var indexLastName = _.indexOf(lastNames, guess);
@@ -48,6 +53,7 @@ var Quiz = React.createClass({
 
   		// reset the guess box
   		$('.guess-box').val('');
+      this.flash();
   	}
   },
 
@@ -55,15 +61,13 @@ var Quiz = React.createClass({
     $('.main-quiz-content .guess-box').addClass('boom');
     setTimeout(function() {
       $('.main-quiz-content .guess-box').removeClass('boom');
-    }, 200)
+    }, 1000)
   },
 
   addFullNameAndConvertLowerCase: function (list) {
     // make it simpler if it's a roster FOR NOW
     if (this.state.roster) {
-      _.each(list.players, function(item, index, players) {
-        item.fullNameLower = item.name.toLowerCase();
-      });
+      list.title = list.team_name;
     } else {
       _.each(list.players, function(item, index, players) {
         // make full name
@@ -75,6 +79,9 @@ var Quiz = React.createClass({
     }
     return list;
   },
+  startQuiz: function () {
+    this.setState({'takingQuiz' :true});
+  },
 
   getQuiz: function() {
     var route = this.state.roster ? '/roster/' : '/quiz/';
@@ -83,10 +90,9 @@ var Quiz = React.createClass({
       dataType: 'json',
       cache: false,
       success: function(data) {
-        // console.log(data);
-        data = this.state.roster ? this.addFullNameAndConvertLowerCase(data[0]) : this.addFullNameAndConvertLowerCase(data[0]);
-        this.setState({quiz_info: data, takingQuiz: true});
-        console.log(this.state);
+        // console.log('from server', data);
+        this.state.quiz_info = this.addFullNameAndConvertLowerCase(data[0]);
+        // console.log('done with sort', this.state);
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -95,15 +101,16 @@ var Quiz = React.createClass({
   },
 
   render: function() {
-    console.log('state', this.state);
     return (
-    	<div>
+    	<div className="quiz-view">
         { !this.state.takingQuiz ?
-          <button onClick={ this.getQuiz }>Take quiz!</button> :
+          <button className="text-middle" onClick={ this.startQuiz }>Take quiz!</button> :
           <div>
-            <div>{ this.state.quiz_info.title }</div>
-           {/* <div> You have answered: {this.state.correct.length} / {this.state.quiz_info.players.length}</div> */}
-      	    <input className="guess-box" type="text" value={this.state.guessValue} onChange={this.handleChange} />
+            <div className="guess-box-container text-middle">
+              <div>{ this.state.quiz_info.title }</div>
+           { <div> You have answered: {this.state.correct.length} / {this.state.quiz_info.players.length}</div> }
+      	      <input className="guess-box" type="text" value={this.state.guessValue} onChange={this.handleChange} />
+            </div>
       	    <div>
         		  <ul>
   						  {this.state.correct.map((item)=>(
