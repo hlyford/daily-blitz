@@ -27142,7 +27142,7 @@
 					{ key: team.acronym },
 					_react2.default.createElement(
 						'a',
-						{ data: team.url },
+						{ href: team.url },
 						team.team_name
 					)
 				);

@@ -17,12 +17,16 @@ module.exports = {
 	},
 	getAllRosters: function (callback) {
 		// find all rosters
-		Roster.find({ acronym: "gsw"},
-    { team_name: 1, acronym: 1, players: 1, _id: 0})
-			.then( function (result) {
-				var teams = [];
-				callback(result);
-			});
+		Roster.find({}, { team_name: 1, acronym: 1, players: 1, _id: 0, conference: 1}).then(function(result) {
+			callback(result);
+		})
+
+
+		// Roster.find({ },
+  //   { team_name: 1, acronym: 1, players: 1, _id: 0, conference: 1})
+		// 	.then( function (result) {
+		// 		callback(result);
+		// 	});
 
 	},
 	getRoster: function (acronym, callback) {
@@ -32,4 +36,3 @@ module.exports = {
 			})
 	}
 }
-module.exports.addStuff(allTeams);

@@ -42,10 +42,8 @@ module.exports = {
 	},
 	getAllRosters: function (callback) {
 		// find all rosters
-		Roster.find({ acronym: "gsw"},
-    { team_name: 1, acronym: 1, players: 1, _id: 0})
+		Roster.find({}, { team_name: 1, acronym: 1, players: 1, _id: 0, conference: 1})
 			.then( function (result) {
-				var teams = [];
 				callback(result);
 			});
 

@@ -46,7 +46,7 @@ var Rosters = React.createClass({
 			team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
 		  return (
 	  		 <li key={ team.acronym }>
-	  			  <a data={ team.url }>{ team.team_name }</a>
+	  			  <a href={ team.url }>{ team.team_name }</a>
 	  		 </li>
 		  )
 			});
