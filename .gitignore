@@ -8,3 +8,4 @@ server/jobs/scraper/url_info.js
 server/jobs/scraper/teams/
 npm-debug.log
 *.sass-cache*
+mongoInfo
