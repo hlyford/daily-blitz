@@ -12,7 +12,7 @@ var app = express();
 
 // set up MongoDB
 var dbURI = process.env.MONGODB_URI || 'mongodb://localhost/obscore';
-
+console.log(dbURI);
 var db = mongoose.connect(dbURI);
 console.log('MongoDB listening at: ' + dbURI);
 
