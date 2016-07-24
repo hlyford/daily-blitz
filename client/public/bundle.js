@@ -27114,6 +27114,7 @@
 				dataType: 'json',
 				cache: false,
 				success: function (data) {
+					console.log(JSON.stringify(data));
 					this.sortByConference(data);
 				}.bind(this),
 				error: function (xhr, status, err) {
