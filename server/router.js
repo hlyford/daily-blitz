@@ -53,7 +53,6 @@ router.route('/roster')
 	})
 router.route('/roster/:team_acronym')
 	.get(function (req, res) {
-		console.log('here', req.params.team_acronym);
 		rosterController.getRoster(req.params.team_acronym, function (roster_data) {
 			res.send(roster_data);
 		})

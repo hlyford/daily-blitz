@@ -25,7 +25,6 @@ var Rosters = React.createClass({
 		  dataType: 'json',
 		  cache: false,
 		  success: function(data) {
-		  	console.log(JSON.stringify(data));
 		    this.sortByConference(data);
 		  }.bind(this),
 		  error: function(xhr, status, err) {
@@ -38,7 +37,7 @@ var Rosters = React.createClass({
 			team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
 		  return (
 	  		 <li key={ team.acronym }>
-	  			  <a href={ team.url }>{ team.team_name }</a>
+	  			  <a id={ team.acronym }href={ team.url }>{ team.team_name }</a>
 	  		 </li>
 		  )
 		});
@@ -46,7 +45,7 @@ var Rosters = React.createClass({
 			team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
 		  return (
 	  		 <li key={ team.acronym }>
-	  			  <a href={ team.url }>{ team.team_name }</a>
+	  			  <a id={ team.acronym } href={ team.url }>{ team.team_name }</a>
 	  		 </li>
 		  )
 			});

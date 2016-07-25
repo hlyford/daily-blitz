@@ -26915,7 +26915,14 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(33);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// ----- QUIZ COMPONENT ---- //
+
 
 	var Quiz = _react2.default.createClass({
 	  displayName: 'Quiz',
@@ -26940,9 +26947,13 @@
 	  },
 	  componentDidMount: function componentDidMount() {
 	    this.getQuiz();
+	    // DOESN'T WORK YET
+	    if (this.refs.guess !== undefined) {
+	      this.refs.guess.focus();
+	    }
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
-	    this.getQuiz.abort();
+	    // this.getQuiz.abort();
 	  },
 	  handleChange: function handleChange(event) {
 	    var guess = event.target.value.toLowerCase();
@@ -26951,24 +26962,15 @@
 	    // check if they entered the last name, keep track of index
 	    var indexLastName = _.indexOf(lastNames, guess);
 	    var indexFullName = _.indexOf(fullNames, guess);
+
 	    // if the entered LAST NAME, they got it correct and they hadn't guessed it before
-	    if (indexLastName !== -1 && _.indexOf(this.state.correct['last_name'], guess) === -1) {
-	      var correctName = this.state.quiz_info.players[indexLastName].fullName;
-	      var correctLastName = this.state.quiz_info.players[indexLastName].lastName;
-	      this.setState({ correct: this.state.correct.concat({ full_name: correctName, last_name: correctLastName }) });
-	      // ***** remove the player from the list ****
-
-	      // reset the guess box
-	      $('.guess-box').val('');
-	      this.flash();
-	      // check if they entered the players FULL NAME
-	    } else if (indexFullName !== -1) {
-	      var correctName = this.state.quiz_info.players[indexFullName].fullName;
-	      var correctLastName = this.state.quiz_info.players[indexFullName].lastName;
-	      this.setState({ correct: this.state.correct.concat({ full_name: correctName, last_name: correctLastName }) });
-	      // this.setState(correct: this.state.correct.concat(correctName);
-	      // ***** remove the player from the list ****
-
+	    if ((indexLastName !== -1 || indexFullName !== -1) && _.indexOf(this.state.correct['last_name'], guess) === -1) {
+	      // add player to the correct array
+	      if (indexFullName === -1) {
+	        this.setState({ correct: this.state.correct.concat(this.state.quiz_info.players[indexLastName]) });
+	      } else {
+	        this.setState({ correct: this.state.correct.concat(this.state.quiz_info.players[indexFullName]) });
+	      }
 	      // reset the guess box
 	      $('.guess-box').val('');
 	      this.flash();
@@ -26999,6 +27001,7 @@
 	  },
 	  startQuiz: function startQuiz() {
 	    this.setState({ 'takingQuiz': true });
+	    $('.guess-box').focus();
 	  },
 
 	  getQuiz: function getQuiz() {
@@ -27010,18 +27013,23 @@
 	      success: function (data) {
 	        // console.log('from server', data);
 	        this.state.quiz_info = this.addFullNameAndConvertLowerCase(data[0]);
-	        // console.log('done with sort', this.state);
 	      }.bind(this),
 	      error: function (xhr, status, err) {
 	        console.error(this.props.url, status, err.toString());
 	      }.bind(this)
 	    });
 	  },
+	  giveUp: function giveUp() {
+	    // add diff between correct players and all players to correct array
+	    var diff = _.difference(this.state.quiz_info.players, this.state.correct);
+	    this.setState({ correct: this.state.correct.concat(diff) });
+	  },
 
 	  render: function render() {
+	    console.log('state', this.state);
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'quiz-view' },
+	      { ref: 'butt', className: 'quiz-view' },
 	      !this.state.takingQuiz ? _react2.default.createElement(
 	        'button',
 	        { className: 'text-middle', onClick: this.startQuiz },
@@ -27045,7 +27053,7 @@
 	            ' / ',
 	            this.state.quiz_info.players.length
 	          ),
-	          _react2.default.createElement('input', { className: 'guess-box', type: 'text', value: this.state.guessValue, onChange: this.handleChange })
+	          _react2.default.createElement('input', { ref: 'guess', className: 'guess-box', type: 'text', value: this.state.guessValue, onChange: this.handleChange })
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -27056,17 +27064,21 @@
 	            this.state.correct.map(function (item) {
 	              return _react2.default.createElement(
 	                'li',
-	                { key: item.full_name },
-	                item.full_name
+	                { key: item.fullName },
+	                item.fullName
 	              );
 	            })
 	          )
-	        )
+	        ),
+	        this.state.takingQuiz ? _react2.default.createElement(
+	          'button',
+	          { onClick: this.giveUp, className: 'give-up-button button button-primary' },
+	          'Give up'
+	        ) : null
 	      )
 	    );
 	  }
-	}); // ----- QUIZ COMPONENT ---- //
-
+	});
 
 	exports.default = Quiz;
 
@@ -27114,7 +27126,6 @@
 				dataType: 'json',
 				cache: false,
 				success: function (data) {
-					console.log(JSON.stringify(data));
 					this.sortByConference(data);
 				}.bind(this),
 				error: function (xhr, status, err) {
@@ -27130,7 +27141,7 @@
 					{ key: team.acronym },
 					_react2.default.createElement(
 						'a',
-						{ href: team.url },
+						{ id: team.acronym, href: team.url },
 						team.team_name
 					)
 				);
@@ -27142,7 +27153,7 @@
 					{ key: team.acronym },
 					_react2.default.createElement(
 						'a',
-						{ href: team.url },
+						{ id: team.acronym, href: team.url },
 						team.team_name
 					)
 				);

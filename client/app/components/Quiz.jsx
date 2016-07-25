@@ -1,5 +1,6 @@
 // ----- QUIZ COMPONENT ---- //
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 var Quiz = React.createClass({
   getInitialState: function() {
@@ -22,9 +23,13 @@ var Quiz = React.createClass({
   },
   componentDidMount: function () {
     this.getQuiz();
+    // DOESN'T WORK YET
+    if ((this.refs.guess) !== undefined) {
+      (this.refs.guess).focus();
+    }
   },
   componentWillUnmount: function() {
-      this.getQuiz.abort();
+      // this.getQuiz.abort();
   },
   handleChange: function(event) {
   	var guess = event.target.value.toLowerCase();
@@ -33,24 +38,15 @@ var Quiz = React.createClass({
   	// check if they entered the last name, keep track of index
   	var indexLastName = _.indexOf(lastNames, guess);
   	var indexFullName = _.indexOf(fullNames, guess);
+
   	// if the entered LAST NAME, they got it correct and they hadn't guessed it before
-  	if (indexLastName !== -1 && _.indexOf(this.state.correct['last_name'], guess) === -1) {
-  		var correctName = this.state.quiz_info.players[indexLastName].fullName;
-      var correctLastName = this.state.quiz_info.players[indexLastName].lastName;
-  		this.setState({ correct: this.state.correct.concat( {full_name:correctName, last_name: correctLastName}) });
-  		// ***** remove the player from the list ****
-
-  		// reset the guess box
-  		$('.guess-box').val('');
-      this.flash();
-  	// check if they entered the players FULL NAME
-  	} else if (indexFullName !== -1) {
-	    var correctName = this.state.quiz_info.players[indexFullName].fullName;
-      var correctLastName = this.state.quiz_info.players[indexFullName].lastName;
-      this.setState({ correct: this.state.correct.concat( {full_name:correctName, last_name: correctLastName}) });
-  		// this.setState(correct: this.state.correct.concat(correctName);
-  		// ***** remove the player from the list ****
-
+  	if ((indexLastName !== -1 || indexFullName !== -1) && _.indexOf(this.state.correct['last_name'], guess) === -1) {
+      // add player to the correct array
+      if (indexFullName === -1) {
+  		  this.setState({ correct: this.state.correct.concat( this.state.quiz_info.players[indexLastName]) });
+      } else {
+        this.setState({ correct: this.state.correct.concat( this.state.quiz_info.players[indexFullName]) });
+      }
   		// reset the guess box
   		$('.guess-box').val('');
       this.flash();
@@ -80,7 +76,8 @@ var Quiz = React.createClass({
     return list;
   },
   startQuiz: function () {
-    this.setState({'takingQuiz' :true});
+    this.setState({'takingQuiz': true});
+    $('.guess-box').focus();
   },
 
   getQuiz: function() {
@@ -92,34 +89,42 @@ var Quiz = React.createClass({
       success: function(data) {
         // console.log('from server', data);
         this.state.quiz_info = this.addFullNameAndConvertLowerCase(data[0]);
-        // console.log('done with sort', this.state);
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
   },
+  giveUp: function() {
+    // add diff between correct players and all players to correct array
+    var diff = _.difference(this.state.quiz_info.players, this.state.correct);
+    this.setState({correct: this.state.correct.concat(diff)});
+  },
 
   render: function() {
+    console.log('state', this.state);
     return (
-    	<div className="quiz-view">
+    	<div ref='butt' className="quiz-view">
         { !this.state.takingQuiz ?
           <button className="text-middle" onClick={ this.startQuiz }>Take quiz!</button> :
           <div>
             <div className="guess-box-container text-middle">
               <div>{ this.state.quiz_info.title }</div>
            { <div> You have answered: {this.state.correct.length} / {this.state.quiz_info.players.length}</div> }
-      	      <input className="guess-box" type="text" value={this.state.guessValue} onChange={this.handleChange} />
+      	      <input ref="guess" className="guess-box" type="text" value={this.state.guessValue} onChange={this.handleChange} />
             </div>
       	    <div>
         		  <ul>
   						  {this.state.correct.map((item)=>(
-  							 <li key={item.full_name}>
-  								  {item.full_name}
+  							 <li key={item.fullName}>
+  								  {item.fullName}
   							 </li>
   						  ))}
   					  </ul>
       	    </div>
+            { this.state.takingQuiz ?
+            <button onClick={ this.giveUp } className="give-up-button button button-primary">Give up</button> : null
+            }
           </div> }
       </div>
     )

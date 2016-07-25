@@ -42,15 +42,15 @@ module.exports = {
 	},
 	getAllRosters: function (callback) {
 		// find all rosters
-		Roster.find({}, { team_name: 1, acronym: 1, players: 1, _id: 0, conference: 1})
-			.then( function (result) {
-				callback(result);
-			});
+		Roster.find({},{players: 0}, function (err, result) {
+		  if (err) console.log('error',err);
+		  callback(result);
 
+		});
 	},
 	getRoster: function (acronym, callback) {
 		Roster.find({acronym: acronym})
-			.then( function (result) {
+			.then( function (result, error) {
 				callback(result);
 			})
 	}
