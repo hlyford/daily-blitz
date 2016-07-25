@@ -91,24 +91,37 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'commentBox' },
+	      null,
 	      _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'page-titles' },
 	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: 'quiz',
-	            activeClassName: '-active' },
-	          'Play today\'s quiz'
+	          'h2',
+	          null,
+	          'Welcome to RosterBlitz 2.0'
 	        )
 	      ),
 	      _react2.default.createElement(
-	        _reactRouter.Link,
-	        { to: 'subscribe',
-	          activeClassName: '-active' },
-	        'Subscribe to daily quizzes'
-	      ),
-	      this.props.children
+	        'div',
+	        { className: 'commentBox' },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: 'quiz',
+	              activeClassName: '-active' },
+	            'Play today\'s quiz'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: 'subscribe',
+	            activeClassName: '-active' },
+	          'Subscribe to daily quizzes'
+	        ),
+	        this.props.children
+	      )
 	    );
 	  }
 	});
@@ -26808,7 +26821,16 @@
 	    });
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'past-quizzes-view' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'page-titles' },
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Not really using this page...'
+	        )
+	      ),
 	      'Here are the old quizzes',
 	      _react2.default.createElement(
 	        'ul',
@@ -26871,6 +26893,15 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'subscribe-view' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'page-titles' },
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Subscribe to daily sports quizzes'
+	        )
+	      ),
 	      _react2.default.createElement(
 	        'div',
 	        null,
@@ -27029,7 +27060,16 @@
 	    console.log('state', this.state);
 	    return _react2.default.createElement(
 	      'div',
-	      { ref: 'butt', className: 'quiz-view' },
+	      { className: 'quiz-view' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'page-titles' },
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          this.state.quiz_info.title ? this.state.quiz_info.title : "Start the quiz"
+	        )
+	      ),
 	      !this.state.takingQuiz ? _react2.default.createElement(
 	        'button',
 	        { className: 'text-middle', onClick: this.startQuiz },
@@ -27057,7 +27097,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          null,
+	          { className: 'correct-guess-container' },
 	          _react2.default.createElement(
 	            'ul',
 	            null,
@@ -27163,7 +27203,16 @@
 				{ className: 'roster-view' },
 				_react2.default.createElement(
 					'div',
-					{ className: 'six columns' },
+					{ className: 'page-titles' },
+					_react2.default.createElement(
+						'h2',
+						null,
+						'Name all the players on a team'
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'five columns' },
 					_react2.default.createElement(
 						'div',
 						null,
@@ -27177,7 +27226,7 @@
 				),
 				_react2.default.createElement(
 					'div',
-					{ className: 'six columns' },
+					{ className: 'five columns' },
 					_react2.default.createElement(
 						'div',
 						null,

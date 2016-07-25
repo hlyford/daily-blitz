@@ -34,7 +34,8 @@ var PastQuizzes = React.createClass({
       );
     });
     return (
-      <div>
+      <div className="past-quizzes-view">
+        <div className="page-titles"><h2>Not really using this page...</h2></div>
         Here are the old quizzes
         <ul>
           {listItems}

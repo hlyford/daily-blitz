@@ -51,13 +51,14 @@ var Rosters = React.createClass({
 			});
 		return (
 			<div className="roster-view">
-		    <div className="six columns">
+				<div className="page-titles"><h2>Name all the players on a team</h2></div>
+		    <div className="five columns">
 		    	<div>Eastern Conference Teams</div>
     		  <ul>
     		  	{ easternTeams }
 				  </ul>
 				</div>
-		    <div className="six columns">
+		    <div className="five columns">
 		    	<div>Western Conference Teams</div>
     		  <ul>
 					  { westernTeams }

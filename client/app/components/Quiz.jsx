@@ -104,7 +104,8 @@ var Quiz = React.createClass({
   render: function() {
     console.log('state', this.state);
     return (
-    	<div ref='butt' className="quiz-view">
+    	<div className="quiz-view">
+        <div className="page-titles"><h2>{ this.state.quiz_info.title ? this.state.quiz_info.title : "Start the quiz" }</h2></div>
         { !this.state.takingQuiz ?
           <button className="text-middle" onClick={ this.startQuiz }>Take quiz!</button> :
           <div>
@@ -113,7 +114,7 @@ var Quiz = React.createClass({
            { <div> You have answered: {this.state.correct.length} / {this.state.quiz_info.players.length}</div> }
       	      <input ref="guess" className="guess-box" type="text" value={this.state.guessValue} onChange={this.handleChange} />
             </div>
-      	    <div>
+      	    <div className="correct-guess-container">
         		  <ul>
   						  {this.state.correct.map((item)=>(
   							 <li key={item.fullName}>

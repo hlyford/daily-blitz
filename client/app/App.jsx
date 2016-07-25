@@ -19,17 +19,20 @@ var App = React.createClass({
 
   render: function() {
     return (
-      <div className="commentBox">
-        <div>
-          <Link to='quiz'
-            activeClassName='-active'>Play today&#39;s quiz
+      <div>
+        <div className="page-titles"><h2>Welcome to RosterBlitz 2.0</h2></div>
+        <div className="commentBox">
+          <div>
+            <Link to='quiz'
+              activeClassName='-active'>Play today&#39;s quiz
+            </Link>
+          </div>
+          <Link to='subscribe'
+            activeClassName='-active'>Subscribe to daily quizzes
           </Link>
+          {this.props.children}
+           {/*} <GuessInput data={ this.state.data } /> */ }
         </div>
-        <Link to='subscribe'
-          activeClassName='-active'>Subscribe to daily quizzes
-        </Link>
-        {this.props.children}
-         {/*} <GuessInput data={ this.state.data } /> */ }
       </div>
     );
   },

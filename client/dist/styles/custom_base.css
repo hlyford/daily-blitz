@@ -8,7 +8,8 @@ a {
   text-align: center; }
 
 html {
-  background: url(../images/epic_bball1.png) no-repeat center center fixed;
+  background: url(../images/epic_bball2.jpg) no-repeat center center fixed;
+  background-position: 0 30%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -16,7 +17,8 @@ html {
   height: 100%; }
   html nav.navbar {
     background-color: rgba(255, 255, 255, 0.6);
-    border-top: none; }
+    border-top: none;
+    border-bottom: none; }
     html nav.navbar .container {
       padding-left: 10%; }
   html input {
@@ -26,12 +28,12 @@ html {
   html .content-container {
     padding: 3%;
     margin: 0px auto;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
     color: white; }
-    html .content-container .title {
+    html .content-container .title, html .content-container .page-titles {
       display: flex;
       justify-content: center; }
     html .content-container .main-quiz-content {
@@ -50,6 +52,9 @@ html {
         color: black; }
       html .content-container #app .quiz-view .guess-box-container {
         text-align: center; }
+      html .content-container #app .quiz-view .correct-guess-container li {
+        display: inline-block;
+        width: 45%; }
       html .content-container #app .roster-view .six {
         text-align: center; }
         html .content-container #app .roster-view .six li {
