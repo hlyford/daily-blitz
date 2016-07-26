@@ -19,4 +19,4 @@ module.exports.sendSms = function(to, message) {
   });
 };
 
-module.exports.sendSms('19079478364', 'as a minority using Twilio [zoom out], it only took me 25 minutes [zoom in] to set up SMSing with my NodeJS app, try dis epic daily sports quiz that i can send until my twilio credit runs out: https://goat-blitz.herokuapp.com/#/quiz?roster=1&quiz_id=gsw');
+module.exports.sendSms(NUMBERS, 'GREAT JERB');
