@@ -11,3 +11,6 @@ npm-debug.log
 mongoInfo
 server/twilio/config.js
 server/email/config.js
+.elasticbeanstalk/
+arbys.zip
+arbys

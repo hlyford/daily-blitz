@@ -2,7 +2,7 @@
   "name": "daily-blitz",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
+  "main": "server/server.js",
   "scripts": {
     "start": "nodemon server/server.js",
     "test": "npm test",
