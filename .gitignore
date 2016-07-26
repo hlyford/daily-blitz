@@ -9,3 +9,4 @@ server/jobs/scraper/teams/
 npm-debug.log
 *.sass-cache*
 mongoInfo
+server/twilio/config.js
