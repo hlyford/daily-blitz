@@ -55,30 +55,30 @@ html {
           background-color: green;
         }
 			}
-		}
-		#app {
-			width: 100%;
-			.subscribe-view {
-				input {
-					color: black;
-				}
-			}
-			.quiz-view {
-				.guess-box-container {
-					text-align: center;
-					}
-				.correct-guess-container {
-					li {
-						display: inline-block;
-						width: 45%;
+			#app {
+				width: 100%;
+				.subscribe-view {
+					input {
+						color: black;
 					}
 				}
-			}
-			.roster-view {
-				.six {
-					text-align: center;
-					li {
-						cursor: pointer;
+				.quiz-view {
+					.guess-box-container {
+						text-align: center;
+						}
+					.correct-guess-container {
+						li {
+							display: inline-block;
+							width: 45%;
+						}
+					}
+				}
+				.roster-view {
+					.six {
+						text-align: center;
+						li {
+							cursor: pointer;
+						}
 					}
 				}
 			}

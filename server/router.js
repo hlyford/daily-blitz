@@ -6,6 +6,7 @@ var userController = require('./controllers/userController');
 var rosterController = require('./controllers/rosterController');
 var bodyParser = require('body-parser');
 var path = require('path');
+var emailSender = require('./email/emailSender');
 
 var router = express.Router();
 router.use(bodyParser.json());
@@ -57,6 +58,16 @@ router.route('/roster/:team_acronym')
 			res.send(roster_data);
 		})
 	})
+
+// email sending routes
+router.route('/hello')
+	.get( function (req, res) {
+		emailSender(function (response) {
+			console.log('going abck', response);
+			res.send(response);
+		});
+	});
+
 
 
 module.exports = router;

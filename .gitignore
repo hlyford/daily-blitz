@@ -10,3 +10,4 @@ npm-debug.log
 *.sass-cache*
 mongoInfo
 server/twilio/config.js
+server/email/config.js

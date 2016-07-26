@@ -46,18 +46,18 @@ html {
         transition: background-color 700ms ease; }
         html .content-container .main-quiz-content .guess-box.boom {
           background-color: green; }
-    html .content-container #app {
-      width: 100%; }
-      html .content-container #app .subscribe-view input {
-        color: black; }
-      html .content-container #app .quiz-view .guess-box-container {
-        text-align: center; }
-      html .content-container #app .quiz-view .correct-guess-container li {
-        display: inline-block;
-        width: 45%; }
-      html .content-container #app .roster-view .six {
-        text-align: center; }
-        html .content-container #app .roster-view .six li {
-          cursor: pointer; }
+      html .content-container .main-quiz-content #app {
+        width: 100%; }
+        html .content-container .main-quiz-content #app .subscribe-view input {
+          color: black; }
+        html .content-container .main-quiz-content #app .quiz-view .guess-box-container {
+          text-align: center; }
+        html .content-container .main-quiz-content #app .quiz-view .correct-guess-container li {
+          display: inline-block;
+          width: 45%; }
+        html .content-container .main-quiz-content #app .roster-view .six {
+          text-align: center; }
+          html .content-container .main-quiz-content #app .roster-view .six li {
+            cursor: pointer; }
 
 /*# sourceMappingURL=custom_base.css.map */
