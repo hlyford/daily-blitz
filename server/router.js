@@ -6,7 +6,7 @@ var userController = require('./controllers/userController');
 var rosterController = require('./controllers/rosterController');
 var bodyParser = require('body-parser');
 var path = require('path');
-var emailSender = require('./email/emailSender');
+// var emailSender = require('./email/emailSender');
 
 var router = express.Router();
 router.use(bodyParser.json());
