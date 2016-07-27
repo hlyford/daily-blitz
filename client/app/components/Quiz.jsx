@@ -31,8 +31,14 @@ var Quiz = React.createClass({
   componentWillUnmount: function() {
       // this.getQuiz.abort();
   },
+  componentDidUpdate: function(){
+    var node = ReactDOM.findDOMNode(this.refs.guess);
+    node.focus();
+  },
+
   handleChange: function(event) {
-  	var guess = event.target.value.toLowerCase();
+  	var guess = event.target.value.toLowerCase().trim();
+    // check the guess against all the first and last names
   	var lastNames = _.pluck(this.state.quiz_info.players, 'lastNameLower');
   	var fullNames = _.pluck(this.state.quiz_info.players, 'fullNameLower');
   	// check if they entered the last name, keep track of index
@@ -77,7 +83,6 @@ var Quiz = React.createClass({
   },
   startQuiz: function () {
     this.setState({'takingQuiz': true});
-    $('.guess-box').focus();
   },
 
   getQuiz: function() {
@@ -112,7 +117,7 @@ var Quiz = React.createClass({
             <div className="guess-box-container text-middle">
               <div>{ this.state.quiz_info.title }</div>
            { <div> You have answered: {this.state.correct.length} / {this.state.quiz_info.players.length}</div> }
-      	      <input ref="guess" className="guess-box" type="text" value={this.state.guessValue} onChange={this.handleChange} />
+      	      <input ref="guess" className="guess-box" type="text" name="guessing" value={this.state.guessValue} onChange={this.handleChange} />
             </div>
       	    <div className="correct-guess-container">
         		  <ul>
