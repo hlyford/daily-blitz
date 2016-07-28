@@ -2,10 +2,15 @@ import React from 'react';
 
 var Rosters = React.createClass({
 	getInitialState: function() {
-	  return { rosters: [] , western :[], eastern: [] };
+		var league = this.props.location.query['league'];
+	  return { league: league, rosters: [] , western :[], eastern: [] };
 	},
 	componentWillMount: function () {
-		this.getRosters();
+		this.getRosters(this.state.league);
+	},
+	// detect changes in league selected
+	componentDidUpdate: function () {
+		// this.getRosters(league);
 	},
 	sortByConference: function (teams) {
 		var eastern = [], western = [];
@@ -18,10 +23,10 @@ var Rosters = React.createClass({
 		});
 		this.setState({ rosters: teams, western: western, eastern: eastern });
 	},
-	getRosters: function () {
-		// call off for all team rosters
+	getRosters: function (league) {
+		// call off for all team rosters for given league
 		$.ajax({
-		  url: '/roster',
+		  url: '/roster/' + league,
 		  dataType: 'json',
 		  cache: false,
 		  success: function(data) {

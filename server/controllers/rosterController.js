@@ -40,7 +40,7 @@ module.exports = {
 			console.log(data.team_name + ' added to db');
 		});
 	},
-	getAllRosters: function (callback) {
+	getAllRosters: function (league, callback) {
 		// find all rosters
 		Roster.find({},{players: 0}, function (err, result) {
 		  if (err) console.log('error',err);

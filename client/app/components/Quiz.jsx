@@ -86,7 +86,7 @@ var Quiz = React.createClass({
   },
 
   getQuiz: function() {
-    var route = this.state.roster ? '/roster/' : '/quiz/';
+    var route = this.state.roster ? '/roster/team/' : '/quiz/';
     $.ajax({
       url: route + this.state.active_quiz,  // test query: 2x68a
       dataType: 'json',
@@ -107,7 +107,7 @@ var Quiz = React.createClass({
   },
 
   render: function() {
-    console.log('state', this.state);
+
     return (
     	<div className="quiz-view">
         <div className="page-titles"><h2>{ this.state.quiz_info.title ? this.state.quiz_info.title : "Start the quiz" }</h2></div>

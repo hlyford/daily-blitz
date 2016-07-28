@@ -31,7 +31,6 @@ var App = React.createClass({
             activeClassName='-active'>Subscribe to daily quizzes
           </Link>
           {this.props.children}
-           {/*} <GuessInput data={ this.state.data } /> */ }
         </div>
       </div>
     );

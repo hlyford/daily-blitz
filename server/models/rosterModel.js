@@ -5,6 +5,7 @@ var RosterSchema = new mongoose.Schema({
 	acronym: String,
 	conference: String,
 	players: Array,
+	league: String,
 	time: { type : Date, default: Date.now }
 });
 
