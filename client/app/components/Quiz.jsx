@@ -125,7 +125,6 @@ var Quiz = React.createClass({
 
   							 <li key={item.fullName}>
                     <img src={"../../dist/images/nba_player_images/" + item.firstName.replace(/ /g,"_") + "_" + item.lastName + "_" + this.state.quiz_info.acronym + ".png"} />
-                    <img src={"../../dist/images/nba_player_images/" + item.firstName.replace(/ /g,"_") + "_" + item.lastName + ".png"} />
   								  {item.fullName}
   							 </li>
   						  ))}

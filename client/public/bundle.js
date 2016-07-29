@@ -27114,7 +27114,6 @@
 	                'li',
 	                { key: item.fullName },
 	                _react2.default.createElement('img', { src: "../../dist/images/nba_player_images/" + item.firstName.replace(/ /g, "_") + "_" + item.lastName + "_" + _this.state.quiz_info.acronym + ".png" }),
-	                _react2.default.createElement('img', { src: "../../dist/images/nba_player_images/" + item.firstName.replace(/ /g, "_") + "_" + item.lastName + ".png" }),
 	                item.fullName
 	              );
 	            })
