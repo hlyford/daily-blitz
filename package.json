@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server/server.js",
     "test": "npm test",
-    "scrape": "node server/scraper.js",
+    "scrape_nba": "node server/nba_scraper.js",
     "db": "node server/prod_db_insert.js"
   },
   "author": "Henry Lyford",

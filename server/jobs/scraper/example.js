@@ -2,6 +2,7 @@
 	name: 'Warriors',
 	location: 'Golden State',
 	logo_url: '',
+	league: '',
 	players: [
 		{
 			first_name: 'Steph',

@@ -2,6 +2,13 @@ var Roster = require('../models/rosterModel');
 
 module.exports = {
 	addStuff: function(data) {
+		// find and delete the current listing for that team
+		Roster.find({acronym: data.acronym}).remove(function (err, result) {
+		  if (err) console.log('error', err);
+		  else {
+		  	console.log('removed', result.result);
+		  }
+		});
 		// determine the conference
 		var westernTeams = ['gsw','lac','lal','pho','sac','dal','hou','mem','nor','sas','den','min','okc','por','uth'];
 		if (westernTeams.indexOf(data.acronym) !== -1) {
@@ -35,7 +42,8 @@ module.exports = {
 			team_name: data.team_name,
 			acronym: data.acronym,
 			conference: data.conference,
-			players: data.players
+			players: data.players,
+			league: data.league
 		}).then(function () {
 			console.log(data.team_name + ' added to db');
 		});

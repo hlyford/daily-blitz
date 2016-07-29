@@ -28,6 +28,8 @@ var getRosters = function (urlSlug, callback) {
 			team['team_name'] = teamName;
 			var teamAcronym = urlSlug;
 			team['acronym'] = teamAcronym;
+			var league = 'nba';
+			team['league'] = league;
 
 			// get all the players info
 			var rows = $('.ys-roster-table tbody tr');

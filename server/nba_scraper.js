@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var path = require('path');
 var rosterModel = require('./models/rosterModel');
 var rosterController = require('./controllers/rosterController');
-var scraper = require('./jobs/scraper/scraper');
+var scraper = require('./jobs/scraper/nba_scraper');
 var run = require('./jobs/scraper/run');
 
 // require in other files
