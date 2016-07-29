@@ -14,5 +14,6 @@ server/email/config.js
 .elasticbeanstalk/
 arbys.zip
 arbys
+server/team_logo_images/
 
 184.168.221.21

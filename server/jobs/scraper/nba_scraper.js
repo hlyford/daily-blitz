@@ -23,6 +23,18 @@ var getRosters = function (urlSlug, callback) {
 	  if (!error && response.statusCode == 200) {
 	  	// load the html for the page
 			var $ = cheerio.load(html);
+
+			// get the TEAM images and save them to the images directory
+			// var teamImageUrl = $('.Row.ys-player-header .IbBox:nth-child(1)').css('background-image');
+			// teamImageUrl = teamImageUrl.replace('url(','').replace(')','');
+			// var dlDir = '/Users/honree/daily-blitz/server/team_logo_images/' + urlSlug.replace(/ /g,"_").replace(/\'/g, '') + '.png'; //+ '_'  + playerName.replace(/ /g,"_").replace(/\'/g, '') + '.png';
+			// var curl =  'curl ' + teamImageUrl.replace(/&/g,'\\&') + ' -o ' + dlDir + ' --create-dirs';
+			// var child = exec(curl, function(err, stdout, stderr) {
+   //  		if (err){ console.log(stderr); throw err; }
+   //  		else console.log(urlSlug + ' downloaded to ' + dlDir);
+			// });
+			// end team image adding
+
 			// get the team name
 			var teamName = $('.IbBox h1 span:nth-child(1)').text();
 			team['team_name'] = teamName;
@@ -30,7 +42,6 @@ var getRosters = function (urlSlug, callback) {
 			team['acronym'] = teamAcronym;
 			var league = 'nba';
 			team['league'] = league;
-
 			// get all the players info
 			var rows = $('.ys-roster-table tbody tr');
 			rows.each(function (i, element) {
@@ -73,30 +84,3 @@ var getRosters = function (urlSlug, callback) {
 	});
 }
 module.exports = getRosters;
-
-// loop through waiting 60 seconds each time
-// var looper = function (i) {
-// 	if (i < 30) {
-// 		getRosters(teamsArray[i], function(teamData) {
-// 			// add the conference
-// 			teamData.conference = 'western';
-// 			// add new file under the team acronym
-// 			var dir = './teams/' + teamData.acronym +'.js';
-// 			var asString = util.inspect(teamData);
-// 			console.log(asString);
-// 			fs.writeFile(dir, asString, function(err) {
-// 			    if(err) {
-// 			        return console.log(err);
-// 			    }
-// 			    console.log("The file was saved!");
-// 			});
-// 		});
-// 	}
-// 	setTimeout(function () {
-// 		looper(i + 1);
-// 	}, 60000);
-// };
-
-// looper(3);
-
-

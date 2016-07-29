@@ -27187,9 +27187,11 @@
 		render: function render() {
 			var westernTeams = this.state.western.map(function (team) {
 				team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
+				team.img = "../../dist/images/team_logo_images/" + team.acronym + ".png";
 				return _react2.default.createElement(
 					'li',
 					{ key: team.acronym },
+					_react2.default.createElement('img', { src: team.img }),
 					_react2.default.createElement(
 						'a',
 						{ id: team.acronym, href: team.url },
@@ -27199,9 +27201,11 @@
 			});
 			var easternTeams = this.state.eastern.map(function (team) {
 				team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
+				team.img = "../../dist/images/team_logo_images/" + team.acronym + ".png";
 				return _react2.default.createElement(
 					'li',
 					{ key: team.acronym },
+					_react2.default.createElement('img', { src: team.img }),
 					_react2.default.createElement(
 						'a',
 						{ id: team.acronym, href: team.url },

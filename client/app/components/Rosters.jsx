@@ -41,17 +41,21 @@ var Rosters = React.createClass({
 	render: function () {
 		var westernTeams = this.state.western.map(function (team) {
 			team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
+			team.img = "../../dist/images/team_logo_images/" + team.acronym + ".png";
 		  return (
 	  		 <li key={ team.acronym }>
-	  			  <a id={ team.acronym }href={ team.url }>{ team.team_name }</a>
+	  		 	<img src={ team.img } />
+	  			<a id={ team.acronym }href={ team.url }>{ team.team_name }</a>
 	  		 </li>
 		  )
 		});
 		var easternTeams = this.state.eastern.map(function (team) {
 			team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
+			team.img = "../../dist/images/team_logo_images/" + team.acronym + ".png";
 		  return (
 	  		 <li key={ team.acronym }>
-	  			  <a id={ team.acronym } href={ team.url }>{ team.team_name }</a>
+	  		 	<img src={ team.img } />
+	  			<a id={ team.acronym } href={ team.url }>{ team.team_name }</a>
 	  		 </li>
 		  )
 			});
