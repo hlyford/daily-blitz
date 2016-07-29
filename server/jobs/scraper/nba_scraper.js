@@ -6,6 +6,7 @@ var fs = require('fs');
 var url = require('url');
 var exec = require('child_process').exec;
 var baseUrl = require('./url_info').baseUrl;
+var baseBase = require('./url_info').baseBase;
 // var teamSlugs = require('./url-info').teamSlugs;
 var rosterController = require('../../controllers/rosterController');
 var teamsArray = require('./team_acronyms');
@@ -24,16 +25,10 @@ var getRosters = function (urlSlug, callback) {
 	  	// load the html for the page
 			var $ = cheerio.load(html);
 
-			// get the TEAM images and save them to the images directory
+			// ****** get the TEAM images and save them to the images directory
 			// var teamImageUrl = $('.Row.ys-player-header .IbBox:nth-child(1)').css('background-image');
-			// teamImageUrl = teamImageUrl.replace('url(','').replace(')','');
-			// var dlDir = '/Users/honree/daily-blitz/server/team_logo_images/' + urlSlug.replace(/ /g,"_").replace(/\'/g, '') + '.png'; //+ '_'  + playerName.replace(/ /g,"_").replace(/\'/g, '') + '.png';
-			// var curl =  'curl ' + teamImageUrl.replace(/&/g,'\\&') + ' -o ' + dlDir + ' --create-dirs';
-			// var child = exec(curl, function(err, stdout, stderr) {
-   //  		if (err){ console.log(stderr); throw err; }
-   //  		else console.log(urlSlug + ' downloaded to ' + dlDir);
-			// });
-			// end team image adding
+			// teamImageGetter(teamImageUrl, urlSlug);
+			// ******* end team image adding
 
 			// get the team name
 			var teamName = $('.IbBox h1 span:nth-child(1)').text();
@@ -45,15 +40,53 @@ var getRosters = function (urlSlug, callback) {
 			// get all the players info
 			var rows = $('.ys-roster-table tbody tr');
 			rows.each(function (i, element) {
-				// if (i === 0) {
+				// pause between players
+				function sleep(miliseconds) {
+					console.log('sleeping for ' + miliseconds);
+				   var currentTime = new Date().getTime();
+
+				   while (currentTime + miliseconds >= new Date().getTime()) {
+				   }
+				   console.log('resume');
+				}
+				sleep(3214);
+				// if (i === 5) {
 					var player = {};
 					var playerNumber = $(element).find('td:nth-child(1)').text();
 					player['player_number'] = playerNumber;
-					// var player_image = $(element).find('td:nth-child(1)
 					var name = $(element).find('td:nth-child(2) div div a').text();
 					player['name'] = name;
-					// var last_name
 					var position = $(element).find('td:nth-child(3) div span:nth-child(1) span:nth-child(1)').text();
+
+					// **** get player images ***
+					// click the player name to get bigger photo
+					var bigImageUrl = $(element).find('td:nth-child(2) div div a').attr('href');
+					bigImageUrl = baseBase + bigImageUrl;
+	  			request(bigImageUrl, function (error, response, html) {
+	  				if (error) throw error;
+		  			if (!error && response.statusCode == 200) {
+		    			var $$ = cheerio.load(html);
+		    			// check if there's a src for img
+		    			var imgType = 'img';
+		    			var playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image');
+		    			if (parseInt(playerPicUrl.children().length) === 0) {
+		    				// make grey outline if no picture
+		    				playerPicUrl = 'http://www.clker.com/cliparts/m/3/I/C/c/2/grey-silhouette-of-man-md.png';
+		    			} else {
+		    				// else see if the img is on the src or the background-image
+		    				playerPicUrl = playerPicUrl.find('img:first-of-type').attr('src');
+		    				if (playerPicUrl.length < 80) {
+		    					imgType = 'background';
+		    					playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image img:first-of-type').css('background-image');
+		    					playerPicUrl = playerPicUrl.slice(4, playerPicUrl.length - 1);
+		    				}
+		    			}
+		    			playerImageGetter(playerPicUrl, urlSlug, name);
+		    			return;
+		    		}
+		    	});
+	  			return;
+
 					player['position'] = position;
 					var height = $(element).find('td:nth-child(4) span span').text();
 					player['height'] = height;
@@ -69,6 +102,7 @@ var getRosters = function (urlSlug, callback) {
 					player['college'] = college;
 					// var salary = $(element).find('td:nth-child(10) span span');
 					// player['salary'] = salary;
+
 					for (key in player) {
 						if (player[key] === '') {
 							player[key] = 'Not available';
@@ -80,7 +114,28 @@ var getRosters = function (urlSlug, callback) {
 		} else {
 			console.log(error);
 		}
-		rosterController.addStuff(team);
+		// add back to get rosters
+		// rosterController.addStuff(team);
 	});
 }
 module.exports = getRosters;
+
+function teamImageGetter (teamImageUrl, urlSlug) {
+	teamImageUrl = teamImageUrl.replace('url(','').replace(')','');
+	var dlDir = '/Users/honree/daily-blitz/server/images_server/team_logo_images/' + urlSlug.replace(/ /g,"_").replace(/\'/g, '') + '.png'; //+ '_'  + playerName.replace(/ /g,"_").replace(/\'/g, '') + '.png';
+	var curl =  'curl ' + teamImageUrl.replace(/&/g,'\\&') + ' -o ' + dlDir + ' --create-dirs';
+	var child = exec(curl, function(err, stdout, stderr) {
+ 		if (err){ console.log(stderr); throw err; }
+ 		else console.log(urlSlug + ' downloaded to ' + dlDir);
+	});
+}
+
+function playerImageGetter (playerImageUrl, shortSlug, playerName) {
+	// get the images and save them to the images directory
+	var dlDir = '/Users/honree/daily-blitz/server/images_server/nba_player_images/' + playerName.replace(/ /g,"_").replace(/\'/g, '') +'.png';
+	var curl =  'curl ' + playerImageUrl.replace(/&/g,'\\&') + ' -o ' + dlDir  + ' --create-dirs';
+	var child = exec(curl, function(err, stdout, stderr) {
+		if (err){ console.log(stderr); throw err; }
+		else console.log(playerName + ' downloaded to ' + dlDir);
+	});
+}

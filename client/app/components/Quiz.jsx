@@ -115,14 +115,17 @@ var Quiz = React.createClass({
           <button className="text-middle" onClick={ this.startQuiz }>Take quiz!</button> :
           <div>
             <div className="guess-box-container text-middle">
-              <div>{ this.state.quiz_info.title }</div>
+              <div><img className="team-logo" src= {"../../dist/images/team_logo_images/" + this.state.quiz_info.acronym + ".png"} /> { this.state.quiz_info.title }</div>
            { <div> You have answered: {this.state.correct.length} / {this.state.quiz_info.players.length}</div> }
       	      <input ref="guess" className="guess-box" type="text" name="guessing" value={this.state.guessValue} onChange={this.handleChange} />
             </div>
       	    <div className="correct-guess-container">
         		  <ul>
   						  {this.state.correct.map((item)=>(
+
   							 <li key={item.fullName}>
+                    <img src={"../../dist/images/nba_player_images/" + item.firstName.replace(/ /g,"_") + "_" + item.lastName + "_" + this.state.quiz_info.acronym + ".png"} />
+                    <img src={"../../dist/images/nba_player_images/" + item.firstName.replace(/ /g,"_") + "_" + item.lastName + ".png"} />
   								  {item.fullName}
   							 </li>
   						  ))}

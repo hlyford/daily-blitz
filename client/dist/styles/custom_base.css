@@ -53,10 +53,17 @@ html {
         html .content-container .main-quiz-content #app .subscribe-view input {
           color: black; }
         html .content-container .main-quiz-content #app .quiz-view .guess-box-container {
-          text-align: center; }
+          text-align: center;
+          padding-bottom: 30px; }
         html .content-container .main-quiz-content #app .quiz-view .correct-guess-container li {
           display: inline-block;
           width: 45%; }
+          html .content-container .main-quiz-content #app .quiz-view .correct-guess-container li img {
+            width: 70px;
+            height: 50px; }
+        html .content-container .main-quiz-content #app .quiz-view .team-logo {
+          width: 100px;
+          float: left; }
         html .content-container .main-quiz-content #app .roster-view .five > div:nth-child(1) {
           padding-bottom: 20px;
           font-size: 1.1em; }

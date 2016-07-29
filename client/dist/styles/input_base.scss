@@ -69,12 +69,21 @@ html {
 				.quiz-view {
 					.guess-box-container {
 						text-align: center;
+						padding-bottom: 30px;
 						}
 					.correct-guess-container {
 						li {
 							display: inline-block;
 							width: 45%;
+							img {
+								width: 70px;
+								height: 50px;
+							}
 						}
+					}
+					.team-logo {
+						width: 100px;
+						float: left;
 					}
 				}
 				.roster-view {
