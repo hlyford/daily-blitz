@@ -12,6 +12,16 @@ var rosterController = require('../../controllers/rosterController');
 var teamsArray = require('./team_acronyms');
 var Roster = require('../../models/rosterModel');
 
+// pause between players
+function sleep(miliseconds) {
+	console.log('sleeping for ' + miliseconds);
+   var currentTime = new Date().getTime();
+
+   while (currentTime + miliseconds >= new Date().getTime()) {
+   }
+   console.log('resume');
+}
+
 
 var getRosters = function (urlSlug, callback) {
 	// initialize team object
@@ -20,9 +30,11 @@ var getRosters = function (urlSlug, callback) {
 	};
 	// form the url and go to the page
 	var url = baseUrl + urlSlug + "/roster";
+	url = "file:///Users/honree/daily-blitz/server/jobs/scraper/bleh.html"
 	request(url, function (error, response, html) {
 	  if (!error && response.statusCode == 200) {
 	  	// load the html for the page
+	  	sleep(5000);
 			var $ = cheerio.load(html);
 
 			// ****** get the TEAM images and save them to the images directory
@@ -40,24 +52,21 @@ var getRosters = function (urlSlug, callback) {
 			// get all the players info
 			var rows = $('.ys-roster-table tbody tr');
 			rows.each(function (i, element) {
-				// pause between players
-				function sleep(miliseconds) {
-					console.log('sleeping for ' + miliseconds);
-				   var currentTime = new Date().getTime();
 
-				   while (currentTime + miliseconds >= new Date().getTime()) {
-				   }
-				   console.log('resume');
-				}
-				sleep(3214);
-				// if (i === 5) {
+				if (i < 1) {
 					var player = {};
 					var playerNumber = $(element).find('td:nth-child(1)').text();
 					player['player_number'] = playerNumber;
 					var name = $(element).find('td:nth-child(2) div div a').text();
 					player['name'] = name;
 					var position = $(element).find('td:nth-child(3) div span:nth-child(1) span:nth-child(1)').text();
+					player['position'] = position;
 
+					// var salary = $(element).find('td:nth-child(10) span span').text();
+					// console.log('sksary here, ' salary);
+					// player['salary'] = salary;
+
+					return;
 					// **** get player images ***
 					// click the player name to get bigger photo
 					var bigImageUrl = $(element).find('td:nth-child(2) div div a').attr('href');
@@ -85,9 +94,9 @@ var getRosters = function (urlSlug, callback) {
 		    			return;
 		    		}
 		    	});
+					sleep(3214);
 	  			return;
 
-					player['position'] = position;
 					var height = $(element).find('td:nth-child(4) span span').text();
 					player['height'] = height;
 					var weight = $(element).find('td:nth-child(5) span').text();
@@ -109,7 +118,7 @@ var getRosters = function (urlSlug, callback) {
 						}
 					}
 					team.players.push(player);
-				// }
+				}
 			});
 		} else {
 			console.log(error);

@@ -18,11 +18,22 @@ html {
     height: 100%;
     background: transparent; }
   html nav.navbar {
+    display: block;
     background-color: rgba(255, 255, 255, 0.6);
     border-top: none;
-    border-bottom: none; }
+    border-bottom: none;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0; }
     html nav.navbar .container {
       padding-left: 10%; }
+    html nav.navbar .navbar-brand {
+      max-width: 60px;
+      float: left; }
+      html nav.navbar .navbar-brand img {
+        width: 80%; }
+    html nav.navbar .navbar-item a {
+      color: #222; }
   html input {
     color: black; }
   html .container.main {

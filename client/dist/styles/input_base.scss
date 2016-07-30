@@ -21,11 +21,28 @@ html {
 		background: rgba(0, 0, 0, 0.0);
 	}
 	nav.navbar {
+		display: block;
 		background-color: rgba(255,255,255,.6);
 		border-top: none;
 		border-bottom: none;
+		border: none;
+		border-radius: 0;
+		margin-bottom: 0;
     .container {
       padding-left: 10%;
+    }
+    .navbar-brand {
+    	max-width: 60px;
+    	float: left;
+    	// background-image: url(./dist/images/lightning-bolt3.png);
+    	img {
+    		width: 80%;
+    	}
+    }
+    .navbar-item {
+    	a {
+    	color: #222;
+    	}
     }
 	}
 	input {
