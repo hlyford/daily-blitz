@@ -25,8 +25,8 @@ html {
     border: none;
     border-radius: 0;
     margin-bottom: 0; }
-    html nav.navbar .container {
-      padding-left: 10%; }
+    html nav.navbar .navbar-nav .open .dropdown-menu > li > a {
+      color: #0FA0CE; }
     html nav.navbar .navbar-brand {
       max-width: 60px;
       float: left; }
