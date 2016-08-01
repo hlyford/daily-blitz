@@ -4,6 +4,7 @@ var app = require('./server.js');
 var quizController = require('./controllers/quizController');
 var userController = require('./controllers/userController');
 var rosterController = require('./controllers/rosterController');
+var rosterControllerNfl = require('./controllers/rosterControllerNfl');
 var bodyParser = require('body-parser');
 var path = require('path');
 // var emailSender = require('./email/emailSender');
@@ -49,9 +50,19 @@ router.route('/user')
 // get all rosters for a given league
 router.route('/roster/:league')
 	.get( function (req, res) {
-		rosterController.getAllRosters(req.params.league, function (response) {
-			res.send(response);
-		})
+		var league = req.params.league;
+		switch (league) {
+			case 'nba':
+				rosterController.getAllRosters(league, function (response) {
+					res.send(response);
+				});
+				break;
+			case 'nfl':
+				rosterControllerNfl.getAllRosters(league, function (response) {
+					res.send(response);
+				});
+		}
+
 	})
 // get roster for a specific team
 router.route('/roster/team/:team_acronym')

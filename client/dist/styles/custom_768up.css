@@ -7,7 +7,12 @@
       height: 65px;
       padding-top: 8px; }
       html nav.navbar .container-fluid .navbar-brand {
-        padding-top: 10px; }
+        padding-top: 6px; }
+      html nav.navbar .container-fluid .navbar-item > a {
+        color: #222;
+        font-size: 0.8em; }
+        html nav.navbar .container-fluid .navbar-item > a:focus {
+          background-color: transparent !important; }
   html .container.main {
     padding-top: 5%; } }
 

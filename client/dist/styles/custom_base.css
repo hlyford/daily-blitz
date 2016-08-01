@@ -25,15 +25,21 @@ html {
     border: none;
     border-radius: 0;
     margin-bottom: 0; }
+    html nav.navbar .navbar-header .navbar-toggle {
+      margin-right: 20px; }
     html nav.navbar .navbar-nav .open .dropdown-menu > li > a {
       color: #0FA0CE; }
     html nav.navbar .navbar-brand {
       max-width: 60px;
-      float: left; }
+      float: left;
+      padding-top: 10px;
+      margin-left: 15px; }
       html nav.navbar .navbar-brand img {
-        width: 80%; }
+        width: 100%; }
     html nav.navbar .navbar-item a {
       color: #222; }
+      html nav.navbar .navbar-item a:focus {
+        background-color: transparent !important; }
   html input {
     color: black; }
   html .container.main {

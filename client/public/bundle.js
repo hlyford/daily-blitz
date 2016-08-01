@@ -27189,9 +27189,14 @@
 			});
 		},
 		render: function render() {
+			var state = this.state;
 			var westernTeams = this.state.western.map(function (team) {
 				team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
-				team.img = "../../dist/images/team_logo_images/" + team.acronym + ".png";
+				if (state.league === 'nfl') {
+					team.img = "../../dist/images/team_logo_images/nfl_" + team.acronym + ".png";
+				} else {
+					team.img = "../../dist/images/team_logo_images/" + team.acronym + ".png";
+				}
 				return _react2.default.createElement(
 					'li',
 					{ key: team.acronym },
@@ -27205,7 +27210,11 @@
 			});
 			var easternTeams = this.state.eastern.map(function (team) {
 				team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
-				team.img = "../../dist/images/team_logo_images/" + team.acronym + ".png";
+				if (state.league === 'nfl') {
+					team.img = "../../dist/images/team_logo_images/nfl_" + team.acronym + ".png";
+				} else {
+					team.img = "../../dist/images/team_logo_images/" + team.acronym + ".png";
+				}
 				return _react2.default.createElement(
 					'li',
 					{ key: team.acronym },

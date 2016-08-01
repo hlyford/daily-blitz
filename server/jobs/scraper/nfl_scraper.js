@@ -1,16 +1,15 @@
 var request = require('request');
 var cheerio = require('cheerio');
 var util = require('util');
-// var Scraper = require("image-scraper");
 var fs = require('fs');
 var url = require('url');
 var exec = require('child_process').exec;
 var baseUrl = require('./url_info').baseUrl;
 var baseBase = require('./url_info').baseBase;
+var baseUrlNfl = require('./url_info').nfl.baseUrl;
 // var teamSlugs = require('./url-info').teamSlugs;
-var rosterController = require('../../controllers/rosterController');
-var teamsArray = require('./team_acronyms');
-var Roster = require('../../models/rosterModel');
+var rosterControllerNfl = require('../../controllers/rosterControllerNfl');
+var teamsArrayNfl = require('./team_acronyms_nfl');
 
 // pause between players
 function sleep(miliseconds) {
@@ -29,22 +28,23 @@ var getRosters = function (urlSlug, callback) {
 		players: []
 	};
 	// form the url and go to the page
-	var url = baseUrl + urlSlug + "/roster";
+	var url = baseUrlNfl + urlSlug + "/roster";
 	request(url, function (error, response, html) {
 	  if (!error && response.statusCode == 200) {
-	  	// load the html for the page
-	  	setTimeout(function() {
-	  		var $ = cheerio.load(html);
-	  		var job = $('.ys-roster-table tbody tr').find('td:nth-child(10) span span');
-	  		console.log('got it');
 
-	  	}, 10000);
-	  	return;
+	  // load the html for the page
+	  // 	setTimeout(function() {
+	  // 		var $ = cheerio.load(html);
+	  // 		var job = $('.ys-roster-table tbody tr').find('td:nth-child(10) span span');
+	  // 		console.log('got it');
+
+	  // 	}, 10000);
+	  // 	return;
 			var $ = cheerio.load(html);
 
 			// ****** get the TEAM images and save them to the images directory
-			// var teamImageUrl = $('.Row.ys-player-header .IbBox:nth-child(1)').css('background-image');
-			// teamImageGetter(teamImageUrl, urlSlug);
+			var teamImageUrl = $('.Row.ys-player-header .IbBox:nth-child(1)').css('background-image');
+			teamImageGetter(teamImageUrl, urlSlug);
 			// ******* end team image adding
 
 			// get the team name
@@ -52,13 +52,13 @@ var getRosters = function (urlSlug, callback) {
 			team['team_name'] = teamName;
 			var teamAcronym = urlSlug;
 			team['acronym'] = teamAcronym;
-			var league = 'nba';
+			var league = 'nfl';
 			team['league'] = league;
 			// get all the players info
 			var rows = $('.ys-roster-table tbody tr');
 			rows.each(function (i, element) {
-
-				if (i < 1) {
+				sleep(3245);
+				// if (i < 1) {
 					var player = {};
 					var playerNumber = $(element).find('td:nth-child(1)').text();
 					player['player_number'] = playerNumber;
@@ -71,36 +71,65 @@ var getRosters = function (urlSlug, callback) {
 					// console.log('sksary here, ' salary);
 					// player['salary'] = salary;
 
-					return;
 					// **** get player images ***
+					// get the thumbnail image -----
+					// var thumbnailUrl = $(element).find('td:nth-child(2) div img').css('background-image');
+					// thumbnailUrl = thumbnailUrl.slice(4, thumbnailUrl.length - 1);
+					// thumbnail = baseBase + thumbnailUrl;
+					// playerImageGetter(thumbnailUrl, urlSlug, name);
+					// ------ end thumbnail getter
+
+	  			// request(thumbnailUrl, function (error, response, html) {
+	  			// 	if (error) throw error;
+		  		// 	if (!error && response.statusCode == 200) {
+		    // 			var $$ = cheerio.load(html);
+		    // 			// check if there's a src for img
+		    // 			var imgType = 'img';
+		    // 			var playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image');
+		    // 			if (parseInt(playerPicUrl.children().length) === 0) {
+		    // 				// make grey outline if no picture
+		    // 				playerPicUrl = 'http://www.clker.com/cliparts/m/3/I/C/c/2/grey-silhouette-of-man-md.png';
+		    // 			} else {
+		    // 				// else see if the img is on the src or the background-image
+		    // 				playerPicUrl = playerPicUrl.find('img:first-of-type').attr('src');
+		    // 				if (playerPicUrl.length < 80) {
+		    // 					imgType = 'background';
+		    // 					playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image img:first-of-type').css('background-image');
+		    // 					playerPicUrl = playerPicUrl.slice(4, playerPicUrl.length - 1);
+		    // 				}
+		    // 			}
+		    // 			playerImageGetter(playerPicUrl, urlSlug, name);
+		    // 			return;
+		    // 		}
+						   //  	});
+
 					// click the player name to get bigger photo
-					var bigImageUrl = $(element).find('td:nth-child(2) div div a').attr('href');
-					bigImageUrl = baseBase + bigImageUrl;
-	  			request(bigImageUrl, function (error, response, html) {
-	  				if (error) throw error;
-		  			if (!error && response.statusCode == 200) {
-		    			var $$ = cheerio.load(html);
-		    			// check if there's a src for img
-		    			var imgType = 'img';
-		    			var playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image');
-		    			if (parseInt(playerPicUrl.children().length) === 0) {
-		    				// make grey outline if no picture
-		    				playerPicUrl = 'http://www.clker.com/cliparts/m/3/I/C/c/2/grey-silhouette-of-man-md.png';
-		    			} else {
-		    				// else see if the img is on the src or the background-image
-		    				playerPicUrl = playerPicUrl.find('img:first-of-type').attr('src');
-		    				if (playerPicUrl.length < 80) {
-		    					imgType = 'background';
-		    					playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image img:first-of-type').css('background-image');
-		    					playerPicUrl = playerPicUrl.slice(4, playerPicUrl.length - 1);
-		    				}
-		    			}
-		    			playerImageGetter(playerPicUrl, urlSlug, name);
-		    			return;
-		    		}
-		    	});
-					sleep(3214);
-	  			return;
+
+					// var bigImageUrl = $(element).find('td:nth-child(2) div div a').attr('href');
+					// bigImageUrl = baseBase + bigImageUrl;
+	  		// 	request(bigImageUrl, function (error, response, html) {
+	  		// 		if (error) throw error;
+		  	// 		if (!error && response.statusCode == 200) {
+		   //  			var $$ = cheerio.load(html);
+		   //  			// check if there's a src for img
+		   //  			var imgType = 'img';
+		   //  			var playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image');
+		   //  			if (parseInt(playerPicUrl.children().length) === 0) {
+		   //  				// make grey outline if no picture
+		   //  				playerPicUrl = 'http://www.clker.com/cliparts/m/3/I/C/c/2/grey-silhouette-of-man-md.png';
+		   //  			} else {
+		   //  				// else see if the img is on the src or the background-image
+		   //  				playerPicUrl = playerPicUrl.find('img:first-of-type').attr('src');
+		   //  				if (playerPicUrl.length < 80) {
+		   //  					imgType = 'background';
+		   //  					playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image img:first-of-type').css('background-image');
+		   //  					playerPicUrl = playerPicUrl.slice(4, playerPicUrl.length - 1);
+		   //  				}
+		   //  			}
+		   //  			playerImageGetter(playerPicUrl, urlSlug, name);
+		   //  			return;
+		   //  		}
+		   //  	});
 
 					var height = $(element).find('td:nth-child(4) span span').text();
 					player['height'] = height;
@@ -123,13 +152,13 @@ var getRosters = function (urlSlug, callback) {
 						}
 					}
 					team.players.push(player);
-				}
+				// }
 			});
 		} else {
 			console.log(error);
 		}
 		// add back to get rosters
-		// rosterController.addStuff(team);
+		rosterControllerNfl.addStuff(team);
 	});
 }
 module.exports = getRosters;
@@ -146,7 +175,7 @@ function teamImageGetter (teamImageUrl, urlSlug) {
 
 function playerImageGetter (playerImageUrl, shortSlug, playerName) {
 	// get the images and save them to the images directory
-	var dlDir = '/Users/honree/daily-blitz/server/images_server/nba_player_images/' + playerName.replace(/ /g,"_").replace(/\'/g, '') +'.png';
+	var dlDir = '/Users/honree/daily-blitz/server/images_server/nfl_player_images/' + playerName.replace(/ /g,"_").replace(/\'/g, '') +'.png';
 	var curl =  'curl ' + playerImageUrl.replace(/&/g,'\\&') + ' -o ' + dlDir  + ' --create-dirs';
 	var child = exec(curl, function(err, stdout, stderr) {
 		if (err){ console.log(stderr); throw err; }

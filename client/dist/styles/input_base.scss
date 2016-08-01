@@ -28,20 +28,32 @@ html {
 		border: none;
 		border-radius: 0;
 		margin-bottom: 0;
+		.navbar-header {
+			.navbar-toggle {
+				margin-right: 20px;
+			}
+		}
     .navbar-nav .open .dropdown-menu>li>a {
     	color: #0FA0CE
     }
     .navbar-brand {
     	max-width: 60px;
     	float: left;
-    	// background-image: url(./dist/images/lightning-bolt3.png);
+    	padding-top: 10px;
+    	margin-left: 15px;
     	img {
-    		width: 80%;
+    		width: 100%;
+    	}
+    	> * {
+
     	}
     }
     .navbar-item {
     	a {
     	color: #222;
+    		&:focus {
+    			background-color: transparent!important;
+    		}
     	}
     }
 	}
