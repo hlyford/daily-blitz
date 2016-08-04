@@ -30,7 +30,7 @@ var getRosters = function (urlSlug, callback) {
 	// form the url and go to the page
 	var url = baseUrlNfl + urlSlug + "/roster";
 	request(url, function (error, response, html) {
-		if (error) { return; }
+		if (error) { console.log('error on html load!'); return; }
 	  if (!error && response.statusCode == 200) {
 
 	  // load the html for the page

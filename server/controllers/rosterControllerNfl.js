@@ -2,7 +2,7 @@ var Roster = require('../models/rosterNflModel');
 
 module.exports = {
 	addStuff: function(data) {
-		console.log('in nfl controller ', data);
+		// console.log('in nfl controller ', data);
 		// find and delete the current listing for that team
 		Roster.find({acronym: data.acronym}).remove(function (err, result) {
 		  if (err) console.log('error', err);
