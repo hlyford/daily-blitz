@@ -16,5 +16,6 @@ arbys.zip
 arbys
 server/images_server/
 *.DS_Store
+newrelic_agent.log
 
 184.168.221.21
