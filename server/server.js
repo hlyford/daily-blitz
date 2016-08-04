@@ -14,9 +14,9 @@ var app = express();
 
 // set up MongoDB
 var dbURI = process.env.MONGODB_URI || 'mongodb://localhost/obscore';
-var env = process.argv[2] || 'dev';
-console.log('environemtnt ', env);
-if (env !== 'dev') {
+
+if (port !== 8000) {
+	console.log('prod?!');
 	var newrelic = require('newrelic');
 }
 
