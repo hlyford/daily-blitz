@@ -6,7 +6,7 @@ var url = require('url');
 var exec = require('child_process').exec;
 var baseUrl = require('./url_info').baseUrl;
 var baseBase = require('./url_info').baseBase;
-var baseUrlNfl = require('./url_info').nfl.baseUrl;
+var baseUrlNfl = require('./url_info').baseUrlNfl.toString();
 // var teamSlugs = require('./url-info').teamSlugs;
 var rosterControllerNfl = require('../../controllers/rosterControllerNfl');
 var teamsArrayNfl = require('./team_acronyms_nfl');
@@ -30,6 +30,7 @@ var getRosters = function (urlSlug, callback) {
 	// form the url and go to the page
 	var url = baseUrlNfl + urlSlug + "/roster";
 	request(url, function (error, response, html) {
+		if (error) { return; }
 	  if (!error && response.statusCode == 200) {
 
 	  // load the html for the page
@@ -41,10 +42,9 @@ var getRosters = function (urlSlug, callback) {
 	  // 	}, 10000);
 	  // 	return;
 			var $ = cheerio.load(html);
-
 			// ****** get the TEAM images and save them to the images directory
 			var teamImageUrl = $('.Row.ys-player-header .IbBox:nth-child(1)').css('background-image');
-			teamImageGetter(teamImageUrl, urlSlug);
+			teamImageGetter(teamImageUrl, urlSlug, 'nfl');
 			// ******* end team image adding
 
 			// get the team name
@@ -57,7 +57,6 @@ var getRosters = function (urlSlug, callback) {
 			// get all the players info
 			var rows = $('.ys-roster-table tbody tr');
 			rows.each(function (i, element) {
-				sleep(1245);
 				// if (i < 1) {
 					var player = {};
 					var playerNumber = $(element).find('td:nth-child(1)').text();
@@ -163,9 +162,9 @@ var getRosters = function (urlSlug, callback) {
 }
 module.exports = getRosters;
 
-function teamImageGetter (teamImageUrl, urlSlug) {
+function teamImageGetter (teamImageUrl, urlSlug, league) {
 	teamImageUrl = teamImageUrl.replace('url(','').replace(')','');
-	var dlDir = '/Users/honree/daily-blitz/server/images_server/team_logo_images/' + urlSlug.replace(/ /g,"_").replace(/\'/g, '') + '.png'; //+ '_'  + playerName.replace(/ /g,"_").replace(/\'/g, '') + '.png';
+	var dlDir = '/Users/honree/daily-blitz/server/images_server/team_logo_images/' + league + '_' + urlSlug.replace(/ /g,"_").replace(/\'/g, '') + '.png'; //+ '_'  + playerName.replace(/ /g,"_").replace(/\'/g, '') + '.png';
 	var curl =  'curl ' + teamImageUrl.replace(/&/g,'\\&') + ' -o ' + dlDir + ' --create-dirs';
 	var child = exec(curl, function(err, stdout, stderr) {
  		if (err){ console.log(stderr); throw err; }

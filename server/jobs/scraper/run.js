@@ -25,13 +25,13 @@ var looper = function (i) {
 // *** NFL *****
 // loop through waiting a random amount of seconds each time
 var looperNfl = function (i) {
-	var nextWait = Math.floor(Math.random() * (40000 - 10000) + 10000);
+	var nextWait = Math.floor(Math.random() * (20000 - 10000) + 10000);
 	console.log('waiting...', nextWait);
 	// EDIT THIS LINE TO CHANGE HOW MANY TEAMS TO GET
 	if (i < 10) {
 		getRostersNfl(teamsArrayNfl[i]);
 		setTimeout(function () {
-			looper(i + 1);
+			looperNfl(i + 1);
 		}, nextWait);
 	}	else {
 		console.log('done');
@@ -40,4 +40,4 @@ var looperNfl = function (i) {
 };
 
 // start at the beginning of teams array
-looperNfl(1);
+looperNfl(6);
