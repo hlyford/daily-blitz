@@ -15,7 +15,7 @@ var Rosters = React.createClass({
 	sortByConference: function (teams) {
 		var eastern = [], western = [];
 		teams.forEach(function(team, index) {
-			if (team.conference === 'western') {
+			if (team.conference === 'western' || team.conference === 'afc') {
 				western.push(team);
 			} else {
 				eastern.push(team);
@@ -30,6 +30,7 @@ var Rosters = React.createClass({
 		  dataType: 'json',
 		  cache: false,
 		  success: function(data) {
+		  	console.log(data);
 		  	// console.log(JSON.stringify(data));
 		    this.sortByConference(data);
 		  }.bind(this),
