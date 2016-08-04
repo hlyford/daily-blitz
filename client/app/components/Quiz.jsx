@@ -109,6 +109,8 @@ var Quiz = React.createClass({
   },
 
   render: function() {
+
+    console.log(this.state);
     return (
     	<div className="quiz-view">
         <div className="page-titles"><h2>{ this.state.quiz_info.title ? this.state.quiz_info.title : "Start the quiz" }</h2></div>
@@ -126,7 +128,7 @@ var Quiz = React.createClass({
 
   							 <li key={item.fullName}>
                     {/* <img src={"../../dist/images/nba_player_images/" + item.firstName.replace(/ /g,"_") + "_" + item.lastName + "_" + this.state.quiz_info.acronym + ".png"} /> */}
-  								  {item.fullName}
+  								  {item.fullName} | #{item.player_number} {item.position}
   							 </li>
   						  ))}
   					  </ul>

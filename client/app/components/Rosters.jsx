@@ -40,6 +40,7 @@ var Rosters = React.createClass({
 		});
 	},
 	render: function () {
+
 		var state = this.state;
 		var westernTeams = this.state.western.map(function (team) {
 			team.url = `#/quiz?league=${state.league}&quiz_id=${team.acronym}`;

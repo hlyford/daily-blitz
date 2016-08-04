@@ -27064,6 +27064,8 @@
 	  },
 
 	  render: function render() {
+
+	    console.log(this.state);
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'quiz-view' },
@@ -27113,7 +27115,11 @@
 	              return _react2.default.createElement(
 	                'li',
 	                { key: item.fullName },
-	                item.fullName
+	                item.fullName,
+	                ' | #',
+	                item.player_number,
+	                ' ',
+	                item.position
 	              );
 	            })
 	          )
@@ -27189,6 +27195,7 @@
 			});
 		},
 		render: function render() {
+
 			var state = this.state;
 			var westernTeams = this.state.western.map(function (team) {
 				team.url = '#/quiz?league=' + state.league + '&quiz_id=' + team.acronym;
