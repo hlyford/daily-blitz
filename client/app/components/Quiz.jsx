@@ -7,10 +7,12 @@ var Quiz = React.createClass({
     return { quiz_info: {}, correct: [], takingQuiz: false, active_quiz: '' };
   },
   componentWillMount: function () {
+    // check which league it is and set state
+    this.state.league = this.props.location.query['league'];
     // check if there's a query string param, if so, set up that quiz
     var quizQueryParam = this.props.location.query['quiz_id'];
-    // check if it's a roster
-    var quizRosterParam = this.props.location.query['roster'];
+    // check if it's a roster; PLACEHOLDER ALL AS ROSTERS FOR NOW
+    var quizRosterParam = true;
     if (quizQueryParam) {
       if (quizRosterParam) {
         this.state.roster = true;
@@ -86,7 +88,7 @@ var Quiz = React.createClass({
   },
 
   getQuiz: function() {
-    var route = this.state.roster ? '/roster/team/' : '/quiz/';
+    var route = this.state.roster ? '/roster/'+ this.state.league + '/team/' : '/quiz/';
     $.ajax({
       url: route + this.state.active_quiz,  // test query: 2x68a
       dataType: 'json',
@@ -107,7 +109,6 @@ var Quiz = React.createClass({
   },
 
   render: function() {
-
     return (
     	<div className="quiz-view">
         <div className="page-titles"><h2>{ this.state.quiz_info.title ? this.state.quiz_info.title : "Start the quiz" }</h2></div>
@@ -115,7 +116,7 @@ var Quiz = React.createClass({
           <button className="text-middle" onClick={ this.startQuiz }>Take quiz!</button> :
           <div>
             <div className="guess-box-container text-middle">
-              <div><img className="team-logo" src= {"../../dist/images/team_logo_images/" + this.state.quiz_info.acronym + ".png"} /> { this.state.quiz_info.title }</div>
+              <div><img className="team-logo" src= {this.state.league === 'nba' ? "../../dist/images/team_logo_images/" + this.state.quiz_info.acronym + ".png" : "../../dist/images/team_logo_images/" + this.state.league + "_" + this.state.quiz_info.acronym + ".png"} /> { this.state.quiz_info.title }</div>
            { <div> You have answered: {this.state.correct.length} / {this.state.quiz_info.players.length}</div> }
       	      <input ref="guess" className="guess-box" type="text" name="guessing" value={this.state.guessValue} onChange={this.handleChange} />
             </div>
@@ -124,7 +125,7 @@ var Quiz = React.createClass({
   						  {this.state.correct.map((item)=>(
 
   							 <li key={item.fullName}>
-                    <img src={"../../dist/images/nba_player_images/" + item.firstName.replace(/ /g,"_") + "_" + item.lastName + "_" + this.state.quiz_info.acronym + ".png"} />
+                    {/* <img src={"../../dist/images/nba_player_images/" + item.firstName.replace(/ /g,"_") + "_" + item.lastName + "_" + this.state.quiz_info.acronym + ".png"} /> */}
   								  {item.fullName}
   							 </li>
   						  ))}

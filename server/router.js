@@ -65,12 +65,21 @@ router.route('/roster/:league')
 
 	})
 // get roster for a specific team
-router.route('/roster/team/:team_acronym')
+router.route('/roster/:league/team/:team_acronym')
 	.get(function (req, res) {
-		rosterController.getRoster(req.params.team_acronym, function (roster_data) {
-			res.send(roster_data);
+			var league = req.params.league;
+			switch (league) {
+				case 'nba':
+					rosterController.getRoster(req.params.team_acronym, function (roster_data) {
+						res.send(roster_data);
+					})
+					break;
+				case 'nfl':
+					rosterControllerNfl.getRoster(req.params.team_acronym, function (response) {
+						res.send(response);
+					});
+			}
 		})
-	})
 
 // email sending routes
 router.route('/hello')

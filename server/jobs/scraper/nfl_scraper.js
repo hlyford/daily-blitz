@@ -57,7 +57,7 @@ var getRosters = function (urlSlug, callback) {
 			// get all the players info
 			var rows = $('.ys-roster-table tbody tr');
 			rows.each(function (i, element) {
-				sleep(3245);
+				sleep(1245);
 				// if (i < 1) {
 					var player = {};
 					var playerNumber = $(element).find('td:nth-child(1)').text();

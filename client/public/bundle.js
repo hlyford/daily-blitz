@@ -26962,10 +26962,12 @@
 	    return { quiz_info: {}, correct: [], takingQuiz: false, active_quiz: '' };
 	  },
 	  componentWillMount: function componentWillMount() {
+	    // check which league it is and set state
+	    this.state.league = this.props.location.query['league'];
 	    // check if there's a query string param, if so, set up that quiz
 	    var quizQueryParam = this.props.location.query['quiz_id'];
-	    // check if it's a roster
-	    var quizRosterParam = this.props.location.query['roster'];
+	    // check if it's a roster; PLACEHOLDER ALL AS ROSTERS FOR NOW
+	    var quizRosterParam = true;
 	    if (quizQueryParam) {
 	      if (quizRosterParam) {
 	        this.state.roster = true;
@@ -27041,7 +27043,7 @@
 	  },
 
 	  getQuiz: function getQuiz() {
-	    var route = this.state.roster ? '/roster/team/' : '/quiz/';
+	    var route = this.state.roster ? '/roster/' + this.state.league + '/team/' : '/quiz/';
 	    $.ajax({
 	      url: route + this.state.active_quiz, // test query: 2x68a
 	      dataType: 'json',
@@ -27062,8 +27064,6 @@
 	  },
 
 	  render: function render() {
-	    var _this = this;
-
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'quiz-view' },
@@ -27089,7 +27089,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            null,
-	            _react2.default.createElement('img', { className: 'team-logo', src: "../../dist/images/team_logo_images/" + this.state.quiz_info.acronym + ".png" }),
+	            _react2.default.createElement('img', { className: 'team-logo', src: this.state.league === 'nba' ? "../../dist/images/team_logo_images/" + this.state.quiz_info.acronym + ".png" : "../../dist/images/team_logo_images/" + this.state.league + "_" + this.state.quiz_info.acronym + ".png" }),
 	            ' ',
 	            this.state.quiz_info.title
 	          ),
@@ -27113,7 +27113,6 @@
 	              return _react2.default.createElement(
 	                'li',
 	                { key: item.fullName },
-	                _react2.default.createElement('img', { src: "../../dist/images/nba_player_images/" + item.firstName.replace(/ /g, "_") + "_" + item.lastName + "_" + _this.state.quiz_info.acronym + ".png" }),
 	                item.fullName
 	              );
 	            })
@@ -27191,7 +27190,7 @@
 		render: function render() {
 			var state = this.state;
 			var westernTeams = this.state.western.map(function (team) {
-				team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
+				team.url = '#/quiz?league=' + state.league + '&quiz_id=' + team.acronym;
 				if (state.league === 'nfl') {
 					team.img = "../../dist/images/team_logo_images/nfl_" + team.acronym + ".png";
 				} else {
@@ -27209,7 +27208,7 @@
 				);
 			});
 			var easternTeams = this.state.eastern.map(function (team) {
-				team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
+				team.url = '#/quiz?league=' + state.league + '&quiz_id=' + team.acronym;
 				if (state.league === 'nfl') {
 					team.img = "../../dist/images/team_logo_images/nfl_" + team.acronym + ".png";
 				} else {

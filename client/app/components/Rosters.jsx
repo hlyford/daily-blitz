@@ -41,7 +41,7 @@ var Rosters = React.createClass({
 	render: function () {
 		var state = this.state;
 		var westernTeams = this.state.western.map(function (team) {
-			team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
+			team.url = `#/quiz?league=${state.league}&quiz_id=${team.acronym}`;
 			if (state.league === 'nfl') {
 				team.img = "../../dist/images/team_logo_images/nfl_" + team.acronym + ".png";
 			} else {
@@ -55,7 +55,7 @@ var Rosters = React.createClass({
 		  )
 		});
 		var easternTeams = this.state.eastern.map(function (team) {
-			team.url = "#/quiz?roster=1&quiz_id=" + team.acronym;
+			team.url = `#/quiz?league=${state.league}&quiz_id=${team.acronym}`;
 			if (state.league === 'nfl') {
 				team.img = "../../dist/images/team_logo_images/nfl_" + team.acronym + ".png";
 			} else {
