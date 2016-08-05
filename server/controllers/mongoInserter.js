@@ -1,10 +1,11 @@
 var Roster = require('../models/rosterModel');
-var allTeams = require('../jobs/scraper/allTeams.js');
+var RosterNfl = require('../models/rosterNflModel');
+var allTeams = require('../jobs/scraper/allTeams.js').nfl;
 
 module.exports = {
 	addStuff: function(data) {
 		data.forEach(function(team, index) {
-			Roster.create(team).then(function () {
+			RosterNfl.create(team).then(function () {
 				console.log(team.team_name + ' added to db');
 			});
 		})
@@ -17,12 +18,12 @@ module.exports = {
 	},
 	getAllRosters: function (callback) {
 		// find all rosters
-		Roster.find({}, { team_name: 1, acronym: 1, players: 1, _id: 0, conference: 1}).then(function(result) {
+		RosterNfl.find({}, { team_name: 1, acronym: 1, players: 1, _id: 0, conference: 1}).then(function(result) {
 			callback(result);
 		})
 	},
 	getRoster: function (acronym, callback) {
-		Roster.find({acronym: acronym})
+		RosterNfl.find({acronym: acronym})
 			.then( function (result) {
 				callback(result);
 			})
