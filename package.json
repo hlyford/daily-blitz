@@ -8,6 +8,7 @@
     "test": "npm test",
     "scrape_nba": "node server/nba_scraper.js",
     "scrape_nfl": "node server/nfl_scraper_server.js",
+    "scrape_mlb": "node server/mlb_scraper_server.js",
     "db": "node server/prod_db_insert.js"
   },
   "author": "Henry Lyford",

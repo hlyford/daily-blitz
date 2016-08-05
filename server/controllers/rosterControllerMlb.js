@@ -1,4 +1,4 @@
-var Roster = require('../models/rosterNflModel');
+var Roster = require('../models/rosterMlbModel');
 
 module.exports = {
 	addStuff: function(data) {
@@ -11,11 +11,25 @@ module.exports = {
 		  }
 		});
 		// determine the conference
-		var westernTeams = ['nwe','buf','nyj','mia','cin','bal','cle','pit','jac','ind','hou','ten','den','sdg','oak','kan'];
+		var westernTeams = ['bal',
+'bos',
+'nyy',
+'tam',
+'tor',
+'chw',
+'cle',
+'det',
+'kan',
+'min',
+'hou',
+'laa',
+'oak',
+'sea',
+'tex'];
 		if (westernTeams.indexOf(data.acronym) !== -1) {
-			data.conference = 'afc';
+			data.conference = 'al';
 		} else {
-			data.conference = 'nfc';
+			data.conference = 'nl';
 		}
 		// give the players the required fields
 		data.players.forEach( function (player, index) {

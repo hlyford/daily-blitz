@@ -1,3 +1,4 @@
+// SWITCH THE MODELS BELOW TO DETERMINE WHAT TEAM TO INSERT
 var Roster = require('../models/rosterModel');
 var RosterNfl = require('../models/rosterNflModel');
 var allTeams = require('../jobs/scraper/allTeams.js').nfl;
@@ -5,13 +6,19 @@ var allTeams = require('../jobs/scraper/allTeams.js').nfl;
 module.exports = {
 	addStuff: function(data) {
 		data.forEach(function(team, index) {
-			RosterNfl.create(team).then(function () {
-				console.log(team.team_name + ' added to db');
+			RosterNfl.find({acronym: team.acronym}).remove(function (err, result) {
+			  if (err) console.log('error', err);
+			  else {
+			  	console.log('removed', result.result);
+			  	RosterNfl.create(team).then(function () {
+			  		console.log(team.team_name + ' added to db');
+			  	});
+			  }
 			});
 		})
 
 		this.getAllRosters(function(results) {
-			if (results.length > 29) {
+			if (results.length > data.length) {
 				console.log('done inserting documents to prod');
 			}
 		})
