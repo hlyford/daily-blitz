@@ -8,9 +8,17 @@ var Rosters = React.createClass({
 	componentWillMount: function () {
 		this.getRosters(this.state.league);
 	},
-	// detect changes in league selected
+	// detect changes in league selected and reload the page if they switch leagues
+	queryString: '',
+
+	componentWillUpdate: function () {
+		this.queryString = this.props.location.query['league'];
+	},
 	componentDidUpdate: function () {
-		// this.getRosters(league);
+		var newQueryString = this.props.location.query['league'];
+		if (this.queryString !== newQueryString) {
+			window.location.reload();
+		}
 	},
 	sortByConference: function (teams) {
 		var eastern = [], western = [];
@@ -30,7 +38,7 @@ var Rosters = React.createClass({
 		  dataType: 'json',
 		  cache: false,
 		  success: function(data) {
-		  	console.log(JSON.stringify(data));
+		  	// console.log(JSON.stringify(data));
 		    this.sortByConference(data);
 		  }.bind(this),
 		  error: function(xhr, status, err) {
@@ -39,7 +47,6 @@ var Rosters = React.createClass({
 		});
 	},
 	render: function () {
-
 		var state = this.state;
 		var westernTeams = this.state.western.map(function (team) {
 			team.url = `#/quiz?league=${state.league}&quiz_id=${team.acronym}`;
@@ -73,13 +80,13 @@ var Rosters = React.createClass({
 			<div className="roster-view">
 				<div className="page-titles"><h2>Name all the players on a team</h2></div>
 		    <div className="five columns">
-		    	<div>Eastern Conference Teams</div>
+		    	<div>{this.state.league === 'nba' ? "Eastern Conference Teams" : "NFC" }</div>
     		  <ul>
     		  	{ easternTeams }
 				  </ul>
 				</div>
 		    <div className="five columns">
-		    	<div>Western Conference Teams</div>
+		    	<div>{this.state.league === 'nba' ? "Western Conference Teams" : "AFC" }</div>
     		  <ul>
 					  { westernTeams }
 				  </ul>

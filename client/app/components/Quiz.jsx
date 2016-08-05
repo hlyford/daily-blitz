@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 var Quiz = React.createClass({
   getInitialState: function() {
-    return { quiz_info: {}, correct: [], takingQuiz: false, active_quiz: '' };
+    return { quiz_info: {}, correct: [], takingQuiz: false, active_quiz: '', timeLeft: 0 };
   },
   componentWillMount: function () {
     // check which league it is and set state
@@ -85,6 +85,33 @@ var Quiz = React.createClass({
   },
   startQuiz: function () {
     this.setState({'takingQuiz': true});
+    var totalTime = this.state.quiz_info.players.length * 10;
+    totalTime = totalTime > 240 ? 240 : totalTime;
+    this.setState({'timeLeft' : totalTime});
+    this.timer();
+  },
+  timer: function () {
+    var that = this;
+    var counter = setInterval(function () {
+      // if time is up, end quiz
+      if (that.state.timeLeft === 0) {
+        that.giveUp();
+        clearInterval(counter);
+      } else {
+        var newTime = that.state.timeLeft - 1;
+        that.setState({timeLeft: newTime});
+      }
+    }, 1000);
+  },
+  timeFormatter: function (seconds) {
+    if (seconds === 0) {return "Time's up!";}
+    var sec_num = parseInt(seconds, 10);
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+    if (minutes < 10) {minutes = minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    return minutes+':'+seconds;
   },
 
   getQuiz: function() {
@@ -106,11 +133,10 @@ var Quiz = React.createClass({
     // add diff between correct players and all players to correct array
     var diff = _.difference(this.state.quiz_info.players, this.state.correct);
     this.setState({correct: this.state.correct.concat(diff)});
+    this.setState({timeLeft: 0});
   },
 
   render: function() {
-
-    console.log(this.state);
     return (
     	<div className="quiz-view">
         <div className="page-titles"><h2>{ this.state.quiz_info.title ? this.state.quiz_info.title : "Start the quiz" }</h2></div>
@@ -133,6 +159,7 @@ var Quiz = React.createClass({
   						  ))}
   					  </ul>
       	    </div>
+            <div className="timer">{ this.timeFormatter(this.state.timeLeft) }</div>
             { this.state.takingQuiz ?
             <button onClick={ this.giveUp } className="give-up-button button button-primary">Give up</button> : null
             }

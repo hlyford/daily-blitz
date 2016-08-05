@@ -11,21 +11,7 @@ module.exports = {
 		  }
 		});
 		// determine the conference
-		var westernTeams = ['nwe',
-	'buf',
-	'nyj',
-	'mia',
-	'cin',
-	'bal',
-	'cle',
-	'pit',
-	'jac',
-	'ind',
-	'hou',
-	'ten',
-	'den',
-	'sdg',
-	'oak'];
+		var westernTeams = ['nwe','buf','nyj','mia','cin','bal','cle','pit','jac','ind','hou','ten','den','sdg','oak','kan'];
 		if (westernTeams.indexOf(data.acronym) !== -1) {
 			data.conference = 'afc';
 		} else {
@@ -67,7 +53,7 @@ module.exports = {
 	},
 	getAllRosters: function (league, callback) {
 		// find all rosters
-		Roster.find({},{_id: 0}, function (err, result) {
+		Roster.find({},{players: 0}, function (err, result) {
 		  if (err) console.log('error',err);
 		  callback(result);
 		});
