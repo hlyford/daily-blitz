@@ -137,6 +137,7 @@ var Quiz = React.createClass({
   },
 
   render: function() {
+    console.log(this.state);
     return (
     	<div className="quiz-view">
         <div className="page-titles"><h2>{ this.state.quiz_info.title ? this.state.quiz_info.title : "Start the quiz" }</h2></div>

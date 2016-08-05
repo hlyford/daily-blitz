@@ -23,7 +23,7 @@ var Rosters = React.createClass({
 	sortByConference: function (teams) {
 		var eastern = [], western = [];
 		teams.forEach(function(team, index) {
-			if (team.conference === 'western' || team.conference === 'afc') {
+			if (team.conference === 'western' || team.conference === 'afc' || team.conference === 'al') {
 				western.push(team);
 			} else {
 				eastern.push(team);
@@ -50,8 +50,8 @@ var Rosters = React.createClass({
 		var state = this.state;
 		var westernTeams = this.state.western.map(function (team) {
 			team.url = `#/quiz?league=${state.league}&quiz_id=${team.acronym}`;
-			if (state.league === 'nfl') {
-				team.img = "../../dist/images/team_logo_images/nfl_" + team.acronym + ".png";
+			if (state.league !== 'nba') {
+				team.img = "../../dist/images/team_logo_images/" + state.league + "_" + team.acronym + ".png";
 			} else {
 				team.img = "../../dist/images/team_logo_images/" + team.acronym + ".png";
 			}
@@ -64,8 +64,8 @@ var Rosters = React.createClass({
 		});
 		var easternTeams = this.state.eastern.map(function (team) {
 			team.url = `#/quiz?league=${state.league}&quiz_id=${team.acronym}`;
-			if (state.league === 'nfl') {
-				team.img = "../../dist/images/team_logo_images/nfl_" + team.acronym + ".png";
+			if (state.league !== 'nba') {
+				team.img = "../../dist/images/team_logo_images/" + state.league + "_" + team.acronym + ".png";
 			} else {
 				team.img = "../../dist/images/team_logo_images/" + team.acronym + ".png";
 			}
@@ -80,13 +80,15 @@ var Rosters = React.createClass({
 			<div className="roster-view">
 				<div className="page-titles"><h2>Name all the players on a team</h2></div>
 		    <div className="five columns">
-		    	<div>{this.state.league === 'nba' ? "Eastern Conference Teams" : "NFC" }</div>
+		    	<div>{this.state.league === 'nba' ? "Eastern Conference Teams" :
+		    	this.state.league === 'nfl' ? "NFC" : "National League" }</div>
     		  <ul>
     		  	{ easternTeams }
 				  </ul>
 				</div>
 		    <div className="five columns">
-		    	<div>{this.state.league === 'nba' ? "Western Conference Teams" : "AFC" }</div>
+		    	<div>{this.state.league === 'nba' ? "Western Conference Teams" :
+		    	this.state.league === 'nfl' ? "AFC" : "American League" }</div>
     		  <ul>
 					  { westernTeams }
 				  </ul>

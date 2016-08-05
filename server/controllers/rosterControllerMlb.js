@@ -11,21 +11,7 @@ module.exports = {
 		  }
 		});
 		// determine the conference
-		var westernTeams = ['bal',
-'bos',
-'nyy',
-'tam',
-'tor',
-'chw',
-'cle',
-'det',
-'kan',
-'min',
-'hou',
-'laa',
-'oak',
-'sea',
-'tex'];
+		var westernTeams = ['bal','bos','nyy','tam','tor','chw','cle','det','kan','min','hou','laa','oak','sea','tex'];
 		if (westernTeams.indexOf(data.acronym) !== -1) {
 			data.conference = 'al';
 		} else {

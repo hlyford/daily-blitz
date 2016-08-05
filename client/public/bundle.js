@@ -27098,6 +27098,7 @@
 	  },
 
 	  render: function render() {
+	    console.log(this.state);
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'quiz-view' },
@@ -27215,7 +27216,7 @@
 			var eastern = [],
 			    western = [];
 			teams.forEach(function (team, index) {
-				if (team.conference === 'western' || team.conference === 'afc') {
+				if (team.conference === 'western' || team.conference === 'afc' || team.conference === 'al') {
 					western.push(team);
 				} else {
 					eastern.push(team);
@@ -27242,8 +27243,8 @@
 			var state = this.state;
 			var westernTeams = this.state.western.map(function (team) {
 				team.url = '#/quiz?league=' + state.league + '&quiz_id=' + team.acronym;
-				if (state.league === 'nfl') {
-					team.img = "../../dist/images/team_logo_images/nfl_" + team.acronym + ".png";
+				if (state.league !== 'nba') {
+					team.img = "../../dist/images/team_logo_images/" + state.league + "_" + team.acronym + ".png";
 				} else {
 					team.img = "../../dist/images/team_logo_images/" + team.acronym + ".png";
 				}
@@ -27260,8 +27261,8 @@
 			});
 			var easternTeams = this.state.eastern.map(function (team) {
 				team.url = '#/quiz?league=' + state.league + '&quiz_id=' + team.acronym;
-				if (state.league === 'nfl') {
-					team.img = "../../dist/images/team_logo_images/nfl_" + team.acronym + ".png";
+				if (state.league !== 'nba') {
+					team.img = "../../dist/images/team_logo_images/" + state.league + "_" + team.acronym + ".png";
 				} else {
 					team.img = "../../dist/images/team_logo_images/" + team.acronym + ".png";
 				}
@@ -27294,7 +27295,7 @@
 					_react2.default.createElement(
 						'div',
 						null,
-						this.state.league === 'nba' ? "Eastern Conference Teams" : "NFC"
+						this.state.league === 'nba' ? "Eastern Conference Teams" : this.state.league === 'nfl' ? "NFC" : "National League"
 					),
 					_react2.default.createElement(
 						'ul',
@@ -27308,7 +27309,7 @@
 					_react2.default.createElement(
 						'div',
 						null,
-						this.state.league === 'nba' ? "Western Conference Teams" : "AFC"
+						this.state.league === 'nba' ? "Western Conference Teams" : this.state.league === 'nfl' ? "AFC" : "American League"
 					),
 					_react2.default.createElement(
 						'ul',

@@ -17,5 +17,6 @@ arbys
 server/images_server/
 *.DS_Store
 newrelic_agent.log
+notes
 
 184.168.221.21

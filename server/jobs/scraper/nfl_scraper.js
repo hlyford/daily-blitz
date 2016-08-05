@@ -43,8 +43,8 @@ var getRosters = function (urlSlug, callback) {
 	  // 	return;
 			var $ = cheerio.load(html);
 			// ****** get the TEAM images and save them to the images directory
-			var teamImageUrl = $('.Row.ys-player-header .IbBox:nth-child(1)').css('background-image');
-			teamImageGetter(teamImageUrl, urlSlug, 'nfl');
+			// var teamImageUrl = $('.Row.ys-player-header .IbBox:nth-child(1)').css('background-image');
+			// teamImageGetter(teamImageUrl, urlSlug, 'nfl');
 			// ******* end team image adding
 
 			// get the team name
