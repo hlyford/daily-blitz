@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var path = require('path');
 var twilio = require('./twilio/twilio');
 
+
 // require in other files
 var router = require('./router.js');
 
@@ -13,6 +14,11 @@ var app = express();
 
 // set up MongoDB
 var dbURI = process.env.MONGODB_URI || 'mongodb://localhost/obscore';
+
+if (port !== 8000) {
+	var newrelic = require('newrelic');
+}
+
 console.log(dbURI);
 var db = mongoose.connect(dbURI);
 
