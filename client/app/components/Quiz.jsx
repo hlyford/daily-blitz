@@ -40,20 +40,28 @@ var Quiz = React.createClass({
 
   handleChange: function(event) {
   	var guess = event.target.value.toLowerCase().trim();
-    // check the guess against all the first and last names
+    // check the guess against all the first and last names, and the names that removed diacritics
   	var lastNames = _.pluck(this.state.quiz_info.players, 'lastNameLower');
   	var fullNames = _.pluck(this.state.quiz_info.players, 'fullNameLower');
+    var lastNames_r = _.pluck(this.state.quiz_info.players, 'lastNameLower_r');
+    var fullNames_r = _.pluck(this.state.quiz_info.players, 'fullNameLower_r');
   	// check if they entered the last name, keep track of index
   	var indexLastName = _.indexOf(lastNames, guess);
   	var indexFullName = _.indexOf(fullNames, guess);
+    var indexLastName_r = _.indexOf(lastNames_r, guess);
+    var indexFullName_r = _.indexOf(fullNames_r, guess);
 
   	// if the entered LAST NAME, they got it correct and they hadn't guessed it before
-  	if ((indexLastName !== -1 || indexFullName !== -1) && _.indexOf(this.state.correct['last_name'], guess) === -1) {
+  	if ((indexLastName !== -1 || indexFullName !== -1 || indexLastName_r !== -1 || indexFullName_r !== -1) && _.indexOf(this.state.correct['last_name'], guess) === -1) {
       // add player to the correct array
-      if (indexFullName === -1) {
-  		  this.setState({ correct: this.state.correct.concat( this.state.quiz_info.players[indexLastName]) });
+      if (indexFullName !== -1) {
+  		  this.setState({ correct: this.state.correct.concat( this.state.quiz_info.players[indexFullName]) });
+      } else if (indexLastName !== -1) {
+        this.setState({ correct: this.state.correct.concat( this.state.quiz_info.players[indexLastName]) });
+      } else if (indexFullName_r !== -1) {
+        this.setState({ correct: this.state.correct.concat( this.state.quiz_info.players[indexFullName_r]) });
       } else {
-        this.setState({ correct: this.state.correct.concat( this.state.quiz_info.players[indexFullName]) });
+        this.setState({ correct: this.state.correct.concat( this.state.quiz_info.players[indexLastName_r]) });
       }
   		// reset the guess box
   		$('.guess-box').val('');

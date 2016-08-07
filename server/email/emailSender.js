@@ -3,13 +3,13 @@ var config = require('./config');
 var rbEmail = config.email, pw = config.pw;
  // handle the route at yourdomain.com/sayHello
 
- module.exports = function (callback) {
+ module.exports = function (toArray, subject, quizUrl, callback) {
      var mailOptions = {
          from: 'rosterblitz@gmail.com', // sender address
-         to: 'hlyford11@gmail.com', // list of receivers
-         subject: 'Email Example', // Subject line
+         to: toArray, // list of receivers
+         subject: subject, // Subject line
          // text: text //, // plaintext body
-         html: '<div>Maybe you try dis quiz</div><ul><li><a href="http://rosterquiz.com">RosterQuiz</a></li></ul>' // You can choose to send an HTML body instead
+         html: '<div>Maybe you try dis quiz: <a href="' + quizUrl + '">Golden State Warriors</a></div>' // You can choose to send an HTML body instead
      };
 
      var handleSayHello = function (req, res) {

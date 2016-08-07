@@ -9,7 +9,7 @@ var baseBase = require('./url_info').baseBase;
 var baseUrlMlb = 'http://sports.yahoo.com/mlb/teams/';
 // var teamSlugs = require('./url-info').teamSlugs;
 var rosterControllerMlb = require('../../controllers/rosterControllerMlb');
-var teamsArrayNfl = require('./team_acronyms_nfl');
+// var teamsArrayNfl = require('./team_acronyms').mlb;
 
 // pause between players
 function sleep(miliseconds) {
@@ -32,7 +32,6 @@ var getRosters = function (urlSlug, callback) {
 	request(url, function (error, response, html) {
 		if (error) { console.log('error on html load!'); return; }
 	  if (!error && response.statusCode == 200) {
-
 			var $ = cheerio.load(html);
 			// ****** get the TEAM images and save them to the images directory
 			// var teamImageUrl = $('.Row.ys-player-header .IbBox:nth-child(1)').css('background-image');
@@ -49,7 +48,7 @@ var getRosters = function (urlSlug, callback) {
 			// get all the players info
 			var rows = $('.ys-roster-table tbody tr');
 			rows.each(function (i, element) {
-				if (i < 1) {
+				// if (i < 1) {
 					var player = {};
 					var playerNumber = $(element).find('td:nth-child(1)').text();
 					player['player_number'] = playerNumber;
@@ -79,20 +78,25 @@ var getRosters = function (urlSlug, callback) {
 					// player['salary'] = salary;
 
 					// PLAYER IMAGE URL
-					var bigImageUrl = $(element).find('td:nth-child(2) div img').attr('src');
+					// var bigImageUrl = $(element).find('td:nth-child(2) div img').attr('src');
 
-		    			// check if there's a src for img
-		    			var imgType = 'img';
+		   //  			// check if there's a src for img
+		   //  			var imgType = 'img';
+		   //  			if (bigImageUrl === 'https://s.yimg.com/g/images/spaceball.gif') {
+		   //  				bigImageUrl = $(element).find('td:nth-child(2) div img').css('background-image');
+		   //  				bigImageUrl = bigImageUrl.slice(4, bigImageUrl.length - 1);
+		   //  			}
 
-		    			var playerPicUrl = bigImageUrl;
-		    			console.log('here', playerPicUrl);
-		    			if (parseInt(bigImageUrl.length) < 80) {
-		    				// make grey outline if no picture
-		    				playerPicUrl = 'http://www.clker.com/cliparts/m/3/I/C/c/2/grey-silhouette-of-man-md.png';
-		    			}
-		    				// else see if the img is on the src or the background-image
-		    			playerImageGetter(playerPicUrl, urlSlug, name);
-		    			return;
+		   //  			var playerPicUrl = bigImageUrl;
+		   //  			console.log('here', playerPicUrl);
+		   //  			if (parseInt(bigImageUrl.length) < 80) {
+		   //  				// make grey outline if no picture
+		   //  				playerPicUrl = 'http://www.clker.com/cliparts/m/3/I/C/c/2/grey-silhouette-of-man-md.png';
+		   //  			}
+		   //  				// else see if the img is on the src or the background-image
+		   //  			sleep(2431);
+		   //  			playerImageGetter(playerPicUrl, urlSlug, name);
+		   //  			return;
 
 					// END PLAYER URL
 
@@ -102,13 +106,13 @@ var getRosters = function (urlSlug, callback) {
 						}
 					}
 					team.players.push(player);
-				}
+				// }
 			});
 		} else {
 			console.log(error);
 		}
 		// add back to get rosters
-		// rosterControllerMlb.addStuff(team);
+		rosterControllerMlb.addStuff(team);
 	});
 }
 module.exports = getRosters;

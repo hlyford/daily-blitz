@@ -2,7 +2,6 @@
 var Roster = require('../models/rosterModel');
 var RosterNfl = require('../models/rosterNflModel');
 var RosterMlb = require('../models/rosterMlbModel');
-var allTeams = require('../jobs/scraper/allTeams.js').mlb;
 
 module.exports = {
 	addStuff: function(data) {
