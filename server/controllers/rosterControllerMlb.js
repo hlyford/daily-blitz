@@ -62,7 +62,7 @@ module.exports = {
 	},
 	getAllRosters: function (league, callback) {
 		// find all rosters
-		Roster.find({},{_id: 0}, function (err, result) {
+		Roster.find({},{players: 0}, function (err, result) {
 		  if (err) console.log('error',err);
 		  callback(result);
 		});
