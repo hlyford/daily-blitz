@@ -69,6 +69,21 @@ html {
         width: 100%; }
         html .content-container .main-quiz-content #app .subscribe-view input {
           color: black; }
+        html .content-container .main-quiz-content #app .homepage-view .sport-selection {
+          text-align: center;
+          font-size: 1.5em; }
+          html .content-container .main-quiz-content #app .homepage-view .sport-selection > div {
+            padding-bottom: 20px; }
+          html .content-container .main-quiz-content #app .homepage-view .sport-selection button {
+            margin-right: 10px;
+            font-size: 0.8em; }
+        html .content-container .main-quiz-content #app .homepage-view .bottom-buttons {
+          text-align: center; }
+          html .content-container .main-quiz-content #app .homepage-view .bottom-buttons .today-quiz {
+            display: inline-block;
+            padding-right: 5%; }
+          html .content-container .main-quiz-content #app .homepage-view .bottom-buttons .subscribe {
+            display: inline-block; }
         html .content-container .main-quiz-content #app .quiz-view .guess-box-container {
           text-align: center;
           padding-bottom: 30px; }

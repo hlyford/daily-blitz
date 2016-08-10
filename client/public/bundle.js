@@ -91,14 +91,14 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'homepage-view' },
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'page-titles' },
 	        _react2.default.createElement(
 	          'h2',
 	          null,
-	          'Welcome to RosterBlitz 2.0'
+	          'Welcome to RosterBlitz'
 	        )
 	      ),
 	      _react2.default.createElement(
@@ -106,21 +106,78 @@
 	        { className: 'commentBox' },
 	        _react2.default.createElement(
 	          'div',
-	          null,
+	          { className: 'sport-selection' },
 	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: 'quiz',
-	              activeClassName: '-active' },
-	            'Play today\'s quiz'
+	            'div',
+	            null,
+	            'Quiz yourself on the team rosters of your favorite sport'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	              'a',
+	              { href: '#/rosters?league=nba' },
+	              _react2.default.createElement(
+	                'button',
+	                null,
+	                'NBA'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { href: '#/rosters?league=nfl' },
+	              _react2.default.createElement(
+	                'button',
+	                null,
+	                'NFL'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { href: '#/rosters?league=mlb' },
+	              _react2.default.createElement(
+	                'button',
+	                null,
+	                'MLB'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { href: '#/rosters?league=soccer' },
+	              _react2.default.createElement(
+	                'button',
+	                null,
+	                'Soccer'
+	              )
+	            )
 	          )
 	        ),
 	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: 'subscribe',
-	            activeClassName: '-active' },
-	          'Subscribe to daily quizzes'
-	        ),
-	        this.props.children
+	          'div',
+	          { className: 'bottom-buttons' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'today-quiz' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: 'quiz',
+	                activeClassName: '-active' },
+	              'Play today\'s quiz'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'subscribe' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: 'subscribe',
+	                activeClassName: '-active' },
+	              'Subscribe to daily quizzes'
+	            ),
+	            this.props.children
+	          )
+	        )
 	      )
 	    );
 	  }
@@ -26912,19 +26969,13 @@
 	      _react2.default.createElement(
 	        'div',
 	        null,
-	        'Enter your email, phone number, or both'
+	        'Enter your email address to receive a daily sports quiz.'
 	      ),
 	      _react2.default.createElement(
 	        'div',
 	        null,
 	        'Get email updates: ',
 	        _react2.default.createElement('input', { className: 'enter-email', type: 'text', id: 'email', onChange: this.handleChange, placeholder: 'Email address' })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Get mobile phone updates: ',
-	        _react2.default.createElement('input', { className: 'enter-email', type: 'text', id: 'phone', onChange: this.handleChange, placeholder: 'Phone number' })
 	      ),
 	      !this.state.response ? _react2.default.createElement(
 	        'button',

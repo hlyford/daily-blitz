@@ -40,13 +40,15 @@ var Subscribe = React.createClass({
     return (
       <div className="subscribe-view">
         <div className="page-titles"><h2>Subscribe to daily sports quizzes</h2></div>
-        <div>Enter your email, phone number, or both</div>
+        <div>Enter your email address to receive a daily sports quiz.</div>
         <div>
           Get email updates: <input className="enter-email" type="text" id="email" onChange={ this.handleChange } placeholder="Email address"/>
         </div>
+        {/* commenting out phone for now
         <div>
           Get mobile phone updates: <input className="enter-email" type="text" id="phone" onChange={ this.handleChange } placeholder="Phone number" />
         </div>
+        */}
         { !this.state.response ? <button onClick={ this.submitForm }>Submit</button> :
            this.state.response }
       </div>

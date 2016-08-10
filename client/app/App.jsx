@@ -19,18 +19,31 @@ var App = React.createClass({
 
   render: function() {
     return (
-      <div>
-        <div className="page-titles"><h2>Welcome to RosterBlitz 2.0</h2></div>
+      <div className="homepage-view">
+        <div className="page-titles"><h2>Welcome to RosterBlitz</h2></div>
         <div className="commentBox">
+        <div className="sport-selection">
+          <div>Quiz yourself on the team rosters of your favorite sport</div>
           <div>
-            <Link to='quiz'
-              activeClassName='-active'>Play today&#39;s quiz
-            </Link>
+            <a href='#/rosters?league=nba'><button>NBA</button></a>
+            <a href='#/rosters?league=nfl'><button>NFL</button></a>
+            <a href='#/rosters?league=mlb'><button>MLB</button></a>
+            <a href='#/rosters?league=soccer'><button>Soccer</button></a>
           </div>
-          <Link to='subscribe'
-            activeClassName='-active'>Subscribe to daily quizzes
-          </Link>
-          {this.props.children}
+        </div>
+          <div className="bottom-buttons">
+            <div className="today-quiz">
+              <Link to='quiz'
+                activeClassName='-active'>Play today&#39;s quiz
+              </Link>
+              </div>
+              <div className="subscribe">
+                <Link to='subscribe'
+                  activeClassName='-active'>Subscribe to daily quizzes
+                </Link>
+                {this.props.children}
+              </div>
+            </div>
         </div>
       </div>
     );

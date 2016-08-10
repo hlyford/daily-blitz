@@ -95,6 +95,31 @@ html {
 						color: black;
 					}
 				}
+				.homepage-view {
+					.sport-selection {
+						text-align: center;
+						font-size: 1.5em;
+						> div {
+							padding-bottom: 20px;
+						}
+						button {
+
+							margin-right: 10px;
+							font-size: 0.8em;
+
+						}
+					}
+					.bottom-buttons {
+						text-align: center;
+						.today-quiz {
+							display: inline-block;
+							padding-right: 5%;
+						}
+						.subscribe {
+							display: inline-block;
+						}
+					}
+				}
 				.quiz-view {
 					.guess-box-container {
 						text-align: center;
