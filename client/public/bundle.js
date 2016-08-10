@@ -26864,7 +26864,7 @@
 	  displayName: 'Subscribe',
 
 	  getInitialState: function getInitialState() {
-	    return { email: null, phone_number: null };
+	    return { email: null, phone_number: null, response: null };
 	  },
 	  handleChange: function handleChange(event) {
 	    var entry = event.target.value;
@@ -26883,7 +26883,14 @@
 	      dataType: 'json',
 	      data: submission,
 	      cache: false,
-	      success: function (data) {}.bind(this),
+	      success: function (data) {
+	        if ('err' in data) {
+	          this.setState({ response: data.err });
+	        } else {
+	          this.setState({ response: 'You have been subscribed with email: ' + data.email + '. Look for our email in your inbox tomorrow!' });
+	        }
+	        console.log(this.state);
+	      }.bind(this),
 	      error: function (xhr, status, err) {
 	        console.error(this.props.url, status, err.toString());
 	      }.bind(this)
@@ -26919,11 +26926,11 @@
 	        'Get mobile phone updates: ',
 	        _react2.default.createElement('input', { className: 'enter-email', type: 'text', id: 'phone', onChange: this.handleChange, placeholder: 'Phone number' })
 	      ),
-	      _react2.default.createElement(
+	      !this.state.response ? _react2.default.createElement(
 	        'button',
 	        { onClick: this.submitForm },
 	        'Submit'
-	      )
+	      ) : this.state.response
 	    );
 	  }
 

@@ -41,7 +41,7 @@ router.route('/quiz')
 
 // USER ROUTES
 router.route('/user')
-	.get(function (req, res) {
+	.post(function (req, res) {
 		userController.createUser(req.body, function (response) {
 			res.send(response);
 		})

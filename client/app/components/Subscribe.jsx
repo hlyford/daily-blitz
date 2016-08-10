@@ -3,7 +3,7 @@ import React from 'react';
 
 var Subscribe = React.createClass({
   getInitialState: function() {
-    return { email: null, phone_number: null };
+    return { email: null, phone_number: null, response: null };
   },
   handleChange: function (event) {
     var entry = event.target.value;
@@ -23,6 +23,12 @@ var Subscribe = React.createClass({
       data: submission,
       cache: false,
       success: function(data) {
+        if ('err' in data) {
+          this.setState({response: data.err});
+        } else {
+          this.setState({response: `You have been subscribed with email: ${data.email}. Look for our email in your inbox tomorrow!` });
+        }
+        console.log(this.state);
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -41,7 +47,8 @@ var Subscribe = React.createClass({
         <div>
           Get mobile phone updates: <input className="enter-email" type="text" id="phone" onChange={ this.handleChange } placeholder="Phone number" />
         </div>
-        <button onClick={ this.submitForm }>Submit</button>
+        { !this.state.response ? <button onClick={ this.submitForm }>Submit</button> :
+           this.state.response }
       </div>
     )
   }
