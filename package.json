@@ -9,6 +9,7 @@
     "scrape_nba": "node server/nba_scraper.js",
     "scrape_nfl": "node server/nfl_scraper_server.js",
     "scrape_mlb": "node server/mlb_scraper_server.js",
+    "scrape_soccer": "node server/soccer_scraper_server.js",
     "email": "node server/email_server.js",
     "db": "node server/prod_db_insert.js"
   },

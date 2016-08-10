@@ -96,5 +96,27 @@ module.exports = {
 		'lad',
 		'sdg',
 		'sfo'
+	],
+	soccer: [
+		'arsenal',
+		'burnley',
+		'crystal-palace',
+		'hull-city',
+		'liverpool',
+		'manchester-united',
+		'southampton',
+		'sunderland',
+		'tottenham-hotspur',
+		'west-bromwich-albion',
+		'bournemouth',
+		'chelsea',
+		'everton',
+		'leicester-city',
+		'manchester-city',
+		'middlesbrough',
+		'stoke-city',
+		'swansea-city',
+		'watford',
+		'west-ham-united'
 	]
 }
