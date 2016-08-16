@@ -3,6 +3,8 @@ li {
 
 a {
   text-decoration: none; }
+  a:hover {
+    text-decoration: none; }
 
 .text-middle {
   text-align: center; }
@@ -67,6 +69,8 @@ html {
           background-color: green; }
       html .content-container .main-quiz-content #app {
         width: 100%; }
+        html .content-container .main-quiz-content #app .subscribe-view div {
+          padding-bottom: 1%; }
         html .content-container .main-quiz-content #app .subscribe-view input {
           color: black; }
         html .content-container .main-quiz-content #app .homepage-view .sport-selection {
@@ -84,6 +88,10 @@ html {
             padding-right: 5%; }
           html .content-container .main-quiz-content #app .homepage-view .bottom-buttons .subscribe {
             display: inline-block; }
+        html .content-container .main-quiz-content #app .quiz-view .quiz-view-body > div {
+          text-align: center; }
+          html .content-container .main-quiz-content #app .quiz-view .quiz-view-body > div > button {
+            font-size: 1.1em; }
         html .content-container .main-quiz-content #app .quiz-view .guess-box-container {
           text-align: center;
           padding-bottom: 30px; }

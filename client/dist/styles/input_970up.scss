@@ -1,0 +1,31 @@
+@media (min-width: 970px) {
+
+	html {
+		nav.navbar {
+			background-color: rgba(255,255,255,.6);
+			border-top: none;
+			.container-fluid {
+				padding-left: 16%;
+				height: 65px;
+				padding-top: 8px;
+
+				.navbar-brand {
+					padding-top: 6px;
+				}
+				.navbar-item {
+					& > a {
+					color: #222;
+					font-size: 0.8em;
+						&:focus {
+							background-color: transparent!important;
+						}
+					}
+				}
+			}
+		}
+		.container.main {
+		  padding-top: 5%;
+		}
+	}
+
+}

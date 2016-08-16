@@ -4,6 +4,9 @@ li {
 }
 a {
   text-decoration: none;
+  &:hover {
+  	text-decoration: none;
+  }
 }
 .text-middle {
 	text-align: center;
@@ -91,6 +94,9 @@ html {
 			#app {
 				width: 100%;
 				.subscribe-view {
+					div {
+						padding-bottom: 1%;
+					}
 					input {
 						color: black;
 					}
@@ -121,6 +127,14 @@ html {
 					}
 				}
 				.quiz-view {
+					.quiz-view-body {
+						> div {
+							text-align: center;
+							> button {
+								font-size: 1.1em;
+							}
+						}
+					}
 					.guess-box-container {
 						text-align: center;
 						padding-bottom: 30px;

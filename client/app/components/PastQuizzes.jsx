@@ -26,7 +26,7 @@ var PastQuizzes = React.createClass({
   },
   render: function() {
     var listItems = this.state.quiz_list.map(function(item) {
-      item.url = "#/quiz?quiz_id=" + item.queryParam;
+      item.url = `#/quiz?quiz_id=${item.queryParam}`;
       return (
         <li key={item._id}>
           <a href={item.url}>{item.title}</a>
