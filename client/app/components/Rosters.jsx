@@ -22,13 +22,25 @@ var Rosters = React.createClass({
 	},
 	sortByConference: function (teams) {
 		var eastern = [], western = [];
-		teams.forEach(function(team, index) {
-			if (team.conference === 'western' || team.conference === 'afc' || team.conference === 'al') {
-				western.push(team);
-			} else {
-				eastern.push(team);
-			}
-		});
+		// just alternate soccer teams in columns
+		if (teams[0].league === 'soccer') {
+			teams.forEach(function(team, index) {
+				if (index % 2 === 0) {
+					western.push(team);
+				} else {
+					eastern.push(team);
+				}
+			});
+		} else {
+			// other sports
+			teams.forEach(function(team, index) {
+				if (team.conference === 'western' || team.conference === 'afc' || team.conference === 'al') {
+					western.push(team);
+				} else {
+					eastern.push(team);
+				}
+			});
+		}
 		this.setState({ rosters: teams, western: western, eastern: eastern });
 	},
 	getRosters: function (league) {
@@ -81,14 +93,16 @@ var Rosters = React.createClass({
 				<div className="page-titles"><h2>Name all the players on a team</h2></div>
 		    <div className="five columns">
 		    	<div>{this.state.league === 'nba' ? "Eastern Conference Teams" :
-		    	this.state.league === 'nfl' ? "NFC" : "National League" }</div>
+		    	this.state.league === 'nfl' ? "NFC" :
+		    	this.state.league === 'mlb' ? "National League" : "English Premier League" }</div>
     		  <ul>
     		  	{ easternTeams }
 				  </ul>
 				</div>
 		    <div className="five columns">
 		    	<div>{this.state.league === 'nba' ? "Western Conference Teams" :
-		    	this.state.league === 'nfl' ? "AFC" : "American League" }</div>
+		    	this.state.league === 'nfl' ? "AFC" :
+		    	this.state.league === 'mlb' ? "American League" : null }</div>
     		  <ul>
 					  { westernTeams }
 				  </ul>

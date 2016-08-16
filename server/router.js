@@ -6,6 +6,7 @@ var userController = require('./controllers/userController');
 var rosterController = require('./controllers/rosterController');
 var rosterControllerNfl = require('./controllers/rosterControllerNfl');
 var rosterControllerMlb = require('./controllers/rosterControllerMlb');
+var rosterControllerSoccer = require('./controllers/rosterControllerSoccer');
 var bodyParser = require('body-parser');
 var path = require('path');
 // var emailSender = require('./email/emailSender');
@@ -68,6 +69,11 @@ router.route('/roster/:league')
 					res.send(response);
 				});
 				break;
+			case 'soccer':
+				rosterControllerSoccer.getAllRosters(league, function (response) {
+					res.send(response);
+				});
+				break;
 		}
 
 	})
@@ -91,6 +97,11 @@ router.route('/roster/:league/team/:team_acronym')
 						res.send(response);
 					});
 				break;
+				case 'soccer':
+					rosterControllerSoccer.getRoster(req.params.team_acronym, function (response) {
+						res.send(response);
+					});
+					break;
 			}
 		})
 

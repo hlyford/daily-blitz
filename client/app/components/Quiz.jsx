@@ -123,7 +123,7 @@ var Quiz = React.createClass({
   },
 
   getQuiz: function() {
-    var route = this.state.roster ? '/roster/'+ this.state.league + '/team/' : '/quiz/';
+    var route = this.state.roster ? '/roster/' + this.state.league + '/team/' : '/quiz/';
     $.ajax({
       url: route + this.state.active_quiz,  // test query: 2x68a
       dataType: 'json',
