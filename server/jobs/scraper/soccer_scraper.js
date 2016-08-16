@@ -31,8 +31,8 @@ var getRosters = function (urlSlug, callback) {
 	  if (!error && response.statusCode == 200) {
 			var $ = cheerio.load(html);
 			// ****** get the TEAM images and save them to the images directory
-			// var teamImageUrl = $('.Row.ys-player-header .IbBox:nth-child(1)').css('background-image');
-			// teamImageGetter(teamImageUrl, urlSlug, 'soccer');
+			var teamImageUrl = $('.Row.ys-player-header .IbBox:nth-child(1)').css('background-image');
+			teamImageGetter(teamImageUrl, urlSlug, 'soccer');
 			// ******* end team image adding
 
 			// **** CHNAGE SOCCER LEAGUE HERE ****
@@ -48,7 +48,7 @@ var getRosters = function (urlSlug, callback) {
 			// get all the players info
 			var rows = $('.ys-roster-table tbody tr');
 			rows.each(function (i, element) {
-				if (i < 1) {
+				// if (i < 1) {   // get just one player for testing
 					var player = {};
 					var playerNumber = $(element).find('td:nth-child(1)').text();
 					player['player_number'] = playerNumber;
@@ -73,12 +73,12 @@ var getRosters = function (urlSlug, callback) {
 					player['weight'] = weight;
 					var age = $(element).find('td:nth-child(6)').text();
 					player['age'] = age;
-					var experience = $(element).find('td:nth-child(7)').text();
-					player['experience'] = experience;
-					var birth_place = $(element).find('td:nth-child(8)').text();
+					// var experience = $(element).find('td:nth-child(7)').text();
+					// player['experience'] = experience;
+					var birth_place = $(element).find('td:nth-child(7)').text();
 					player['birth_place'] = birth_place;
-					var college = $(element).find('td:nth-child(9)').text();
-					player['college'] = college;
+					// var college = $(element).find('td:nth-child(9)').text();
+					// player['college'] = college;
 					// var salary = $(element).find('td:nth-child(10) span span');
 					// player['salary'] = salary;
 
@@ -111,7 +111,7 @@ var getRosters = function (urlSlug, callback) {
 						}
 					}
 					team.players.push(player);
-				}
+				// } // comment out this one to get all players
 			});
 		} else {
 			console.log(error);

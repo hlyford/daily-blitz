@@ -8,7 +8,7 @@ var rosterController = require('./controllers/rosterController');
 var mongoInserter = require('./controllers/mongoInserter');
 // var scraper = require('./jobs/scraper/scraper');
 // ----- CHANGE LEAGUE HERE -----
-var allTeams = require('./jobs/scraper/allTeams.js').mlb;
+var allTeams = require('./jobs/scraper/allTeams.js').soccer;
 
 // require in other files
 
