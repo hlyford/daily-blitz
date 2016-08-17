@@ -25,6 +25,12 @@
 		}
 		.container.main {
 		  padding-top: 5%;
+		  .sport-selection {
+		  	button {
+		  		display: inline-block;
+		  		width: auto;
+		  	}
+		  }
 		}
 	}
 

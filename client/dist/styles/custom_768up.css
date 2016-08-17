@@ -14,6 +14,9 @@
         html nav.navbar .container-fluid .navbar-item > a:focus {
           background-color: transparent !important; }
   html .container.main {
-    padding-top: 5%; } }
+    padding-top: 5%; }
+    html .container.main .sport-selection button {
+      display: inline-block;
+      width: auto; } }
 
 /*# sourceMappingURL=custom_768up.css.map */

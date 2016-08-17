@@ -61,7 +61,7 @@ html {
 		color: black;
 	}
   .container.main {
-    padding-top: 25%;
+    padding-top: 10%;
   }
 	.content-container {
     padding: 3%;
@@ -80,6 +80,12 @@ html {
 			justify-content: center;
 			button {
 				color: white;
+			}
+			.sport-selection {
+				button {
+					display: block;
+					width: 100%;
+				}
 			}
 			.guess-box {
 				color: black;

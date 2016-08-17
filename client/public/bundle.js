@@ -27164,6 +27164,8 @@
 	  },
 
 	  render: function render() {
+	    var _this = this;
+
 	    console.log(this.state);
 	    return _react2.default.createElement(
 	      'div',
@@ -27214,6 +27216,7 @@
 	              return _react2.default.createElement(
 	                'li',
 	                { key: item.fullName },
+	                _react2.default.createElement('img', { src: "../../dist/images/" + _this.state.league + "_player_images/" + item.firstName.replace(/ /g, "_") + "_" + item.lastName + ".png" }),
 	                item.fullName,
 	                ' | #',
 	                item.player_number,

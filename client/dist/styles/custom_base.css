@@ -43,7 +43,7 @@ html {
   html input {
     color: black; }
   html .container.main {
-    padding-top: 25%; }
+    padding-top: 10%; }
   html .content-container {
     padding: 3%;
     margin: 0px auto;
@@ -60,6 +60,9 @@ html {
       justify-content: center; }
       html .content-container .main-quiz-content button {
         color: white; }
+      html .content-container .main-quiz-content .sport-selection button {
+        display: block;
+        width: 100%; }
       html .content-container .main-quiz-content .guess-box {
         color: black;
         transition: background-color 700ms ease; }

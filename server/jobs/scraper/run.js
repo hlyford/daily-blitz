@@ -1,5 +1,5 @@
 var getRostersNba = require('./nba_scraper');
-var teamsArray = require('./team_acronyms');
+var teamsArray = require('./team_acronyms').nba;
 // var getRostersNfl = require('./nfl_scraper');
 var teamsArrayNfl = require('./team_acronyms').nfl;
 
@@ -10,11 +10,12 @@ var getRostersSoccer = require('./soccer_scraper');
 var teamsArraySoccer = require('./team_acronyms').soccer;
 
 // loop through waiting a random amount of seconds each time
+// ***** NBA  // there are 30 teams
 var looper = function (i) {
 	var nextWait = Math.floor(Math.random() * (40000 - 10000) + 10000);
 	console.log('waiting...', nextWait);
 	// EDIT THIS LINE TO CHANGE HOW MANY TEAMS TO GET
-	if (i < 1) {
+	if (i < 30) {
 		getRostersNba(teamsArray[i]);
 		setTimeout(function () {
 			looper(i + 1);
@@ -24,11 +25,9 @@ var looper = function (i) {
 		return;
 	}
 };
+looper(1);
 
-// start at the beginning of teams array
-// looper(0);
-
-// *** NFL *****
+// *** NFL ***** // there are 32 teams
 // loop through waiting a random amount of seconds each time
 var looperNfl = function (i) {
 	var nextWait = Math.floor(Math.random() * (20000 - 10000) + 10000);
@@ -45,7 +44,7 @@ var looperNfl = function (i) {
 	}
 };
 
-// *** MLB *****
+// *** MLB ***** // there are 30 teams
 // loop through waiting a random amount of seconds each time
 var looperMlb = function (i) {
 	var nextWait = Math.floor(Math.random() * (20000 - 10000) + 10000);
@@ -62,13 +61,13 @@ var looperMlb = function (i) {
 	}
 };
 
-// *** Soccer *****
+// *** Soccer ***** // there are 20 teams
 // loop through waiting a random amount of seconds each time
 var looperSoccer = function (i) {
 	var nextWait = Math.floor(Math.random() * (20000 - 10000) + 10000);
 	console.log('waiting...', nextWait);
 	// EDIT THIS LINE TO CHANGE HOW MANY TEAMS TO GET
-	if (i < 20) {
+	if (i < 3) {
 		getRostersSoccer(teamsArraySoccer[i]);
 		setTimeout(function () {
 			looperSoccer(i + 1);
@@ -81,4 +80,4 @@ var looperSoccer = function (i) {
 
 // start at the beginning of teams array
 // looperNfl(5)
-looperSoccer(19);
+// looperSoccer(0);

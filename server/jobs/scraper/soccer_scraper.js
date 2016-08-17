@@ -31,8 +31,8 @@ var getRosters = function (urlSlug, callback) {
 	  if (!error && response.statusCode == 200) {
 			var $ = cheerio.load(html);
 			// ****** get the TEAM images and save them to the images directory
-			var teamImageUrl = $('.Row.ys-player-header .IbBox:nth-child(1)').css('background-image');
-			teamImageGetter(teamImageUrl, urlSlug, 'soccer');
+			// var teamImageUrl = $('.Row.ys-player-header .IbBox:nth-child(1)').css('background-image');
+			// teamImageGetter(teamImageUrl, urlSlug, 'soccer');
 			// ******* end team image adding
 
 			// **** CHNAGE SOCCER LEAGUE HERE ****
@@ -83,25 +83,24 @@ var getRosters = function (urlSlug, callback) {
 					// player['salary'] = salary;
 
 					// PLAYER IMAGE URL
-					// var bigImageUrl = $(element).find('td:nth-child(2) div img').attr('src');
+					var smallImageUrl = $(element).find('td:nth-child(2) div img').attr('src');
 
 		   //  			// check if there's a src for img
-		   //  			var imgType = 'img';
-		   //  			if (bigImageUrl === 'https://s.yimg.com/g/images/spaceball.gif') {
-		   //  				bigImageUrl = $(element).find('td:nth-child(2) div img').css('background-image');
-		   //  				bigImageUrl = bigImageUrl.slice(4, bigImageUrl.length - 1);
-		   //  			}
+		    			var imgType = 'img';
+		    			if (smallImageUrl === 'https://s.yimg.com/g/images/spaceball.gif') {
+		    				smallImageUrl = $(element).find('td:nth-child(2) div img').css('background-image');
+		    				smallImageUrl = smallImageUrl.slice(4, smallImageUrl.length - 1);
+		    			}
 
-		   //  			var playerPicUrl = bigImageUrl;
-		   //  			console.log('here', playerPicUrl);
-		   //  			if (parseInt(bigImageUrl.length) < 80) {
-		   //  				// make grey outline if no picture
-		   //  				playerPicUrl = 'http://www.clker.com/cliparts/m/3/I/C/c/2/grey-silhouette-of-man-md.png';
-		   //  			}
-		   //  				// else see if the img is on the src or the background-image
-		   //  			sleep(2431);
-		   //  			playerImageGetter(playerPicUrl, urlSlug, name);
-		   //  			return;
+		    			var playerPicUrl = smallImageUrl;
+		    			if (parseInt(smallImageUrl.length) < 80) {
+		    				// make grey outline if no picture
+		    				playerPicUrl = 'http://www.clker.com/cliparts/m/3/I/C/c/2/grey-silhouette-of-man-md.png';
+		    			}
+		    				// else see if the img is on the src or the background-image
+		    			sleep(2431);
+		    			playerImageGetter(playerPicUrl, urlSlug, name);
+		    			return;
 
 					// END PLAYER URL
 
@@ -117,6 +116,7 @@ var getRosters = function (urlSlug, callback) {
 			console.log(error);
 		}
 		// add back to get rosters
+		return;
 		rosterControllerSoccer.addStuff(team);
 	});
 }
