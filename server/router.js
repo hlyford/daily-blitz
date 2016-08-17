@@ -6,11 +6,8 @@ var userController = require('./controllers/userController');
 var rosterController = require('./controllers/rosterController');
 var rosterControllerNfl = require('./controllers/rosterControllerNfl');
 var rosterControllerMlb = require('./controllers/rosterControllerMlb');
-<<<<<<< HEAD
 var goatsController = require('./controllers/goatsController');
-=======
 var rosterControllerSoccer = require('./controllers/rosterControllerSoccer');
->>>>>>> 68c2f5cbbc0413bf79f4766170446c7e8701df13
 var bodyParser = require('body-parser');
 var path = require('path');
 // var emailSender = require('./email/emailSender');
