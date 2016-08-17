@@ -7,7 +7,6 @@
 |__,|___|___| |_| |___|__|__|___|_|_|_|___|___|___|_| |___|___|_|_|
                               by Matteo Spinelli ~ http://cubiq.org
 */
-
 // Check for addEventListener browser support (prevent errors in IE<9)
 var _eventListener = 'addEventListener' in window;
 
