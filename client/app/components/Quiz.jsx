@@ -148,32 +148,33 @@ var Quiz = React.createClass({
   render: function() {
     console.log(this.state);
     return (
-    	<div className="quiz-view">
-        <div className="page-titles"><h2>{ this.state.quiz_info.title ? this.state.quiz_info.title : "Start the quiz" }</h2></div>
-          <div className="quiz-view-body">
-            { !this.state.takingQuiz ?
-              <div><button className="text-middle" onClick={ this.startQuiz }>Take quiz!</button></div> :
-              <div>
-                <div className="guess-box-container text-middle">
-                  <div><img className="team-logo" src= {this.state.league === 'nba' ? `../../dist/images/team_logo_images/${this.state.quiz_info.acronym}.png` : `../../dist/images/team_logo_images/${this.state.league}_${this.state.quiz_info.acronym}.png`} /> { this.state.quiz_info.title }</div>
-               { <div> You have answered: {this.state.correct.length} / {this.state.quiz_info.players.length}</div> }
-          	      <input ref="guess" className="guess-box" type="text" name="guessing" value={this.state.guessValue} onChange={this.handleChange} />
-                </div>
-          	    <div className="correct-guess-container">
-            		  <ul>
-      						  {this.state.correct.map((item)=>(
-  							 <li key={item.fullName}>
-                    { <img src={"../../dist/images/"+ this.state.league + "_player_images/" + item.firstName.replace(/ /g,"_") + "_" + item.lastName + ".png"} /> }
-  								  {item.fullName} | #{item.player_number} {item.position}
-  							 </li>
-  						  ))}
-  					  </ul>
-      	    </div>
-            <div className="timer">{ this.timeFormatter(this.state.timeLeft) }</div>
-            { this.state.takingQuiz ?
-            <button onClick={ this.giveUp } className="give-up-button button button-primary">Give up</button> : null
-            }
-          </div>
+    	 <div className="quiz-view">
+          <div className="page-titles"><h2>{ this.state.quiz_info.title ? this.state.quiz_info.title : "Start the quiz" }</h2></div>
+            <div className="quiz-view-body">
+              { !this.state.takingQuiz ?
+                <div><button className="text-middle" onClick={ this.startQuiz }>Take quiz!</button></div> :
+                <div>
+                  <div className="guess-box-container text-middle">
+                    <div><img className="team-logo" src= {this.state.league === 'nba' ? `../../dist/images/team_logo_images/${this.state.quiz_info.acronym}.png` : `../../dist/images/team_logo_images/${this.state.league}_${this.state.quiz_info.acronym}.png`} /> { this.state.quiz_info.title }</div>
+                 { <div> You have answered: {this.state.correct.length} / {this.state.quiz_info.players.length}</div> }
+                    <input ref="guess" className="guess-box" type="text" name="guessing" value={this.state.guessValue} onChange={this.handleChange} />
+                  </div>
+                  <div className="correct-guess-container">
+                    <ul>
+                      {this.state.correct.map((item)=>(
+                     <li key={item.fullName}>
+                        { <img src={"../../dist/images/"+ this.state.league + "_player_images/" + item.firstName.replace(/ /g,"_") + "_" + item.lastName + ".png"} /> }
+                        {item.fullName} | #{item.player_number} {item.position}
+                     </li>
+                    ))}
+                  </ul>
+                 </div>
+              <div className="timer">{ this.timeFormatter(this.state.timeLeft) }</div>
+              { this.state.takingQuiz ?
+              <button onClick={ this.giveUp } className="give-up-button button button-primary">Give up</button> : null
+              }
+            </div>
+        </div>
       </div>
     )
   }
