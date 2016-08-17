@@ -6,6 +6,7 @@ var userController = require('./controllers/userController');
 var rosterController = require('./controllers/rosterController');
 var rosterControllerNfl = require('./controllers/rosterControllerNfl');
 var rosterControllerMlb = require('./controllers/rosterControllerMlb');
+var goatsController = require('./controllers/goatsController');
 var rosterControllerSoccer = require('./controllers/rosterControllerSoccer');
 var bodyParser = require('body-parser');
 var path = require('path');
@@ -105,11 +106,24 @@ router.route('/roster/:league/team/:team_acronym')
 			}
 		})
 
+// GOATS LISTS ROUTES
+	router.route('/lists')
+		.get( function (req, res) {
+			goatsController.findAll(function (result) {
+				res.send(result);
+			});
+		});
+	router.route('/lists/:acronym')
+		.get( function (req, res) {
+			goatsController.findOne(req.params.acronym, function (result) {
+				res.send(result);
+			});
+		});
+
 // email sending routes
 router.route('/hello')
 	.get( function (req, res) {
 		emailSender(function (response) {
-			console.log('going abck', response);
 			res.send(response);
 		});
 	});

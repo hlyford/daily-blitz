@@ -83,7 +83,7 @@ var Quiz = React.createClass({
     } else {
       _.each(list.players, function(item, index, players) {
         // make full name
-        item.fullName = item.firstName + ' ' + item.lastName;
+        item.fullName = `${item.firstName} ${item.lastName}`;
         // convert to lower case
         item.firstNameLower = item.firstName.toLowerCase(), item.lastName = item.lastName.toLowerCase();
         item.fullNameLower = item.fullName.toLowerCase();
@@ -94,6 +94,7 @@ var Quiz = React.createClass({
   startQuiz: function () {
     this.setState({'takingQuiz': true});
     var totalTime = this.state.quiz_info.players.length * 10;
+    // time allowed is lesser of 240 or 10 seconds/player
     totalTime = totalTime > 240 ? 240 : totalTime;
     this.setState({'timeLeft' : totalTime});
     this.timer();
@@ -118,12 +119,12 @@ var Quiz = React.createClass({
     var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
     var seconds = sec_num - (hours * 3600) - (minutes * 60);
     if (minutes < 10) {minutes = minutes;}
-    if (seconds < 10) {seconds = "0"+seconds;}
-    return minutes+':'+seconds;
+    if (seconds < 10) {seconds = `0${seconds}`;}
+    return `${minutes}:${seconds}`;
   },
 
   getQuiz: function() {
-    var route = this.state.roster ? '/roster/' + this.state.league + '/team/' : '/quiz/';
+    var route = this.state.roster ? `/roster/${this.state.league}/team/` : '/quiz/';
     $.ajax({
       url: route + this.state.active_quiz,  // test query: 2x68a
       dataType: 'json',
@@ -149,18 +150,18 @@ var Quiz = React.createClass({
     return (
     	<div className="quiz-view">
         <div className="page-titles"><h2>{ this.state.quiz_info.title ? this.state.quiz_info.title : "Start the quiz" }</h2></div>
-        { !this.state.takingQuiz ?
-          <button className="text-middle" onClick={ this.startQuiz }>Take quiz!</button> :
-          <div>
-            <div className="guess-box-container text-middle">
-              <div><img className="team-logo" src= {this.state.league === 'nba' ? "../../dist/images/team_logo_images/" + this.state.quiz_info.acronym + ".png" : "../../dist/images/team_logo_images/" + this.state.league + "_" + this.state.quiz_info.acronym + ".png"} /> { this.state.quiz_info.title }</div>
-           { <div> You have answered: {this.state.correct.length} / {this.state.quiz_info.players.length}</div> }
-      	      <input ref="guess" className="guess-box" type="text" name="guessing" value={this.state.guessValue} onChange={this.handleChange} />
-            </div>
-      	    <div className="correct-guess-container">
-        		  <ul>
-  						  {this.state.correct.map((item)=>(
-
+          <div className="quiz-view-body">
+            { !this.state.takingQuiz ?
+              <div><button className="text-middle" onClick={ this.startQuiz }>Take quiz!</button></div> :
+              <div>
+                <div className="guess-box-container text-middle">
+                  <div><img className="team-logo" src= {this.state.league === 'nba' ? `../../dist/images/team_logo_images/${this.state.quiz_info.acronym}.png` : `../../dist/images/team_logo_images/${this.state.league}_${this.state.quiz_info.acronym}.png`} /> { this.state.quiz_info.title }</div>
+               { <div> You have answered: {this.state.correct.length} / {this.state.quiz_info.players.length}</div> }
+          	      <input ref="guess" className="guess-box" type="text" name="guessing" value={this.state.guessValue} onChange={this.handleChange} />
+                </div>
+          	    <div className="correct-guess-container">
+            		  <ul>
+      						  {this.state.correct.map((item)=>(
   							 <li key={item.fullName}>
                     { <img src={"../../dist/images/"+ this.state.league + "_player_images/" + item.firstName.replace(/ /g,"_") + "_" + item.lastName + ".png"} /> }
   								  {item.fullName} | #{item.player_number} {item.position}
@@ -172,7 +173,7 @@ var Quiz = React.createClass({
             { this.state.takingQuiz ?
             <button onClick={ this.giveUp } className="give-up-button button button-primary">Give up</button> : null
             }
-          </div> }
+          </div>
       </div>
     )
   }

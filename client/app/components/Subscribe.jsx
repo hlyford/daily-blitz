@@ -49,8 +49,22 @@ var Subscribe = React.createClass({
           Get mobile phone updates: <input className="enter-email" type="text" id="phone" onChange={ this.handleChange } placeholder="Phone number" />
         </div>
         */}
-        { !this.state.response ? <button onClick={ this.submitForm }>Submit</button> :
-           this.state.response }
+        {/*
+        <div>What sports are you interested in?</div>
+        <div>
+          NBA
+          NFL
+          MLB
+          Soccer
+          NHL
+        </div>
+        */}
+        <div>
+          { !this.state.response ? <button onClick={ this.submitForm }>Submit</button> :
+           this.state.response
+          }
+        </div>
+
       </div>
     )
   }
