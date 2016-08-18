@@ -14,6 +14,8 @@
         html nav.navbar .container-fluid .navbar-item > a:focus {
           background-color: transparent !important; }
   html .container.main {
-    padding-top: 5%; } }
+    padding-top: 5%; }
+    html .container.main .correct-guess-container {
+      padding-left: 10%; } }
 
 /*# sourceMappingURL=custom_970up.css.map */

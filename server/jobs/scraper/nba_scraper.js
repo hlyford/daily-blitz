@@ -140,7 +140,7 @@ var getRosters = function (urlSlug, callback) {
 			console.log(error);
 		}
 		// add back to get rosters
-		return;
+		console.log('all player images for ' + team.team_name + ' added.'); return;
 		rosterController.addStuff(team);
 	});
 }
