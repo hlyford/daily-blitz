@@ -128,4 +128,31 @@ router.route('/hello')
 		});
 	});
 
+// forwarding from rosterblitz 1.0 routes already SEO'd
+router.route('/leaguesearch/:league').get(function (req, res) {
+	switch (req.params.league) {
+		case 'nba':
+			res.writeHead(301,
+			  {Location: '/#/rosters?league=' + req.params.league}
+			);
+			break;
+		case 'nfl':
+			res.writeHead(301,
+			  {Location: '/#/rosters?league=' + req.params.league}
+			);
+			break;
+		case 'mlb':
+			res.writeHead(301,
+			  {Location: '/#/rosters?league=' + req.params.league}
+			);
+		break;
+		case 'soccer':
+			res.writeHead(301,
+			  {Location: '/#/rosters?league=' + req.params.league}
+			);
+			break;
+	}
+	res.end();
+});
+
 module.exports = router;
