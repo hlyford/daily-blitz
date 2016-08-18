@@ -50,7 +50,7 @@ var getRosters = function (urlSlug, callback) {
 			var rows = $('.ys-roster-table tbody tr');
 			rows.each(function (i, element) {
 
-				// if (i < 1) {  // comment out when want to get all players
+				// if (i > 9 && i < 31) {  // comment out when want to get all players
 					var player = {};
 					var playerNumber = $(element).find('td:nth-child(1)').text();
 					player['player_number'] = playerNumber;
@@ -65,21 +65,23 @@ var getRosters = function (urlSlug, callback) {
 
 					// **** get player images ***
 					// SMALL PLAYER IMAGE URL
-					// var smallImageUrl = $(element).find('td:nth-child(2) div img').attr('src');
-     // 			// check if there's a src for img
-    	// 		var imgType = 'img';
-    	// 		if (smallImageUrl === 'https://s.yimg.com/g/images/spaceball.gif') {
-    	// 			smallImageUrl = $(element).find('td:nth-child(2) div img').css('background-image');
-    	// 			smallImageUrl = smallImageUrl.slice(4, smallImageUrl.length - 1);
-    	// 		}
+					var smallImageUrl = $(element).find('td:nth-child(2) div img').attr('src');
+     			// check if there's a src for img
+    			var imgType = 'img';
+    			if (smallImageUrl === 'https://s.yimg.com/g/images/spaceball.gif') {
+    				smallImageUrl = $(element).find('td:nth-child(2) div img').css('background-image');
+    				smallImageUrl = smallImageUrl.slice(4, smallImageUrl.length - 1);
+    			}
 
-    	// 		var playerPicUrl = smallImageUrl;
-    	// 		if (parseInt(smallImageUrl.length) < 80) {
-    	// 			// make grey outline if no picture
-    	// 			playerPicUrl = 'http://www.clker.com/cliparts/m/3/I/C/c/2/grey-silhouette-of-man-md.png';
-    	// 		}
-    	// 			// else see if the img is on the src or the background-image
-    	// 		playerImageGetter(playerPicUrl, urlSlug, name);
+    			var playerPicUrl = smallImageUrl;
+    			if (parseInt(smallImageUrl.length) < 80) {
+    				// make grey outline if no picture
+    				playerPicUrl = 'http://www.clker.com/cliparts/m/3/I/C/c/2/grey-silhouette-of-man-md.png';
+    			}
+    				// else see if the img is on the src or the background-image
+    			playerImageGetter(playerPicUrl, urlSlug, name);
+    			sleep(3421);
+    			return;
 					// END SMALL PLAYER URL
 
 					// DON'T USE BIG IMAGE GETTER
@@ -138,6 +140,7 @@ var getRosters = function (urlSlug, callback) {
 			console.log(error);
 		}
 		// add back to get rosters
+		return;
 		rosterController.addStuff(team);
 	});
 }
@@ -154,7 +157,6 @@ function teamImageGetter (teamImageUrl, urlSlug) {
 }
 
 function playerImageGetter (playerImageUrl, shortSlug, playerName) {
-	sleep(2431);
 	// get the images and save them to the images directory
 	var dlDir = '/Users/honree/daily-blitz/server/images_server/nba_player_images/' + playerName.replace(/ /g,"_").replace(/\'/g, '') +'.png';
 	var curl =  'curl ' + playerImageUrl.replace(/&/g,'\\&') + ' -o ' + dlDir  + ' --create-dirs';

@@ -164,7 +164,7 @@ var Quiz = React.createClass({
                     { this.state.correct.map((item)=>
                       (
                     <li key={item.fullName}>
-                      <img src= { "../../dist/images/" + this.state.league + "_player_images/" + item.firstName.replace(/ /g,"_") + "_" + item.lastName + ".png" } />
+                      {this.state.league === 'nba' ? <img src={"../../dist/images/" + this.state.league + "_player_images/" + item.firstName.replace(/ /g,"_").replace(/'/g, "")  + "_" + item.lastName.replace(/'/g, "") + ".png"} /> : null}
                       {item.fullName} | #{item.player_number} {item.position}
                     </li>
                     ))

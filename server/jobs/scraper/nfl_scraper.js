@@ -9,7 +9,7 @@ var baseBase = require('./url_info').baseBase;
 var baseUrlNfl = require('./url_info').baseUrlNfl.toString();
 // var teamSlugs = require('./url-info').teamSlugs;
 var rosterControllerNfl = require('../../controllers/rosterControllerNfl');
-var teamsArrayNfl = require('./team_acronyms_nfl');
+var teamsArrayNfl = require('./team_acronyms').nfl;
 
 // pause between players
 function sleep(miliseconds) {

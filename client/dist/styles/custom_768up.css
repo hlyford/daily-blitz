@@ -17,6 +17,8 @@
     padding-top: 5%; }
     html .container.main .sport-selection button {
       display: inline-block;
-      width: auto; } }
+      width: auto; }
+    html .container.main .quiz-view .correct-guess-container {
+      padding-left: 10%; } }
 
 /*# sourceMappingURL=custom_768up.css.map */

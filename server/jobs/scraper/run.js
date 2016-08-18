@@ -1,6 +1,6 @@
 var getRostersNba = require('./nba_scraper');
 var teamsArray = require('./team_acronyms').nba;
-// var getRostersNfl = require('./nfl_scraper');
+var getRostersNfl = require('./nfl_scraper');
 var teamsArrayNfl = require('./team_acronyms').nfl;
 
 var getRostersMlb = require('./mlb_scraper');
@@ -15,7 +15,7 @@ var looper = function (i) {
 	var nextWait = Math.floor(Math.random() * (40000 - 10000) + 10000);
 	console.log('waiting...', nextWait);
 	// EDIT THIS LINE TO CHANGE HOW MANY TEAMS TO GET
-	if (i < 30) {
+	if (i < 3) {
 		getRostersNba(teamsArray[i]);
 		setTimeout(function () {
 			looper(i + 1);
@@ -25,7 +25,7 @@ var looper = function (i) {
 		return;
 	}
 };
-looper(1);
+// looper(2);
 
 // *** NFL ***** // there are 32 teams
 // loop through waiting a random amount of seconds each time
@@ -33,7 +33,7 @@ var looperNfl = function (i) {
 	var nextWait = Math.floor(Math.random() * (20000 - 10000) + 10000);
 	console.log('waiting...', nextWait);
 	// EDIT THIS LINE TO CHANGE HOW MANY TEAMS TO GET
-	if (i < 6) {
+	if (i < 32) {
 		getRostersNfl(teamsArrayNfl[i]);
 		setTimeout(function () {
 			looperNfl(i + 1);
@@ -43,6 +43,7 @@ var looperNfl = function (i) {
 		return;
 	}
 };
+looperNfl(6)
 
 // *** MLB ***** // there are 30 teams
 // loop through waiting a random amount of seconds each time
@@ -79,5 +80,4 @@ var looperSoccer = function (i) {
 };
 
 // start at the beginning of teams array
-// looperNfl(5)
 // looperSoccer(0);

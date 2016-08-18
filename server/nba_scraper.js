@@ -10,7 +10,7 @@ var run = require('./jobs/scraper/run');
 
 // require in other files
 
-var port = process.env.PORT || 8000;
+var port = process.env.PORT || 8001;
 var app = express();
 
 // set up MongoDB
