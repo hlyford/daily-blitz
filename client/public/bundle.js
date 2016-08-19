@@ -27231,11 +27231,15 @@
 	                  _react2.default.createElement(_reactImageFallback2.default, {
 	                    src: "../../dist/images/" + _this.state.league + "_player_images/" + item.firstName.replace(/ /g, "_").replace(/'/g, "") + "_" + item.lastName.replace(/'/g, "") + ".png",
 	                    fallbackImage: '../../dist/images/grey_man.png', style: _this.state.league === 'soccer' ? { height: "70px", margin: "0 10px 0 0" } : { display: "inline" } }),
-	                  item.fullName,
-	                  ' | #',
-	                  item.player_number,
-	                  ' ',
-	                  item.position
+	                  _react2.default.createElement(
+	                    'span',
+	                    null,
+	                    item.fullName,
+	                    ' | #',
+	                    item.player_number,
+	                    ' ',
+	                    item.position
+	                  )
 	                );
 	              })
 	            )

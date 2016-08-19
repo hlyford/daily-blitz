@@ -102,10 +102,16 @@ html {
           text-align: left; }
           html .content-container .main-quiz-content #app .quiz-view .correct-guess-container li {
             display: inline-block;
-            width: 45%; }
+            width: 49%;
+            vertical-align: top;
+            margin-left: 1%;
+            text-align: center; }
             html .content-container .main-quiz-content #app .quiz-view .correct-guess-container li img {
               width: 70px;
               height: 50px; }
+            html .content-container .main-quiz-content #app .quiz-view .correct-guess-container li span {
+              display: block;
+              font-size: 12px; }
         html .content-container .main-quiz-content #app .quiz-view .team-logo {
           width: 100px;
           float: left; }

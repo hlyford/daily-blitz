@@ -13,12 +13,22 @@
         font-size: 0.8em; }
         html nav.navbar .container-fluid .navbar-item > a:focus {
           background-color: transparent !important; }
-  html .container.main {
+  html .content-container .main-quiz-content #app {
     padding-top: 5%; }
-    html .container.main .sport-selection button {
+    html .content-container .main-quiz-content #app .sport-selection button {
       display: inline-block;
       width: auto; }
-    html .container.main .quiz-view .guess-box-container {
-      padding-right: 10%; } }
+    html .content-container .main-quiz-content #app .quiz-view .guess-box-container {
+      padding-right: 10%; }
+    html .content-container .main-quiz-content #app .quiz-view .correct-guess-container li {
+      display: inline-block;
+      width: 48%;
+      text-align: left; }
+      html .content-container .main-quiz-content #app .quiz-view .correct-guess-container li img {
+        width: 85px;
+        height: 60px; }
+      html .content-container .main-quiz-content #app .quiz-view .correct-guess-container li span {
+        display: inline;
+        font-size: 15px; } }
 
 /*# sourceMappingURL=custom_768up.css.map */

@@ -167,7 +167,7 @@ var Quiz = React.createClass({
                       <ReactImageFallback
                       src={"../../dist/images/" + this.state.league + "_player_images/" + item.firstName.replace(/ /g,"_").replace(/'/g, "")  + "_" + item.lastName.replace(/'/g, "") + ".png"}
                       fallbackImage="../../dist/images/grey_man.png" style={this.state.league === 'soccer' ? {height: "70px", margin: "0 10px 0 0"}  : {display: "inline"} }/>
-                      {item.fullName} | #{item.player_number} {item.position}
+                      <span>{item.fullName} | #{item.player_number} {item.position}</span>
                     </li>
                     ))
                     }
