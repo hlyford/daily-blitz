@@ -75,6 +75,7 @@ html {
 		border-radius: 4px;
 		color: white;
 		.title, .page-titles {
+			text-align: center;
       display: flex;
       justify-content: center;
 		}
@@ -95,6 +96,9 @@ html {
 				transition: background-color 700ms ease;
         &.boom {
           background-color: green;
+        }
+        &.boom-red {
+          background-color: red;
         }
 			}
 			#app {

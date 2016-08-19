@@ -23,9 +23,10 @@ var Quiz = React.createClass({
       // PLACEHOLDER KOBE QUIZ FOR NOW
       this.state.active_quiz = '2x68a';
     }
+    this.getQuiz();
   },
   componentDidMount: function () {
-    this.getQuiz();
+    // this.getQuiz();
     // DOESN'T WORK YET
     if ((this.refs.guess) !== undefined) {
       (this.refs.guess).focus();
@@ -42,38 +43,48 @@ var Quiz = React.createClass({
   handleChange: function(event) {
   	var guess = event.target.value.toLowerCase().trim();
     // check the guess against all the first and last names, and the names that removed diacritics
-  	var lastNames = _.pluck(this.state.quiz_info.players, 'lastNameLower');
-  	var fullNames = _.pluck(this.state.quiz_info.players, 'fullNameLower');
-    var lastNames_r = _.pluck(this.state.quiz_info.players, 'lastNameLower_r');
-    var fullNames_r = _.pluck(this.state.quiz_info.players, 'fullNameLower_r');
+  	var lastNames = _.pluck(this.state.quiz_info.players, 'lastNameLower'), lastNamesCorrect = _.pluck(this.state.correct, 'lastNameLower');
+  	var fullNames = _.pluck(this.state.quiz_info.players, 'fullNameLower'), fullNamesCorrect = _.pluck(this.state.correct, 'fullNameLower');
+    var lastNames_r = _.pluck(this.state.quiz_info.players, 'lastNameLower_r'), lastNames_r_Correct = _.pluck(this.state.correct, 'lastNameLower_r');
+    var fullNames_r = _.pluck(this.state.quiz_info.players, 'fullNameLower_r'), fullNames_r_Correct = _.pluck(this.state.correct, 'fullNameLower_r');
   	// check if they entered the last name, keep track of index
-  	var indexLastName = _.indexOf(lastNames, guess);
-  	var indexFullName = _.indexOf(fullNames, guess);
-    var indexLastName_r = _.indexOf(lastNames_r, guess);
-    var indexFullName_r = _.indexOf(fullNames_r, guess);
-
-  	// if the entered LAST NAME, they got it correct and they hadn't guessed it before
-  	if ((indexLastName !== -1 || indexFullName !== -1 || indexLastName_r !== -1 || indexFullName_r !== -1) && _.indexOf(this.state.correct['last_name'], guess) === -1) {
-      // add player to the correct array
-      if (indexFullName !== -1) {
-  		  this.setState({ correct: this.state.correct.concat( this.state.quiz_info.players[indexFullName]) });
-      } else if (indexLastName !== -1) {
-        this.setState({ correct: this.state.correct.concat( this.state.quiz_info.players[indexLastName]) });
-      } else if (indexFullName_r !== -1) {
-        this.setState({ correct: this.state.correct.concat( this.state.quiz_info.players[indexFullName_r]) });
-      } else {
-        this.setState({ correct: this.state.correct.concat( this.state.quiz_info.players[indexLastName_r]) });
-      }
-  		// reset the guess box
-  		$('.guess-box').val('');
-      this.flash();
-  	}
+  	var indexLastName = _.indexOf(lastNames, guess), indexLastNameCorrect = _.indexOf(lastNamesCorrect, guess);
+  	var indexFullName = _.indexOf(fullNames, guess), indexFullNameCorrect = _.indexOf(fullNamesCorrect, guess);
+    var indexLastName_r = _.indexOf(lastNames_r, guess), indexLastName_r_Correct = _.indexOf(lastNames_r_Correct, guess);
+    var indexFullName_r = _.indexOf(fullNames_r, guess), indexFullName_r_Correct = _.indexOf(fullNames_r_Correct, guess);
+    // check if the it's been guessed before
+    if ((indexLastNameCorrect !== -1 || indexFullNameCorrect !== -1 || indexLastName_r_Correct !== -1 || indexFullName_r_Correct !== -1)) {
+      this.flash('red');
+      $('.guess-box').val('ALREADY GUESSED!');
+      var that = this;
+      setTimeout( function () {
+        $('.guess-box').val('');
+      }, 500);
+    } else {
+    	// if the entered LAST NAME, they got it correct and they hadn't guessed it before
+    	if ((indexLastName !== -1 || indexFullName !== -1 || indexLastName_r !== -1 || indexFullName_r !== -1)) {
+        // add player to the correct array
+        if (indexFullName !== -1) {
+    		  this.setState({ correct: this.state.correct.concat( this.state.quiz_info.players[indexFullName]) });
+        } else if (indexLastName !== -1) {
+          this.setState({ correct: this.state.correct.concat( this.state.quiz_info.players[indexLastName]) });
+        } else if (indexFullName_r !== -1) {
+          this.setState({ correct: this.state.correct.concat( this.state.quiz_info.players[indexFullName_r]) });
+        } else {
+          this.setState({ correct: this.state.correct.concat( this.state.quiz_info.players[indexLastName_r]) });
+        }
+    		// reset the guess box
+    		$('.guess-box').val('');
+        this.flash();
+    	}
+    }
   },
 
-  flash: function () {
-    $('.main-quiz-content .guess-box').addClass('boom');
+  flash: function (color) {
+    var classColor = color ? 'boom-red' : 'boom';
+    $('.main-quiz-content .guess-box').addClass(classColor);
     setTimeout(function() {
-      $('.main-quiz-content .guess-box').removeClass('boom');
+      $('.main-quiz-content .guess-box').removeClass(classColor);
     }, 1000)
   },
 
@@ -147,9 +158,10 @@ var Quiz = React.createClass({
   },
 
   render: function() {
+    console.log(this.state);
     return (
       <div className="quiz-view">
-        <div className="page-titles"><h2>{ this.state.quiz_info.title ? this.state.quiz_info.title : "Start the quiz" }</h2></div>
+        <div className="page-titles"><h2>{ this.state.quiz_info.title ? this.state.quiz_info.title : 'Start quiz!' }</h2></div>
           <div className="quiz-view-body">
             { !this.state.takingQuiz ?
               <div><button className="text-middle" onClick={ this.startQuiz }>Take quiz!</button></div> :
@@ -166,7 +178,7 @@ var Quiz = React.createClass({
                     <li key={item.fullName}>
                       <ReactImageFallback
                       src={"../../dist/images/" + this.state.league + "_player_images/" + item.firstName.replace(/ /g,"_").replace(/'/g, "")  + "_" + item.lastName.replace(/'/g, "") + ".png"}
-                      fallbackImage="../../dist/images/grey_man.png" style={this.state.league === 'soccer' ? {height: "70px", margin: "0 10px 0 0"}  : {display: "inline"} }/>
+                      fallbackImage="../../dist/images/grey_man.png" style={this.state.league === 'soccer' ? {height: "75px", margin: "0 10px 0 0", borderRadius: "50%"}  : {display: "inline"} }/>
                       <span>{item.fullName} | #{item.player_number} {item.position}</span>
                     </li>
                     ))

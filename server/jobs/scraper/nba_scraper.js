@@ -65,23 +65,23 @@ var getRosters = function (urlSlug, callback) {
 
 					// **** get player images ***
 					// SMALL PLAYER IMAGE URL
-					var smallImageUrl = $(element).find('td:nth-child(2) div img').attr('src');
-     			// check if there's a src for img
-    			var imgType = 'img';
-    			if (smallImageUrl === 'https://s.yimg.com/g/images/spaceball.gif') {
-    				smallImageUrl = $(element).find('td:nth-child(2) div img').css('background-image');
-    				smallImageUrl = smallImageUrl.slice(4, smallImageUrl.length - 1);
-    			}
+					// var smallImageUrl = $(element).find('td:nth-child(2) div img').attr('src');
+     // 			// check if there's a src for img
+    	// 		var imgType = 'img';
+    	// 		if (smallImageUrl === 'https://s.yimg.com/g/images/spaceball.gif') {
+    	// 			smallImageUrl = $(element).find('td:nth-child(2) div img').css('background-image');
+    	// 			smallImageUrl = smallImageUrl.slice(4, smallImageUrl.length - 1);
+    	// 		}
 
-    			var playerPicUrl = smallImageUrl;
-    			if (parseInt(smallImageUrl.length) < 80) {
-    				// make grey outline if no picture
-    				playerPicUrl = 'https://s.yimg.com/dh/ap/default/140828/silhouette@2x.png';
-    			}
-    				// else see if the img is on the src or the background-image
-    			playerImageGetter(playerPicUrl, urlSlug, name);
-    			sleep(3421);
-    			return;
+    	// 		var playerPicUrl = smallImageUrl;
+    	// 		if (parseInt(smallImageUrl.length) < 80) {
+    	// 			// make grey outline if no picture
+    	// 			playerPicUrl = 'https://s.yimg.com/dh/ap/default/140828/silhouette@2x.png';
+    	// 		}
+    	// 			// else see if the img is on the src or the background-image
+    	// 		playerImageGetter(playerPicUrl, urlSlug, name);
+    	// 		sleep(3421);
+    	// 		return;
 					// END SMALL PLAYER URL
 
 					// DON'T USE BIG IMAGE GETTER
@@ -140,7 +140,7 @@ var getRosters = function (urlSlug, callback) {
 			console.log(error);
 		}
 		// add back to get rosters
-		console.log('all player images for ' + team.team_name + ' added.'); return;
+		// console.log('all player images for ' + team.team_name + ' added.'); return;
 		rosterController.addStuff(team);
 	});
 }

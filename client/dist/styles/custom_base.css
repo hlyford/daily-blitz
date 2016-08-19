@@ -55,6 +55,7 @@ html {
     border-radius: 4px;
     color: white; }
     html .content-container .title, html .content-container .page-titles {
+      text-align: center;
       display: flex;
       justify-content: center; }
     html .content-container .main-quiz-content {
@@ -70,6 +71,8 @@ html {
         transition: background-color 700ms ease; }
         html .content-container .main-quiz-content .guess-box.boom {
           background-color: green; }
+        html .content-container .main-quiz-content .guess-box.boom-red {
+          background-color: red; }
       html .content-container .main-quiz-content #app {
         width: 100%; }
         html .content-container .main-quiz-content #app .subscribe-view div {

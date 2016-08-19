@@ -38,7 +38,7 @@ module.exports = {
 			data.players[index].fullName = data.players[index].name;
 			data.players[index].fullNameLower = data.players[index].name.toLowerCase();
 			// also add each type of name with diacritics removed
-			data.players[index].firstName_r = removeDiacritics(firstName);
+			data.players[index]['firstName_r'] = removeDiacritics(firstName);
 			data.players[index].firstNameLower_r = removeDiacritics(firstName.toLowerCase());
 			data.players[index].lastNameLower_r = removeDiacritics(data.players[index].lastName.toLowerCase());
 			data.players[index].lastName_r = removeDiacritics(data.players[index].lastName);
@@ -53,7 +53,7 @@ module.exports = {
 			players: data.players,
 			league: data.league
 		}).then(function () {
-			console.log(data.team_name + ' added to db');
+			console.log(data.team_name + ' added to ' + Roster['RosterNba']);
 		});
 	},
 	getAllRosters: function (league, callback) {
