@@ -8,11 +8,11 @@ var rosterController = require('./controllers/rosterController');
 var mongoInserter = require('./controllers/mongoInserter');
 // var scraper = require('./jobs/scraper/scraper');
 // ----- CHANGE LEAGUE HERE -----
-var allTeams = require('./jobs/scraper/allTeams.js').soccer;
+var allTeams = require('./jobs/scraper/allTeams.js').nfl;
 
 // require in other files
 
-var port = process.env.PORT || 8000;
+var port = process.env.PORT || 8010;
 var app = express();
 
 // set up MongoDB

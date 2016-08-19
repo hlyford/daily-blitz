@@ -87,7 +87,7 @@ var getRosters = function (urlSlug, callback) {
 		    // 			var playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image');
 		    // 			if (parseInt(playerPicUrl.children().length) === 0) {
 		    // 				// make grey outline if no picture
-		    // 				playerPicUrl = 'http://www.clker.com/cliparts/m/3/I/C/c/2/grey-silhouette-of-man-md.png';
+		    // 				playerPicUrl = 'https://s.yimg.com/dh/ap/default/140828/silhouette@2x.png';
 		    // 			} else {
 		    // 				// else see if the img is on the src or the background-image
 		    // 				playerPicUrl = playerPicUrl.find('img:first-of-type').attr('src');

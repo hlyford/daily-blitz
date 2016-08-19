@@ -27012,10 +27012,11 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _reactImageFallback = __webpack_require__(237);
+
+	var _reactImageFallback2 = _interopRequireDefault(_reactImageFallback);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// ----- QUIZ COMPONENT ---- //
-
 
 	var Quiz = _react2.default.createClass({
 	  displayName: 'Quiz',
@@ -27171,7 +27172,6 @@
 	  render: function render() {
 	    var _this = this;
 
-	    console.log(this.state);
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'quiz-view' },
@@ -27228,7 +27228,9 @@
 	                return _react2.default.createElement(
 	                  'li',
 	                  { key: item.fullName },
-	                  _this.state.league === 'nba' ? _react2.default.createElement('img', { src: "../../dist/images/" + _this.state.league + "_player_images/" + item.firstName.replace(/ /g, "_").replace(/'/g, "") + "_" + item.lastName.replace(/'/g, "") + ".png" }) : null,
+	                  _react2.default.createElement(_reactImageFallback2.default, {
+	                    src: "../../dist/images/" + _this.state.league + "_player_images/" + item.firstName.replace(/ /g, "_").replace(/'/g, "") + "_" + item.lastName.replace(/'/g, "") + ".png",
+	                    fallbackImage: '../../dist/images/grey_man.png', style: _this.state.league === 'soccer' ? { height: "70px", margin: "0 10px 0 0" } : { display: "inline" } }),
 	                  item.fullName,
 	                  ' | #',
 	                  item.player_number,
@@ -27252,7 +27254,8 @@
 	      )
 	    );
 	  }
-	});
+	}); // ----- QUIZ COMPONENT ---- //
+
 
 	exports.default = Quiz;
 
@@ -27416,6 +27419,344 @@
 	});
 
 	exports.default = Rosters;
+
+/***/ },
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _filterDomProps = __webpack_require__(238);
+
+	var _filterDomProps2 = _interopRequireDefault(_filterDomProps);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ReactImageFallback = (function (_Component) {
+		_inherits(ReactImageFallback, _Component);
+
+		function ReactImageFallback(props) {
+			_classCallCheck(this, ReactImageFallback);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ReactImageFallback).call(this, props));
+
+			_this.displayImage = new window.Image();
+			_this.state = {
+				imageSource: props.initialImage
+			};
+			_this.setDisplayImage = _this.setDisplayImage.bind(_this);
+			return _this;
+		}
+
+		_createClass(ReactImageFallback, [{
+			key: "componentDidMount",
+			value: function componentDidMount() {
+				this.setDisplayImage(this.props.src, this.props.fallbackImage);
+			}
+		}, {
+			key: "componentWillReceiveProps",
+			value: function componentWillReceiveProps(nextProps) {
+				if (nextProps.src !== this.props.src) {
+					this.setDisplayImage(nextProps.src, nextProps.fallbackImage);
+				}
+			}
+		}, {
+			key: "componentWillUnmount",
+			value: function componentWillUnmount() {
+				this.displayImage.onerror = null;
+				this.displayImage.onload = null;
+			}
+		}, {
+			key: "setDisplayImage",
+			value: function setDisplayImage(image, fallback) {
+				var _this2 = this;
+
+				this.displayImage.onerror = function () {
+					_this2.setState({
+						imageSource: fallback
+					}, function () {
+						if (_this2.props.onError) {
+							_this2.props.onError(image);
+						}
+					});
+				};
+				this.displayImage.onload = function () {
+					_this2.setState({
+						imageSource: image
+					}, function () {
+						if (_this2.props.onLoad) {
+							_this2.props.onLoad(image);
+						}
+					});
+				};
+				this.displayImage.src = image;
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				var domProps = (0, _filterDomProps2.default)(this.props);
+				return this.state.imageSource ? _react2.default.createElement("img", _extends({}, domProps, { src: this.state.imageSource })) : null;
+			}
+		}]);
+
+		return ReactImageFallback;
+	})(_react.Component);
+
+	exports.default = ReactImageFallback;
+
+	ReactImageFallback.displayName = "ReactImageFallback";
+
+	ReactImageFallback.propTypes = {
+		src: _react.PropTypes.string.isRequired,
+		fallbackImage: _react.PropTypes.string.isRequired,
+		initialImage: _react.PropTypes.string,
+		onLoad: _react.PropTypes.func,
+		onError: _react.PropTypes.func
+	};
+
+	ReactImageFallback.defaultProps = {
+		initialImage: null
+	};
+
+/***/ },
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = filterDOMProps;
+
+	var _htmlAttributes = __webpack_require__(239);
+
+	var _htmlAttributes2 = _interopRequireDefault(_htmlAttributes);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var eventProps = {
+		onCopy: true,
+		onCut: true,
+		onPaste: true,
+		onLoad: true,
+		onError: true,
+		onWheel: true,
+		onScroll: true,
+		onCompositionEnd: true,
+		onCompositionStart: true,
+		onCompositionUpdate: true,
+		onKeyDown: true,
+		onKeyPress: true,
+		onKeyUp: true,
+		onFocus: true,
+		onBlur: true,
+		onChange: true,
+		onInput: true,
+		onSubmit: true,
+		onClick: true,
+		onContextMenu: true,
+		onDoubleClick: true,
+		onDrag: true,
+		onDragEnd: true,
+		onDragEnter: true,
+		onDragExit: true,
+		onDragLeave: true,
+		onDragOver: true,
+		onDragStart: true,
+		onDrop: true,
+		onMouseDown: true,
+		onMouseEnter: true,
+		onMouseLeave: true,
+		onMouseMove: true,
+		onMouseOut: true,
+		onMouseOver: true,
+		onMouseUp: true,
+		onSelect: true,
+		onTouchCancel: true,
+		onTouchEnd: true,
+		onTouchMove: true,
+		onTouchStart: true,
+		onAnimationStart: true,
+		onAnimationEnd: true,
+		onAnimationIteration: true,
+		onTransitionEnd: true
+	};
+
+	function isValidDOMProp(prop) {
+		return eventProps[prop] || _htmlAttributes2.default[prop];
+	}
+
+	function filterDOMProps(props) {
+		var domProps = {};
+		for (var prop in props) {
+			if (props.hasOwnProperty(prop) && isValidDOMProp(prop)) {
+				domProps[prop] = props[prop];
+			}
+		}
+		return domProps;
+	}
+
+/***/ },
+/* 239 */
+/***/ function(module, exports) {
+
+	/*!
+	 * html-attributes
+	 * https://github.com/alexmingoia/html-attributes
+	 */
+
+	'use strict';
+
+	/**
+	 * @module html-attributes
+	 */
+
+	module.exports = {
+	  "abbr": "abbr",
+	  "accept": "accept",
+	  "acceptCharset": "accept-charset",
+	  "accessKey": "accesskey",
+	  "action": "action",
+	  "allowFullScreen": "allowfullscreen",
+	  "allowTransparency": "allowtransparency",
+	  "alt": "alt",
+	  "async": "async",
+	  "autoComplete": "autocomplete",
+	  "autoFocus": "autofocus",
+	  "autoPlay": "autoplay",
+	  "cellPadding": "cellpadding",
+	  "cellSpacing": "cellspacing",
+	  "challenge": "challenge",
+	  "charset": "charset",
+	  "checked": "checked",
+	  "cite": "cite",
+	  "class": "class",
+	  "className": "class",
+	  "cols": "cols",
+	  "colSpan": "colspan",
+	  "command": "command",
+	  "content": "content",
+	  "contentEditable": "contenteditable",
+	  "contextMenu": "contextmenu",
+	  "controls": "controls",
+	  "coords": "coords",
+	  "crossOrigin": "crossorigin",
+	  "data": "data",
+	  "dateTime": "datetime",
+	  "default": "default",
+	  "defer": "defer",
+	  "dir": "dir",
+	  "disabled": "disabled",
+	  "download": "download",
+	  "draggable": "draggable",
+	  "dropzone": "dropzone",
+	  "encType": "enctype",
+	  "for": "for",
+	  "form": "form",
+	  "formAction": "formaction",
+	  "formEncType": "formenctype",
+	  "formMethod": "formmethod",
+	  "formNoValidate": "formnovalidate",
+	  "formTarget": "formtarget",
+	  "frameBorder": "frameBorder",
+	  "headers": "headers",
+	  "height": "height",
+	  "hidden": "hidden",
+	  "high": "high",
+	  "href": "href",
+	  "hrefLang": "hreflang",
+	  "htmlFor": "for",
+	  "httpEquiv": "http-equiv",
+	  "icon": "icon",
+	  "id": "id",
+	  "inputMode": "inputmode",
+	  "isMap": "ismap",
+	  "itemId": "itemid",
+	  "itemProp": "itemprop",
+	  "itemRef": "itemref",
+	  "itemScope": "itemscope",
+	  "itemType": "itemtype",
+	  "kind": "kind",
+	  "label": "label",
+	  "lang": "lang",
+	  "list": "list",
+	  "loop": "loop",
+	  "manifest": "manifest",
+	  "max": "max",
+	  "maxLength": "maxlength",
+	  "media": "media",
+	  "mediaGroup": "mediagroup",
+	  "method": "method",
+	  "min": "min",
+	  "minLength": "minlength",
+	  "multiple": "multiple",
+	  "muted": "muted",
+	  "name": "name",
+	  "noValidate": "novalidate",
+	  "open": "open",
+	  "optimum": "optimum",
+	  "pattern": "pattern",
+	  "ping": "ping",
+	  "placeholder": "placeholder",
+	  "poster": "poster",
+	  "preload": "preload",
+	  "radioGroup": "radiogroup",
+	  "readOnly": "readonly",
+	  "rel": "rel",
+	  "required": "required",
+	  "role": "role",
+	  "rows": "rows",
+	  "rowSpan": "rowspan",
+	  "sandbox": "sandbox",
+	  "scope": "scope",
+	  "scoped": "scoped",
+	  "scrolling": "scrolling",
+	  "seamless": "seamless",
+	  "selected": "selected",
+	  "shape": "shape",
+	  "size": "size",
+	  "sizes": "sizes",
+	  "sortable": "sortable",
+	  "span": "span",
+	  "spellCheck": "spellcheck",
+	  "src": "src",
+	  "srcDoc": "srcdoc",
+	  "srcSet": "srcset",
+	  "start": "start",
+	  "step": "step",
+	  "style": "style",
+	  "tabIndex": "tabindex",
+	  "target": "target",
+	  "title": "title",
+	  "translate": "translate",
+	  "type": "type",
+	  "typeMustMatch": "typemustmatch",
+	  "useMap": "usemap",
+	  "value": "value",
+	  "width": "width",
+	  "wmode": "wmode",
+	  "wrap": "wrap"
+	};
+
 
 /***/ }
 /******/ ]);

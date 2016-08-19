@@ -1,6 +1,7 @@
 // ----- QUIZ COMPONENT ---- //
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactImageFallback from "react-image-fallback";
 
 var Quiz = React.createClass({
   getInitialState: function() {
@@ -146,7 +147,6 @@ var Quiz = React.createClass({
   },
 
   render: function() {
-    console.log(this.state);
     return (
       <div className="quiz-view">
         <div className="page-titles"><h2>{ this.state.quiz_info.title ? this.state.quiz_info.title : "Start the quiz" }</h2></div>
@@ -164,7 +164,9 @@ var Quiz = React.createClass({
                     { this.state.correct.map((item)=>
                       (
                     <li key={item.fullName}>
-                      {this.state.league === 'nba' ? <img src={"../../dist/images/" + this.state.league + "_player_images/" + item.firstName.replace(/ /g,"_").replace(/'/g, "")  + "_" + item.lastName.replace(/'/g, "") + ".png"} /> : null}
+                      <ReactImageFallback
+                      src={"../../dist/images/" + this.state.league + "_player_images/" + item.firstName.replace(/ /g,"_").replace(/'/g, "")  + "_" + item.lastName.replace(/'/g, "") + ".png"}
+                      fallbackImage="../../dist/images/grey_man.png" style={this.state.league === 'soccer' ? {height: "70px", margin: "0 10px 0 0"}  : {display: "inline"} }/>
                       {item.fullName} | #{item.player_number} {item.position}
                     </li>
                     ))

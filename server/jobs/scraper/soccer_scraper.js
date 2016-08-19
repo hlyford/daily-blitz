@@ -83,26 +83,37 @@ var getRosters = function (urlSlug, callback) {
 					// player['salary'] = salary;
 
 					// PLAYER IMAGE URL
-					var smallImageUrl = $(element).find('td:nth-child(2) div img').attr('src');
+					// var smallImageUrl = $(element).find('td:nth-child(2) div img').attr('src');
 
-		   //  			// check if there's a src for img
+
+					// BIG IMAGE GETTER
+					var bigImageUrl = $(element).find('td:nth-child(2) div div a').attr('href');
+					bigImageUrl = baseBase + bigImageUrl;
+	  			request(bigImageUrl, function (error, response, html) {
+	  				if (error) throw error;
+		  			if (!error && response.statusCode == 200) {
+		    			var $$ = cheerio.load(html);
+		    			// check if there's a src for img
 		    			var imgType = 'img';
-		    			if (smallImageUrl === 'https://s.yimg.com/g/images/spaceball.gif') {
-		    				smallImageUrl = $(element).find('td:nth-child(2) div img').css('background-image');
-		    				smallImageUrl = smallImageUrl.slice(4, smallImageUrl.length - 1);
-		    			}
-
-		    			var playerPicUrl = smallImageUrl;
-		    			if (parseInt(smallImageUrl.length) < 80) {
+		    			var playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image');
+		    			if (parseInt(playerPicUrl.children().length) === 0) {
 		    				// make grey outline if no picture
-		    				playerPicUrl = 'http://www.clker.com/cliparts/m/3/I/C/c/2/grey-silhouette-of-man-md.png';
-		    			}
+		    				playerPicUrl = 'https://s.yimg.com/dh/ap/default/140828/silhouette@2x.png';
+		    			} else {
 		    				// else see if the img is on the src or the background-image
-		    			sleep(2431);
+		    				playerPicUrl = playerPicUrl.find('img:first-of-type').attr('src');
+		    				if (playerPicUrl.length < 80) {
+		    					imgType = 'background';
+		    					playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image img:first-of-type').css('background-image');
+		    					playerPicUrl = playerPicUrl.slice(4, playerPicUrl.length - 1);
+		    				}
+		    			}
 		    			playerImageGetter(playerPicUrl, urlSlug, name);
+		    			sleep(1421);
 		    			return;
-
-					// END PLAYER URL
+		    		}
+		    	});
+					// ----- end big image getter ----
 
 					for (key in player) {
 						if (player[key] === '') {
@@ -116,6 +127,7 @@ var getRosters = function (urlSlug, callback) {
 			console.log(error);
 		}
 		// add back to get rosters
+		console.log('all palyers for '+team.team_name+' added.');
 		return;
 		rosterControllerSoccer.addStuff(team);
 	});
@@ -133,6 +145,25 @@ function teamImageGetter (teamImageUrl, urlSlug, league) {
 }
 
 function playerImageGetter (playerImageUrl, shortSlug, playerName) {
+	// format player name
+	function formatter (player) {
+		// loop from the back of the player name looking for space and forming last name
+		var lastName = '', firstName = ''; fullName = '';
+		var nameSoFar = '';
+		for (var i = 0; i < player.length; i++) {
+			if (player[i] === '-') {
+				firstName = nameSoFar;
+				firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+				lastName = player.slice(i + 1);
+				lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1);
+				fullName = firstName + ' ' + lastName;
+				return fullName;
+			} else {
+				nameSoFar += player[i];
+			}
+		}
+	}
+	playerName = formatter(playerName);
 	// get the images and save them to the images directory
 	var dlDir = '/Users/honree/daily-blitz/server/images_server/soccer_player_images/' + playerName.replace(/ /g,"_").replace(/\'/g, '') +'.png';
 	var curl =  'curl ' + playerImageUrl.replace(/&/g,'\\&') + ' -o ' + dlDir  + ' --create-dirs';

@@ -76,7 +76,7 @@ var getRosters = function (urlSlug, callback) {
     			var playerPicUrl = smallImageUrl;
     			if (parseInt(smallImageUrl.length) < 80) {
     				// make grey outline if no picture
-    				playerPicUrl = 'http://www.clker.com/cliparts/m/3/I/C/c/2/grey-silhouette-of-man-md.png';
+    				playerPicUrl = 'https://s.yimg.com/dh/ap/default/140828/silhouette@2x.png';
     			}
     				// else see if the img is on the src or the background-image
     			playerImageGetter(playerPicUrl, urlSlug, name);

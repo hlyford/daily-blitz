@@ -77,28 +77,26 @@ var getRosters = function (urlSlug, callback) {
 					// var salary = $(element).find('td:nth-child(10) span span');
 					// player['salary'] = salary;
 
-					// PLAYER IMAGE URL
-					// var bigImageUrl = $(element).find('td:nth-child(2) div img').attr('src');
+					// **** get player images ***
+					// SMALL PLAYER IMAGE URL
+					var smallImageUrl = $(element).find('td:nth-child(2) div img').attr('src');
+     			// check if there's a src for img
+    			var imgType = 'img';
+    			if (smallImageUrl === 'https://s.yimg.com/g/images/spaceball.gif') {
+    				smallImageUrl = $(element).find('td:nth-child(2) div img').css('background-image');
+    				smallImageUrl = smallImageUrl.slice(4, smallImageUrl.length - 1);
+    			}
 
-		   //  			// check if there's a src for img
-		   //  			var imgType = 'img';
-		   //  			if (bigImageUrl === 'https://s.yimg.com/g/images/spaceball.gif') {
-		   //  				bigImageUrl = $(element).find('td:nth-child(2) div img').css('background-image');
-		   //  				bigImageUrl = bigImageUrl.slice(4, bigImageUrl.length - 1);
-		   //  			}
-
-		   //  			var playerPicUrl = bigImageUrl;
-		   //  			console.log('here', playerPicUrl);
-		   //  			if (parseInt(bigImageUrl.length) < 80) {
-		   //  				// make grey outline if no picture
-		   //  				playerPicUrl = 'http://www.clker.com/cliparts/m/3/I/C/c/2/grey-silhouette-of-man-md.png';
-		   //  			}
-		   //  				// else see if the img is on the src or the background-image
-		   //  			sleep(2431);
-		   //  			playerImageGetter(playerPicUrl, urlSlug, name);
-		   //  			return;
-
-					// END PLAYER URL
+    			var playerPicUrl = smallImageUrl;
+    			if (parseInt(smallImageUrl.length) < 80) {
+    				// make grey outline if no picture
+    				playerPicUrl = 'https://s.yimg.com/dh/ap/default/140828/silhouette@2x.png';
+    			}
+    				// else see if the img is on the src or the background-image
+    			playerImageGetter(playerPicUrl, urlSlug, name);
+    			sleep(2421);
+    			return;
+					// END SMALL PLAYER URL
 
 					for (key in player) {
 						if (player[key] === '') {
@@ -112,6 +110,8 @@ var getRosters = function (urlSlug, callback) {
 			console.log(error);
 		}
 		// add back to get rosters
+		console.log('all players from '+team.team_name+' added.');
+		return;
 		rosterControllerMlb.addStuff(team);
 	});
 }
