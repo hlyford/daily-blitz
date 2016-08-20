@@ -23,10 +23,10 @@ var Quiz = React.createClass({
       // PLACEHOLDER KOBE QUIZ FOR NOW
       this.state.active_quiz = '2x68a';
     }
-    this.getQuiz();
+    // this.getQuiz();
   },
   componentDidMount: function () {
-    // this.getQuiz();
+    this.getQuiz();
     // DOESN'T WORK YET
     if ((this.refs.guess) !== undefined) {
       (this.refs.guess).focus();
@@ -144,6 +144,7 @@ var Quiz = React.createClass({
       success: function(data) {
         // console.log('from server', data);
         this.state.quiz_info = this.addFullNameAndConvertLowerCase(data[0]);
+        this.setState({team_name: data[0].team_name})
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -158,16 +159,17 @@ var Quiz = React.createClass({
   },
 
   render: function() {
-    console.log(this.state);
+    console.log('state', this.state);
     return (
       <div className="quiz-view">
-        <div className="page-titles"><h2>{ this.state.quiz_info.title ? this.state.quiz_info.title : 'Start quiz!' }</h2></div>
+        <div><img className="team-logo" src= {this.state.league === 'nba' ? `../../dist/images/team_logo_images/${this.state.quiz_info.acronym}.png` : `../../dist/images/team_logo_images/${this.state.league}_${this.state.quiz_info.acronym}.png`} /></div>
+        <div className="page-titles"><h2>{ this.state.quiz_info.team_name }</h2></div>
           <div className="quiz-view-body">
             { !this.state.takingQuiz ?
               <div><button className="text-middle" onClick={ this.startQuiz }>Take quiz!</button></div> :
               <div>
                 <div className="guess-box-container text-middle">
-                  <div><img className="team-logo" src= {this.state.league === 'nba' ? `../../dist/images/team_logo_images/${this.state.quiz_info.acronym}.png` : `../../dist/images/team_logo_images/${this.state.league}_${this.state.quiz_info.acronym}.png`} /> { this.state.quiz_info.title }</div>
+
                { <div> You have answered: {this.state.correct.length} / {this.state.quiz_info.players.length}</div> }
                   <input ref="guess" className="guess-box" type="text" name="guessing" value={this.state.guessValue} onChange={this.handleChange} />
                 </div>

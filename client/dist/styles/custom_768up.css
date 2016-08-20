@@ -18,17 +18,23 @@
     html .content-container .main-quiz-content #app .sport-selection button {
       display: inline-block;
       width: auto; }
-    html .content-container .main-quiz-content #app .quiz-view .guess-box-container {
+    html .content-container .main-quiz-content #app .quiz-view .page-titles {
       padding-right: 10%; }
-    html .content-container .main-quiz-content #app .quiz-view .correct-guess-container li {
+    html .content-container .main-quiz-content #app .quiz-view .quiz-view-body > div:first-of-type {
+      padding-right: 10%; }
+    html .content-container .main-quiz-content #app .quiz-view .quiz-view-body .correct-guess-container li {
       display: inline-block;
       width: 48%;
       text-align: left; }
-      html .content-container .main-quiz-content #app .quiz-view .correct-guess-container li img {
+      html .content-container .main-quiz-content #app .quiz-view .quiz-view-body .correct-guess-container li img {
         width: 85px;
         height: 60px; }
-      html .content-container .main-quiz-content #app .quiz-view .correct-guess-container li span {
+      html .content-container .main-quiz-content #app .quiz-view .quiz-view-body .correct-guess-container li span {
         display: inline;
-        font-size: 15px; } }
+        font-size: 15px; }
+    html .content-container .main-quiz-content #app .quiz-view .quiz-view-body .timer {
+      margin-left: 10%; }
+      html .content-container .main-quiz-content #app .quiz-view .quiz-view-body .timer + button {
+        margin-left: 10%; } }
 
 /*# sourceMappingURL=custom_768up.css.map */

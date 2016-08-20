@@ -27040,10 +27040,10 @@
 	      // PLACEHOLDER KOBE QUIZ FOR NOW
 	      this.state.active_quiz = '2x68a';
 	    }
-	    this.getQuiz();
+	    // this.getQuiz();
 	  },
 	  componentDidMount: function componentDidMount() {
-	    // this.getQuiz();
+	    this.getQuiz();
 	    // DOESN'T WORK YET
 	    if (this.refs.guess !== undefined) {
 	      this.refs.guess.focus();
@@ -27175,6 +27175,7 @@
 	      success: function (data) {
 	        // console.log('from server', data);
 	        this.state.quiz_info = this.addFullNameAndConvertLowerCase(data[0]);
+	        this.setState({ team_name: data[0].team_name });
 	      }.bind(this),
 	      error: function (xhr, status, err) {
 	        console.error(this.props.url, status, err.toString());
@@ -27191,17 +27192,22 @@
 	  render: function render() {
 	    var _this = this;
 
-	    console.log(this.state);
+	    console.log('state', this.state);
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'quiz-view' },
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement('img', { className: 'team-logo', src: this.state.league === 'nba' ? '../../dist/images/team_logo_images/' + this.state.quiz_info.acronym + '.png' : '../../dist/images/team_logo_images/' + this.state.league + '_' + this.state.quiz_info.acronym + '.png' })
+	      ),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'page-titles' },
 	        _react2.default.createElement(
 	          'h2',
 	          null,
-	          this.state.quiz_info.title ? this.state.quiz_info.title : 'Start quiz!'
+	          this.state.quiz_info.team_name
 	        )
 	      ),
 	      _react2.default.createElement(
@@ -27221,13 +27227,6 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'guess-box-container text-middle' },
-	            _react2.default.createElement(
-	              'div',
-	              null,
-	              _react2.default.createElement('img', { className: 'team-logo', src: this.state.league === 'nba' ? '../../dist/images/team_logo_images/' + this.state.quiz_info.acronym + '.png' : '../../dist/images/team_logo_images/' + this.state.league + '_' + this.state.quiz_info.acronym + '.png' }),
-	              ' ',
-	              this.state.quiz_info.title
-	            ),
 	            _react2.default.createElement(
 	              'div',
 	              null,

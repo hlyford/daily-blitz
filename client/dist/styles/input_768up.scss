@@ -34,21 +34,35 @@
 				  	}
 				  }
 				  .quiz-view {
-				  	.guess-box-container {
+				  	.page-titles {
 				  		padding-right: 10%;
 				  	}
-				  	.correct-guess-container {
-				  		li {
-				  			display: inline-block;
-				  			width: 48%;
-				  			text-align: left;
-				  			img {
-				  				width: 85px;
-				  				height: 60px;
+				  	.quiz-view-body {
+				  		> div:first-of-type {
+				  			padding-right: 10%;
+				  		}
+				  		.guess-box-container {
+				  			// padding-right: 10%;
+				  		}
+				  		.correct-guess-container {
+				  			li {
+				  				display: inline-block;
+				  				width: 48%;
+				  				text-align: left;
+				  				img {
+				  					width: 85px;
+				  					height: 60px;
+				  				}
+				  				span {
+				  					display: inline;
+				  					font-size: 15px
+				  				}
 				  			}
-				  			span {
-				  				display: inline;
-				  				font-size: 15px
+				  		}
+				  		.timer {
+				  			margin-left: 10%;
+				  			+ button {
+				  				margin-left: 10%;
 				  			}
 				  		}
 				  	}
