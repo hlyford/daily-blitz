@@ -10,7 +10,9 @@ import Quiz from './components/Quiz.jsx';
 import Rosters from './components/Rosters.jsx';
 
 // ------ END SUB COMPONENTS ------- //
-
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
 var App = React.createClass({
 
   getInitialState: function() {
@@ -33,7 +35,7 @@ var App = React.createClass({
         </div>
           <div className="bottom-buttons">
             <div className="today-quiz">
-              <Link to='quiz'
+              <Link to={{ pathname: '/quiz', query: { league: 'soccer', quiz_id: 'manchester-united' } }}
                 activeClassName='-active'>Play today&#39;s quiz
               </Link>
               </div>

@@ -79,6 +79,10 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// ------ END SUB COMPONENTS ------- //
+	$(function () {
+	  $('[data-toggle="popover"]').popover();
+	});
+	// import subcomponents
 
 	var App = _react2.default.createClass({
 	  displayName: 'App',
@@ -161,7 +165,7 @@
 	            { className: 'today-quiz' },
 	            _react2.default.createElement(
 	              _reactRouter.Link,
-	              { to: 'quiz',
+	              { to: { pathname: '/quiz', query: { league: 'soccer', quiz_id: 'manchester-united' } },
 	                activeClassName: '-active' },
 	              'Play today\'s quiz'
 	            )
@@ -182,8 +186,6 @@
 	    );
 	  }
 	});
-	// import subcomponents
-
 
 	var routes = _react2.default.createElement(
 	  _reactRouter.Route,
