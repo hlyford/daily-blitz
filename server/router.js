@@ -8,6 +8,7 @@ var rosterControllerNfl = require('./controllers/rosterControllerNfl');
 var rosterControllerMlb = require('./controllers/rosterControllerMlb');
 var goatsController = require('./controllers/goatsController');
 var rosterControllerSoccer = require('./controllers/rosterControllerSoccer');
+var searchController = require('./controllers/searchController');
 var bodyParser = require('body-parser');
 var path = require('path');
 // var emailSender = require('./email/emailSender');
@@ -119,6 +120,15 @@ router.route('/roster/:league/team/:team_acronym')
 				res.send(result);
 			});
 		});
+
+// site wide search routes
+router.route('/search').post(function (req, res) {
+	req.body.search = 'warriors';
+	searchController.find(req.body.search, function (result) {
+		console.log(result);
+		res.send(result)
+	})
+});
 
 // email sending routes
 router.route('/hello')
