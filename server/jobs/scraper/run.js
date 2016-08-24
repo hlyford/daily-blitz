@@ -68,7 +68,7 @@ var looperSoccer = function (i) {
 	var nextWait = Math.floor(Math.random() * (20000 - 10000) + 10000);
 	console.log('waiting...', nextWait);
 	// EDIT THIS LINE TO CHANGE HOW MANY TEAMS TO GET
-	if (i < 20) {
+	if (i < 12) {
 		getRostersSoccer(teamsArraySoccer[i]);
 		setTimeout(function () {
 			looperSoccer(i + 1);
@@ -80,4 +80,4 @@ var looperSoccer = function (i) {
 };
 
 // start at the beginning of teams array
-// looperSoccer(3);
+looperSoccer(11);

@@ -163,7 +163,11 @@ function playerImageGetter (playerImageUrl, shortSlug, playerName) {
 			}
 		}
 	}
-	playerName = formatter(playerName);
+	if (playerName.indexOf('-') !== -1) {
+		playerName = formatter(playerName);
+	} else {
+		playerName = playerName;
+	}
 	// get the images and save them to the images directory
 	var dlDir = '/Users/honree/daily-blitz/server/images_server/soccer_player_images/' + playerName.replace(/ /g,"_").replace(/\'/g, '') +'.png';
 	var curl =  'curl ' + playerImageUrl.replace(/&/g,'\\&') + ' -o ' + dlDir  + ' --create-dirs';
@@ -171,4 +175,5 @@ function playerImageGetter (playerImageUrl, shortSlug, playerName) {
 		if (err){ console.log(stderr); throw err; }
 		else console.log(playerName + ' downloaded to ' + dlDir);
 	});
+	return;
 }
