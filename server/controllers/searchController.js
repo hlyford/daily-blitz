@@ -7,42 +7,47 @@ var RosterSoccer = require('../models/rosterSoccerModel');
 // get all data in memory when server starts
 allData = [];
 (function getAllData () {
-	Roster.find({}, function (err, result) {
+	Roster.find({},{players: 0},  function (err, result) {
   	if (err) console.log('error',err);
 	  result.forEach(function (item, index) {
 	  	allData.push(item);
 	  });
 	});
-	RosterNfl.find({}, function (err, result) {
+	RosterNfl.find({},{players: 0},  function (err, result) {
   	if (err) console.log('error',err);
 	  result.forEach(function (item, index) {
 	  	allData.push(item);
 	  });
 	});
-	RosterMlb.find({}, function (err, result) {
+	RosterMlb.find({},{players: 0},  function (err, result) {
   	if (err) console.log('error',err);
 	  result.forEach(function (item, index) {
 	  	allData.push(item);
 	  });
 	});
-	RosterSoccer.find({}, function (err, result) {
+	RosterSoccer.find({},{players: 0},  function (err, result) {
   	if (err) console.log('error',err);
 	  result.forEach(function (item, index) {
-	  	allData.push(item);
+	  	allData.push(result[index]);
 	  });
 	});
 })();
 // when query comes in, search and return
 module.exports = {
 	find: function (query, callback) {
-		console.log(query);
 		var options = {
 		  keys: ['team_name'],
-		  id: 'team_name'
+		  include: ['team_name', 'acroynm' ]
 		}
-		// allData = [{team_name: 'warriors'}];
 		var fuse = new Fuse(allData, options)
-
-		callback(fuse.search(query));
+		// only send back one team if exact match
+		var results = fuse.search(query);
+		if (query.length > 5 && results[0].item.team_name.toLowerCase().indexOf(query.toLowerCase())) {
+			console.log('madtch');
+			callback(results[0]);
+		} else {
+			callback(results);
+		}
+		return;
 	}
 }

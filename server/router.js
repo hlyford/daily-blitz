@@ -123,10 +123,8 @@ router.route('/roster/:league/team/:team_acronym')
 
 // site wide search routes
 router.route('/search').post(function (req, res) {
-	req.body.search = 'warriors';
-	searchController.find(req.body.search, function (result) {
-		console.log(result);
-		res.send(result)
+	searchController.find(req.body.query, function (result) {
+		res.send(result);
 	})
 });
 
