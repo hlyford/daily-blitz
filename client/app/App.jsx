@@ -48,7 +48,7 @@ var App = React.createClass({
             </div>
           </div>
         </div>
-        <SearchBar />
+        {/* <SearchBarch /> */}
       </div>
     );
   },

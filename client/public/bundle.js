@@ -186,8 +186,7 @@
 	            this.props.children
 	          )
 	        )
-	      ),
-	      _react2.default.createElement(_SearchBar2.default, null)
+	      )
 	    );
 	  }
 	});
