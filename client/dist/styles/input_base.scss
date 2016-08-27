@@ -23,179 +23,177 @@ html {
 		height: 100%;
 		background: rgba(0, 0, 0, 0.0);
 	}
-	nav.navbar {
-		display: block;
-		background-color: rgba(255,255,255,.6);
-		border-top: none;
-		border-bottom: none;
-		border: none;
-		border-radius: 0;
-		margin-bottom: 0;
-		.navbar-header {
-			.navbar-toggle {
-				margin-right: 20px;
+	#app {
+		nav.navbar {
+			display: block;
+			background-color: rgba(255,255,255,.6);
+			border-top: none;
+			border-bottom: none;
+			border: none;
+			border-radius: 0;
+			margin-bottom: 0;
+			.navbar-header {
+				.navbar-toggle {
+					margin-right: 20px;
+				}
 			}
-		}
-    .navbar-nav .open .dropdown-menu>li>a {
-    	color: #0FA0CE
-    }
-    .navbar-brand {
-    	max-width: 60px;
-    	float: left;
-    	padding-top: 10px;
-    	margin-left: 15px;
-    	img {
-    		width: 100%;
-    	}
-    	> * {
+	    .navbar-nav .open .dropdown-menu>li>a {
+	    	color: #0FA0CE
+	    }
+	    .navbar-brand {
+	    	max-width: 60px;
+	    	float: left;
+	    	padding-top: 10px;
+	    	margin-left: 15px;
+	    	img {
+	    		width: 100%;
+	    	}
+	    	> * {
 
-    	}
-    }
-    .navbar-item {
-    	a {
-    	color: #222;
-    		&:focus {
-    			background-color: transparent!important;
-    		}
-    	}
-    }
-	}
-	input {
-		color: black;
-	}
-  .container.main {
-    padding-top: 10%;
-  }
-	.content-container {
-    padding: 3%;
-    margin: 0px auto;
-		background-color: rgba(0,0,0,.7);
-		-webkit-border-radius: 4px;
-		-moz-border-radius: 4px;
-		border-radius: 4px;
-		color: white;
-		.title, .page-titles {
-			text-align: center;
-      display: flex;
-      justify-content: center;
+	    	}
+	    }
+	    .navbar-item {
+	    	a {
+	    	color: #222;
+	    		&:focus {
+	    			background-color: transparent!important;
+	    		}
+	    	}
+	    }
 		}
-		.main-quiz-content {
-			display: flex;
-			justify-content: center;
-			button {
-				color: white;
+		input {
+			color: black;
+		}
+	  .container.main {
+	    padding-top: 10%;
+	  }
+		.content-container {
+	    padding: 3%;
+	    margin: 0px auto;
+			background-color: rgba(0,0,0,.7);
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			border-radius: 4px;
+			color: white;
+			.title, .page-titles {
+				text-align: center;
+	      display: flex;
+	      justify-content: center;
 			}
-			.sport-selection {
+			.main-quiz-content {
+				display: flex;
+				justify-content: center;
 				button {
-					display: block;
+					color: white;
+				}
+				.sport-selection {
+					button {
+						display: block;
+						width: 100%;
+					}
+				}
+				.guess-box {
+					color: black;
+					transition: background-color 700ms ease;
+	        &.boom {
+	          background-color: green;
+	        }
+	        &.boom-red {
+	          background-color: red;
+	        }
+				}
 					width: 100%;
-				}
-			}
-			.guess-box {
-				color: black;
-				transition: background-color 700ms ease;
-        &.boom {
-          background-color: green;
-        }
-        &.boom-red {
-          background-color: red;
-        }
-			}
-			#app {
-				width: 100%;
-				.subscribe-view {
-					div {
-						padding-bottom: 1%;
-					}
-					input {
-						color: black;
-					}
-				}
-				.homepage-view {
-					.sport-selection {
-						text-align: center;
-						font-size: 1.5em;
-						> div {
-							padding-bottom: 20px;
+					.subscribe-view {
+						div {
+							padding-bottom: 1%;
 						}
-						button {
-
-							margin-right: 10px;
-							font-size: 0.8em;
-
+						input {
+							color: black;
 						}
 					}
-					.bottom-buttons {
-						text-align: center;
-						.today-quiz {
-							display: inline-block;
-							padding-right: 5%;
-						}
-						.subscribe {
-							display: inline-block;
-						}
-					}
-				}
-				.quiz-view {
-					.quiz-view-body {
-						> div {
+					.homepage-view {
+						.sport-selection {
 							text-align: center;
-							> button {
-								font-size: 1.1em;
+							font-size: 1.5em;
+							> div {
+								padding-bottom: 20px;
+							}
+							button {
+
+								margin-right: 10px;
+								font-size: 0.8em;
+
 							}
 						}
-					}
-					.guess-box-container {
-						text-align: center;
-						padding-bottom: 30px;
-						}
-					.correct-guess-container {
-						text-align: left;
-						li {
-							display: inline-block;
-							width: 49%;
-							vertical-align: top;
-							margin-left: 1%;
+						.bottom-buttons {
 							text-align: center;
-							img {
-								width: 70px;
-								height: 50px;
+							.today-quiz {
+								display: inline-block;
+								padding-right: 5%;
 							}
-							span {
-								display: block;
-								font-size: 12px
-							}
-						}
-					}
-					.team-logo {
-						width: 100px;
-						float: left;
-					}
-				}
-				.roster-view {
-					.five {
-						> div:nth-child(1) {
-							padding-bottom: 20px;
-							font-size: 1.1em;
-						}
-						li {
-							cursor: pointer;
-							img, a {
+							.subscribe {
 								display: inline-block;
 							}
-							img {
-								width: 50px;
+						}
+					}
+					.quiz-view {
+						.quiz-view-body {
+							> div {
+								text-align: center;
+								> button {
+									font-size: 1.1em;
+								}
 							}
-							a {
-								// font-size: 1.1em;
-								padding-left: 15px;
+						}
+						.guess-box-container {
+							text-align: center;
+							padding-bottom: 30px;
+							}
+						.correct-guess-container {
+							text-align: left;
+							li {
+								display: inline-block;
+								width: 49%;
+								vertical-align: top;
+								margin-left: 1%;
+								text-align: center;
+								img {
+									width: 70px;
+									height: 50px;
+								}
+								span {
+									display: block;
+									font-size: 12px
+								}
+							}
+						}
+						.team-logo {
+							width: 100px;
+							float: left;
+						}
+					}
+					.roster-view {
+						.five {
+							> div:nth-child(1) {
+								padding-bottom: 20px;
+								font-size: 1.1em;
+							}
+							li {
+								cursor: pointer;
+								img, a {
+									display: inline-block;
+								}
+								img {
+									width: 50px;
+								}
+								a {
+									// font-size: 1.1em;
+									padding-left: 15px;
+								}
 							}
 						}
 					}
-				}
 			}
 		}
 	}
-
-
 }

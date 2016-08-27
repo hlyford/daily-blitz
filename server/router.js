@@ -127,6 +127,11 @@ router.route('/search').post(function (req, res) {
 		res.send(result);
 	})
 });
+router.route('/search').get(function (req, res) {
+	searchController.find('all', function (result) {
+		res.send(result);
+	})
+});
 
 // email sending routes
 router.route('/hello')
