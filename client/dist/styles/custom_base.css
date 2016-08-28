@@ -19,114 +19,152 @@ html {
   html body {
     height: 100%;
     background: transparent; }
-  html #app nav.navbar {
-    display: block;
-    background-color: rgba(255, 255, 255, 0.6);
-    border-top: none;
-    border-bottom: none;
-    border: none;
-    border-radius: 0;
-    margin-bottom: 0; }
-    html #app nav.navbar .navbar-header .navbar-toggle {
-      margin-right: 20px; }
-    html #app nav.navbar .navbar-nav .open .dropdown-menu > li > a {
-      color: #0FA0CE; }
-    html #app nav.navbar .navbar-brand {
-      max-width: 60px;
-      float: left;
-      padding-top: 10px;
-      margin-left: 15px; }
-      html #app nav.navbar .navbar-brand img {
+  html #app {
+    width: 100%; }
+    html #app nav.navbar {
+      display: block;
+      background-color: rgba(255, 255, 255, 0.6);
+      border-top: none;
+      border-bottom: none;
+      border: none;
+      border-radius: 0;
+      margin-bottom: 0; }
+      html #app nav.navbar .navbar-header .navbar-toggle {
+        margin-right: 20px; }
+      html #app nav.navbar .navbar-nav .open .dropdown-menu > li > a {
+        color: #0FA0CE; }
+      html #app nav.navbar .navbar-brand {
+        max-width: 60px;
+        float: left;
+        padding-top: 10px;
+        margin-left: 15px; }
+        html #app nav.navbar .navbar-brand img {
+          width: 100%; }
+      html #app nav.navbar .navbar-item a {
+        color: #222; }
+        html #app nav.navbar .navbar-item a:focus {
+          background-color: transparent !important; }
+      html #app nav.navbar .navbar-item .react-search {
+        margin: 0;
+        margin-top: 6px;
+        font-weight: 200;
+        line-height: 1.5;
         width: 100%; }
-    html #app nav.navbar .navbar-item a {
-      color: #222; }
-      html #app nav.navbar .navbar-item a:focus {
-        background-color: transparent !important; }
-  html #app input {
-    color: black; }
-  html #app .container.main {
-    padding-top: 10%; }
-  html #app .content-container {
-    padding: 3%;
-    margin: 0px auto;
-    background-color: rgba(0, 0, 0, 0.7);
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    color: white; }
-    html #app .content-container .title, html #app .content-container .page-titles {
-      text-align: center;
-      display: flex;
-      justify-content: center; }
-    html #app .content-container .main-quiz-content {
-      display: flex;
-      justify-content: center;
-      width: 100%; }
-      html #app .content-container .main-quiz-content button {
-        color: white; }
-      html #app .content-container .main-quiz-content .sport-selection button {
+      html #app nav.navbar .navbar-item .react-search__input {
+        color: #666;
+        width: 100%;
+        padding: 1em;
+        margin-bottom: 0; }
+      html #app nav.navbar .navbar-item .react-search__menu {
         display: block;
-        width: 100%; }
-      html #app .content-container .main-quiz-content .guess-box {
-        color: black;
-        transition: background-color 700ms ease; }
-        html #app .content-container .main-quiz-content .guess-box.boom {
-          background-color: green; }
-        html #app .content-container .main-quiz-content .guess-box.boom-red {
-          background-color: red; }
-      html #app .content-container .main-quiz-content .subscribe-view div {
-        padding-bottom: 1%; }
-      html #app .content-container .main-quiz-content .subscribe-view input {
-        color: black; }
-      html #app .content-container .main-quiz-content .homepage-view .sport-selection {
+        line-height: 1.5em;
+        text-decoration: none;
+        white-space: nowrap;
+        padding: 0.5em; }
+      html #app nav.navbar .navbar-item .react-search__menu-items {
+        list-style-type: none;
+        padding: 0em;
+        margin: 0em; }
+        html #app nav.navbar .navbar-item .react-search__menu-items a {
+          color: #0FA0CE;
+          font-size: 14px; }
+          html #app nav.navbar .navbar-item .react-search__menu-items a:hover, html #app nav.navbar .navbar-item .react-search__menu-items a:visited {
+            font-weight: bold; }
+      html #app nav.navbar .navbar-item .react-search__menu--open {
+        position: absolute;
+        width: 100%;
+        visibility: visible;
+        z-index: 2;
+        background: #fff;
+        border: 1px solid #b7b7b7; }
+      html #app nav.navbar .navbar-item .react-search__menu--hidden {
+        visibility: hidden; }
+    html #app input {
+      color: black; }
+    html #app .container.main {
+      padding-top: 10%; }
+    html #app .content-container {
+      padding: 3%;
+      margin: 0px auto;
+      background-color: rgba(0, 0, 0, 0.7);
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+      color: white; }
+      html #app .content-container .title, html #app .content-container .page-titles {
         text-align: center;
-        font-size: 1.5em; }
-        html #app .content-container .main-quiz-content .homepage-view .sport-selection > div {
-          padding-bottom: 20px; }
-        html #app .content-container .main-quiz-content .homepage-view .sport-selection button {
-          margin-right: 10px;
-          font-size: 0.8em; }
-      html #app .content-container .main-quiz-content .homepage-view .bottom-buttons {
-        text-align: center; }
-        html #app .content-container .main-quiz-content .homepage-view .bottom-buttons .today-quiz {
-          display: inline-block;
-          padding-right: 5%; }
-        html #app .content-container .main-quiz-content .homepage-view .bottom-buttons .subscribe {
-          display: inline-block; }
-      html #app .content-container .main-quiz-content .quiz-view .quiz-view-body > div {
-        text-align: center; }
-        html #app .content-container .main-quiz-content .quiz-view .quiz-view-body > div > button {
-          font-size: 1.1em; }
-      html #app .content-container .main-quiz-content .quiz-view .guess-box-container {
-        text-align: center;
-        padding-bottom: 30px; }
-      html #app .content-container .main-quiz-content .quiz-view .correct-guess-container {
-        text-align: left; }
-        html #app .content-container .main-quiz-content .quiz-view .correct-guess-container li {
-          display: inline-block;
-          width: 49%;
-          vertical-align: top;
-          margin-left: 1%;
+        display: flex;
+        justify-content: center; }
+      html #app .content-container .main-quiz-content {
+        display: flex;
+        justify-content: center; }
+        html #app .content-container .main-quiz-content button {
+          color: white; }
+        html #app .content-container .main-quiz-content .sport-selection button {
+          display: block;
+          width: 100%; }
+        html #app .content-container .main-quiz-content .guess-box {
+          color: black;
+          transition: background-color 700ms ease; }
+          html #app .content-container .main-quiz-content .guess-box.boom {
+            background-color: green; }
+          html #app .content-container .main-quiz-content .guess-box.boom-red {
+            background-color: red; }
+        html #app .content-container .main-quiz-content .views {
+          width: 100%; }
+        html #app .content-container .main-quiz-content .subscribe-view div {
+          padding-bottom: 1%; }
+        html #app .content-container .main-quiz-content .subscribe-view input {
+          color: black; }
+        html #app .content-container .main-quiz-content .homepage-view .sport-selection {
+          text-align: center;
+          font-size: 1.5em; }
+          html #app .content-container .main-quiz-content .homepage-view .sport-selection > div {
+            padding-bottom: 20px; }
+          html #app .content-container .main-quiz-content .homepage-view .sport-selection button {
+            margin-right: 10px;
+            font-size: 0.8em; }
+        html #app .content-container .main-quiz-content .homepage-view .bottom-buttons {
           text-align: center; }
-          html #app .content-container .main-quiz-content .quiz-view .correct-guess-container li img {
-            width: 70px;
-            height: 50px; }
-          html #app .content-container .main-quiz-content .quiz-view .correct-guess-container li span {
-            display: block;
-            font-size: 12px; }
-      html #app .content-container .main-quiz-content .quiz-view .team-logo {
-        width: 100px;
-        float: left; }
-      html #app .content-container .main-quiz-content .roster-view .five > div:nth-child(1) {
-        padding-bottom: 20px;
-        font-size: 1.1em; }
-      html #app .content-container .main-quiz-content .roster-view .five li {
-        cursor: pointer; }
-        html #app .content-container .main-quiz-content .roster-view .five li img, html #app .content-container .main-quiz-content .roster-view .five li a {
-          display: inline-block; }
-        html #app .content-container .main-quiz-content .roster-view .five li img {
-          width: 50px; }
-        html #app .content-container .main-quiz-content .roster-view .five li a {
-          padding-left: 15px; }
+          html #app .content-container .main-quiz-content .homepage-view .bottom-buttons .today-quiz {
+            display: inline-block;
+            padding-right: 5%; }
+          html #app .content-container .main-quiz-content .homepage-view .bottom-buttons .subscribe {
+            display: inline-block; }
+        html #app .content-container .main-quiz-content .quiz-view .quiz-view-body > div {
+          text-align: center; }
+          html #app .content-container .main-quiz-content .quiz-view .quiz-view-body > div > button {
+            font-size: 1.1em; }
+        html #app .content-container .main-quiz-content .quiz-view .guess-box-container {
+          text-align: center;
+          padding-bottom: 30px; }
+        html #app .content-container .main-quiz-content .quiz-view .correct-guess-container {
+          text-align: left; }
+          html #app .content-container .main-quiz-content .quiz-view .correct-guess-container li {
+            display: inline-block;
+            width: 49%;
+            vertical-align: top;
+            margin-left: 1%;
+            text-align: center; }
+            html #app .content-container .main-quiz-content .quiz-view .correct-guess-container li img {
+              width: 70px;
+              height: 50px; }
+            html #app .content-container .main-quiz-content .quiz-view .correct-guess-container li span {
+              display: block;
+              font-size: 12px; }
+        html #app .content-container .main-quiz-content .quiz-view .team-logo {
+          width: 100px;
+          float: left; }
+        html #app .content-container .main-quiz-content .roster-view .five > div:nth-child(1) {
+          padding-bottom: 20px;
+          font-size: 1.1em; }
+        html #app .content-container .main-quiz-content .roster-view .five li {
+          cursor: pointer; }
+          html #app .content-container .main-quiz-content .roster-view .five li img, html #app .content-container .main-quiz-content .roster-view .five li a {
+            display: inline-block; }
+          html #app .content-container .main-quiz-content .roster-view .five li img {
+            width: 50px; }
+          html #app .content-container .main-quiz-content .roster-view .five li a {
+            padding-left: 15px; }
 
 /*# sourceMappingURL=custom_base.css.map */

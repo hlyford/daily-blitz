@@ -204,8 +204,7 @@
 	                    this.props.children
 	                  )
 	                )
-	              ),
-	              _react2.default.createElement(_SearchBar2.default, null)
+	              )
 	            )
 	          )
 	        )
@@ -219,9 +218,7 @@
 	  null,
 	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: App }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/quiz', component: _Quiz2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/pastQuizzes', component: _PastQuizzes2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/subscribe', component: _Subscribe2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/admin', component: _Admin2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/rosters', component: _Rosters2.default })
 	);
 
@@ -26944,7 +26941,14 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _NavBar = __webpack_require__(244);
+
+	var _NavBar2 = _interopRequireDefault(_NavBar);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// ----- Subcribe COMPONENT ---- //
+
 
 	var Subscribe = _react2.default.createClass({
 	  displayName: 'Subscribe',
@@ -26985,41 +26989,57 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'subscribe-view' },
+	      null,
+	      _react2.default.createElement(_NavBar2.default, { todayQuizAcronym: this.state.todayQuizAcronym }),
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'page-titles' },
+	        { className: 'container main' },
 	        _react2.default.createElement(
-	          'h2',
-	          null,
-	          'Subscribe to daily sports quizzes'
+	          'div',
+	          { className: 'content-container twelve columns' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'main-quiz-content' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'subscribe-view views' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'page-titles' },
+	                _react2.default.createElement(
+	                  'h2',
+	                  null,
+	                  'Subscribe to daily sports quizzes'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                null,
+	                'Enter your email address to receive a daily sports quiz.'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                null,
+	                'Get email updates: ',
+	                _react2.default.createElement('input', { className: 'enter-email', type: 'text', id: 'email', onChange: this.handleChange, placeholder: 'Email address' })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                null,
+	                !this.state.response ? _react2.default.createElement(
+	                  'button',
+	                  { onClick: this.submitForm },
+	                  'Submit'
+	                ) : this.state.response
+	              )
+	            )
+	          )
 	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Enter your email address to receive a daily sports quiz.'
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'Get email updates: ',
-	        _react2.default.createElement('input', { className: 'enter-email', type: 'text', id: 'email', onChange: this.handleChange, placeholder: 'Email address' })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        !this.state.response ? _react2.default.createElement(
-	          'button',
-	          { onClick: this.submitForm },
-	          'Submit'
-	        ) : this.state.response
 	      )
 	    );
 	  }
 
-	}); // ----- Subcribe COMPONENT ---- //
-
+	});
 
 	exports.default = Subscribe;
 
@@ -27045,7 +27065,14 @@
 
 	var _reactImageFallback2 = _interopRequireDefault(_reactImageFallback);
 
+	var _NavBar = __webpack_require__(244);
+
+	var _NavBar2 = _interopRequireDefault(_NavBar);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// ----- QUIZ COMPONENT ---- //
+
 
 	var Quiz = _react2.default.createClass({
 	  displayName: 'Quiz',
@@ -27083,7 +27110,7 @@
 	  },
 	  componentDidUpdate: function componentDidUpdate() {
 	    var node = _reactDom2.default.findDOMNode(this.refs.guess);
-	    node.focus();
+	    node !== null ? node.focus() : null;
 	  },
 
 	  handleChange: function handleChange(event) {
@@ -27224,90 +27251,106 @@
 	    console.log('state', this.state);
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'quiz-view' },
+	      null,
+	      _react2.default.createElement(_NavBar2.default, { todayQuizAcronym: this.state.todayQuizAcronym }),
 	      _react2.default.createElement(
 	        'div',
-	        null,
-	        _react2.default.createElement('img', { className: 'team-logo', src: this.state.league === 'nba' ? '../../dist/images/team_logo_images/' + this.state.quiz_info.acronym + '.png' : '../../dist/images/team_logo_images/' + this.state.league + '_' + this.state.quiz_info.acronym + '.png' })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'page-titles' },
+	        { className: 'container main' },
 	        _react2.default.createElement(
-	          'h2',
-	          null,
-	          this.state.quiz_info.team_name
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'quiz-view-body' },
-	        !this.state.takingQuiz ? _react2.default.createElement(
 	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'button',
-	            { className: 'text-middle', onClick: this.startQuiz },
-	            'Take quiz!'
-	          )
-	        ) : _react2.default.createElement(
-	          'div',
-	          null,
+	          { className: 'content-container twelve columns' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'guess-box-container text-middle' },
+	            { className: 'main-quiz-content' },
 	            _react2.default.createElement(
 	              'div',
-	              null,
-	              ' You have answered: ',
-	              this.state.correct.length,
-	              ' / ',
-	              this.state.quiz_info.players.length
-	            ),
-	            _react2.default.createElement('input', { ref: 'guess', className: 'guess-box', type: 'text', name: 'guessing', value: this.state.guessValue, onChange: this.handleChange })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'correct-guess-container' },
-	            _react2.default.createElement(
-	              'ul',
-	              null,
-	              this.state.correct.map(function (item) {
-	                return _react2.default.createElement(
-	                  'li',
-	                  { key: item.fullName },
-	                  _react2.default.createElement(_reactImageFallback2.default, {
-	                    src: "../../dist/images/" + _this.state.league + "_player_images/" + item.firstName.replace(/ /g, "_").replace(/'/g, "") + "_" + item.lastName.replace(/'/g, "") + ".png",
-	                    fallbackImage: '../../dist/images/grey_man.png', style: _this.state.league === 'soccer' ? { height: "75px", margin: "0 10px 0 0", borderRadius: "50%" } : { display: "inline" } }),
+	              { className: 'quiz-view views' },
+	              _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement('img', { className: 'team-logo', src: this.state.league === 'nba' ? '../../dist/images/team_logo_images/' + this.state.quiz_info.acronym + '.png' : '../../dist/images/team_logo_images/' + this.state.league + '_' + this.state.quiz_info.acronym + '.png' })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'page-titles' },
+	                _react2.default.createElement(
+	                  'h2',
+	                  null,
+	                  this.state.quiz_info.team_name
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'quiz-view-body' },
+	                !this.state.takingQuiz ? _react2.default.createElement(
+	                  'div',
+	                  null,
 	                  _react2.default.createElement(
-	                    'span',
-	                    null,
-	                    item.fullName,
-	                    ' | #',
-	                    item.player_number,
-	                    ' ',
-	                    item.position
+	                    'button',
+	                    { className: 'text-middle', onClick: this.startQuiz },
+	                    'Take quiz!'
 	                  )
-	                );
-	              })
+	                ) : _react2.default.createElement(
+	                  'div',
+	                  null,
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'guess-box-container text-middle' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      null,
+	                      ' You have answered: ',
+	                      this.state.correct.length,
+	                      ' / ',
+	                      this.state.quiz_info.players.length
+	                    ),
+	                    _react2.default.createElement('input', { ref: 'guess', className: 'guess-box', type: 'text', name: 'guessing', value: this.state.guessValue, onChange: this.handleChange })
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'correct-guess-container' },
+	                    _react2.default.createElement(
+	                      'ul',
+	                      null,
+	                      this.state.correct.map(function (item) {
+	                        return _react2.default.createElement(
+	                          'li',
+	                          { key: item.fullName },
+	                          _react2.default.createElement(_reactImageFallback2.default, {
+	                            src: "../../dist/images/" + _this.state.league + "_player_images/" + item.firstName.replace(/ /g, "_").replace(/'/g, "") + "_" + item.lastName.replace(/'/g, "") + ".png",
+	                            fallbackImage: '../../dist/images/grey_man.png', style: _this.state.league === 'soccer' ? { height: "75px", margin: "0 10px 0 0", borderRadius: "50%" } : { display: "inline" } }),
+	                          _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            item.fullName,
+	                            ' | #',
+	                            item.player_number,
+	                            ' ',
+	                            item.position
+	                          )
+	                        );
+	                      })
+	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'timer' },
+	                    this.timeFormatter(this.state.timeLeft)
+	                  ),
+	                  this.state.takingQuiz ? _react2.default.createElement(
+	                    'button',
+	                    { onClick: this.giveUp, className: 'give-up-button button button-primary' },
+	                    'Give up'
+	                  ) : null
+	                )
+	              )
 	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'timer' },
-	            this.timeFormatter(this.state.timeLeft)
-	          ),
-	          this.state.takingQuiz ? _react2.default.createElement(
-	            'button',
-	            { onClick: this.giveUp, className: 'give-up-button button button-primary' },
-	            'Give up'
-	          ) : null
+	          )
 	        )
 	      )
 	    );
 	  }
-	}); // ----- QUIZ COMPONENT ---- //
-
+	});
 
 	exports.default = Quiz;
 
@@ -27663,6 +27706,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _NavBar = __webpack_require__(244);
+
+	var _NavBar2 = _interopRequireDefault(_NavBar);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Rosters = _react2.default.createClass({
@@ -27766,42 +27813,59 @@
 			});
 			return _react2.default.createElement(
 				'div',
-				{ className: 'roster-view' },
+				null,
+				_react2.default.createElement(_NavBar2.default, { todayQuizAcronym: this.state.todayQuizAcronym }),
 				_react2.default.createElement(
 					'div',
-					{ className: 'page-titles' },
-					_react2.default.createElement(
-						'h2',
-						null,
-						'Name all the players on a team'
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'five columns' },
+					{ className: 'container main' },
 					_react2.default.createElement(
 						'div',
-						null,
-						this.state.league === 'nba' ? "Eastern Conference Teams" : this.state.league === 'nfl' ? "NFC" : this.state.league === 'mlb' ? "National League" : "English Premier League"
-					),
-					_react2.default.createElement(
-						'ul',
-						null,
-						easternTeams
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'five columns' },
-					_react2.default.createElement(
-						'div',
-						null,
-						this.state.league === 'nba' ? "Western Conference Teams" : this.state.league === 'nfl' ? "AFC" : this.state.league === 'mlb' ? "American League" : null
-					),
-					_react2.default.createElement(
-						'ul',
-						null,
-						westernTeams
+						{ className: 'content-container twelve columns' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'main-quiz-content' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'roster-view views' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'page-titles' },
+									_react2.default.createElement(
+										'h2',
+										null,
+										'Name all the players on a team'
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'five columns' },
+									_react2.default.createElement(
+										'div',
+										null,
+										this.state.league === 'nba' ? "Eastern Conference Teams" : this.state.league === 'nfl' ? "NFC" : this.state.league === 'mlb' ? "National League" : "English Premier League"
+									),
+									_react2.default.createElement(
+										'ul',
+										null,
+										easternTeams
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'five columns' },
+									_react2.default.createElement(
+										'div',
+										null,
+										this.state.league === 'nba' ? "Western Conference Teams" : this.state.league === 'nfl' ? "AFC" : this.state.league === 'mlb' ? "American League" : null
+									),
+									_react2.default.createElement(
+										'ul',
+										null,
+										westernTeams
+									)
+								)
+							)
+						)
 					)
 				)
 			);
@@ -27886,6 +27950,7 @@
 	      return team.team_name === teamName;
 	    });
 	    window.open('/#/quiz?league=' + selectedTeam.league + '&quiz_id=' + selectedTeam.acronym, '_self');
+	    location.reload(true);
 	  },
 
 	  render: function render() {
@@ -27894,7 +27959,7 @@
 	      'div',
 	      { className: 'search-view' },
 	      _react2.default.createElement('div', null),
-	      _react2.default.createElement(_reactSearch2.default, { placeholder: 'Search for a team', ItemElement: 'span', onClick: this.openTeamQuiz, onChange: this.handleChange, items: this.state.search_results, keys: this.state.search_keys, searchKey: this.state.search_term })
+	      _react2.default.createElement(_reactSearch2.default, { placeholder: 'Search for a team', ItemElement: 'a', onClick: this.openTeamQuiz, onChange: this.handleChange, items: this.state.search_results, keys: this.state.search_keys, searchKey: this.state.search_term })
 	    );
 	  }
 
@@ -28145,7 +28210,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; } // ----- Subcribe COMPONENT ---- //
+	// ----- Subcribe COMPONENT ---- //
 
 
 	var NavBar = _react2.default.createClass({
@@ -28153,15 +28218,12 @@
 
 	  getInitialState: function getInitialState() {
 	    ;
-	    return { todayQuizAcronym: this.props.todayQuizAcronym, todayQuizLeague: 'soccer' };
+	    return { todayQuizAcronym: 'manchester-united', todayQuizLeague: 'soccer' };
 	  },
 	  openTodayQuiz: function openTodayQuiz() {
 	    window.open('/#/quiz?league=' + this.state.todayQuizLeague + '&quiz_id=' + this.state.todayQuizAcronym, "_self");
 	  },
 	  render: function render() {
-	    var _React$createElement;
-
-	    console.log(this.state);
 	    return _react2.default.createElement(
 	      'nav',
 	      { className: 'navbar navbar-default' },
@@ -28197,15 +28259,19 @@
 	            { className: 'nav navbar-nav' },
 	            _react2.default.createElement(
 	              'li',
-	              { className: 'navbar-item' },
-	              _react2.default.createElement(_SearchBar2.default, null)
+	              { className: 'navbar-item hide' },
+	              _react2.default.createElement(
+	                'a',
+	                { className: 'navbar-link', href: '/#' },
+	                'Home'
+	              )
 	            ),
 	            _react2.default.createElement(
 	              'li',
 	              { className: 'navbar-item' },
 	              _react2.default.createElement(
 	                'a',
-	                (_React$createElement = { className: 'navbar-link', href: '' }, _defineProperty(_React$createElement, 'className', 'dropdown-toggle'), _defineProperty(_React$createElement, 'data-toggle', 'dropdown'), _defineProperty(_React$createElement, 'data-popover', 'subscribe'), _defineProperty(_React$createElement, 'role', 'button'), _defineProperty(_React$createElement, 'aria-haspopup', 'true'), _defineProperty(_React$createElement, 'aria-expanded', 'false'), _React$createElement),
+	                { className: 'navbar-link', href: '', 'data-toggle': 'dropdown', 'data-popover': 'subscribe', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
 	                'Rosters',
 	                _react2.default.createElement('span', { className: 'caret' })
 	              ),
@@ -28226,7 +28292,7 @@
 	                  null,
 	                  _react2.default.createElement(
 	                    'a',
-	                    { href: '#/rosters?league=nfl' },
+	                    { href: '#/rosters?league=nfl', onClick: '' },
 	                    'NFL'
 	                  )
 	                ),
@@ -28285,6 +28351,11 @@
 	                { className: 'navbar-link', 'data-popover': 'subscribe', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Click Rosters to select your sport then choose a team. Your goal is to name all the players on the team.' },
 	                'How this works'
 	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              { className: 'navbar-item' },
+	              _react2.default.createElement(_SearchBar2.default, null)
 	            )
 	          )
 	        )

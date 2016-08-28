@@ -10,10 +10,12 @@
         padding-top: 6px; }
       html #app nav.navbar .container-fluid .navbar-item > a {
         color: #222;
-        font-size: 0.8em;
+        font-size: 12px;
         margin-right: 2px; }
         html #app nav.navbar .container-fluid .navbar-item > a:focus {
           background-color: transparent !important; }
+      html #app nav.navbar .container-fluid .navbar-item .react-search {
+        margin-left: 80%; }
   html #app .content-container .main-quiz-content {
     padding-top: 5%; }
     html #app .content-container .main-quiz-content .sport-selection button {

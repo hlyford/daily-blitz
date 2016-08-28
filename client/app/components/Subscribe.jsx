@@ -1,5 +1,6 @@
 // ----- Subcribe COMPONENT ---- //
 import React from 'react';
+import NavBar from './NavBar.jsx';
 
 var Subscribe = React.createClass({
   getInitialState: function() {
@@ -38,33 +39,41 @@ var Subscribe = React.createClass({
   },
   render: function() {
     return (
-      <div className="subscribe-view">
-        <div className="page-titles"><h2>Subscribe to daily sports quizzes</h2></div>
-        <div>Enter your email address to receive a daily sports quiz.</div>
-        <div>
-          Get email updates: <input className="enter-email" type="text" id="email" onChange={ this.handleChange } placeholder="Email address"/>
+      <div>
+        <NavBar todayQuizAcronym={this.state.todayQuizAcronym}/>
+        <div className="container main">
+          <div className="content-container twelve columns">
+            <div className="main-quiz-content">
+              <div className="subscribe-view views">
+                <div className="page-titles"><h2>Subscribe to daily sports quizzes</h2></div>
+                <div>Enter your email address to receive a daily sports quiz.</div>
+                <div>
+                  Get email updates: <input className="enter-email" type="text" id="email" onChange={ this.handleChange } placeholder="Email address"/>
+                </div>
+                {/* commenting out phone for now
+                <div>
+                  Get mobile phone updates: <input className="enter-email" type="text" id="phone" onChange={ this.handleChange } placeholder="Phone number" />
+                </div>
+                */}
+                {/*
+                <div>What sports are you interested in?</div>
+                <div>
+                  NBA
+                  NFL
+                  MLB
+                  Soccer
+                  NHL
+                </div>
+                */}
+                <div>
+                  { !this.state.response ? <button onClick={ this.submitForm }>Submit</button> :
+                   this.state.response
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        {/* commenting out phone for now
-        <div>
-          Get mobile phone updates: <input className="enter-email" type="text" id="phone" onChange={ this.handleChange } placeholder="Phone number" />
-        </div>
-        */}
-        {/*
-        <div>What sports are you interested in?</div>
-        <div>
-          NBA
-          NFL
-          MLB
-          Soccer
-          NHL
-        </div>
-        */}
-        <div>
-          { !this.state.response ? <button onClick={ this.submitForm }>Submit</button> :
-           this.state.response
-          }
-        </div>
-
       </div>
     )
   }

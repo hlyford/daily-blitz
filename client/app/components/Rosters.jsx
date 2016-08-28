@@ -1,4 +1,5 @@
 import React from 'react';
+import NavBar from './NavBar.jsx';
 
 var Rosters = React.createClass({
 	getInitialState: function() {
@@ -89,25 +90,34 @@ var Rosters = React.createClass({
 		  )
 			});
 		return (
-			<div className="roster-view">
-				<div className="page-titles"><h2>Name all the players on a team</h2></div>
-		    <div className="five columns">
-		    	<div>{this.state.league === 'nba' ? "Eastern Conference Teams" :
-		    	this.state.league === 'nfl' ? "NFC" :
-		    	this.state.league === 'mlb' ? "National League" : "English Premier League" }</div>
-    		  <ul>
-    		  	{ easternTeams }
-				  </ul>
+			<div>
+			  <NavBar todayQuizAcronym={this.state.todayQuizAcronym}/>
+			  <div className="container main">
+			    <div className="content-container twelve columns">
+			      <div className="main-quiz-content">
+							<div className="roster-view views">
+								<div className="page-titles"><h2>Name all the players on a team</h2></div>
+						    <div className="five columns">
+						    	<div>{this.state.league === 'nba' ? "Eastern Conference Teams" :
+						    	this.state.league === 'nfl' ? "NFC" :
+						    	this.state.league === 'mlb' ? "National League" : "English Premier League" }</div>
+				    		  <ul>
+				    		  	{ easternTeams }
+								  </ul>
+								</div>
+						    <div className="five columns">
+						    	<div>{this.state.league === 'nba' ? "Western Conference Teams" :
+						    	this.state.league === 'nfl' ? "AFC" :
+						    	this.state.league === 'mlb' ? "American League" : null }</div>
+				    		  <ul>
+									  { westernTeams }
+								  </ul>
+						    </div>
+						  </div>
+						</div>
+					</div>
 				</div>
-		    <div className="five columns">
-		    	<div>{this.state.league === 'nba' ? "Western Conference Teams" :
-		    	this.state.league === 'nfl' ? "AFC" :
-		    	this.state.league === 'mlb' ? "American League" : null }</div>
-    		  <ul>
-					  { westernTeams }
-				  </ul>
-		    </div>
-		  </div>
+			</div>
 		)
 	}
 });

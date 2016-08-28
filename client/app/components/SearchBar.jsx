@@ -55,6 +55,7 @@ var SearchBar = React.createClass({
       return team.team_name === teamName;
     });
     window.open(`/#/quiz?league=${selectedTeam.league}&quiz_id=${selectedTeam.acronym}`, '_self');
+    location.reload(true);
   },
 
   render: function() {
@@ -64,7 +65,7 @@ var SearchBar = React.createClass({
         <div>
           {/* }<input className="enter-email" type="text" id="email" onChange={ this.handleChange } placeholder="Search for your team"/> */}
         </div>
-        <Search placeholder="Search for a team" ItemElement='span' onClick={this.openTeamQuiz} onChange={ this.handleChange } items={this.state.search_results} keys={this.state.search_keys} searchKey={this.state.search_term} />
+        <Search placeholder="Search for a team" ItemElement='a' onClick={this.openTeamQuiz} onChange={ this.handleChange } items={this.state.search_results} keys={this.state.search_keys} searchKey={this.state.search_term} />
       </div>
     )
   }

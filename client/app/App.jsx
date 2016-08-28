@@ -54,7 +54,7 @@ var App = React.createClass({
                     </div>
                   </div>
                 </div>
-                <SearchBar />
+                {/* <SearchBar /> */}
               </div>
             </div>
           </div>
@@ -68,9 +68,9 @@ const routes = (
   <Route>
     <Route path="/" component={App} />
     <Route path="/quiz" component={Quiz}/>
-    <Route path="/pastQuizzes" component={PastQuizzes}/>
+    {/* <Route path="/pastQuizzes" component={PastQuizzes}/> */}
     <Route path="/subscribe" component={Subscribe}/>
-    <Route path="/admin" component={Admin}/>
+    {/* <Route path="/admin" component={Admin}/> */}
     <Route path="/rosters" component={Rosters}/>
   </Route>
 )

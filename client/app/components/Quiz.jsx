@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactImageFallback from "react-image-fallback";
+import NavBar from './NavBar.jsx';
 
 var Quiz = React.createClass({
   getInitialState: function() {
@@ -37,7 +38,7 @@ var Quiz = React.createClass({
   },
   componentDidUpdate: function(){
     var node = ReactDOM.findDOMNode(this.refs.guess);
-    node.focus();
+    node !== null ? node.focus() : null;
   },
 
   handleChange: function(event) {
@@ -161,37 +162,46 @@ var Quiz = React.createClass({
   render: function() {
     console.log('state', this.state);
     return (
-      <div className="quiz-view">
-        <div><img className="team-logo" src= {this.state.league === 'nba' ? `../../dist/images/team_logo_images/${this.state.quiz_info.acronym}.png` : `../../dist/images/team_logo_images/${this.state.league}_${this.state.quiz_info.acronym}.png`} /></div>
-        <div className="page-titles"><h2>{ this.state.quiz_info.team_name }</h2></div>
-          <div className="quiz-view-body">
-            { !this.state.takingQuiz ?
-              <div><button className="text-middle" onClick={ this.startQuiz }>Take quiz!</button></div> :
-              <div>
-                <div className="guess-box-container text-middle">
+      <div>
+        <NavBar todayQuizAcronym={this.state.todayQuizAcronym}/>
+        <div className="container main">
+          <div className="content-container twelve columns">
+            <div className="main-quiz-content">
+              <div className="quiz-view views">
+                <div><img className="team-logo" src= {this.state.league === 'nba' ? `../../dist/images/team_logo_images/${this.state.quiz_info.acronym}.png` : `../../dist/images/team_logo_images/${this.state.league}_${this.state.quiz_info.acronym}.png`} /></div>
+                <div className="page-titles"><h2>{ this.state.quiz_info.team_name }</h2></div>
+                  <div className="quiz-view-body">
+                    { !this.state.takingQuiz ?
+                      <div><button className="text-middle" onClick={ this.startQuiz }>Take quiz!</button></div> :
+                      <div>
+                        <div className="guess-box-container text-middle">
 
-               { <div> You have answered: {this.state.correct.length} / {this.state.quiz_info.players.length}</div> }
-                  <input ref="guess" className="guess-box" type="text" name="guessing" value={this.state.guessValue} onChange={this.handleChange} />
-                </div>
-                <div className="correct-guess-container">
-                  <ul>
-                    { this.state.correct.map((item)=>
-                      (
-                    <li key={item.fullName}>
-                      <ReactImageFallback
-                      src={"../../dist/images/" + this.state.league + "_player_images/" + item.firstName.replace(/ /g,"_").replace(/'/g, "")  + "_" + item.lastName.replace(/'/g, "") + ".png"}
-                      fallbackImage="../../dist/images/grey_man.png" style={this.state.league === 'soccer' ? {height: "75px", margin: "0 10px 0 0", borderRadius: "50%"}  : {display: "inline"} }/>
-                      <span>{item.fullName} | #{item.player_number} {item.position}</span>
-                    </li>
-                    ))
+                       { <div> You have answered: {this.state.correct.length} / {this.state.quiz_info.players.length}</div> }
+                          <input ref="guess" className="guess-box" type="text" name="guessing" value={this.state.guessValue} onChange={this.handleChange} />
+                        </div>
+                        <div className="correct-guess-container">
+                          <ul>
+                            { this.state.correct.map((item)=>
+                              (
+                            <li key={item.fullName}>
+                              <ReactImageFallback
+                              src={"../../dist/images/" + this.state.league + "_player_images/" + item.firstName.replace(/ /g,"_").replace(/'/g, "")  + "_" + item.lastName.replace(/'/g, "") + ".png"}
+                              fallbackImage="../../dist/images/grey_man.png" style={this.state.league === 'soccer' ? {height: "75px", margin: "0 10px 0 0", borderRadius: "50%"}  : {display: "inline"} }/>
+                              <span>{item.fullName} | #{item.player_number} {item.position}</span>
+                            </li>
+                            ))
+                            }
+                          </ul>
+                        </div>
+                        <div className="timer">{ this.timeFormatter(this.state.timeLeft) }</div>
+                        { this.state.takingQuiz ? <button onClick={ this.giveUp } className="give-up-button button button-primary">Give up</button> : null }
+                      </div>
                     }
-                  </ul>
-                </div>
-                <div className="timer">{ this.timeFormatter(this.state.timeLeft) }</div>
-                { this.state.takingQuiz ? <button onClick={ this.giveUp } className="give-up-button button button-primary">Give up</button> : null }
+                  </div>
               </div>
-            }
+            </div>
           </div>
+        </div>
       </div>
     )
   }
