@@ -88,11 +88,6 @@
 
 	// ------ END SUB COMPONENTS ------- //
 
-	$(function () {
-	  $('[data-toggle="popover"]').popover();
-	});
-	// import subcomponents
-
 	var App = _react2.default.createClass({
 	  displayName: 'App',
 
@@ -212,6 +207,8 @@
 	    );
 	  }
 	});
+	// import subcomponents
+
 
 	var routes = _react2.default.createElement(
 	  _reactRouter.Route,
@@ -28348,7 +28345,7 @@
 	              { className: 'navbar-item' },
 	              _react2.default.createElement(
 	                'a',
-	                { className: 'navbar-link', 'data-popover': 'subscribe', 'data-container': 'body', 'data-toggle': 'popover', 'data-placement': 'bottom', 'data-content': 'Click Rosters to select your sport then choose a team. Your goal is to name all the players on the team.' },
+	                { className: 'navbar-link', 'data-popover': 'subscribe', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover', 'data-placement': 'bottom', 'data-content': 'Click Rosters to select your sport then choose a team. Your goal is to name all the players on the team.' },
 	                'How this works'
 	              )
 	            ),

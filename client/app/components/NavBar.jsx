@@ -46,7 +46,7 @@ var NavBar = React.createClass({
                 <a className="navbar-link" href="#/subscribe" data-popover="subscribe">Subscribe</a>
               </li>
               <li className="navbar-item">
-                <a className="navbar-link" data-popover="subscribe" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Click Rosters to select your sport then choose a team. Your goal is to name all the players on the team.">How this works</a>
+                <a className="navbar-link" data-popover="subscribe" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Click Rosters to select your sport then choose a team. Your goal is to name all the players on the team.">How this works</a>
               </li>
               <li className="navbar-item"><SearchBar /></li>
             </ul>

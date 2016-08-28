@@ -12,9 +12,6 @@ import NavBar from './components/NavBar.jsx';
 
 // ------ END SUB COMPONENTS ------- //
 
-$(function () {
-  $('[data-toggle="popover"]').popover()
-})
 var App = React.createClass({
 
   getInitialState: function() {
