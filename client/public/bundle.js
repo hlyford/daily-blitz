@@ -178,6 +178,11 @@
 	                ),
 	                _react2.default.createElement(
 	                  'div',
+	                  { className: 'hide-desktop' },
+	                  _react2.default.createElement(_SearchBar2.default, null)
+	                ),
+	                _react2.default.createElement(
+	                  'div',
 	                  { className: 'bottom-buttons' },
 	                  _react2.default.createElement(
 	                    'div',
@@ -28356,7 +28361,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'li',
-	              { className: 'navbar-item' },
+	              { className: 'navbar-item hide-mobile' },
 	              _react2.default.createElement(_SearchBar2.default, null)
 	            )
 	          )

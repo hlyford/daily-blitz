@@ -39,6 +39,9 @@ var App = React.createClass({
                       <a href='#/rosters?league=soccer' onClick={ this.gaEvent.bind(this, 'soccer') }><button>Soccer</button></a>
                     </div>
                   </div>
+                  <div className='hide-desktop'>
+                    <SearchBar />
+                  </div>
                   <div className="bottom-buttons">
                     <div className="today-quiz">
                       <Link to={{ pathname: '/quiz', query: { league: this.state.todayQuizLeague, quiz_id: this.state.todayQuizAcronym } }}

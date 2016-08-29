@@ -11,6 +11,17 @@ a {
 .text-middle {
 	text-align: center;
 }
+.hide-mobile {
+	@media (max-width: 500px) {
+		display: none!important;
+	}
+}
+.hide-desktop {
+	@media (min-width: 768px) {
+		display: none!important;
+	}
+}
+// end general rules
 html {
   background: url(../images/epic_bball2.jpg) no-repeat center center fixed;
   background-position: 0 30%;
@@ -168,11 +179,12 @@ html {
 								padding-bottom: 20px;
 							}
 							button {
-
 								margin-right: 10px;
 								font-size: 0.8em;
-
 							}
+						}
+						.search-view {
+							text-align: center;
 						}
 						.bottom-buttons {
 							text-align: center;

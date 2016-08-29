@@ -51,7 +51,7 @@ var NavBar = React.createClass({
               <li className="navbar-item">
                 <a className="navbar-link" data-popover="subscribe" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Click Rosters to select your sport then choose a team. Your goal is to name all the players on the team.">How this works</a>
               </li>
-              <li className="navbar-item"><SearchBar /></li>
+              <li className="navbar-item hide-mobile"><SearchBar /></li>
             </ul>
           </div>
         </div>

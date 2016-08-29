@@ -9,6 +9,14 @@ a {
 .text-middle {
   text-align: center; }
 
+@media (max-width: 500px) {
+  .hide-mobile {
+    display: none !important; } }
+
+@media (min-width: 768px) {
+  .hide-desktop {
+    display: none !important; } }
+
 html {
   background: url(../images/epic_bball2.jpg) no-repeat center center fixed;
   background-position: 0 30%;
@@ -124,6 +132,8 @@ html {
           html #app .content-container .main-quiz-content .homepage-view .sport-selection button {
             margin-right: 10px;
             font-size: 0.8em; }
+        html #app .content-container .main-quiz-content .homepage-view .search-view {
+          text-align: center; }
         html #app .content-container .main-quiz-content .homepage-view .bottom-buttons {
           text-align: center; }
           html #app .content-container .main-quiz-content .homepage-view .bottom-buttons .today-quiz {
