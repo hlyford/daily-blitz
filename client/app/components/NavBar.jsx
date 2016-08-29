@@ -10,7 +10,6 @@ var NavBar = React.createClass({
   	window.open(`/#/quiz?league=${this.state.todayQuizLeague}&quiz_id=${this.state.todayQuizAcronym}`,"_self");
   },
   gaEvent: function (event) {
-    let league = parseInt(event.target.id);
     googleClickEvent(league);
   },
   render: function() {
@@ -36,11 +35,11 @@ var NavBar = React.createClass({
                 <a className="navbar-link" href="" data-toggle="dropdown" data-popover="subscribe" role="button" aria-haspopup="true" aria-expanded="false">Rosters<span className="caret">
                 </span></a>
                 <ul className="dropdown-menu">
-                  <li><a href="#/rosters?league=nba" onClick={ this.gaEvent } id="1">NBA</a></li>
-                  <li><a href="#/rosters?league=nfl" onClick={ this.gaEvent } id="2">NFL</a></li>
-                  <li><a href="#/rosters?league=mlb" onClick={ this.gaEvent } id="3">MLB</a></li>
-                  <li><a href="#/rosters?league=soccer" onClick={ this.gaEvent } id="4">Soccer</a></li>
-                  <li><a href="#/rosters?league=mlb" onClick={ this.gaEvent } id="5">NHL (coming soon)</a></li>
+                  <li><a href="#/rosters?league=nba" onClick={ this.gaEvent.bind(this, 'nba') }>NBA</a></li>
+                  <li><a href="#/rosters?league=nfl" onClick={ this.gaEvent.bind(this, 'nfl') }>NFL</a></li>
+                  <li><a href="#/rosters?league=mlb" onClick={ this.gaEvent.bind(this, 'mlb') }>MLB</a></li>
+                  <li><a href="#/rosters?league=soccer" onClick={ this.gaEvent.bind(this, 'soccer') }>Soccer</a></li>
+                  <li><a href="#/rosters?league=mlb" onClick={ this.gaEvent.bind(this, 'nhl') }>NHL (coming soon)</a></li>
                 </ul>
               </li>
               <li className="navbar-item">

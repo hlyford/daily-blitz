@@ -33,10 +33,10 @@ var App = React.createClass({
                   <div className="sport-selection">
                     <div>Quiz yourself on the team rosters of your favorite sport</div>
                     <div>
-                      <a href='#/rosters?league=nba' onClick={ this.gaEvent.bind(this, '1') } ><button>NBA</button></a>
-                      <a href='#/rosters?league=nfl' onClick={ this.gaEvent.bind(this, '2') } ><button>NFL</button></a>
-                      <a href='#/rosters?league=mlb' onClick={ this.gaEvent.bind(this, '3') }><button>MLB</button></a>
-                      <a href='#/rosters?league=soccer' onClick={ this.gaEvent.bind(this, '4') }><button>Soccer</button></a>
+                      <a href='#/rosters?league=nba' onClick={ this.gaEvent.bind(this, 'nba') } ><button>NBA</button></a>
+                      <a href='#/rosters?league=nfl' onClick={ this.gaEvent.bind(this, 'nfl') } ><button>NFL</button></a>
+                      <a href='#/rosters?league=mlb' onClick={ this.gaEvent.bind(this, 'mlb') }><button>MLB</button></a>
+                      <a href='#/rosters?league=soccer' onClick={ this.gaEvent.bind(this, 'soccer') }><button>Soccer</button></a>
                     </div>
                   </div>
                   <div className="bottom-buttons">

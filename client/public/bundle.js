@@ -140,7 +140,7 @@
 	                    null,
 	                    _react2.default.createElement(
 	                      'a',
-	                      { href: '#/rosters?league=nba', onClick: this.gaEvent.bind(this, '1') },
+	                      { href: '#/rosters?league=nba', onClick: this.gaEvent.bind(this, 'nba') },
 	                      _react2.default.createElement(
 	                        'button',
 	                        null,
@@ -149,7 +149,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                      'a',
-	                      { href: '#/rosters?league=nfl', onClick: this.gaEvent.bind(this, '2') },
+	                      { href: '#/rosters?league=nfl', onClick: this.gaEvent.bind(this, 'nfl') },
 	                      _react2.default.createElement(
 	                        'button',
 	                        null,
@@ -158,7 +158,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                      'a',
-	                      { href: '#/rosters?league=mlb', onClick: this.gaEvent.bind(this, '3') },
+	                      { href: '#/rosters?league=mlb', onClick: this.gaEvent.bind(this, 'mlb') },
 	                      _react2.default.createElement(
 	                        'button',
 	                        null,
@@ -167,7 +167,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                      'a',
-	                      { href: '#/rosters?league=soccer', onClick: this.gaEvent.bind(this, '4') },
+	                      { href: '#/rosters?league=soccer', onClick: this.gaEvent.bind(this, 'soccer') },
 	                      _react2.default.createElement(
 	                        'button',
 	                        null,
@@ -28223,7 +28223,6 @@
 	    window.open('/#/quiz?league=' + this.state.todayQuizLeague + '&quiz_id=' + this.state.todayQuizAcronym, "_self");
 	  },
 	  gaEvent: function gaEvent(event) {
-	    var league = parseInt(event.target.id);
 	    googleClickEvent(league);
 	  },
 	  render: function render() {
@@ -28286,7 +28285,7 @@
 	                  null,
 	                  _react2.default.createElement(
 	                    'a',
-	                    { href: '#/rosters?league=nba', onClick: this.gaEvent, id: '1' },
+	                    { href: '#/rosters?league=nba', onClick: this.gaEvent.bind(this, 'nba') },
 	                    'NBA'
 	                  )
 	                ),
@@ -28295,7 +28294,7 @@
 	                  null,
 	                  _react2.default.createElement(
 	                    'a',
-	                    { href: '#/rosters?league=nfl', onClick: this.gaEvent, id: '2' },
+	                    { href: '#/rosters?league=nfl', onClick: this.gaEvent.bind(this, 'nfl') },
 	                    'NFL'
 	                  )
 	                ),
@@ -28304,7 +28303,7 @@
 	                  null,
 	                  _react2.default.createElement(
 	                    'a',
-	                    { href: '#/rosters?league=mlb', onClick: this.gaEvent, id: '3' },
+	                    { href: '#/rosters?league=mlb', onClick: this.gaEvent.bind(this, 'mlb') },
 	                    'MLB'
 	                  )
 	                ),
@@ -28313,7 +28312,7 @@
 	                  null,
 	                  _react2.default.createElement(
 	                    'a',
-	                    { href: '#/rosters?league=soccer', onClick: this.gaEvent, id: '4' },
+	                    { href: '#/rosters?league=soccer', onClick: this.gaEvent.bind(this, 'soccer') },
 	                    'Soccer'
 	                  )
 	                ),
@@ -28322,7 +28321,7 @@
 	                  null,
 	                  _react2.default.createElement(
 	                    'a',
-	                    { href: '#/rosters?league=mlb', onClick: this.gaEvent, id: '5' },
+	                    { href: '#/rosters?league=mlb', onClick: this.gaEvent.bind(this, 'nhl') },
 	                    'NHL (coming soon)'
 	                  )
 	                )
