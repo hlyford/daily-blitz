@@ -28220,6 +28220,10 @@
 	  openTodayQuiz: function openTodayQuiz() {
 	    window.open('/#/quiz?league=' + this.state.todayQuizLeague + '&quiz_id=' + this.state.todayQuizAcronym, "_self");
 	  },
+	  gaEvent: function gaEvent(event) {
+	    var league = parseInt(event.target.id);
+	    ga('send', 'event', 'buttons', 'click', 'menu', league);
+	  },
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'nav',
@@ -28268,7 +28272,7 @@
 	              { className: 'navbar-item' },
 	              _react2.default.createElement(
 	                'a',
-	                { className: 'navbar-link', href: '', 'data-toggle': 'dropdown', 'data-popover': 'subscribe', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
+	                { onClick: this.gaEvent, id: '1', className: 'navbar-link', href: '', 'data-toggle': 'dropdown', 'data-popover': 'subscribe', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
 	                'Rosters',
 	                _react2.default.createElement('span', { className: 'caret' })
 	              ),
@@ -28280,7 +28284,7 @@
 	                  null,
 	                  _react2.default.createElement(
 	                    'a',
-	                    { href: '#/rosters?league=nba' },
+	                    { href: '#/rosters?league=nba', onClick: this.gaEvent, id: '1' },
 	                    'NBA'
 	                  )
 	                ),
@@ -28289,7 +28293,7 @@
 	                  null,
 	                  _react2.default.createElement(
 	                    'a',
-	                    { href: '#/rosters?league=nfl', onClick: '' },
+	                    { href: '#/rosters?league=nfl', onClick: this.gaEvent, id: '2' },
 	                    'NFL'
 	                  )
 	                ),
