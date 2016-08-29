@@ -95,7 +95,9 @@
 	  getInitialState: function getInitialState() {
 	    return { todayQuizAcronym: 'manchester-united', todayQuizLeague: 'soccer' };
 	  },
-
+	  gaEvent: function gaEvent(league) {
+	    googleClickEvent(league);
+	  },
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
@@ -138,7 +140,7 @@
 	                    null,
 	                    _react2.default.createElement(
 	                      'a',
-	                      { href: '#/rosters?league=nba' },
+	                      { href: '#/rosters?league=nba', onClick: this.gaEvent.bind(this, '1') },
 	                      _react2.default.createElement(
 	                        'button',
 	                        null,
@@ -147,7 +149,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                      'a',
-	                      { href: '#/rosters?league=nfl' },
+	                      { href: '#/rosters?league=nfl', onClick: this.gaEvent.bind(this, '2') },
 	                      _react2.default.createElement(
 	                        'button',
 	                        null,
@@ -156,7 +158,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                      'a',
-	                      { href: '#/rosters?league=mlb' },
+	                      { href: '#/rosters?league=mlb', onClick: this.gaEvent.bind(this, '3') },
 	                      _react2.default.createElement(
 	                        'button',
 	                        null,
@@ -165,7 +167,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                      'a',
-	                      { href: '#/rosters?league=soccer' },
+	                      { href: '#/rosters?league=soccer', onClick: this.gaEvent.bind(this, '4') },
 	                      _react2.default.createElement(
 	                        'button',
 	                        null,
@@ -28222,7 +28224,7 @@
 	  },
 	  gaEvent: function gaEvent(event) {
 	    var league = parseInt(event.target.id);
-	    ga('send', 'event', 'buttons', 'click', 'menu', league);
+	    googleClickEvent(league);
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(
@@ -28272,7 +28274,7 @@
 	              { className: 'navbar-item' },
 	              _react2.default.createElement(
 	                'a',
-	                { onClick: this.gaEvent, id: '1', className: 'navbar-link', href: '', 'data-toggle': 'dropdown', 'data-popover': 'subscribe', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
+	                { className: 'navbar-link', href: '', 'data-toggle': 'dropdown', 'data-popover': 'subscribe', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
 	                'Rosters',
 	                _react2.default.createElement('span', { className: 'caret' })
 	              ),
@@ -28302,7 +28304,7 @@
 	                  null,
 	                  _react2.default.createElement(
 	                    'a',
-	                    { href: '#/rosters?league=mlb' },
+	                    { href: '#/rosters?league=mlb', onClick: this.gaEvent, id: '3' },
 	                    'MLB'
 	                  )
 	                ),
@@ -28311,7 +28313,7 @@
 	                  null,
 	                  _react2.default.createElement(
 	                    'a',
-	                    { href: '#/rosters?league=soccer' },
+	                    { href: '#/rosters?league=soccer', onClick: this.gaEvent, id: '4' },
 	                    'Soccer'
 	                  )
 	                ),
@@ -28320,7 +28322,7 @@
 	                  null,
 	                  _react2.default.createElement(
 	                    'a',
-	                    { href: '#/rosters?league=mlb' },
+	                    { href: '#/rosters?league=mlb', onClick: this.gaEvent, id: '5' },
 	                    'NHL (coming soon)'
 	                  )
 	                )
