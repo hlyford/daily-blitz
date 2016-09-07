@@ -59,7 +59,6 @@ var SearchBar = React.createClass({
   },
 
   render: function() {
-
     return (
       <div className="search-view">
         <div>
@@ -69,7 +68,6 @@ var SearchBar = React.createClass({
       </div>
     )
   }
-
 });
 
 export default SearchBar;

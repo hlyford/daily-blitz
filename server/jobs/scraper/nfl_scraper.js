@@ -72,10 +72,11 @@ var getRosters = function (urlSlug, callback) {
 
 					// **** get player images ***
 					// get the thumbnail image -----
-					// var thumbnailUrl = $(element).find('td:nth-child(2) div img').css('background-image');
-					// thumbnailUrl = thumbnailUrl.slice(4, thumbnailUrl.length - 1);
-					// thumbnail = baseBase + thumbnailUrl;
-					// playerImageGetter(thumbnailUrl, urlSlug, name);
+					var thumbnailUrl = $(element).find('td:nth-child(2) div img').css('background-image');
+					thumbnailUrl = thumbnailUrl.slice(4, thumbnailUrl.length - 1);
+					thumbnail = baseBase + thumbnailUrl;
+					playerImageGetter(thumbnailUrl, urlSlug, name);
+					sleep(271);
 					// ------ end thumbnail getter
 
 	  			// request(thumbnailUrl, function (error, response, html) {

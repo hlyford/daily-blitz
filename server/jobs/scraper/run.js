@@ -43,7 +43,7 @@ var looperNfl = function (i) {
 		return;
 	}
 };
-// looperNfl(6);
+looperNfl(11);
 
 // *** MLB ***** // there are 30 teams
 // loop through waiting a random amount of seconds each time
@@ -80,4 +80,4 @@ var looperSoccer = function (i) {
 };
 
 // start at the beginning of teams array
-looperSoccer(11);
+// looperSoccer(11);

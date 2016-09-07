@@ -43,8 +43,7 @@ module.exports = {
 		// only send back one team if exact match
 		var results = fuse.search(query);
 		if (query.length > 5 && results[0].item.team_name.toLowerCase().indexOf(query.toLowerCase())) {
-			console.log('madtch');
-			callback(results[0]);
+			callback([results[0]]);
 		} else {
 			callback(results);
 		}

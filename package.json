@@ -12,7 +12,8 @@
     "scrape_soccer": "node server/soccer_scraper_server.js",
     "import_lists": "node server/goats_server.js",
     "email": "node server/email_server.js",
-    "db": "node server/prod_db_insert.js"
+    "db": "node server/prod_db_insert.js",
+    "copy_local": "node server/copy_local_db.js"
   },
   "author": "Henry Lyford",
   "license": "ISC",

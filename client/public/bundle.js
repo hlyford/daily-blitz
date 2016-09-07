@@ -68,19 +68,19 @@
 
 	var _Subscribe2 = _interopRequireDefault(_Subscribe);
 
-	var _Quiz = __webpack_require__(235);
+	var _Quiz = __webpack_require__(240);
 
 	var _Quiz2 = _interopRequireDefault(_Quiz);
 
-	var _Rosters = __webpack_require__(239);
+	var _Rosters = __webpack_require__(244);
 
 	var _Rosters2 = _interopRequireDefault(_Rosters);
 
-	var _SearchBar = __webpack_require__(240);
+	var _SearchBar = __webpack_require__(236);
 
 	var _SearchBar2 = _interopRequireDefault(_SearchBar);
 
-	var _NavBar = __webpack_require__(244);
+	var _NavBar = __webpack_require__(235);
 
 	var _NavBar2 = _interopRequireDefault(_NavBar);
 
@@ -26945,7 +26945,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _NavBar = __webpack_require__(244);
+	var _NavBar = __webpack_require__(235);
 
 	var _NavBar2 = _interopRequireDefault(_NavBar);
 
@@ -27061,15 +27061,509 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _SearchBar = __webpack_require__(236);
+
+	var _SearchBar2 = _interopRequireDefault(_SearchBar);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// ----- Subcribe COMPONENT ---- //
+
+
+	var NavBar = _react2.default.createClass({
+	  displayName: 'NavBar',
+
+	  getInitialState: function getInitialState() {
+	    ;
+	    return { todayQuizAcronym: 'manchester-united', todayQuizLeague: 'soccer' };
+	  },
+	  openTodayQuiz: function openTodayQuiz() {
+	    window.open('/#/quiz?league=' + this.state.todayQuizLeague + '&quiz_id=' + this.state.todayQuizAcronym, "_self");
+	  },
+	  gaEvent: function gaEvent(event) {
+	    googleClickEvent(league);
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'nav',
+	      { className: 'navbar navbar-default' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'container-fluid' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'navbar-header' },
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-1', 'aria-expanded': 'false' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'sr-only' },
+	              'Toggle navigation'
+	            ),
+	            _react2.default.createElement('span', { className: 'icon-bar' }),
+	            _react2.default.createElement('span', { className: 'icon-bar' }),
+	            _react2.default.createElement('span', { className: 'icon-bar' })
+	          ),
+	          _react2.default.createElement(
+	            'a',
+	            { className: 'navbar-brand', href: '/' },
+	            _react2.default.createElement('img', { src: './dist/images/lightning-bolt3.png' })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
+	          _react2.default.createElement(
+	            'ul',
+	            { className: 'nav navbar-nav' },
+	            _react2.default.createElement(
+	              'li',
+	              { className: 'navbar-item hide' },
+	              _react2.default.createElement(
+	                'a',
+	                { className: 'navbar-link', href: '/#' },
+	                'Home'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              { className: 'navbar-item' },
+	              _react2.default.createElement(
+	                'a',
+	                { className: 'navbar-link', href: '', 'data-toggle': 'dropdown', 'data-popover': 'subscribe', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
+	                'Rosters',
+	                _react2.default.createElement('span', { className: 'caret' })
+	              ),
+	              _react2.default.createElement(
+	                'ul',
+	                { className: 'dropdown-menu' },
+	                _react2.default.createElement(
+	                  'li',
+	                  null,
+	                  _react2.default.createElement(
+	                    'a',
+	                    { href: '#/rosters?league=nba', onClick: this.gaEvent.bind(this, 'nba') },
+	                    'NBA'
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'li',
+	                  null,
+	                  _react2.default.createElement(
+	                    'a',
+	                    { href: '#/rosters?league=nfl', onClick: this.gaEvent.bind(this, 'nfl') },
+	                    'NFL'
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'li',
+	                  null,
+	                  _react2.default.createElement(
+	                    'a',
+	                    { href: '#/rosters?league=mlb', onClick: this.gaEvent.bind(this, 'mlb') },
+	                    'MLB'
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'li',
+	                  null,
+	                  _react2.default.createElement(
+	                    'a',
+	                    { href: '#/rosters?league=soccer', onClick: this.gaEvent.bind(this, 'soccer') },
+	                    'Soccer'
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'li',
+	                  null,
+	                  _react2.default.createElement(
+	                    'a',
+	                    { href: '#/rosters?league=mlb', onClick: this.gaEvent.bind(this, 'nhl') },
+	                    'NHL (coming soon)'
+	                  )
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              { className: 'navbar-item' },
+	              _react2.default.createElement(
+	                'a',
+	                { className: 'navbar-link', href: '', onClick: this.openTodayQuiz, 'data-popover': '#codeNavPopover' },
+	                'Todays Quiz'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              { className: 'navbar-item' },
+	              _react2.default.createElement(
+	                'a',
+	                { className: 'navbar-link', href: '#/subscribe', 'data-popover': 'subscribe' },
+	                'Subscribe'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              { className: 'navbar-item' },
+	              _react2.default.createElement(
+	                'a',
+	                { className: 'navbar-link', 'data-popover': 'subscribe', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover', 'data-placement': 'bottom', 'data-content': 'Click Rosters to select your sport then choose a team. Your goal is to name all the players on the team.' },
+	                'How this works'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              { className: 'navbar-item hide-mobile' },
+	              _react2.default.createElement(_SearchBar2.default, null)
+	            )
+	          )
+	        )
+	      )
+	    );
+	  }
+
+	});
+
+	exports.default = NavBar;
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactSearch = __webpack_require__(237);
+
+	var _reactSearch2 = _interopRequireDefault(_reactSearch);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// ----- Subcribe COMPONENT ---- //
+
+
+	var SearchBar = _react2.default.createClass({
+	  displayName: 'SearchBar',
+
+	  getInitialState: function getInitialState() {
+	    return { query: null, search_results: [], search_keys: ['team_name'], search_term: 'team_name' };
+	  },
+	  componentWillMount: function componentWillMount() {
+	    // this.getTeams();
+	  },
+	  handleChange: function handleChange(event) {
+	    var entry = event.target.value;
+	    this.setState({ query: entry });
+	    if (this.state.query !== null) {
+	      this.sendQuery(this.state.query);
+	    }
+	  },
+	  sendQuery: function sendQuery(query) {
+	    // call off to backend with user info
+	    $.ajax({
+	      url: '/search',
+	      type: 'POST',
+	      dataType: 'json',
+	      data: { query: query },
+	      cache: false,
+	      success: function (data) {
+	        data = _.pluck(data, 'item');
+	        this.setState({ search_results: data });
+	      }.bind(this),
+	      error: function (xhr, status, err) {
+	        console.error(this.props.url, status, err.toString());
+	      }.bind(this)
+	    });
+	  },
+
+	  getTeams: function getTeams() {
+	    $.ajax({
+	      url: '/search',
+	      type: 'GET',
+	      dataType: 'json',
+	      cache: false,
+	      success: function (data) {}.bind(this),
+	      error: function (xhr, status, err) {
+	        console.error(this.props.url, status, err.toString());
+	      }.bind(this)
+	    });
+	  },
+
+	  openTeamQuiz: function openTeamQuiz(e) {
+	    var teamName = $(e.target).text();
+	    var selectedTeam = _.find(this.state.search_results, function (team) {
+	      return team.team_name === teamName;
+	    });
+	    window.open('/#/quiz?league=' + selectedTeam.league + '&quiz_id=' + selectedTeam.acronym, '_self');
+	    location.reload(true);
+	  },
+
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'search-view' },
+	      _react2.default.createElement('div', null),
+	      _react2.default.createElement(_reactSearch2.default, { placeholder: 'Search for a team', ItemElement: 'a', onClick: this.openTeamQuiz, onChange: this.handleChange, items: this.state.search_results, keys: this.state.search_keys, searchKey: this.state.search_term })
+	    );
+	  }
+	});
+
+	exports.default = SearchBar;
+
+/***/ },
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _SearchItemInArray = __webpack_require__(238);
+
+	var _SearchItemInArray2 = _interopRequireDefault(_SearchItemInArray);
+
+	var _SearchItemInArrayObjects = __webpack_require__(239);
+
+	var _SearchItemInArrayObjects2 = _interopRequireDefault(_SearchItemInArrayObjects);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Search component
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * A simple search component.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               **/
+
+
+	var Search = function (_Component) {
+	  _inherits(Search, _Component);
+
+	  _createClass(Search, null, [{
+	    key: 'defaultProps',
+	    get: function get() {
+	      return {
+	        ItemElement: 'a',
+	        classPrefix: 'react-search'
+	      };
+	    }
+	  }, {
+	    key: 'propTypes',
+	    get: function get() {
+	      return {
+	        classPrefix: _react.PropTypes.string,
+	        items: _react.PropTypes.array.isRequired,
+	        searchKey: _react.PropTypes.string,
+	        keys: _react.PropTypes.array,
+	        placeholder: _react.PropTypes.string,
+	        onChange: _react.PropTypes.func,
+	        onClick: _react.PropTypes.func,
+	        ItemElement: _react.PropTypes.oneOfType([_react.PropTypes.element, _react.PropTypes.string])
+	      };
+	    }
+	  }]);
+
+	  function Search(props) {
+	    _classCallCheck(this, Search);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Search).call(this, props));
+
+	    _this.state = { matchingItems: [] };
+	    return _this;
+	  }
+
+	  _createClass(Search, [{
+	    key: 'changeInput',
+	    value: function changeInput(e) {
+	      this.refs.autocomplete.className = this.props.classPrefix + '__menu ' + this.props.classPrefix + '__menu--open';
+	      var searchValue = this.refs.searchInput.value;
+
+	      var result = void 0;
+
+	      if (this.props.keys !== undefined && this.props.searchKey !== undefined) {
+	        /* hash */
+	        result = (0, _SearchItemInArrayObjects2.default)(this.props.items, searchValue, this.props.searchKey);
+	      } else {
+	        /* array */
+	        result = (0, _SearchItemInArray2.default)(this.props.items, searchValue);
+	      }
+
+	      this.setState({ matchingItems: result });
+
+	      if (this.props.onChange !== undefined) {
+	        this.props.onChange(e, result);
+	      }
+	    }
+	  }, {
+	    key: 'selectAutoComplete',
+	    value: function selectAutoComplete(e) {
+	      this.refs.autocomplete.className = this.props.classPrefix + '__menu ' + this.props.classPrefix + '__menu--hidden';
+	      var result = void 0;
+	      if (e.currentTarget.children.length) {
+	        result = e.currentTarget.children[0].innerHTML;
+	      } else {
+	        result = e.currentTarget.innerHTML;
+	      }
+	      this.refs.searchInput.value = result;
+
+	      if (this.props.onClick !== undefined) {
+	        this.props.onClick(e, result);
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      var ItemElement = this.props.ItemElement;
+
+	      var inputClassName = this.props.classPrefix + '__input';
+	      var menuClassName = this.props.classPrefix + '__menu ' + this.props.classPrefix + '__menu--hidden';
+
+	      var items = [];
+
+	      if (this.props.keys !== undefined) {
+	        /* items for hash results */
+	        items = this.state.matchingItems.map(function (item, i) {
+	          return _react2.default.createElement(
+	            'li',
+	            { key: i,
+	              className: _this2.props.classPrefix + '__menu-item',
+	              onClick: _this2.selectAutoComplete.bind(_this2) },
+	            _this2.props.keys.map(function (itemKey, j) {
+	              return _react2.default.createElement(
+	                ItemElement,
+	                { key: j },
+	                item[itemKey]
+	              );
+	            })
+	          );
+	        });
+	      } else {
+	        /* items for a simple array */
+	        items = this.state.matchingItems.map(function (item, i) {
+	          return _react2.default.createElement(
+	            'li',
+	            { key: i, className: _this2.props.classPrefix + '__menu-item' },
+	            _react2.default.createElement(
+	              ItemElement,
+	              { onClick: _this2.selectAutoComplete.bind(_this2) },
+	              item
+	            )
+	          );
+	        });
+	      }
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: this.props.classPrefix },
+	        _react2.default.createElement('input', {
+	          type: 'text',
+	          className: inputClassName,
+	          placeholder: this.props.placeholder,
+	          ref: 'searchInput',
+	          onKeyUp: this.changeInput.bind(this) }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: menuClassName, ref: 'autocomplete' },
+	          _react2.default.createElement(
+	            'ul',
+	            { className: this.props.classPrefix + '__menu-items' },
+	            items
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Search;
+	}(_react.Component);
+
+	exports.default = Search;
+
+/***/ },
+/* 238 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var SearchItemInArray = function SearchItemInArray(items, input) {
+	  if (input.trim() === '') {
+	    return [];
+	  }
+	  var reg = new RegExp(input.split('').join('\\w*').replace(/\W/, ''), 'i');
+
+	  return items.filter(function (item) {
+	    if (reg.test(item)) {
+	      return item;
+	    }
+	  });
+	};
+
+	module.exports = SearchItemInArray;
+
+/***/ },
+/* 239 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var SearchItemInArrayObjects = function SearchItemInArrayObjects(items, input, searchKey) {
+	  if (input.trim() === '' || searchKey === undefined) {
+	    return [];
+	  }
+	  var reg = new RegExp(input.split('').join('\\w*').replace(/\W/, ''), 'i');
+
+	  return items.filter(function (item) {
+	    if (reg.test(item[searchKey])) {
+	      return item;
+	    }
+	  });
+	};
+
+	module.exports = SearchItemInArrayObjects;
+
+/***/ },
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactDom = __webpack_require__(33);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _reactImageFallback = __webpack_require__(236);
+	var _reactImageFallback = __webpack_require__(241);
 
 	var _reactImageFallback2 = _interopRequireDefault(_reactImageFallback);
 
-	var _NavBar = __webpack_require__(244);
+	var _NavBar = __webpack_require__(235);
 
 	var _NavBar2 = _interopRequireDefault(_NavBar);
 
@@ -27359,7 +27853,7 @@
 	exports.default = Quiz;
 
 /***/ },
-/* 236 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27376,7 +27870,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _filterDomProps = __webpack_require__(237);
+	var _filterDomProps = __webpack_require__(242);
 
 	var _filterDomProps2 = _interopRequireDefault(_filterDomProps);
 
@@ -27475,7 +27969,7 @@
 	};
 
 /***/ },
-/* 237 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27485,7 +27979,7 @@
 	});
 	exports.default = filterDOMProps;
 
-	var _htmlAttributes = __webpack_require__(238);
+	var _htmlAttributes = __webpack_require__(243);
 
 	var _htmlAttributes2 = _interopRequireDefault(_htmlAttributes);
 
@@ -27554,7 +28048,7 @@
 	}
 
 /***/ },
-/* 238 */
+/* 243 */
 /***/ function(module, exports) {
 
 	/*!
@@ -27697,7 +28191,7 @@
 
 
 /***/ },
-/* 239 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27710,7 +28204,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _NavBar = __webpack_require__(244);
+	var _NavBar = __webpack_require__(235);
 
 	var _NavBar2 = _interopRequireDefault(_NavBar);
 
@@ -27877,502 +28371,6 @@
 	});
 
 	exports.default = Rosters;
-
-/***/ },
-/* 240 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactSearch = __webpack_require__(241);
-
-	var _reactSearch2 = _interopRequireDefault(_reactSearch);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// ----- Subcribe COMPONENT ---- //
-
-
-	var SearchBar = _react2.default.createClass({
-	  displayName: 'SearchBar',
-
-	  getInitialState: function getInitialState() {
-	    return { query: null, search_results: [], search_keys: ['team_name'], search_term: 'team_name' };
-	  },
-	  componentWillMount: function componentWillMount() {
-	    // this.getTeams();
-	  },
-	  handleChange: function handleChange(event) {
-	    var entry = event.target.value;
-	    this.setState({ query: entry });
-	    if (this.state.query !== null) {
-	      this.sendQuery(this.state.query);
-	    }
-	  },
-	  sendQuery: function sendQuery(query) {
-	    // call off to backend with user info
-	    $.ajax({
-	      url: '/search',
-	      type: 'POST',
-	      dataType: 'json',
-	      data: { query: query },
-	      cache: false,
-	      success: function (data) {
-	        data = _.pluck(data, 'item');
-	        this.setState({ search_results: data });
-	      }.bind(this),
-	      error: function (xhr, status, err) {
-	        console.error(this.props.url, status, err.toString());
-	      }.bind(this)
-	    });
-	  },
-
-	  getTeams: function getTeams() {
-	    $.ajax({
-	      url: '/search',
-	      type: 'GET',
-	      dataType: 'json',
-	      cache: false,
-	      success: function (data) {}.bind(this),
-	      error: function (xhr, status, err) {
-	        console.error(this.props.url, status, err.toString());
-	      }.bind(this)
-	    });
-	  },
-
-	  openTeamQuiz: function openTeamQuiz(e) {
-	    var teamName = $(e.target).text();
-	    var selectedTeam = _.find(this.state.search_results, function (team) {
-	      return team.team_name === teamName;
-	    });
-	    window.open('/#/quiz?league=' + selectedTeam.league + '&quiz_id=' + selectedTeam.acronym, '_self');
-	    location.reload(true);
-	  },
-
-	  render: function render() {
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'search-view' },
-	      _react2.default.createElement('div', null),
-	      _react2.default.createElement(_reactSearch2.default, { placeholder: 'Search for a team', ItemElement: 'a', onClick: this.openTeamQuiz, onChange: this.handleChange, items: this.state.search_results, keys: this.state.search_keys, searchKey: this.state.search_term })
-	    );
-	  }
-
-	});
-
-	exports.default = SearchBar;
-
-/***/ },
-/* 241 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _SearchItemInArray = __webpack_require__(242);
-
-	var _SearchItemInArray2 = _interopRequireDefault(_SearchItemInArray);
-
-	var _SearchItemInArrayObjects = __webpack_require__(243);
-
-	var _SearchItemInArrayObjects2 = _interopRequireDefault(_SearchItemInArrayObjects);
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Search component
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * A simple search component.
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               **/
-
-
-	var Search = function (_Component) {
-	  _inherits(Search, _Component);
-
-	  _createClass(Search, null, [{
-	    key: 'defaultProps',
-	    get: function get() {
-	      return {
-	        ItemElement: 'a',
-	        classPrefix: 'react-search'
-	      };
-	    }
-	  }, {
-	    key: 'propTypes',
-	    get: function get() {
-	      return {
-	        classPrefix: _react.PropTypes.string,
-	        items: _react.PropTypes.array.isRequired,
-	        searchKey: _react.PropTypes.string,
-	        keys: _react.PropTypes.array,
-	        placeholder: _react.PropTypes.string,
-	        onChange: _react.PropTypes.func,
-	        onClick: _react.PropTypes.func,
-	        ItemElement: _react.PropTypes.oneOfType([_react.PropTypes.element, _react.PropTypes.string])
-	      };
-	    }
-	  }]);
-
-	  function Search(props) {
-	    _classCallCheck(this, Search);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Search).call(this, props));
-
-	    _this.state = { matchingItems: [] };
-	    return _this;
-	  }
-
-	  _createClass(Search, [{
-	    key: 'changeInput',
-	    value: function changeInput(e) {
-	      this.refs.autocomplete.className = this.props.classPrefix + '__menu ' + this.props.classPrefix + '__menu--open';
-	      var searchValue = this.refs.searchInput.value;
-
-	      var result = void 0;
-
-	      if (this.props.keys !== undefined && this.props.searchKey !== undefined) {
-	        /* hash */
-	        result = (0, _SearchItemInArrayObjects2.default)(this.props.items, searchValue, this.props.searchKey);
-	      } else {
-	        /* array */
-	        result = (0, _SearchItemInArray2.default)(this.props.items, searchValue);
-	      }
-
-	      this.setState({ matchingItems: result });
-
-	      if (this.props.onChange !== undefined) {
-	        this.props.onChange(e, result);
-	      }
-	    }
-	  }, {
-	    key: 'selectAutoComplete',
-	    value: function selectAutoComplete(e) {
-	      this.refs.autocomplete.className = this.props.classPrefix + '__menu ' + this.props.classPrefix + '__menu--hidden';
-	      var result = void 0;
-	      if (e.currentTarget.children.length) {
-	        result = e.currentTarget.children[0].innerHTML;
-	      } else {
-	        result = e.currentTarget.innerHTML;
-	      }
-	      this.refs.searchInput.value = result;
-
-	      if (this.props.onClick !== undefined) {
-	        this.props.onClick(e, result);
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-
-	      var ItemElement = this.props.ItemElement;
-
-	      var inputClassName = this.props.classPrefix + '__input';
-	      var menuClassName = this.props.classPrefix + '__menu ' + this.props.classPrefix + '__menu--hidden';
-
-	      var items = [];
-
-	      if (this.props.keys !== undefined) {
-	        /* items for hash results */
-	        items = this.state.matchingItems.map(function (item, i) {
-	          return _react2.default.createElement(
-	            'li',
-	            { key: i,
-	              className: _this2.props.classPrefix + '__menu-item',
-	              onClick: _this2.selectAutoComplete.bind(_this2) },
-	            _this2.props.keys.map(function (itemKey, j) {
-	              return _react2.default.createElement(
-	                ItemElement,
-	                { key: j },
-	                item[itemKey]
-	              );
-	            })
-	          );
-	        });
-	      } else {
-	        /* items for a simple array */
-	        items = this.state.matchingItems.map(function (item, i) {
-	          return _react2.default.createElement(
-	            'li',
-	            { key: i, className: _this2.props.classPrefix + '__menu-item' },
-	            _react2.default.createElement(
-	              ItemElement,
-	              { onClick: _this2.selectAutoComplete.bind(_this2) },
-	              item
-	            )
-	          );
-	        });
-	      }
-
-	      return _react2.default.createElement(
-	        'div',
-	        { className: this.props.classPrefix },
-	        _react2.default.createElement('input', {
-	          type: 'text',
-	          className: inputClassName,
-	          placeholder: this.props.placeholder,
-	          ref: 'searchInput',
-	          onKeyUp: this.changeInput.bind(this) }),
-	        _react2.default.createElement(
-	          'div',
-	          { className: menuClassName, ref: 'autocomplete' },
-	          _react2.default.createElement(
-	            'ul',
-	            { className: this.props.classPrefix + '__menu-items' },
-	            items
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Search;
-	}(_react.Component);
-
-	exports.default = Search;
-
-/***/ },
-/* 242 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	var SearchItemInArray = function SearchItemInArray(items, input) {
-	  if (input.trim() === '') {
-	    return [];
-	  }
-	  var reg = new RegExp(input.split('').join('\\w*').replace(/\W/, ''), 'i');
-
-	  return items.filter(function (item) {
-	    if (reg.test(item)) {
-	      return item;
-	    }
-	  });
-	};
-
-	module.exports = SearchItemInArray;
-
-/***/ },
-/* 243 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	var SearchItemInArrayObjects = function SearchItemInArrayObjects(items, input, searchKey) {
-	  if (input.trim() === '' || searchKey === undefined) {
-	    return [];
-	  }
-	  var reg = new RegExp(input.split('').join('\\w*').replace(/\W/, ''), 'i');
-
-	  return items.filter(function (item) {
-	    if (reg.test(item[searchKey])) {
-	      return item;
-	    }
-	  });
-	};
-
-	module.exports = SearchItemInArrayObjects;
-
-/***/ },
-/* 244 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _SearchBar = __webpack_require__(240);
-
-	var _SearchBar2 = _interopRequireDefault(_SearchBar);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// ----- Subcribe COMPONENT ---- //
-
-
-	var NavBar = _react2.default.createClass({
-	  displayName: 'NavBar',
-
-	  getInitialState: function getInitialState() {
-	    ;
-	    return { todayQuizAcronym: 'manchester-united', todayQuizLeague: 'soccer' };
-	  },
-	  openTodayQuiz: function openTodayQuiz() {
-	    window.open('/#/quiz?league=' + this.state.todayQuizLeague + '&quiz_id=' + this.state.todayQuizAcronym, "_self");
-	  },
-	  gaEvent: function gaEvent(event) {
-	    googleClickEvent(league);
-	  },
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'nav',
-	      { className: 'navbar navbar-default' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'container-fluid' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'navbar-header' },
-	          _react2.default.createElement(
-	            'button',
-	            { type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-1', 'aria-expanded': 'false' },
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'sr-only' },
-	              'Toggle navigation'
-	            ),
-	            _react2.default.createElement('span', { className: 'icon-bar' }),
-	            _react2.default.createElement('span', { className: 'icon-bar' }),
-	            _react2.default.createElement('span', { className: 'icon-bar' })
-	          ),
-	          _react2.default.createElement(
-	            'a',
-	            { className: 'navbar-brand', href: '/' },
-	            _react2.default.createElement('img', { src: './dist/images/lightning-bolt3.png' })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
-	          _react2.default.createElement(
-	            'ul',
-	            { className: 'nav navbar-nav' },
-	            _react2.default.createElement(
-	              'li',
-	              { className: 'navbar-item hide' },
-	              _react2.default.createElement(
-	                'a',
-	                { className: 'navbar-link', href: '/#' },
-	                'Home'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { className: 'navbar-item' },
-	              _react2.default.createElement(
-	                'a',
-	                { className: 'navbar-link', href: '', 'data-toggle': 'dropdown', 'data-popover': 'subscribe', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
-	                'Rosters',
-	                _react2.default.createElement('span', { className: 'caret' })
-	              ),
-	              _react2.default.createElement(
-	                'ul',
-	                { className: 'dropdown-menu' },
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#/rosters?league=nba', onClick: this.gaEvent.bind(this, 'nba') },
-	                    'NBA'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#/rosters?league=nfl', onClick: this.gaEvent.bind(this, 'nfl') },
-	                    'NFL'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#/rosters?league=mlb', onClick: this.gaEvent.bind(this, 'mlb') },
-	                    'MLB'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#/rosters?league=soccer', onClick: this.gaEvent.bind(this, 'soccer') },
-	                    'Soccer'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#/rosters?league=mlb', onClick: this.gaEvent.bind(this, 'nhl') },
-	                    'NHL (coming soon)'
-	                  )
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { className: 'navbar-item' },
-	              _react2.default.createElement(
-	                'a',
-	                { className: 'navbar-link', href: '', onClick: this.openTodayQuiz, 'data-popover': '#codeNavPopover' },
-	                'Todays Quiz'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { className: 'navbar-item' },
-	              _react2.default.createElement(
-	                'a',
-	                { className: 'navbar-link', href: '#/subscribe', 'data-popover': 'subscribe' },
-	                'Subscribe'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { className: 'navbar-item' },
-	              _react2.default.createElement(
-	                'a',
-	                { className: 'navbar-link', 'data-popover': 'subscribe', 'data-container': 'body', 'data-toggle': 'popover', 'data-trigger': 'hover', 'data-placement': 'bottom', 'data-content': 'Click Rosters to select your sport then choose a team. Your goal is to name all the players on the team.' },
-	                'How this works'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { className: 'navbar-item hide-mobile' },
-	              _react2.default.createElement(_SearchBar2.default, null)
-	            )
-	          )
-	        )
-	      )
-	    );
-	  }
-
-	});
-
-	exports.default = NavBar;
 
 /***/ }
 /******/ ]);
