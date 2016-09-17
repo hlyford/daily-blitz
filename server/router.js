@@ -54,6 +54,7 @@ router.route('/roster/:league').get( function (req, res) {
 	switch (league) {
 		case 'nba':
 			rosterController.getAllRosters(league, function (response) {
+				console.log(response);
 				res.send(response);
 			});
 			break;

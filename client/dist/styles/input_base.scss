@@ -254,6 +254,21 @@ html {
 							}
 						}
 					}
+					.suggested-quizzes-view {
+						padding-top: 3%;
+						div:nth-of-type(1) {
+							font-size: 1.4em;
+						}
+						ul {
+							padding-top: 2%;
+							padding-left: 9%;
+							li {
+								display: inline-block;
+								padding-right: 3%;
+								font-size: 1.4em;
+							}
+						}
+					}
 			}
 		}
 	}

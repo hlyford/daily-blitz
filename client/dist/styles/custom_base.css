@@ -176,5 +176,16 @@ html {
             width: 50px; }
           html #app .content-container .main-quiz-content .roster-view .five li a {
             padding-left: 15px; }
+        html #app .content-container .main-quiz-content .suggested-quizzes-view {
+          padding-top: 3%; }
+          html #app .content-container .main-quiz-content .suggested-quizzes-view div:nth-of-type(1) {
+            font-size: 1.4em; }
+          html #app .content-container .main-quiz-content .suggested-quizzes-view ul {
+            padding-top: 2%;
+            padding-left: 9%; }
+            html #app .content-container .main-quiz-content .suggested-quizzes-view ul li {
+              display: inline-block;
+              padding-right: 3%;
+              font-size: 1.4em; }
 
 /*# sourceMappingURL=custom_base.css.map */

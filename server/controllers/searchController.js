@@ -9,7 +9,9 @@ allData = [];
 (function getAllData () {
 	Roster.find({},{players: 0},  function (err, result) {
   	if (err) console.log('error',err);
-	  result.forEach(function (item, index) {
+  	var stuff = result;
+	  stuff.forEach(function (item, index) {
+	  	stuff[index]['league_icon_url'] = '/dist/images/league_icons/nba.png';
 	  	allData.push(item);
 	  });
 	});
@@ -34,6 +36,7 @@ allData = [];
 })();
 // when query comes in, search and return
 module.exports = {
+
 	find: function (query, callback) {
 		var options = {
 		  keys: ['team_name'],

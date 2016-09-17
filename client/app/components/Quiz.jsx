@@ -3,10 +3,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactImageFallback from "react-image-fallback";
 import NavBar from './NavBar.jsx';
+import SuggestedQuizzes from './SuggestedQuizzes.jsx';
 
 var Quiz = React.createClass({
   getInitialState: function() {
-    return { quiz_info: {}, correct: [], takingQuiz: false, active_quiz: '', timeLeft: 0 };
+    return { quiz_info: {}, correct: [], takingQuiz: false, active_quiz: '', timeLeft: 0, quizEnded: false };
   },
   componentWillMount: function () {
     // check which league it is and set state
@@ -156,11 +157,11 @@ var Quiz = React.createClass({
     // add diff between correct players and all players to correct array
     var diff = _.difference(this.state.quiz_info.players, this.state.correct);
     this.setState({correct: this.state.correct.concat(diff)});
-    this.setState({timeLeft: 0});
+    this.setState({ quizEnded: true , timeLeft: 0 });
   },
 
   render: function() {
-    console.log('state', this.state);
+    // console.log('state', this.state);
     return (
       <div>
         <NavBar todayQuizAcronym={this.state.todayQuizAcronym}/>
@@ -194,7 +195,7 @@ var Quiz = React.createClass({
                           </ul>
                         </div>
                         <div className="timer">{ this.timeFormatter(this.state.timeLeft) }</div>
-                        { this.state.takingQuiz ? <button onClick={ this.giveUp } className="give-up-button button button-primary">Give up</button> : null }
+                        { !this.state.quizEnded ? <button onClick={ this.giveUp } className="give-up-button button button-primary">Give up</button> : <SuggestedQuizzes team={ this.state.quiz_info } /> }
                       </div>
                     }
                   </div>
