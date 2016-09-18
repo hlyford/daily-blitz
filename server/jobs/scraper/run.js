@@ -18,10 +18,10 @@ switch (process.argv[2]) {
 		looperNfl(31, 32);
 		break;
 	case 'mlb':
-		looperMlb(29, 30);
+		looperMlb(0, 30);
 		break;
 	case 'soccer':
-		looperSoccer(19, 20);
+		looperSoccer(0, 20);
 		break;
 };
 
@@ -33,7 +33,7 @@ function looper (start, end) {
 	if (start < end) {
 		getRostersNba(teamsArray[start]);
 		setTimeout(function () {
-			looper(start + 1);
+			looper(start + 1, end);
 		}, nextWait);
 	}	else {
 		console.log('done');
@@ -51,7 +51,7 @@ function looperNfl (start, end) {
 	if (start < end) {
 		getRostersNfl(teamsArrayNfl[start]);
 		setTimeout(function () {
-			looperNfl(start + 1);
+			looperNfl(start + 1, end);
 		}, nextWait);
 	}	else {
 		console.log('done');
@@ -62,12 +62,12 @@ function looperNfl (start, end) {
 // *** MLB ***** // there are 30 teams
 // loop through waiting a random amount of seconds each time
 function looperMlb (start, end) {
-	var nextWait = Math.floor(Math.random() * (20000 - 10000) + 10000);
+	var nextWait = Math.floor(Math.random() * (6000 - 3000) + 3000);
 	console.log('waiting...', nextWait);
 	if (start < end) {
 		getRostersMlb(teamsArrayMlb[start]);
 		setTimeout(function () {
-			looperMlb(start + 1);
+			looperMlb(start + 1, end);
 		}, nextWait);
 	}	else {
 		console.log('done');
@@ -78,12 +78,12 @@ function looperMlb (start, end) {
 // *** Soccer ***** // there are 20 teams
 // loop through waiting a random amount of seconds each time
 function looperSoccer (start, end) {
-	var nextWait = Math.floor(Math.random() * (20000 - 10000) + 10000);
+	var nextWait = Math.floor(Math.random() * (8000 - 3000) + 3000);
 	console.log('waiting...', nextWait);
 	if (start < end) {
 		getRostersSoccer(teamsArraySoccer[start]);
 		setTimeout(function () {
-			looperSoccer(start + 1);
+			looperSoccer(start + 1, end);
 		}, nextWait);
 	}	else {
 		console.log('done');
