@@ -6,13 +6,11 @@
   "scripts": {
     "start": "nodemon server/server.js",
     "test": "npm test",
-    "scrape_nba": "node server/nba_scraper.js",
-    "scrape_nfl": "node server/nfl_scraper_server.js",
-    "scrape_mlb": "node server/mlb_scraper_server.js",
-    "scrape_soccer": "node server/soccer_scraper_server.js",
+    "scrape": "node server/scraper_server.js",
     "import_lists": "node server/goats_server.js",
     "email": "node server/email_server.js",
     "db": "node server/prod_db_insert.js",
+    "db2": "node server/prod_db_insert2.js",
     "copy_local": "node server/copy_local_db.js"
   },
   "author": "Henry Lyford",

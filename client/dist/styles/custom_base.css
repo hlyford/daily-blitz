@@ -4,7 +4,8 @@ li {
 a {
   text-decoration: none; }
   a:hover {
-    text-decoration: none; }
+    text-decoration: none;
+    cursor: pointer; }
 
 .text-middle {
   text-align: center; }

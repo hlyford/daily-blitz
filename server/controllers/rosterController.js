@@ -14,6 +14,8 @@ module.exports = {
 		var westernTeams = ['gsw','lac','lal','pho','sac','dal','hou','mem','nor','sas','den','min','okc','por','uth'];
 		if (westernTeams.indexOf(data.acronym) !== -1) {
 			data.conference = 'western';
+		} else {
+			data.conference = 'eastern';
 		}
 		// give the players the required fields
 		data.players.forEach( function (player, index) {
@@ -53,7 +55,7 @@ module.exports = {
 			players: data.players,
 			league: data.league
 		}).then(function () {
-			console.log(data.team_name + ' added to ' + Roster['RosterNba']);
+			console.log(data.team_name + ' added');
 		});
 	},
 	getAllRosters: function (league, callback) {
@@ -66,7 +68,7 @@ module.exports = {
 	},
 	getAllRostersInsert: function (league, callback) {
 		// find all rosters
-		Roster.find({},{_id: 0}, function (err, result) {
+		Roster.find({},{_id: 0, time: 0}, function (err, result) {
 		  if (err) console.log('error',err);
 		  callback(result);
 		});

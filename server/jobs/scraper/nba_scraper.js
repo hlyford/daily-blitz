@@ -65,53 +65,26 @@ var getRosters = function (urlSlug, callback) {
 
 					// **** get player images ***
 					// SMALL PLAYER IMAGE URL
-					// var smallImageUrl = $(element).find('td:nth-child(2) div img').attr('src');
-     // 			// check if there's a src for img
-    	// 		var imgType = 'img';
-    	// 		if (smallImageUrl === 'https://s.yimg.com/g/images/spaceball.gif') {
-    	// 			smallImageUrl = $(element).find('td:nth-child(2) div img').css('background-image');
-    	// 			smallImageUrl = smallImageUrl.slice(4, smallImageUrl.length - 1);
-    	// 		}
+					if (process.argv[3] === 'img') {
+						var smallImageUrl = $(element).find('td:nth-child(2) div img').attr('src');
+	     			// check if there's a src for img
+	    			var imgType = 'img';
+	    			if (smallImageUrl === 'https://s.yimg.com/g/images/spaceball.gif') {
+	    				smallImageUrl = $(element).find('td:nth-child(2) div img').css('background-image');
+	    				smallImageUrl = smallImageUrl.slice(4, smallImageUrl.length - 1);
+	    			}
 
-    	// 		var playerPicUrl = smallImageUrl;
-    	// 		if (parseInt(smallImageUrl.length) < 80) {
-    	// 			// make grey outline if no picture
-    	// 			playerPicUrl = 'https://s.yimg.com/dh/ap/default/140828/silhouette@2x.png';
-    	// 		}
-    	// 			// else see if the img is on the src or the background-image
-    	// 		playerImageGetter(playerPicUrl, urlSlug, name);
-    	// 		sleep(3421);
-    	// 		return;
+	    			var playerPicUrl = smallImageUrl;
+	    			if (parseInt(smallImageUrl.length) < 80) {
+	    				// make grey outline if no picture
+	    				playerPicUrl = 'https://s.yimg.com/dh/ap/default/140828/silhouette@2x.png';
+	    			}
+	    				// else see if the img is on the src or the background-image
+	    			playerImageGetter(playerPicUrl, urlSlug, name);
+	    			sleep(3421);
+    				return;
+    			}
 					// END SMALL PLAYER URL
-
-					// DON'T USE BIG IMAGE GETTER
-					// click the player name to get bigger photo
-					// var bigImageUrl = $(element).find('td:nth-child(2) div div a').attr('href');
-					// bigImageUrl = baseBase + bigImageUrl;
-	  		// 	request(bigImageUrl, function (error, response, html) {
-	  		// 		if (error) throw error;
-		  	// 		if (!error && response.statusCode == 200) {
-		   //  			var $$ = cheerio.load(html);
-		   //  			// check if there's a src for img
-		   //  			var imgType = 'img';
-		   //  			var playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image');
-		   //  			if (parseInt(playerPicUrl.children().length) === 0) {
-		   //  				// make grey outline if no picture
-		   //  				playerPicUrl = 'http://www.clker.com/cliparts/m/3/I/C/c/2/grey-silhouette-of-man-md.png';
-		   //  			} else {
-		   //  				// else see if the img is on the src or the background-image
-		   //  				playerPicUrl = playerPicUrl.find('img:first-of-type').attr('src');
-		   //  				if (playerPicUrl.length < 80) {
-		   //  					imgType = 'background';
-		   //  					playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image img:first-of-type').css('background-image');
-		   //  					playerPicUrl = playerPicUrl.slice(4, playerPicUrl.length - 1);
-		   //  				}
-		   //  			}
-		   //  			playerImageGetter(playerPicUrl, urlSlug, name);
-		   //  			return;
-		   //  		}
-		   //  	});
-				// 	----- end big image getter ----
 
 					var height = $(element).find('td:nth-child(4) span span').text();
 					player['height'] = height;
@@ -139,8 +112,9 @@ var getRosters = function (urlSlug, callback) {
 		} else {
 			console.log(error);
 		}
-		// add back to get rosters
 		// console.log('all player images for ' + team.team_name + ' added.'); return;
+		// add back to get rosters
+		if (process.argv[3] === 'img') { return;}
 		rosterController.addStuff(team);
 	});
 }

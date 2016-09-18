@@ -9,69 +9,65 @@ var teamsArrayMlb = require('./team_acronyms').mlb;
 var getRostersSoccer = require('./soccer_scraper');
 var teamsArraySoccer = require('./team_acronyms').soccer;
 
+// read the command arg to determine league; numbers and start and end indexes of teams
+switch (process.argv[2]) {
+	case 'nba':
+		looper(29, 30);
+		break;
+	case 'nfl':
+		looperNfl(31, 32);
+		break;
+	case 'mlb':
+		looperMlb(29, 30);
+		break;
+	case 'soccer':
+		looperSoccer(19, 20);
+		break;
+};
+
 // loop through waiting a random amount of seconds each time
 // ***** NBA  // there are 30 teams
-var looper = function (i) {
+function looper (start, end) {
 	var nextWait = Math.floor(Math.random() * (20000 - 10000) + 10000);
 	console.log('waiting...', nextWait);
-	// EDIT THIS LINE TO CHANGE HOW MANY TEAMS TO GET
-	if (i < 1) {
-		getRostersNba(teamsArray[i]);
+	if (start < end) {
+		getRostersNba(teamsArray[start]);
 		setTimeout(function () {
-			looper(i + 1);
+			looper(start + 1);
 		}, nextWait);
 	}	else {
 		console.log('done');
 		return;
 	}
 };
-// looper(0);
+
 
 // *** NFL ***** // there are 32 teams
 // loop through waiting a random amount of seconds each time
-var looperNfl = function (i) {
+function looperNfl (start, end) {
 	var nextWait = Math.floor(Math.random() * (20000 - 10000) + 10000);
 	console.log('waiting...', nextWait);
 	// EDIT THIS LINE TO CHANGE HOW MANY TEAMS TO GET
-	if (i < 32) {
-		getRostersNfl(teamsArrayNfl[i]);
+	if (start < end) {
+		getRostersNfl(teamsArrayNfl[start]);
 		setTimeout(function () {
-			looperNfl(i + 1);
+			looperNfl(start + 1);
 		}, nextWait);
 	}	else {
 		console.log('done');
 		return;
 	}
 };
-looperNfl(11);
 
 // *** MLB ***** // there are 30 teams
 // loop through waiting a random amount of seconds each time
-var looperMlb = function (i) {
+function looperMlb (start, end) {
 	var nextWait = Math.floor(Math.random() * (20000 - 10000) + 10000);
 	console.log('waiting...', nextWait);
-	// EDIT THIS LINE TO CHANGE HOW MANY TEAMS TO GET
-	if (i < 30) {
-		getRostersMlb(teamsArrayMlb[i]);
+	if (start < end) {
+		getRostersMlb(teamsArrayMlb[start]);
 		setTimeout(function () {
-			looperMlb(i + 1);
-		}, nextWait);
-	}	else {
-		console.log('done');
-		return;
-	}
-};
-// looperMlb(15)
-// *** Soccer ***** // there are 20 teams
-// loop through waiting a random amount of seconds each time
-var looperSoccer = function (i) {
-	var nextWait = Math.floor(Math.random() * (20000 - 10000) + 10000);
-	console.log('waiting...', nextWait);
-	// EDIT THIS LINE TO CHANGE HOW MANY TEAMS TO GET
-	if (i < 12) {
-		getRostersSoccer(teamsArraySoccer[i]);
-		setTimeout(function () {
-			looperSoccer(i + 1);
+			looperMlb(start + 1);
 		}, nextWait);
 	}	else {
 		console.log('done');
@@ -79,5 +75,18 @@ var looperSoccer = function (i) {
 	}
 };
 
-// start at the beginning of teams array
-// looperSoccer(11);
+// *** Soccer ***** // there are 20 teams
+// loop through waiting a random amount of seconds each time
+function looperSoccer (start, end) {
+	var nextWait = Math.floor(Math.random() * (20000 - 10000) + 10000);
+	console.log('waiting...', nextWait);
+	if (start < end) {
+		getRostersSoccer(teamsArraySoccer[start]);
+		setTimeout(function () {
+			looperSoccer(start + 1);
+		}, nextWait);
+	}	else {
+		console.log('done');
+		return;
+	}
+};

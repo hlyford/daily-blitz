@@ -73,46 +73,41 @@ var getRosters = function (urlSlug, callback) {
 					player['weight'] = weight;
 					var age = $(element).find('td:nth-child(6)').text();
 					player['age'] = age;
-					// var experience = $(element).find('td:nth-child(7)').text();
-					// player['experience'] = experience;
 					var birth_place = $(element).find('td:nth-child(7)').text();
 					player['birth_place'] = birth_place;
-					// var college = $(element).find('td:nth-child(9)').text();
-					// player['college'] = college;
 					// var salary = $(element).find('td:nth-child(10) span span');
 					// player['salary'] = salary;
 
-					// PLAYER IMAGE URL
-					// var smallImageUrl = $(element).find('td:nth-child(2) div img').attr('src');
-
 
 					// BIG IMAGE GETTER
-					var bigImageUrl = $(element).find('td:nth-child(2) div div a').attr('href');
-					bigImageUrl = baseBase + bigImageUrl;
-	  			request(bigImageUrl, function (error, response, html) {
-	  				if (error) throw error;
-		  			if (!error && response.statusCode == 200) {
-		    			var $$ = cheerio.load(html);
-		    			// check if there's a src for img
-		    			var imgType = 'img';
-		    			var playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image');
-		    			if (parseInt(playerPicUrl.children().length) === 0) {
-		    				// make grey outline if no picture
-		    				playerPicUrl = 'https://s.yimg.com/dh/ap/default/140828/silhouette@2x.png';
-		    			} else {
-		    				// else see if the img is on the src or the background-image
-		    				playerPicUrl = playerPicUrl.find('img:first-of-type').attr('src');
-		    				if (playerPicUrl.length < 80) {
-		    					imgType = 'background';
-		    					playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image img:first-of-type').css('background-image');
-		    					playerPicUrl = playerPicUrl.slice(4, playerPicUrl.length - 1);
-		    				}
-		    			}
-		    			playerImageGetter(playerPicUrl, urlSlug, name);
-		    			sleep(1421);
-		    			return;
-		    		}
-		    	});
+					if (process.argv[3] === 'img') {
+						var bigImageUrl = $(element).find('td:nth-child(2) div div a').attr('href');
+						bigImageUrl = baseBase + bigImageUrl;
+		  			request(bigImageUrl, function (error, response, html) {
+		  				if (error) throw error;
+			  			if (!error && response.statusCode == 200) {
+			    			var $$ = cheerio.load(html);
+			    			// check if there's a src for img
+			    			var imgType = 'img';
+			    			var playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image');
+			    			if (parseInt(playerPicUrl.children().length) === 0) {
+			    				// make grey outline if no picture
+			    				playerPicUrl = 'https://s.yimg.com/dh/ap/default/140828/silhouette@2x.png';
+			    			} else {
+			    				// else see if the img is on the src or the background-image
+			    				playerPicUrl = playerPicUrl.find('img:first-of-type').attr('src');
+			    				if (playerPicUrl.length < 80) {
+			    					imgType = 'background';
+			    					playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image img:first-of-type').css('background-image');
+			    					playerPicUrl = playerPicUrl.slice(4, playerPicUrl.length - 1);
+			    				}
+			    			}
+			    			playerImageGetter(playerPicUrl, urlSlug, name);
+			    			sleep(1421);
+			    			return;
+			    		}
+			    	});
+					}
 					// ----- end big image getter ----
 
 					for (key in player) {
@@ -128,7 +123,8 @@ var getRosters = function (urlSlug, callback) {
 		}
 		// add back to get rosters
 		console.log('all palyers for '+team.team_name+' added.');
-		return;
+		// you're getting images only, return now
+		if (process.argv[3] === 'img') { return;}
 		rosterControllerSoccer.addStuff(team);
 	});
 }

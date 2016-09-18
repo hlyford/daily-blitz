@@ -33,14 +33,6 @@ var getRosters = function (urlSlug, callback) {
 		if (error) { console.log('error on html load!'); return; }
 	  if (!error && response.statusCode == 200) {
 
-	  // load the html for the page
-	  // 	setTimeout(function() {
-	  // 		var $ = cheerio.load(html);
-	  // 		var job = $('.ys-roster-table tbody tr').find('td:nth-child(10) span span');
-	  // 		console.log('got it');
-
-	  // 	}, 10000);
-	  // 	return;
 			var $ = cheerio.load(html);
 			// ****** get the TEAM images and save them to the images directory
 			// var teamImageUrl = $('.Row.ys-player-header .IbBox:nth-child(1)').css('background-image');
@@ -72,64 +64,14 @@ var getRosters = function (urlSlug, callback) {
 
 					// **** get player images ***
 					// get the thumbnail image -----
-					var thumbnailUrl = $(element).find('td:nth-child(2) div img').css('background-image');
-					thumbnailUrl = thumbnailUrl.slice(4, thumbnailUrl.length - 1);
-					thumbnail = baseBase + thumbnailUrl;
-					playerImageGetter(thumbnailUrl, urlSlug, name);
-					sleep(271);
+					if (process.argv[3] === 'img') {
+						var thumbnailUrl = $(element).find('td:nth-child(2) div img').css('background-image');
+						thumbnailUrl = thumbnailUrl.slice(4, thumbnailUrl.length - 1);
+						thumbnail = baseBase + thumbnailUrl;
+						playerImageGetter(thumbnailUrl, urlSlug, name);
+						sleep(271);
+					}
 					// ------ end thumbnail getter
-
-	  			// request(thumbnailUrl, function (error, response, html) {
-	  			// 	if (error) throw error;
-		  		// 	if (!error && response.statusCode == 200) {
-		    // 			var $$ = cheerio.load(html);
-		    // 			// check if there's a src for img
-		    // 			var imgType = 'img';
-		    // 			var playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image');
-		    // 			if (parseInt(playerPicUrl.children().length) === 0) {
-		    // 				// make grey outline if no picture
-		    // 				playerPicUrl = 'https://s.yimg.com/dh/ap/default/140828/silhouette@2x.png';
-		    // 			} else {
-		    // 				// else see if the img is on the src or the background-image
-		    // 				playerPicUrl = playerPicUrl.find('img:first-of-type').attr('src');
-		    // 				if (playerPicUrl.length < 80) {
-		    // 					imgType = 'background';
-		    // 					playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image img:first-of-type').css('background-image');
-		    // 					playerPicUrl = playerPicUrl.slice(4, playerPicUrl.length - 1);
-		    // 				}
-		    // 			}
-		    // 			playerImageGetter(playerPicUrl, urlSlug, name);
-		    // 			return;
-		    // 		}
-						   //  	});
-
-					// click the player name to get bigger photo
-
-					// var bigImageUrl = $(element).find('td:nth-child(2) div div a').attr('href');
-					// bigImageUrl = baseBase + bigImageUrl;
-	  		// 	request(bigImageUrl, function (error, response, html) {
-	  		// 		if (error) throw error;
-		  	// 		if (!error && response.statusCode == 200) {
-		   //  			var $$ = cheerio.load(html);
-		   //  			// check if there's a src for img
-		   //  			var imgType = 'img';
-		   //  			var playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image');
-		   //  			if (parseInt(playerPicUrl.children().length) === 0) {
-		   //  				// make grey outline if no picture
-		   //  				playerPicUrl = 'http://www.clker.com/cliparts/m/3/I/C/c/2/grey-silhouette-of-man-md.png';
-		   //  			} else {
-		   //  				// else see if the img is on the src or the background-image
-		   //  				playerPicUrl = playerPicUrl.find('img:first-of-type').attr('src');
-		   //  				if (playerPicUrl.length < 80) {
-		   //  					imgType = 'background';
-		   //  					playerPicUrl = $$('#Main').find('#mediasportsplayerheader .player-image img:first-of-type').css('background-image');
-		   //  					playerPicUrl = playerPicUrl.slice(4, playerPicUrl.length - 1);
-		   //  				}
-		   //  			}
-		   //  			playerImageGetter(playerPicUrl, urlSlug, name);
-		   //  			return;
-		   //  		}
-		   //  	});
 
 					var height = $(element).find('td:nth-child(4) span span').text();
 					player['height'] = height;
@@ -157,6 +99,7 @@ var getRosters = function (urlSlug, callback) {
 		} else {
 			console.log(error);
 		}
+		if (process.argv[3] === 'img') { return;}
 		// add back to get rosters
 		rosterControllerNfl.addStuff(team);
 	});

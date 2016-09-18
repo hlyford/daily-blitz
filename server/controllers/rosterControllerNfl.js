@@ -66,6 +66,13 @@ module.exports = {
 		  callback(result);
 		});
 	},
+	getAllRostersInsert: function (league, callback) {
+		// find all rosters
+		Roster.find({},{_id: 0, time: 0}, function (err, result) {
+		  if (err) console.log('error',err);
+		  callback(result);
+		});
+	},
 	getRoster: function (acronym, callback) {
 		Roster.find({acronym: acronym})
 			.then( function (result, error) {
