@@ -12,10 +12,10 @@ var teamsArraySoccer = require('./team_acronyms').soccer;
 // read the command arg to determine league; numbers and start and end indexes of teams
 switch (process.argv[2]) {
 	case 'nba':
-		looper(29, 30);
+		looper(0, 30);
 		break;
 	case 'nfl':
-		looperNfl(31, 32);
+		looperNfl(0, 32);
 		break;
 	case 'mlb':
 		looperMlb(0, 30);
@@ -28,7 +28,7 @@ switch (process.argv[2]) {
 // loop through waiting a random amount of seconds each time
 // ***** NBA  // there are 30 teams
 function looper (start, end) {
-	var nextWait = Math.floor(Math.random() * (20000 - 10000) + 10000);
+	var nextWait = Math.floor(Math.random() * (8000 - 4000) + 4000);
 	console.log('waiting...', nextWait);
 	if (start < end) {
 		getRostersNba(teamsArray[start]);
@@ -45,7 +45,7 @@ function looper (start, end) {
 // *** NFL ***** // there are 32 teams
 // loop through waiting a random amount of seconds each time
 function looperNfl (start, end) {
-	var nextWait = Math.floor(Math.random() * (20000 - 10000) + 10000);
+	var nextWait = Math.floor(Math.random() * (9000 - 3000) + 3000);
 	console.log('waiting...', nextWait);
 	// EDIT THIS LINE TO CHANGE HOW MANY TEAMS TO GET
 	if (start < end) {
