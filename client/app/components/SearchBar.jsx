@@ -7,13 +7,25 @@ var SearchBar = React.createClass({
     return { query: null , search_results: [], search_keys: ['team_name'], search_term: 'team_name' };
   },
   componentWillMount: function () {
-    // this.getTeams();
+    document.addEventListener("keydown", this.resetSearch, false);
+    document.addEventListener("click", this.resetSearch, false);
+  },
+  componentWillUnmount: function () {
+    document.removeEventListener("keydown", this._handleEscKey, false);
+    document.removeEventListener("click", this.resetSearch, false);
   },
   handleChange: function (event) {
     var entry = event.target.value;
     this.setState({ query: entry });
     if (this.state.query !== null) {
       this.sendQuery(this.state.query);
+    }
+  },
+  resetSearch: function (event) {
+    // if they click out of the search bar or hit escape guy
+    if (event.keyCode == 27 || event.target.className !== 'react-search__input') {
+      // $('.react-search__input').val('');
+      // this.handleChange({target: {value: ''}});
     }
   },
   sendQuery: function (query) {
@@ -59,6 +71,7 @@ var SearchBar = React.createClass({
   },
 
   render: function() {
+    console.log(this.state.query);
     return (
       <div className="search-view">
         <div>

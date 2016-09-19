@@ -27257,13 +27257,25 @@
 	    return { query: null, search_results: [], search_keys: ['team_name'], search_term: 'team_name' };
 	  },
 	  componentWillMount: function componentWillMount() {
-	    // this.getTeams();
+	    document.addEventListener("keydown", this.resetSearch, false);
+	    document.addEventListener("click", this.resetSearch, false);
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    document.removeEventListener("keydown", this._handleEscKey, false);
+	    document.removeEventListener("click", this.resetSearch, false);
 	  },
 	  handleChange: function handleChange(event) {
 	    var entry = event.target.value;
 	    this.setState({ query: entry });
 	    if (this.state.query !== null) {
 	      this.sendQuery(this.state.query);
+	    }
+	  },
+	  resetSearch: function resetSearch(event) {
+	    // if they click out of the search bar or hit escape guy
+	    if (event.keyCode == 27 || event.target.className !== 'react-search__input') {
+	      // $('.react-search__input').val('');
+	      // this.handleChange({target: {value: ''}});
 	    }
 	  },
 	  sendQuery: function sendQuery(query) {
@@ -27307,6 +27319,7 @@
 	  },
 
 	  render: function render() {
+	    console.log(this.state.query);
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'search-view' },
