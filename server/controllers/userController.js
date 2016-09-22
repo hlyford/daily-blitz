@@ -3,11 +3,20 @@ var validator = require('email-validator');
 
 module.exports = {
 
-	handleQuiz: function (quiz_id, callback) {
+	getOneUser: function (quiz_id, callback) {
 		User.find({queryParam: quiz_id})
 			.then(function (result) {
 				callback(result);
 			})
+	},
+
+	getUsers: function (callback) {
+		console.log('yoyoo');
+		User.find({}).then(function (result) {
+			console.log('in ere', result);
+			callback(result);
+			return result;
+		});
 	},
 
 	createUser: function (data, callback) {

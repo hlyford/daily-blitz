@@ -27319,7 +27319,7 @@
 	  },
 
 	  render: function render() {
-	    console.log(this.state.query);
+
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'search-view' },

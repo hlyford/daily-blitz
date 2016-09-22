@@ -71,7 +71,7 @@ var SearchBar = React.createClass({
   },
 
   render: function() {
-    console.log(this.state.query);
+
     return (
       <div className="search-view">
         <div>
