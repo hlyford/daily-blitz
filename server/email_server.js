@@ -9,6 +9,10 @@ var rosterController = require('./controllers/rosterController');
 // var scraper = require('./jobs/scraper/scraper');
 // ----- CHANGE LEAGUE HERE -----
 
+// set up MongoDB
+var dbURI = process.env.MONGODB_URI || 'mongodb://localhost/obscore';
+var db = mongoose.connect(dbURI);
+
 var emailRunner = require('./email/runEmail');
 
 // require in other files

@@ -10,12 +10,13 @@ module.exports = {
 			})
 	},
 
-	getUsers: function (callback) {
-		console.log('yoyoo');
-		User.find({}).then(function (result) {
-			console.log('in ere', result);
-			callback(result);
-			return result;
+	getUsers: function (onlyEmail) {
+		var params = onlyEmail === 1 ? {email: 1} : {};
+		return User.find({}, params, function (err, result) {
+			if (err) return err;
+			else {
+				return result;
+			}
 		});
 	},
 

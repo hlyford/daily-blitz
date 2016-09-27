@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var path = require('path');
 var twilio = require('./twilio/twilio');
-
+var redisStuff = require('./models/redisStuff');
 
 // require in other files
 var router = require('./router.js');
@@ -21,6 +21,14 @@ if (port !== 8000) {
 
 console.log(dbURI);
 var db = mongoose.connect(dbURI);
+
+// set up Redis
+var redis = require('redis');
+var client = redis.createClient(); //creates a new client
+client.on('connect', function() {
+  console.log('Redis connected...');
+  redisStuff(client);
+});
 
 // middleware
 app.use(bodyParser.json());

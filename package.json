@@ -40,6 +40,7 @@
     "react-router": "^2.5.2",
     "react-search": "^1.0.10",
     "react-skeleton": "^1.0.2",
+    "redis": "^2.6.2",
     "request": "^2.73.0",
     "requirejs": "^2.2.0",
     "shrinkwrap": "^0.4.0",
