@@ -24,7 +24,7 @@ var db = mongoose.connect(dbURI);
 
 // set up Redis
 var redis = require('redis');
-var client = redis.createClient(); //creates a new client
+var client = redis.createClient(process.env.REDIS_URL);
 client.on('connect', function() {
   console.log('Redis connected...');
   redisStuff(client);
