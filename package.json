@@ -45,6 +45,7 @@
     "requirejs": "^2.2.0",
     "shrinkwrap": "^0.4.0",
     "twilio": "^2.9.1",
+    "underscore": "https://registry.npmjs.org/underscore/-/underscore-1.8.3.tgz",
     "url": "^0.11.0",
     "util": "^0.10.3",
     "webpack": "^1.13.1"

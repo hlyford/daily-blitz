@@ -11,6 +11,7 @@ var rosterController = require('./controllers/rosterController');
 
 // set up MongoDB
 var dbURI = process.env.MONGODB_URI || 'mongodb://localhost/obscore';
+var dbURI = 'mongodb://heroku_rbb7779l:qu17dskjak3brt79onfnn2o8uh@ds017173.mlab.com:17173/heroku_rbb7779l';
 var db = mongoose.connect(dbURI);
 
 var emailRunner = require('./email/runEmail');

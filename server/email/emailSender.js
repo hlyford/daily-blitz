@@ -4,9 +4,10 @@ var rbEmail = config.email, pw = config.pw;
  // handle the route at yourdomain.com/sayHello
 
  module.exports = function (toArray, subject, quizUrl, callback) {
+    console.log('Sending to: ', toArray);
      var mailOptions = {
          from: 'rosterblitz@gmail.com', // sender address
-         to: toArray, // list of receivers
+         bcc: toArray, // list of receivers
          subject: subject, // Subject line
          // text: text //, // plaintext body
          html: '<div>Maybe you try dis quiz: <a href="' + quizUrl + '">Golden State Warriors</a></div>' // You can choose to send an HTML body instead
@@ -23,19 +24,20 @@ var rbEmail = config.email, pw = config.pw;
          });
          return transporter;
      };
-     var sendMail = function (t) {
+     var sendMail = function (t, callback) {
         console.log('hihh');
         t.sendMail(mailOptions, function(error, info){
-            console.log('hi', transporter);
              if(error){
-                 console.log(error);
-                 // res.json({yo: 'error'});
-             }else{
-                 console.log('Message sent: ' + info.response);
-                 callback(info.response);
+                 callback('Error: ', error)
+             } else {
+                 callback('Message sent: ' + info.response);
              };
         });
+        return;
     }
     var transporter = handleSayHello();
-    sendMail(transporter);
+
+    sendMail(transporter, function (result) {
+        console.log(result);
+    });
 }
