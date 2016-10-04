@@ -12,11 +12,14 @@ var searchController = require('./controllers/searchController');
 var bodyParser = require('body-parser');
 var path = require('path');
 // var emailSender = require('./email/emailSender');
+var redisController = require('./jobs/redis/redisInserter');
 
 var router = express.Router();
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
+// switch to Redis or mongo for team data
+var redis = false;
 
 // QUIZ ROUTES
 
@@ -49,56 +52,82 @@ router.route('/user').post(function (req, res) {
 
 // ROSTER ROUTES
 // get all rosters for a given league
+// keeping the teams in memory
+var allLeagues = {};
+rosterController.getAllRosters('nba', function(result) {
+	allLeagues['nba'] = result;
+});
+
 router.route('/roster/:league').get( function (req, res) {
 	var league = req.params.league;
-	switch (league) {
-		case 'nba':
-			rosterController.getAllRosters(league, function (response) {
-				res.send(response);
-			});
-			break;
-		case 'nfl':
-			rosterControllerNfl.getAllRosters(league, function (response) {
-				res.send(response);
-			});
-			break;
-		case 'mlb':
-			rosterControllerMlb.getAllRosters(league, function (response) {
-				res.send(response);
-			});
-			break;
-		case 'soccer':
-			rosterControllerSoccer.getAllRosters(league, function (response) {
-				res.send(response);
-			});
-			break;
+	if (redis) {
+		redisController.retrieveOneLeague(league, function (response) {
+			res.send(response);
+		});
+	} else {
+		switch (league) {
+			case 'nba':
+				// console.log('yep');
+				// res.send(allLeagues[league]);
+				// return;
+				rosterController.getAllRosters(league, function (response) {
+					res.send(response);
+				});
+
+				break;
+			case 'nfl':
+				rosterControllerNfl.getAllRosters(league, function (response) {
+					res.send(response);
+				});
+				break;
+			case 'mlb':
+				rosterControllerMlb.getAllRosters(league, function (response) {
+					res.send(response);
+				});
+				break;
+			case 'soccer':
+				rosterControllerSoccer.getAllRosters(league, function (response) {
+					res.send(response);
+				});
+				break;
+		}
 	}
+
 });
 // get roster for a specific team
 router.route('/roster/:league/team/:team_acronym').get(function (req, res) {
 	var league = req.params.league;
-	switch (league) {
-		case 'nba':
-			rosterController.getRoster(req.params.team_acronym, function (roster_data) {
-				res.send(roster_data);
-			})
+	var team = req.params.team_acronym;
+
+	if (redis) {
+		redisController.retrieveOneTeam(league, team, function (response) {
+			res.send(response);
+		});
+	} else {
+		switch (league) {
+			case 'nba':
+				rosterController.getRoster(req.params.team_acronym, function (roster_data) {
+					res.send(roster_data);
+				})
+				break;
+			case 'nfl':
+				rosterControllerNfl.getRoster(req.params.team_acronym, function (response) {
+					res.send(response);
+				});
+				break;
+			case 'mlb':
+				rosterControllerMlb.getRoster(req.params.team_acronym, function (response) {
+					res.send(response);
+				});
 			break;
-		case 'nfl':
-			rosterControllerNfl.getRoster(req.params.team_acronym, function (response) {
-				res.send(response);
-			});
-			break;
-		case 'mlb':
-			rosterControllerMlb.getRoster(req.params.team_acronym, function (response) {
-				res.send(response);
-			});
-		break;
-		case 'soccer':
-			rosterControllerSoccer.getRoster(req.params.team_acronym, function (response) {
-				res.send(response);
-			});
-			break;
+			case 'soccer':
+				rosterControllerSoccer.getRoster(req.params.team_acronym, function (response) {
+					res.send(response);
+				});
+				break;
+		}
 	}
+
 });
 
 // GOATS LISTS ROUTES

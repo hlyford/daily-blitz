@@ -7,7 +7,7 @@ module.exports = {
 		User.find({queryParam: quiz_id})
 			.then(function (result) {
 				callback(result);
-			})
+			});
 	},
 
 	getUsers: function (onlyEmail) {
@@ -41,7 +41,7 @@ module.exports = {
 							callback(result);
 						});
 				}
-			})
+			});
 		}
 	}
-}
+};

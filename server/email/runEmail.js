@@ -16,7 +16,7 @@ users.then( function(result) {
 	var quizUrl = 'http://www.rosterblitz.com/#/quiz?league=nba&quiz_id=gsw&_k=3mwx4u';
 	var handleComplete = function (response) {
 		console.log(response);
-	}
+	};
 
 	console.log('Running email...');
 	emailSender(toArray, subject, quizUrl, handleComplete);

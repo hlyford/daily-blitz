@@ -28,16 +28,16 @@ var rbEmail = config.email, pw = config.pw;
         console.log('hihh');
         t.sendMail(mailOptions, function(error, info){
              if(error){
-                 callback('Error: ', error)
+                 callback('Error: ', error);
              } else {
                  callback('Message sent: ' + info.response);
-             };
+             }
         });
         return;
-    }
+    };
     var transporter = handleSayHello();
 
     sendMail(transporter, function (result) {
         console.log(result);
     });
-}
+};
