@@ -45,7 +45,11 @@ if (process.argv[2] !== 'redis') {
 // redis insert if argument provided
 if (process.argv[2] === 'redis') {
 	console.log('Running redis insert...');
-	var client = redis.createClient(process.env.REDIS_URL);
+	if (process.argv[3] === 'prod') {
+		var client = redis.createClient('redis://h:pa9igs3tc3moh26cdkoukolbsnk@ec2-54-163-236-235.compute-1.amazonaws.com:31619');
+	} else {
+		var client = redis.createClient(process.env.REDIS_URL);
+	}
 	client.on('connect', function() {
 	  console.log('Redis connected...');
 	  redisInserter(client);

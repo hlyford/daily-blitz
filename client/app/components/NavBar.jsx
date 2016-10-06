@@ -39,7 +39,7 @@ var NavBar = React.createClass({
                   <li><a href="#/rosters?league=nfl" onClick={ this.gaEvent.bind(this, 'nfl') }>NFL</a></li>
                   <li><a href="#/rosters?league=mlb" onClick={ this.gaEvent.bind(this, 'mlb') }>MLB</a></li>
                   <li><a href="#/rosters?league=soccer" onClick={ this.gaEvent.bind(this, 'soccer') }>Soccer</a></li>
-                  <li><a href="#/rosters?league=mlb" onClick={ this.gaEvent.bind(this, 'nhl') }>NHL (coming soon)</a></li>
+                  <li><a href="" onClick={ this.gaEvent.bind(this, 'nhl') }>NHL (coming soon)</a></li>
                 </ul>
               </li>
               <li className="navbar-item">

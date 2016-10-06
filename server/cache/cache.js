@@ -20,7 +20,7 @@ module.exports = {
 			allTeams.nba = teamsObj;
 		}, 1);
 
-		rosterControllerNfl.getAllRosters('nfl', function (teams) {
+		rosterControllerNfl.getAllRostersInsert('nfl', function (teams) {
 			var teamsObj = {};
 			teams.forEach( function (team, index) {
 				teamsObj[team.acronym] = team;
@@ -28,7 +28,7 @@ module.exports = {
 			allTeams.nfl = teamsObj;
 		}, 1);
 
-		rosterControllerMlb.getAllRosters('mlb', function (teams) {
+		rosterControllerMlb.getAllRostersInsert('mlb', function (teams) {
 			// this.allTeams['nba'] = teams;
 			var teamsObj = {};
 			teams.forEach( function (team, index) {
@@ -37,7 +37,7 @@ module.exports = {
 			allTeams.mlb = teamsObj;
 		}, 1);
 
-		rosterControllerSoccer.getAllRosters('soccer', function (teams) {
+		rosterControllerSoccer.getAllRostersInsert('soccer', function (teams) {
 			var teamsObj = {};
 			teams.forEach( function (team, index) {
 				teamsObj[team.acronym] = team;
