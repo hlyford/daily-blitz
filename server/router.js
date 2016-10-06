@@ -14,12 +14,20 @@ var path = require('path');
 // var emailSender = require('./email/emailSender');
 var redisController = require('./jobs/redis/redisInserter');
 
+// create server side cache
+var cache = require('./cache/cache'), storage;
+
+cache.populateAllTeams( function (allTeams) {
+	storage = allTeams;
+});
+
 var router = express.Router();
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
-// switch to Redis or mongo for team data
-var redis = false;
+// switch to Redis or mongo for team data; switch server cache usage
+var redis = true; serverCache = true;
+console.log('Using Redis: ' + redis + ' | Using server cache: ' + serverCache);
 
 // QUIZ ROUTES
 
@@ -99,10 +107,12 @@ router.route('/roster/:league/team/:team_acronym').get(function (req, res) {
 	var league = req.params.league;
 	var team = req.params.team_acronym;
 
-	if (redis) {
+	if (redis && !serverCache) {
 		redisController.retrieveOneTeam(league, team, function (response) {
 			res.send(response);
 		});
+	} else if (serverCache) {
+		res.send([storage[league][team]]);
 	} else {
 		switch (league) {
 			case 'nba':
