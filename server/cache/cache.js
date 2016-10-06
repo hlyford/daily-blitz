@@ -45,6 +45,43 @@ module.exports = {
 			allTeams.soccer = teamsObj;
 			callback(allTeams);
 		}, 1);
+	},
+	populateAllTeamsWithPlayers: function (callback) {
+		var allTeams = {};
+		rosterController.getAllRosters('nba', function (teams) {
+
+			var teamsObj = {};
+			teams.forEach( function (team, index) {
+				teamsObj[team.acronym] = team;
+			});
+			allTeams.nba = teamsObj;
+		}, 1);
+
+		rosterControllerNfl.getAllRosters('nfl', function (teams) {
+			var teamsObj = {};
+			teams.forEach( function (team, index) {
+				teamsObj[team.acronym] = team;
+			});
+			allTeams.nfl = teamsObj;
+		}, 1);
+
+		rosterControllerMlb.getAllRosters('mlb', function (teams) {
+			// this.allTeams['nba'] = teams;
+			var teamsObj = {};
+			teams.forEach( function (team, index) {
+				teamsObj[team.acronym] = team;
+			});
+			allTeams.mlb = teamsObj;
+		}, 1);
+
+		rosterControllerSoccer.getAllRosters('soccer', function (teams) {
+			var teamsObj = {};
+			teams.forEach( function (team, index) {
+				teamsObj[team.acronym] = team;
+			});
+			allTeams.soccer = teamsObj;
+			callback(allTeams);
+		}, 1);
 	}
 
 }

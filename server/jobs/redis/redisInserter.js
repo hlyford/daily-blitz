@@ -1,3 +1,6 @@
+var flatten = require('flat');
+var unflatten = require('flat').unflatten;
+
 var allTeams = {
 	nba: require('../../../allTeams/nba_insert'),
 	nfl: require('../../../allTeams/nfl_insert'),
@@ -47,13 +50,25 @@ module.exports = {
 			// loop through each team in the league
 			allTeams[league].forEach( function (team, index) {
 				// set the key value-pair as 'acronym' : [team_object]
-				team.players = null;
+				delete team['players'];
+				delete team['__v'];
 				allTeamsInLeague.push(team);
+				// allTeamsInLeague[team.acronym] = team;
 			});
 			// add all the teams to the main object
 			allTeamsByLeague[league + '_2'] = allTeamsInLeague;
 		}
+		// flatten expierent
+		// var flattenedTeams = flatten(allTeamsByLeague);
 
+		// for (var league in flattenedTeams) {
+		// 	client.set(league, flattenedTeams[league], function(err, reply) {
+		// 	});
+		// }
+		// end flatten experiment
+
+
+		// this still works down here
 		for (var league in allTeamsByLeague) {
 			var leagueString = JSON.stringify(allTeamsByLeague[league]);
 			client.set(league, leagueString, function(err, reply) {

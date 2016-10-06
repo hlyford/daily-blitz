@@ -58,14 +58,9 @@ router.route('/user').post(function (req, res) {
 	});
 });
 
+
 // ROSTER ROUTES
 // get all rosters for a given league
-// keeping the teams in memory
-var allLeagues = {};
-rosterController.getAllRosters('nba', function(result) {
-	allLeagues['nba'] = result;
-});
-
 router.route('/roster/:league').get( function (req, res) {
 	var league = req.params.league;
 	if (redis) {
