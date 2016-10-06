@@ -28,7 +28,7 @@ module.exports = {
 		  console.log("Closed out server connection.");
 		  process.exit();
 			});
-		}, 6000);
+		}, 40000);
 
 		this.getAllRosters(function(results) {
 			if (results.length > data.length) {
