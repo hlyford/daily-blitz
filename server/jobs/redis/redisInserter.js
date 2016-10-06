@@ -39,8 +39,6 @@ module.exports = {
 			};
 		}
 
-		return;
-
 		// add the team info WITHOUT players
 		// loop through each league in allTeams
 		var allTeamsByLeague = {};
@@ -68,7 +66,6 @@ module.exports = {
 	retrieveOneTeam: function (league, acronym, callback) {
 		this.client.get(league + acronym, function (err, reply) {
 			if (err) console.log(err);
-			console.log(reply);
 			// reply = JSON.parse(reply);
 			// reply = reply[acronym];
 			callback([reply]);

@@ -26,7 +26,7 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
 // switch to Redis or mongo for team data; switch server cache usage
-var redis = true; serverCache = true;
+var redis = false; serverCache = false;
 console.log('Using Redis: ' + redis + ' | Using server cache: ' + serverCache);
 
 // QUIZ ROUTES
@@ -75,9 +75,6 @@ router.route('/roster/:league').get( function (req, res) {
 	} else {
 		switch (league) {
 			case 'nba':
-				// console.log('yep');
-				// res.send(allLeagues[league]);
-				// return;
 				rosterController.getAllRosters(league, function (response) {
 					res.send(response);
 				});
