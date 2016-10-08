@@ -33,6 +33,7 @@
     "mongoose": "^4.4.12",
     "newrelic": "^1.29.0",
     "nodemailer": "^2.5.0",
+    "nodemon": "^1.11.0",
     "path": "^0.12.7",
     "promise": "https://registry.npmjs.org/promise/-/promise-7.1.1.tgz",
     "react": "^15.2.0",

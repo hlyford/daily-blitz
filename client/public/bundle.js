@@ -72,7 +72,7 @@
 
 	var _Quiz2 = _interopRequireDefault(_Quiz);
 
-	var _Rosters = __webpack_require__(248);
+	var _Rosters = __webpack_require__(244);
 
 	var _Rosters2 = _interopRequireDefault(_Rosters);
 
@@ -27717,7 +27717,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _reactImageFallback = __webpack_require__(244);
+	var _reactImageFallback = __webpack_require__(245);
 
 	var _reactImageFallback2 = _interopRequireDefault(_reactImageFallback);
 
@@ -27725,7 +27725,7 @@
 
 	var _NavBar2 = _interopRequireDefault(_NavBar);
 
-	var _SuggestedQuizzes = __webpack_require__(247);
+	var _SuggestedQuizzes = __webpack_require__(248);
 
 	var _SuggestedQuizzes2 = _interopRequireDefault(_SuggestedQuizzes);
 
@@ -27943,6 +27943,11 @@
 	                  'div',
 	                  null,
 	                  _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    'Try to name all the players on the current roster (last name or full name) before time expires.'
+	                  ),
+	                  _react2.default.createElement(
 	                    'button',
 	                    { className: 'text-middle', onClick: this.startQuiz },
 	                    'Take quiz!'
@@ -28012,447 +28017,6 @@
 
 /***/ },
 /* 244 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _filterDomProps = __webpack_require__(245);
-
-	var _filterDomProps2 = _interopRequireDefault(_filterDomProps);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ReactImageFallback = function (_Component) {
-		_inherits(ReactImageFallback, _Component);
-
-		function ReactImageFallback(props) {
-			_classCallCheck(this, ReactImageFallback);
-
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ReactImageFallback).call(this, props));
-
-			_this.displayImage = new window.Image();
-			_this.state = {
-				imageSource: props.initialImage
-			};
-			_this.setDisplayImage = _this.setDisplayImage.bind(_this);
-			return _this;
-		}
-
-		_createClass(ReactImageFallback, [{
-			key: "componentDidMount",
-			value: function componentDidMount() {
-				this.setDisplayImage({ image: this.props.src, fallbacks: this.props.fallbackImage });
-			}
-		}, {
-			key: "componentWillReceiveProps",
-			value: function componentWillReceiveProps(nextProps) {
-				if (nextProps.src !== this.props.src) {
-					this.setDisplayImage({ image: nextProps.src, fallbacks: nextProps.fallbackImage });
-				}
-			}
-		}, {
-			key: "componentWillUnmount",
-			value: function componentWillUnmount() {
-				this.displayImage.onerror = null;
-				this.displayImage.onload = null;
-			}
-		}, {
-			key: "setDisplayImage",
-			value: function setDisplayImage(_ref) {
-				var _this2 = this;
-
-				var image = _ref.image;
-				var fallbacks = _ref.fallbacks;
-
-				var imagesArray = [image].concat(fallbacks);
-				this.displayImage.onerror = function () {
-					if (imagesArray.length > 2 && typeof imagesArray[1] === "string") {
-						var updatedFallbacks = imagesArray.slice(2);
-						_this2.setDisplayImage({ image: imagesArray[1], fallbacks: updatedFallbacks });
-						return;
-					}
-					_this2.setState({
-						imageSource: imagesArray[1]
-					}, function () {
-						if (_this2.props.onError) {
-							_this2.props.onError(_this2.props.src);
-						}
-					});
-				};
-				this.displayImage.onload = function () {
-					_this2.setState({
-						imageSource: imagesArray[0]
-					}, function () {
-						if (_this2.props.onLoad) {
-							_this2.props.onLoad(imagesArray[0]);
-						}
-					});
-				};
-				this.displayImage.src = imagesArray[0];
-			}
-		}, {
-			key: "render",
-			value: function render() {
-				return typeof this.state.imageSource === "string" ? _react2.default.createElement("img", _extends({}, (0, _filterDomProps2.default)(this.props), { src: this.state.imageSource })) : this.state.imageSource;
-			}
-		}]);
-
-		return ReactImageFallback;
-	}(_react.Component);
-
-	exports.default = ReactImageFallback;
-
-	ReactImageFallback.displayName = "ReactImageFallback";
-
-	ReactImageFallback.propTypes = {
-		src: _react.PropTypes.string.isRequired,
-		fallbackImage: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.element, _react.PropTypes.array]).isRequired,
-		initialImage: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.element]),
-		onLoad: _react.PropTypes.func,
-		onError: _react.PropTypes.func
-	};
-
-	ReactImageFallback.defaultProps = {
-		initialImage: null
-	};
-
-/***/ },
-/* 245 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.default = filterDOMProps;
-
-	var _htmlAttributes = __webpack_require__(246);
-
-	var _htmlAttributes2 = _interopRequireDefault(_htmlAttributes);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var eventProps = {
-		onCopy: true,
-		onCut: true,
-		onPaste: true,
-		onLoad: true,
-		onError: true,
-		onWheel: true,
-		onScroll: true,
-		onCompositionEnd: true,
-		onCompositionStart: true,
-		onCompositionUpdate: true,
-		onKeyDown: true,
-		onKeyPress: true,
-		onKeyUp: true,
-		onFocus: true,
-		onBlur: true,
-		onChange: true,
-		onInput: true,
-		onSubmit: true,
-		onClick: true,
-		onContextMenu: true,
-		onDoubleClick: true,
-		onDrag: true,
-		onDragEnd: true,
-		onDragEnter: true,
-		onDragExit: true,
-		onDragLeave: true,
-		onDragOver: true,
-		onDragStart: true,
-		onDrop: true,
-		onMouseDown: true,
-		onMouseEnter: true,
-		onMouseLeave: true,
-		onMouseMove: true,
-		onMouseOut: true,
-		onMouseOver: true,
-		onMouseUp: true,
-		onSelect: true,
-		onTouchCancel: true,
-		onTouchEnd: true,
-		onTouchMove: true,
-		onTouchStart: true,
-		onAnimationStart: true,
-		onAnimationEnd: true,
-		onAnimationIteration: true,
-		onTransitionEnd: true
-	};
-
-	function isValidDOMProp(prop) {
-		return eventProps[prop] || _htmlAttributes2.default[prop];
-	}
-
-	function filterDOMProps(props) {
-		var domProps = {};
-		for (var prop in props) {
-			if (props.hasOwnProperty(prop) && isValidDOMProp(prop)) {
-				domProps[prop] = props[prop];
-			}
-		}
-		return domProps;
-	}
-
-/***/ },
-/* 246 */
-/***/ function(module, exports) {
-
-	/*!
-	 * html-attributes
-	 * https://github.com/alexmingoia/html-attributes
-	 */
-
-	'use strict';
-
-	/**
-	 * @module html-attributes
-	 */
-
-	module.exports = {
-	  "abbr": "abbr",
-	  "accept": "accept",
-	  "acceptCharset": "accept-charset",
-	  "accessKey": "accesskey",
-	  "action": "action",
-	  "allowFullScreen": "allowfullscreen",
-	  "allowTransparency": "allowtransparency",
-	  "alt": "alt",
-	  "async": "async",
-	  "autoComplete": "autocomplete",
-	  "autoFocus": "autofocus",
-	  "autoPlay": "autoplay",
-	  "cellPadding": "cellpadding",
-	  "cellSpacing": "cellspacing",
-	  "challenge": "challenge",
-	  "charset": "charset",
-	  "checked": "checked",
-	  "cite": "cite",
-	  "class": "class",
-	  "className": "class",
-	  "cols": "cols",
-	  "colSpan": "colspan",
-	  "command": "command",
-	  "content": "content",
-	  "contentEditable": "contenteditable",
-	  "contextMenu": "contextmenu",
-	  "controls": "controls",
-	  "coords": "coords",
-	  "crossOrigin": "crossorigin",
-	  "data": "data",
-	  "dateTime": "datetime",
-	  "default": "default",
-	  "defer": "defer",
-	  "dir": "dir",
-	  "disabled": "disabled",
-	  "download": "download",
-	  "draggable": "draggable",
-	  "dropzone": "dropzone",
-	  "encType": "enctype",
-	  "for": "for",
-	  "form": "form",
-	  "formAction": "formaction",
-	  "formEncType": "formenctype",
-	  "formMethod": "formmethod",
-	  "formNoValidate": "formnovalidate",
-	  "formTarget": "formtarget",
-	  "frameBorder": "frameBorder",
-	  "headers": "headers",
-	  "height": "height",
-	  "hidden": "hidden",
-	  "high": "high",
-	  "href": "href",
-	  "hrefLang": "hreflang",
-	  "htmlFor": "for",
-	  "httpEquiv": "http-equiv",
-	  "icon": "icon",
-	  "id": "id",
-	  "inputMode": "inputmode",
-	  "isMap": "ismap",
-	  "itemId": "itemid",
-	  "itemProp": "itemprop",
-	  "itemRef": "itemref",
-	  "itemScope": "itemscope",
-	  "itemType": "itemtype",
-	  "kind": "kind",
-	  "label": "label",
-	  "lang": "lang",
-	  "list": "list",
-	  "loop": "loop",
-	  "manifest": "manifest",
-	  "max": "max",
-	  "maxLength": "maxlength",
-	  "media": "media",
-	  "mediaGroup": "mediagroup",
-	  "method": "method",
-	  "min": "min",
-	  "minLength": "minlength",
-	  "multiple": "multiple",
-	  "muted": "muted",
-	  "name": "name",
-	  "noValidate": "novalidate",
-	  "open": "open",
-	  "optimum": "optimum",
-	  "pattern": "pattern",
-	  "ping": "ping",
-	  "placeholder": "placeholder",
-	  "poster": "poster",
-	  "preload": "preload",
-	  "radioGroup": "radiogroup",
-	  "readOnly": "readonly",
-	  "rel": "rel",
-	  "required": "required",
-	  "role": "role",
-	  "rows": "rows",
-	  "rowSpan": "rowspan",
-	  "sandbox": "sandbox",
-	  "scope": "scope",
-	  "scoped": "scoped",
-	  "scrolling": "scrolling",
-	  "seamless": "seamless",
-	  "selected": "selected",
-	  "shape": "shape",
-	  "size": "size",
-	  "sizes": "sizes",
-	  "sortable": "sortable",
-	  "span": "span",
-	  "spellCheck": "spellcheck",
-	  "src": "src",
-	  "srcDoc": "srcdoc",
-	  "srcSet": "srcset",
-	  "start": "start",
-	  "step": "step",
-	  "style": "style",
-	  "tabIndex": "tabindex",
-	  "target": "target",
-	  "title": "title",
-	  "translate": "translate",
-	  "type": "type",
-	  "typeMustMatch": "typemustmatch",
-	  "useMap": "usemap",
-	  "value": "value",
-	  "width": "width",
-	  "wmode": "wmode",
-	  "wrap": "wrap"
-	};
-
-
-/***/ },
-/* 247 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var SuggestedQuizzes = _react2.default.createClass({
-	  displayName: 'SuggestedQuizzes',
-
-	  getInitialState: function getInitialState() {
-	    return { league: this.props.team.league, conference: this.props.team.conference, suggested: [] };
-	  },
-	  componentDidMount: function componentDidMount() {
-	    this.getTeams();
-	  },
-	  makeSuggestedTeams: function makeSuggestedTeams(teams) {
-	    var indexesSelected = [];
-	    // make a random team index as long as it's not already selected
-	    function makeRandomNumber() {
-	      var number = Math.floor(Math.random() * teams.length);
-	      if (indexesSelected.indexOf(number) === -1) {
-	        return number;
-	      } else {
-	        return makeRandomNumber();
-	      }
-	    }
-	    indexesSelected = [makeRandomNumber(), makeRandomNumber(), makeRandomNumber()];
-	    this.setState({ suggested: [teams[indexesSelected[0]], teams[indexesSelected[1]], teams[indexesSelected[2]]] });
-	  },
-	  getTeams: function getTeams() {
-	    $.ajax({
-	      url: '/roster/' + this.state.league,
-	      type: 'GET',
-	      dataType: 'json',
-	      cache: false,
-	      success: function (data) {
-	        this.makeSuggestedTeams(data);
-	      }.bind(this),
-	      error: function (xhr, status, err) {
-	        console.error(this.props.url, status, err.toString());
-	      }.bind(this)
-	    });
-	  },
-
-	  openTeamQuiz: function openTeamQuiz(acronym) {
-	    window.open('/#/quiz?league=' + this.state.league + '&quiz_id=' + acronym, '_self');
-	    location.reload(true);
-	  },
-
-	  render: function render() {
-	    var _this = this;
-
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'suggested-quizzes-view' },
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        'You might also like'
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'ul',
-	          null,
-	          this.state.suggested.map(function (team) {
-	            return _react2.default.createElement(
-	              'li',
-	              { key: team.acronym },
-	              _react2.default.createElement(
-	                'a',
-	                { onClick: _this.openTeamQuiz.bind(_this, team.acronym) },
-	                team.team_name,
-	                ' '
-	              )
-	            );
-	          })
-	        )
-	      )
-	    );
-	  }
-	}); // ----- Subcribe COMPONENT ---- //
-	exports.default = SuggestedQuizzes;
-
-/***/ },
-/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28632,6 +28196,447 @@
 	});
 
 	exports.default = Rosters;
+
+/***/ },
+/* 245 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _filterDomProps = __webpack_require__(246);
+
+	var _filterDomProps2 = _interopRequireDefault(_filterDomProps);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ReactImageFallback = function (_Component) {
+		_inherits(ReactImageFallback, _Component);
+
+		function ReactImageFallback(props) {
+			_classCallCheck(this, ReactImageFallback);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ReactImageFallback).call(this, props));
+
+			_this.displayImage = new window.Image();
+			_this.state = {
+				imageSource: props.initialImage
+			};
+			_this.setDisplayImage = _this.setDisplayImage.bind(_this);
+			return _this;
+		}
+
+		_createClass(ReactImageFallback, [{
+			key: "componentDidMount",
+			value: function componentDidMount() {
+				this.setDisplayImage({ image: this.props.src, fallbacks: this.props.fallbackImage });
+			}
+		}, {
+			key: "componentWillReceiveProps",
+			value: function componentWillReceiveProps(nextProps) {
+				if (nextProps.src !== this.props.src) {
+					this.setDisplayImage({ image: nextProps.src, fallbacks: nextProps.fallbackImage });
+				}
+			}
+		}, {
+			key: "componentWillUnmount",
+			value: function componentWillUnmount() {
+				this.displayImage.onerror = null;
+				this.displayImage.onload = null;
+			}
+		}, {
+			key: "setDisplayImage",
+			value: function setDisplayImage(_ref) {
+				var _this2 = this;
+
+				var image = _ref.image;
+				var fallbacks = _ref.fallbacks;
+
+				var imagesArray = [image].concat(fallbacks);
+				this.displayImage.onerror = function () {
+					if (imagesArray.length > 2 && typeof imagesArray[1] === "string") {
+						var updatedFallbacks = imagesArray.slice(2);
+						_this2.setDisplayImage({ image: imagesArray[1], fallbacks: updatedFallbacks });
+						return;
+					}
+					_this2.setState({
+						imageSource: imagesArray[1]
+					}, function () {
+						if (_this2.props.onError) {
+							_this2.props.onError(_this2.props.src);
+						}
+					});
+				};
+				this.displayImage.onload = function () {
+					_this2.setState({
+						imageSource: imagesArray[0]
+					}, function () {
+						if (_this2.props.onLoad) {
+							_this2.props.onLoad(imagesArray[0]);
+						}
+					});
+				};
+				this.displayImage.src = imagesArray[0];
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				return typeof this.state.imageSource === "string" ? _react2.default.createElement("img", _extends({}, (0, _filterDomProps2.default)(this.props), { src: this.state.imageSource })) : this.state.imageSource;
+			}
+		}]);
+
+		return ReactImageFallback;
+	}(_react.Component);
+
+	exports.default = ReactImageFallback;
+
+	ReactImageFallback.displayName = "ReactImageFallback";
+
+	ReactImageFallback.propTypes = {
+		src: _react.PropTypes.string.isRequired,
+		fallbackImage: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.element, _react.PropTypes.array]).isRequired,
+		initialImage: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.element]),
+		onLoad: _react.PropTypes.func,
+		onError: _react.PropTypes.func
+	};
+
+	ReactImageFallback.defaultProps = {
+		initialImage: null
+	};
+
+/***/ },
+/* 246 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = filterDOMProps;
+
+	var _htmlAttributes = __webpack_require__(247);
+
+	var _htmlAttributes2 = _interopRequireDefault(_htmlAttributes);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var eventProps = {
+		onCopy: true,
+		onCut: true,
+		onPaste: true,
+		onLoad: true,
+		onError: true,
+		onWheel: true,
+		onScroll: true,
+		onCompositionEnd: true,
+		onCompositionStart: true,
+		onCompositionUpdate: true,
+		onKeyDown: true,
+		onKeyPress: true,
+		onKeyUp: true,
+		onFocus: true,
+		onBlur: true,
+		onChange: true,
+		onInput: true,
+		onSubmit: true,
+		onClick: true,
+		onContextMenu: true,
+		onDoubleClick: true,
+		onDrag: true,
+		onDragEnd: true,
+		onDragEnter: true,
+		onDragExit: true,
+		onDragLeave: true,
+		onDragOver: true,
+		onDragStart: true,
+		onDrop: true,
+		onMouseDown: true,
+		onMouseEnter: true,
+		onMouseLeave: true,
+		onMouseMove: true,
+		onMouseOut: true,
+		onMouseOver: true,
+		onMouseUp: true,
+		onSelect: true,
+		onTouchCancel: true,
+		onTouchEnd: true,
+		onTouchMove: true,
+		onTouchStart: true,
+		onAnimationStart: true,
+		onAnimationEnd: true,
+		onAnimationIteration: true,
+		onTransitionEnd: true
+	};
+
+	function isValidDOMProp(prop) {
+		return eventProps[prop] || _htmlAttributes2.default[prop];
+	}
+
+	function filterDOMProps(props) {
+		var domProps = {};
+		for (var prop in props) {
+			if (props.hasOwnProperty(prop) && isValidDOMProp(prop)) {
+				domProps[prop] = props[prop];
+			}
+		}
+		return domProps;
+	}
+
+/***/ },
+/* 247 */
+/***/ function(module, exports) {
+
+	/*!
+	 * html-attributes
+	 * https://github.com/alexmingoia/html-attributes
+	 */
+
+	'use strict';
+
+	/**
+	 * @module html-attributes
+	 */
+
+	module.exports = {
+	  "abbr": "abbr",
+	  "accept": "accept",
+	  "acceptCharset": "accept-charset",
+	  "accessKey": "accesskey",
+	  "action": "action",
+	  "allowFullScreen": "allowfullscreen",
+	  "allowTransparency": "allowtransparency",
+	  "alt": "alt",
+	  "async": "async",
+	  "autoComplete": "autocomplete",
+	  "autoFocus": "autofocus",
+	  "autoPlay": "autoplay",
+	  "cellPadding": "cellpadding",
+	  "cellSpacing": "cellspacing",
+	  "challenge": "challenge",
+	  "charset": "charset",
+	  "checked": "checked",
+	  "cite": "cite",
+	  "class": "class",
+	  "className": "class",
+	  "cols": "cols",
+	  "colSpan": "colspan",
+	  "command": "command",
+	  "content": "content",
+	  "contentEditable": "contenteditable",
+	  "contextMenu": "contextmenu",
+	  "controls": "controls",
+	  "coords": "coords",
+	  "crossOrigin": "crossorigin",
+	  "data": "data",
+	  "dateTime": "datetime",
+	  "default": "default",
+	  "defer": "defer",
+	  "dir": "dir",
+	  "disabled": "disabled",
+	  "download": "download",
+	  "draggable": "draggable",
+	  "dropzone": "dropzone",
+	  "encType": "enctype",
+	  "for": "for",
+	  "form": "form",
+	  "formAction": "formaction",
+	  "formEncType": "formenctype",
+	  "formMethod": "formmethod",
+	  "formNoValidate": "formnovalidate",
+	  "formTarget": "formtarget",
+	  "frameBorder": "frameBorder",
+	  "headers": "headers",
+	  "height": "height",
+	  "hidden": "hidden",
+	  "high": "high",
+	  "href": "href",
+	  "hrefLang": "hreflang",
+	  "htmlFor": "for",
+	  "httpEquiv": "http-equiv",
+	  "icon": "icon",
+	  "id": "id",
+	  "inputMode": "inputmode",
+	  "isMap": "ismap",
+	  "itemId": "itemid",
+	  "itemProp": "itemprop",
+	  "itemRef": "itemref",
+	  "itemScope": "itemscope",
+	  "itemType": "itemtype",
+	  "kind": "kind",
+	  "label": "label",
+	  "lang": "lang",
+	  "list": "list",
+	  "loop": "loop",
+	  "manifest": "manifest",
+	  "max": "max",
+	  "maxLength": "maxlength",
+	  "media": "media",
+	  "mediaGroup": "mediagroup",
+	  "method": "method",
+	  "min": "min",
+	  "minLength": "minlength",
+	  "multiple": "multiple",
+	  "muted": "muted",
+	  "name": "name",
+	  "noValidate": "novalidate",
+	  "open": "open",
+	  "optimum": "optimum",
+	  "pattern": "pattern",
+	  "ping": "ping",
+	  "placeholder": "placeholder",
+	  "poster": "poster",
+	  "preload": "preload",
+	  "radioGroup": "radiogroup",
+	  "readOnly": "readonly",
+	  "rel": "rel",
+	  "required": "required",
+	  "role": "role",
+	  "rows": "rows",
+	  "rowSpan": "rowspan",
+	  "sandbox": "sandbox",
+	  "scope": "scope",
+	  "scoped": "scoped",
+	  "scrolling": "scrolling",
+	  "seamless": "seamless",
+	  "selected": "selected",
+	  "shape": "shape",
+	  "size": "size",
+	  "sizes": "sizes",
+	  "sortable": "sortable",
+	  "span": "span",
+	  "spellCheck": "spellcheck",
+	  "src": "src",
+	  "srcDoc": "srcdoc",
+	  "srcSet": "srcset",
+	  "start": "start",
+	  "step": "step",
+	  "style": "style",
+	  "tabIndex": "tabindex",
+	  "target": "target",
+	  "title": "title",
+	  "translate": "translate",
+	  "type": "type",
+	  "typeMustMatch": "typemustmatch",
+	  "useMap": "usemap",
+	  "value": "value",
+	  "width": "width",
+	  "wmode": "wmode",
+	  "wrap": "wrap"
+	};
+
+
+/***/ },
+/* 248 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SuggestedQuizzes = _react2.default.createClass({
+	  displayName: 'SuggestedQuizzes',
+
+	  getInitialState: function getInitialState() {
+	    return { league: this.props.team.league, conference: this.props.team.conference, suggested: [] };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.getTeams();
+	  },
+	  makeSuggestedTeams: function makeSuggestedTeams(teams) {
+	    var indexesSelected = [];
+	    // make a random team index as long as it's not already selected
+	    function makeRandomNumber() {
+	      var number = Math.floor(Math.random() * teams.length);
+	      if (indexesSelected.indexOf(number) === -1) {
+	        return number;
+	      } else {
+	        return makeRandomNumber();
+	      }
+	    }
+	    indexesSelected = [makeRandomNumber(), makeRandomNumber(), makeRandomNumber()];
+	    this.setState({ suggested: [teams[indexesSelected[0]], teams[indexesSelected[1]], teams[indexesSelected[2]]] });
+	  },
+	  getTeams: function getTeams() {
+	    $.ajax({
+	      url: '/roster/' + this.state.league,
+	      type: 'GET',
+	      dataType: 'json',
+	      cache: false,
+	      success: function (data) {
+	        this.makeSuggestedTeams(data);
+	      }.bind(this),
+	      error: function (xhr, status, err) {
+	        console.error(this.props.url, status, err.toString());
+	      }.bind(this)
+	    });
+	  },
+
+	  openTeamQuiz: function openTeamQuiz(acronym) {
+	    window.open('/#/quiz?league=' + this.state.league + '&quiz_id=' + acronym, '_self');
+	    location.reload(true);
+	  },
+
+	  render: function render() {
+	    var _this = this;
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'suggested-quizzes-view' },
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        'You might also like'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          this.state.suggested.map(function (team) {
+	            return _react2.default.createElement(
+	              'li',
+	              { key: team.acronym },
+	              _react2.default.createElement(
+	                'a',
+	                { onClick: _this.openTeamQuiz.bind(_this, team.acronym) },
+	                team.team_name,
+	                ' '
+	              )
+	            );
+	          })
+	        )
+	      )
+	    );
+	  }
+	}); // ----- Subcribe COMPONENT ---- //
+	exports.default = SuggestedQuizzes;
 
 /***/ }
 /******/ ]);

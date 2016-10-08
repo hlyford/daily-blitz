@@ -144,6 +144,9 @@ html {
             display: inline-block; }
         html #app .content-container .main-quiz-content .quiz-view .quiz-view-body > div {
           text-align: center; }
+          html #app .content-container .main-quiz-content .quiz-view .quiz-view-body > div > div:nth-child(1) {
+            padding-bottom: 20px;
+            font-size: 1.1em; }
           html #app .content-container .main-quiz-content .quiz-view .quiz-view-body > div > button {
             font-size: 1.1em; }
         html #app .content-container .main-quiz-content .quiz-view .guess-box-container {

@@ -173,7 +173,10 @@ var Quiz = React.createClass({
                 <div className="page-titles"><h2>{ this.state.quiz_info.team_name }</h2></div>
                   <div className="quiz-view-body">
                     { !this.state.takingQuiz ?
-                      <div><button className="text-middle" onClick={ this.startQuiz }>Take quiz!</button></div> :
+                      <div>
+                        <div>Try to name all the players on the current roster (last name or full name) before time expires.</div>
+                        <button className="text-middle" onClick={ this.startQuiz }>Take quiz!</button>
+                      </div> :
                       <div>
                         <div className="guess-box-container text-middle">
 

@@ -33,7 +33,6 @@ module.exports = {
 			client.set(team, leagueString, function(err, reply) {
 			});
 		}
-		return;
 
 		// add the team info WITHOUT players
 		// loop through each league in allTeams
