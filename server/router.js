@@ -26,7 +26,7 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
 // switch to Redis or mongo for team data; switch server cache usage
-var redis = true; serverCache = true;
+var redis = true; serverCache = false;
 console.log('Using Redis: ' + redis + ' | Using server cache: ' + serverCache);
 
 // QUIZ ROUTES
