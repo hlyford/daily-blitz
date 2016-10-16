@@ -17,7 +17,7 @@ console.log('MongoDB listening at: ' + dbURI);
 
 var server = app.listen(port, function () {
 	console.log('App running at: ' + port);
-})
+});
 
 // require in all the leagues' controllers
 var rosterNbaController = require('./controllers/rosterController');
@@ -26,19 +26,19 @@ var rosterMlbController = require('./controllers/rosterControllerMlb');
 var rosterSoccerController = require('./controllers/rosterControllerSoccer');
 
 rosterNbaController.getAllRostersInsert('nba', function(res) {
-	allTeams['nba'] = res;
+	allTeams.nba = res;
 	writeTeams('nba', allTeams);
 });
 rosterNflController.getAllRostersInsert('nfl', function(res) {
-	allTeams['nfl'] = res;
+	allTeams.nfl = res;
 	writeTeams('nfl', allTeams);
 });
 rosterMlbController.getAllRostersInsert('mlb', function(res) {
-	allTeams['mlb'] = res;
+	allTeams.mlb = res;
 	writeTeams('mlb', allTeams);
 });
 rosterSoccerController.getAllRostersInsert('soccer', function(res) {
-	allTeams['soccer'] = res;
+	allTeams.soccer = res;
 	writeTeams('soccer', allTeams);
 });
 
@@ -61,4 +61,4 @@ function writeTeams(league, allTeams) {
     	}, 8000);
     }
 	});
-};
+}

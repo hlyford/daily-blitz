@@ -20,8 +20,7 @@ var dbURI = 'mongodb://heroku_rbb7779l:qu17dskjak3brt79onfnn2o8uh@ds017173.mlab.
 // var dbURI = 'mongodb://localhost/obscore';
 var db = mongoose.connect(dbURI);
 console.log('MongoDB listening at: ' + dbURI);
-mongoInserter.addStuff(allTeams['nfl']);
-return;
+mongoInserter.addStuff(allTeams.nfl);
 
 for (var league in allTeams) {
 	mongoInserter.addStuff(allTeams[league]);
@@ -46,4 +45,4 @@ for (var league in allTeams) {
 // start the server
 app.listen(port, function () {
 	console.log('App running at: ' + port);
-})
+});

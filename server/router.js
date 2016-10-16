@@ -110,7 +110,7 @@ router.route('/roster/:league/team/:team_acronym').get(function (req, res) {
 			case 'nba':
 				rosterController.getRoster(req.params.team_acronym, function (roster_data) {
 					res.send(roster_data);
-				})
+				});
 				break;
 			case 'nfl':
 				rosterControllerNfl.getRoster(req.params.team_acronym, function (response) {
@@ -148,12 +148,12 @@ router.route('/lists/:acronym').get( function (req, res) {
 router.route('/search').post(function (req, res) {
 	searchController.find(req.body.query, function (result) {
 		res.send(result);
-	})
+	});
 });
 router.route('/search').get(function (req, res) {
 	searchController.find('all', function (result) {
 		res.send(result);
-	})
+	});
 });
 
 // email sending routes

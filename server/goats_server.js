@@ -23,4 +23,4 @@ console.log('MongoDB listening at: ' + dbURI);
 // start the server
 app.listen(port, function () {
 	console.log('App running at: ' + port);
-})
+});
