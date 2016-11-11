@@ -22,7 +22,7 @@ module.exports = {
 
 			toArray = result;
 			toArray = _.pluck(toArray, 'email');
-			var subject = 'Thanks for subscribing to RosterBlitz - hi Jake!';
+			var subject = 'Your daily RosterBlitz quiz';
 			// select a quiz
 
 

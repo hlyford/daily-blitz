@@ -3,17 +3,23 @@ import React from 'react';
 
 var SuggestedQuizzes = React.createClass({
   getInitialState: function() {
-    return { league: this.props.team.league, conference: this.props.team.conference, suggested: [] };
+    return { team_acronym: this.props.team.acronym, league: this.props.team.league, conference: this.props.team.conference, suggested: [] };
   },
   componentDidMount: function () {
     this.getTeams();
   },
   makeSuggestedTeams: function (teams) {
     var indexesSelected = [];
+    var currentTeamIndex, state = this.state;
+    teams.forEach(function(item, index) {
+      if (item.acronym === state.team_acronym) {
+        currentTeamIndex = index;
+      }
+    });
     // make a random team index as long as it's not already selected
     function makeRandomNumber () {
       var number = Math.floor(Math.random() * teams.length);
-      if (indexesSelected.indexOf(number) === -1) {
+      if (indexesSelected.indexOf(number) === -1 && number !== currentTeamIndex) {
         return number;
       } else {
         return makeRandomNumber();

@@ -10,7 +10,8 @@ var rbEmail = config.email, pw = config.pw;
          bcc: toArray, // list of receivers
          subject: subject, // Subject line
          // text: text //, // plaintext body
-         html: `<div>Maybe you try dis quiz: <a href="${quiz_info.quizUrl}">${quiz_info.quiz_name}</a></div>` // You can choose to send an HTML body instead
+         html: `<div>Maybe you try dis quiz: <a href="${quiz_info.quizUrl}">${quiz_info.quiz_name}</a></div>
+         <div style="padding-top: 20px">Changed your mind? <a id="">Unsubscribe</a></div>`
      };
 
      var handleSayHello = function (req, res) {
