@@ -56,7 +56,7 @@ var getRosters = function (urlSlug, callback) {
 					player['player_number'] = playerNumber;
 					var name = $(element).find('td:nth-child(2) div div a').text();
 					player['name'] = name;
-					var position = $(element).find('td:nth-child(3) div span:nth-child(1) span:nth-child(1)').text();
+					var position = $(element).find('td:nth-child(3) div span:nth-child(1)').text().replace(/\//g, "");
 					player['position'] = position;
 
 					// var salary = $(element).find('td:nth-child(10) span span').text();
