@@ -99,7 +99,7 @@ var Quiz = React.createClass({
         // make full name
         item.fullName = `${item.firstName} ${item.lastName}`;
         // convert to lower case
-        item.firstNameLower = item.firstName.toLowerCase(), item.lastName = item.lastName.toLowerCase();
+        item.firstNameLower = item.firstName.toLowerCase(), item.lastNameLower = item.lastName.toLowerCase();
         item.fullNameLower = item.fullName.toLowerCase();
       });
     }
@@ -161,7 +161,7 @@ var Quiz = React.createClass({
   },
 
   render: function() {
-    // console.log('state', this.state);
+    console.log('state', this.state);
     return (
       <div>
         <NavBar todayQuizAcronym={this.state.todayQuizAcronym}/>
@@ -189,7 +189,7 @@ var Quiz = React.createClass({
                               (
                             <li key={item.fullName}>
                               <ReactImageFallback
-                              src={"../../dist/images/" + this.state.league + "_player_images/" + item.firstName.replace(/ /g,"_").replace(/'/g, "")  + "_" + item.lastName.replace(/'/g, "") + ".png"}
+                              src={"../../dist/images/" + this.state.league + "_player_images/" + item.firstNameLower.replace(/ /g,"_").replace(/'/g, "")  + "_" + item.lastNameLower.replace(/'/g, "") + ".png"}
                               fallbackImage="../../dist/images/grey_man.png" style={this.state.league === 'soccer' ? {height: "75px", margin: "0 10px 0 0", borderRadius: "50%"}  : {display: "inline"} }/>
                               <span>{item.fullName} | #{item.player_number} {item.position}</span>
                             </li>

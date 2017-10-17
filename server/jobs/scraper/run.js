@@ -12,7 +12,7 @@ var teamsArraySoccer = require('./team_acronyms').soccer;
 // read the command arg to determine league; numbers and start and end indexes of teams
 switch (process.argv[2]) {
 	case 'nba':
-		looper(0, 1);
+		looper(21, 22);
 		break;
 	case 'nfl':
 		looperNfl(0, 32);
