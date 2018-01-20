@@ -126,7 +126,14 @@ router.route('/roster/:league/team/:team_acronym').get(function (req, res) {
 
 // PLAYER DATA
 router.route('/players/:league').get(function(req, res) {
-	playerControllerNba.getAllPlayers('nba', function(result) {
+	playerControllerNba.getAllPlayers(req.params.league, function(result) {
+		res.send(result);
+	});
+});
+// GET TOP 10 LISTS BY CATEGORY: e.g. order_by = `/blocks_per_game'
+router.route('/league_leaders/:league/:order_by').get(function(req, res) {
+	var list_length = req.query.list_length !== undefined ? req.query.list_length : 10;
+	playerControllerNba.getLeagueLeadersList(req.params.league, req.params.order_by, list_length, function(result) {
 		res.send(result);
 	});
 });

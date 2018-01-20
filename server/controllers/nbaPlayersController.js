@@ -31,7 +31,32 @@ module.exports = {
     // find all rosters
     Roster.find({}, function (err, result) {
       if (err) console.log('error',err);
-      callback(result);
+      allPlayers = [];
+      // Loop through all teams
+      for (var i = 0; i < result.length; i++) {
+        // Loop through all players on team and add to array of players
+        var team = result[i]
+        for (var j = 0; j < team.players.length; j++) {
+          allPlayers.push(team.players[j]);
+        }
+      }
+      callback(allPlayers);
+    });
+  },
+
+  getLeagueLeadersList: function(league, list, listLength = 10, callback) {
+    this.getAllPlayers(league, function(allPlayers) {
+      // Sort the list by the type of stat provided
+      var sortBy = list;
+      allPlayers.sort(function compare(a,b) {
+        if (parseFloat(a[sortBy]) > parseFloat(b[sortBy]))
+          return -1;
+        if (parseFloat(a[sortBy]) < parseFloat(b[sortBy]))
+          return 1;
+        return 0;
+      })
+      // Send top ten
+      callback(allPlayers.slice(0, listLength));
     });
   },
 
