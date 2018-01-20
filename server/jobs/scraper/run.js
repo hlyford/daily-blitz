@@ -9,6 +9,9 @@ var teamsArrayMlb = require('./team_acronyms').mlb;
 var getRostersSoccer = require('./soccer_scraper');
 var teamsArraySoccer = require('./team_acronyms').soccer;
 
+// Stats scrapers
+var nbaStatsScraper = require('./nbaStatsScraper');
+
 // read the command arg to determine league; numbers and start and end indexes of teams
 switch (process.argv[2]) {
 	case 'nba':
@@ -22,6 +25,8 @@ switch (process.argv[2]) {
 		break;
 	case 'soccer':
 		looperSoccer(0, 20);
+	case 'stats-nba':
+		looperNbaStats(1, 2);
 		break;
 };
 
@@ -32,6 +37,21 @@ function looper (start, end) {
 	console.log('waiting...', nextWait);
 	if (start < end) {
 		getRostersNba(teamsArray[start]);
+		setTimeout(function () {
+			looper(start + 1, end);
+		}, nextWait);
+	}	else {
+		console.log('done');
+		return;
+	}
+};
+
+// ***** NBA STATS // there are 30 teams
+function looperNbaStats (start, end) {
+	var nextWait = Math.floor(Math.random() * (8000 - 4000) + 4000);
+	console.log('waiting...', nextWait);
+	if (start < end) {
+		nbaStatsScraper(teamsArray[start]);
 		setTimeout(function () {
 			looper(start + 1, end);
 		}, nextWait);

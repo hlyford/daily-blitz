@@ -1,6 +1,7 @@
 var removeDiacritics = require('./removeDiacritics');
 
 module.exports = {
+
 	formatPlayerNames: function(data) {
 
 		data.players.forEach( function (player, index) {
@@ -32,7 +33,8 @@ module.exports = {
 			data.players[index].fullName_r = removeDiacritics(data.players[index].name);
 			data.players[index].fullNameLower_r = removeDiacritics(data.players[index].name.toLowerCase());
 		});
-		console.log(data);
+
 		return data;
 	}
-}
+
+};

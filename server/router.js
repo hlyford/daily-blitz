@@ -4,6 +4,7 @@ var app = require('./server.js');
 var quizController = require('./controllers/quizController');
 var userController = require('./controllers/userController');
 var rosterController = require('./controllers/rosterController');
+var playerControllerNba = require('./controllers/nbaPlayersController');
 var rosterControllerNfl = require('./controllers/rosterControllerNfl');
 var rosterControllerMlb = require('./controllers/rosterControllerMlb');
 var goatsController = require('./controllers/goatsController');
@@ -28,15 +29,6 @@ router.use(bodyParser.urlencoded({ extended: true }));
 // switch to Redis or mongo for team data; switch server cache usage
 var redis = true; serverCache = false;
 console.log('Using Redis: ' + redis + ' | Using server cache: ' + serverCache);
-
-// QUIZ ROUTES
-
-// add back wild card route once have browserHistory working
-// router.route('*')
-// 	.get(function (req, res) {
-// 		var stuff = path.resolve('client', 'index.html');
-// 		res.sendFile(stuff);
-// 	})
 
 // QUIZ ROUTES
 router.route( '/quiz/:querySlug' ).get(function (req, res) {
@@ -130,6 +122,13 @@ router.route('/roster/:league/team/:team_acronym').get(function (req, res) {
 		}
 	}
 
+});
+
+// PLAYER DATA
+router.route('/players/:league').get(function(req, res) {
+	playerControllerNba.getAllPlayers('nba', function(result) {
+		res.send(result);
+	});
 });
 
 // GOATS LISTS ROUTES
