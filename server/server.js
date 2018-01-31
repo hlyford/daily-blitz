@@ -6,7 +6,6 @@ var path = require('path');
 var twilio = require('./twilio/twilio');
 var responseTime = require('response-time');
 var redisController = require('./jobs/redis/redisInserter');
-
 // require in other files
 var router = require('./router.js');
 

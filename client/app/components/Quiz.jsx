@@ -6,9 +6,11 @@ import NavBar from './NavBar.jsx';
 import SuggestedQuizzes from './SuggestedQuizzes.jsx';
 
 var Quiz = React.createClass({
+
   getInitialState: function() {
     return { quiz_info: {}, correct: [], takingQuiz: false, active_quiz: '', timeLeft: 0, quizEnded: false };
   },
+
   componentWillMount: function () {
     // check which league it is and set state
     this.state.league = this.props.location.query['league'];
@@ -27,6 +29,7 @@ var Quiz = React.createClass({
     }
     // this.getQuiz();
   },
+
   componentDidMount: function () {
     this.getQuiz();
     // DOESN'T WORK YET
@@ -34,9 +37,11 @@ var Quiz = React.createClass({
       (this.refs.guess).focus();
     }
   },
+
   componentWillUnmount: function() {
       // this.getQuiz.abort();
   },
+
   componentDidUpdate: function(){
     var node = ReactDOM.findDOMNode(this.refs.guess);
     node !== null ? node.focus() : null;
@@ -105,6 +110,7 @@ var Quiz = React.createClass({
     }
     return list;
   },
+
   startQuiz: function () {
     this.setState({'takingQuiz': true});
     var totalTime = this.state.quiz_info.players.length * 10;
@@ -113,6 +119,7 @@ var Quiz = React.createClass({
     this.setState({'timeLeft' : totalTime});
     this.timer();
   },
+
   timer: function () {
     var that = this;
     var counter = setInterval(function () {
@@ -126,6 +133,7 @@ var Quiz = React.createClass({
       }
     }, 1000);
   },
+
   timeFormatter: function (seconds) {
     if (seconds === 0) {return "Time's up!";}
     var sec_num = parseInt(seconds, 10);
@@ -147,12 +155,14 @@ var Quiz = React.createClass({
         // console.log('from server', data);
         this.state.quiz_info = this.addFullNameAndConvertLowerCase(data[0]);
         this.setState({team_name: data[0].team_name})
+        console.log(this.state.quiz_info);
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
   },
+
   giveUp: function() {
     // add diff between correct players and all players to correct array
     var diff = _.difference(this.state.quiz_info.players, this.state.correct);

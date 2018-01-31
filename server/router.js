@@ -10,6 +10,7 @@ var rosterControllerMlb = require('./controllers/rosterControllerMlb');
 var goatsController = require('./controllers/goatsController');
 var rosterControllerSoccer = require('./controllers/rosterControllerSoccer');
 var searchController = require('./controllers/searchController');
+var leagueLeadersController = require('./controllers/leagueLeadersController');
 var bodyParser = require('body-parser');
 var path = require('path');
 // var emailSender = require('./email/emailSender');
@@ -134,6 +135,13 @@ router.route('/players/:league').get(function(req, res) {
 router.route('/league_leaders/:league/:order_by').get(function(req, res) {
 	var list_length = req.query.list_length !== undefined ? req.query.list_length : 10;
 	playerControllerNba.getLeagueLeadersList(req.params.league, req.params.order_by, list_length, function(result) {
+		res.send(result);
+	});
+});
+// Get top 10 lists by category but using API
+router.route('/league_leaders_api/:league/:order_by').get(function(req, res) {
+	var list_length = req.query.list_length !== undefined ? req.query.list_length : 10;
+	leagueLeadersController.getLeagueLeadersList(req.params.league, req.params.order_by, list_length, function(result) {
 		res.send(result);
 	});
 });
