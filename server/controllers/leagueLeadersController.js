@@ -13,7 +13,6 @@ if (developing) {
   allPlayerData = JSON.parse(asString);
   allPlayerData['players'] = allPlayerData;
   allPlayerData = formatPlayerNames(allPlayerData.players);
-  console.log(allPlayerData);
 
 } else {
 

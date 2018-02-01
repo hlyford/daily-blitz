@@ -2,25 +2,30 @@ import React from 'react';
 import NavBar from './NavBar.jsx';
 
 var Rosters = React.createClass({
+
 	getInitialState: function() {
 		var league = this.props.location.query['league'];
 	  return { league: league, rosters: [] , western :[], eastern: [] };
 	},
+
 	componentWillMount: function () {
 		this.getRosters(this.state.league);
 	},
+
 	// detect changes in league selected and reload the page if they switch leagues
 	queryString: '',
 
 	componentWillUpdate: function () {
 		this.queryString = this.props.location.query['league'];
 	},
+
 	componentDidUpdate: function () {
 		var newQueryString = this.props.location.query['league'];
 		if (this.queryString !== newQueryString) {
 			window.location.reload();
 		}
 	},
+
 	sortByConference: function (teams) {
 		var eastern = [], western = [];
 		// just alternate soccer teams in columns
@@ -44,6 +49,7 @@ var Rosters = React.createClass({
 		}
 		this.setState({ rosters: teams, western: western, eastern: eastern });
 	},
+
 	getRosters: function (league) {
 		// call off for all team rosters for given league
 		$.ajax({
@@ -59,6 +65,7 @@ var Rosters = React.createClass({
 		  }.bind(this)
 		});
 	},
+
 	render: function () {
 		var state = this.state;
 		var westernTeams = this.state.western.map(function (team) {

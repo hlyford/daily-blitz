@@ -9,6 +9,7 @@ import Quiz from './components/Quiz.jsx';
 import Rosters from './components/Rosters.jsx';
 import SearchBar from './components/SearchBar.jsx';
 import NavBar from './components/NavBar.jsx';
+import RostersLeagueLeaders from './components/Rosters_LeagueLeaders.jsx';
 
 // ------ END SUB COMPONENTS ------- //
 
@@ -74,6 +75,7 @@ const routes = (
     <Route path="/subscribe" component={Subscribe}/>
     {/* <Route path="/admin" component={Admin}/> */}
     <Route path="/rosters" component={Rosters}/>
+    <Route path="/rosters-league-leaders" component={RostersLeagueLeaders}/>
   </Route>
 )
 

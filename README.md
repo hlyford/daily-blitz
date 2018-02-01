@@ -6,7 +6,7 @@ Sass watch
 
 Webpack
 - from root of project
-`webpack --progress --colors —watch`
+`webpack --watch --progress`
 
 Mongo
 - run ‘mongod'
